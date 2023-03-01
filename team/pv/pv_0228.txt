@@ -1,0 +1,35 @@
+REUNION 1
+
+Inspi Quizlet.
+
+-Rôles : tracker, updater des infos
+
+-Qu’est ce que le risque ? Niveau planning (Raph) ou technique (Wassim)?
+	—> A quel point ça va être chaud à implémenter. 
+
+*temps et risque de chaque histoire*
+
+
+Histoire 1 : Sécurité 
+Histoire 2 : A quoi devrait ressembler le menu ? User qui crée les catégories (du coup comme des tag) ? Modifier catégories ? 
+Histoire 3 : 
+Histoire 4 : Score pris en compte déjà là ? Score à la fin du paquet ? Pour retourner la carte, design ? 
+
+
+
+
+
+
+
+
+PENDANT REU AVEC ASSISTANT
+1 point = 1h de travail pour un binome
+28h / semaine en binome.
+chacun 3.5 de travail et 3.5 de copilote
+
+Histoire 1 : modification pseudo et mdp, sans remettre son mdp une fois qu’on est co
+Histoire 2 : Juste gestion des paquets
+Histoire 2b : Tags
+Histoire 3 : voir combien de cartes dans paquet, supprimer modifier
+
+Création interface et apprentissage : 4 points apprentissage 
