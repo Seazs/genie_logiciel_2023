@@ -6,9 +6,15 @@ public class Paquet {
 
     private String nom, categorie;
 
+    /**
+     * Crée un paquet dont le nom doit être unique.
+     * @param nom
+     * @param categorie
+     */
     public Paquet(String nom, String categorie){
         if(nom == null || nom == "")
             throw new IllegalArgumentException("Le paquet doit posséder un nom");
+
         this.nom = nom;
         this.categorie = categorie;
     }
@@ -21,6 +27,9 @@ public class Paquet {
         return nom;
     }
 
+    public String getCategorie(){
+        return categorie;
+    }
 
 
 }
