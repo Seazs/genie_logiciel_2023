@@ -8,16 +8,7 @@ import java.util.List;
 
 class PaquetTest {
 
-    /*
-        - dossier de stockage
-            - <utilisateur>
-                - fichier login
-                - fichier <decks>
 
-
-                branch -> travail -> commits
-                travail fini: merge {main sur ta branche} -> résoud les conflits -> merge{ ta branche sur main}
-         */
 
     @Test
     public void testCreationPaquet(){
@@ -48,5 +39,12 @@ class PaquetTest {
         Assertions.assertEquals(nom+" (2)",paquet3.getName());
     }
 
+    @Test
+    public void testMemePaquet(){
+
+        Paquet paquet = new Paquet("Maths","BA-1");
+        Paquet paquet2 = new Paquet("Maths","BA-1");
+        Assertions.assertEquals(paquet2,paquet);
+    }
 
 }
