@@ -6,27 +6,32 @@ public class Carte {
     public String verso;
 
     Carte(int id, String recto,  String verso){
+        if(recto == null || recto.equals(""))
+            throw new IllegalArgumentException("La carte doit posséder un recto");
+
+        if(verso == null || verso.equals(""))
+            throw new IllegalArgumentException("La carte doit posséder un verso");
+
         this.id = id;
         this.recto = recto;
         this.verso = verso;
     }
 
     /**
-     * Function that
+     * Function that edit the recto of the card
      */
-    public void EditCarte(){
-        recto = ""; // A récuperer avec les input de l'interface
-        verso = "";
+    public void editRecto(String new_recto){
+        if (new_recto == null || new_recto.equals(""))
+            throw new IllegalArgumentException("La carte doit posséder un recto");
+        recto = new_recto;
     }
 
-    public void CreerCarte(String question, String reponse){
-        recto = question;
-        verso = reponse;
+    public void editVerso(String new_verso){
+        if (new_verso == null || new_verso.equals(""))
+            throw new IllegalArgumentException("La carte doit posséder un verso");
+        verso = new_verso;
     }
 
-    public String PrintCarte(){
-        return ("Question: "+ recto + " Réponse: "+ verso);
-    }
 
     public String getRecto() {
         return recto;
