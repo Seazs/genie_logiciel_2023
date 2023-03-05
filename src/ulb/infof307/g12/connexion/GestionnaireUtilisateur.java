@@ -80,18 +80,20 @@ public class GestionnaireUtilisateur {
         {
             if (u.getPseudo().equals(username))
             {
-                if (u.getMdp().equals(password))
+                System.out.println(u.getMdp()+ password);
+                if (!u.getMdp().equals(password))
                 {
-                    status = STATUS.OK;
-                    System.out.println("AUTHORIZED ACCESS");
-                    return true;
+                    status = STATUS.WRONG_PASSWORD;
+                    System.out.println("WRONG PASSWORD");
+                    return false;
                 }
-                status = STATUS.WRONG_PASSWORD;
-                System.out.println("WRONG PASSWORD");
+                status = STATUS.OK;
+                System.out.println("AUTHORIZED ACCESS");
+                return true;
             }
-            System.out.println("USERNAME DOES NOT EXIST");
-            status = STATUS.USERNAME_DOES_NOT_EXIST;
         }
+        System.out.println("USERNAME DOES NOT EXIST");
+        status = STATUS.USERNAME_DOES_NOT_EXIST;
         return false;
     }
 

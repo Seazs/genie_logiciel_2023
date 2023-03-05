@@ -19,7 +19,7 @@ public class ConnexionMenuController {
     @FXML
     protected void onConnectButtonClick() throws IOException {
         String username = usernameField.getText();
-        String password = usernameField.getText();
+        String password = passwordField.getText();
         GestionnaireUtilisateur gestionnaire = new GestionnaireUtilisateur();
         if (gestionnaire.connect(username, password)) {
             messageLabel.setText("Connecting: " + usernameField.getText() + " = " + passwordField.getText());
@@ -30,8 +30,6 @@ public class ConnexionMenuController {
                 case USERNAME_DOES_NOT_EXIST ->
                         messageLabel.setText("Username does not exist. Please try again or create your account!");
                 case WRONG_PASSWORD -> messageLabel.setText("Wrong password. Please try again.");
-                case USERNAME_DOES_ALREADY_EXIST ->
-                        messageLabel.setText("Username does already exist. Please try another username!");
 
             }
         }
@@ -48,9 +46,9 @@ public class ConnexionMenuController {
         {
             switch (gestionnaire.getStatus())
             {
-                case USERNAME_DOES_ALREADY_EXIST:
-                    messageLabel.setText("Username does not exist. Please try again or create your account!");
-                    break;
+                case USERNAME_DOES_ALREADY_EXIST ->
+                        messageLabel.setText("Username does already exist. Please try another username!");
+
             }
         }
     }
