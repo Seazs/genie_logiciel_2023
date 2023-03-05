@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/projet_infof307_g12.iml" filepath="$PROJECT_DIR$/.idea/projet_infof307_g12.iml" />
-      <module fileurl="file://$PROJECT_DIR$/javafxModule/runnable.iml" filepath="$PROJECT_DIR$/javafxModule/runnable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/2023-groupe-12.iml" filepath="$PROJECT_DIR$/.idea/2023-groupe-12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javafxmodule/javafxmodule.iml" filepath="$PROJECT_DIR$/javafxmodule/javafxmodule.iml" />
     </modules>
   </component>
 </project>

@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="runnable" />
+        <module name="javafxmodule" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="runnable" target="19" />
+      <module name="javafxmodule" target="19" />
     </bytecodeTargetLevel>
   </component>
 </project>

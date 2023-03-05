@@ -1,6 +1,6 @@
 package com.example.javafxmodule;
 
-public class Paquet{
+public class Paquet {
     private final String nom;
     private final String categorie;
 

@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 public class MenuPaquetController implements Initializable {
     @FXML
     private ListView<Paquet> paquetListView;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Ajouter les paquets de cartes à la liste
@@ -60,7 +61,7 @@ public class MenuPaquetController implements Initializable {
         });
     }
 
-    public void ouvirProfil(ActionEvent event) throws Exception{
+    public void ouvirProfil(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("profil.fxml"));
         Parent nouvellePage = loader.load();
 
