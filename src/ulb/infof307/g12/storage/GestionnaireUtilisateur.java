@@ -22,21 +22,18 @@ public class GestionnaireUtilisateur {
     }
     public GestionnaireUtilisateur() throws IOException {
         userdatabase = new File("stockUser.txt");
-        if (!userdatabase.createNewFile()){
-            load();
-        }
+        if (!userdatabase.createNewFile()){load();}
     }
 
     /**
      * Sauvegarde la liste des utilisateurs dans un fichier .txt
-     * @param pseudo
-     * @param mdp
      * @throws IOException
      */
-    public void save(String pseudo, String mdp) throws IOException {
-        BufferedWriter out = new BufferedWriter(new FileWriter(userdatabase.getName()));
-        out.write(pseudo + "#" + mdp);
-        out.newLine();
+    public void save() throws IOException {
+        FileWriter out = new  FileWriter(userdatabase);
+        for(Utilisateur u : listeUtilisateur) {
+            out.write(u.getPseudo() + "#" + u.getMdp() + "\n");
+        }
         out.close();
     }
 
@@ -56,4 +53,5 @@ public class GestionnaireUtilisateur {
         }
         myReader.close();
     }
+    public List<Utilisateur> getListeUtilisateur() {return listeUtilisateur;}
 }

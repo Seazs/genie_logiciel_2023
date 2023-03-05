@@ -35,5 +35,6 @@ public class Utilisateur {
     public void rmPaquet(String nom){
         listPaquet.removeIf(paquet -> Objects.equals(paquet.getName(), nom));
     }
+    public List<Paquet> getListPaquet(){return listPaquet;}
 
 }
