@@ -4,17 +4,20 @@ package com.example.javafxmodule;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class HelloController implements Initializable {
+public class MenuPaquetController implements Initializable {
     @FXML
     private ListView<Paquet> paquetListView;
     @Override
@@ -55,5 +58,22 @@ public class HelloController implements Initializable {
                 }
             }
         });
+    }
+
+    public void ouvirProfil(ActionEvent event) throws Exception{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("profil.fxml"));
+        Parent nouvellePage = loader.load();
+
+        // Créer une nouvelle scène à partir de la racine de la nouvelle page
+        Scene nouvelleScene = new Scene(nouvellePage);
+
+        // Obtenir une référence au stage actuel
+        Button bouton = (Button) event.getSource();
+        Stage stageActuel = (Stage) bouton.getScene().getWindow();
+
+        // Définir la nouvelle scène sur le stage actuel et afficher le stage
+        stageActuel.setScene(nouvelleScene);
+        stageActuel.show();
+
     }
 }
