@@ -8,11 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class CarteTest {
 
     @Test
-    public void testRectoPasVide(){
-        Carte carte = new Carte(1, "", "");
-        assertNotNull(carte.recto);
-    }
-    @Test
     public void testRiendeVide(){
         String recto = "Bonjour", verso = "Au revoir";
 
@@ -25,6 +20,14 @@ class CarteTest {
         });
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             Carte carte = new Carte(2, recto, "");
+        });
+
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            Carte carte = new Carte(2, recto, null);
+        });
+
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            Carte carte = new Carte(2, recto, null);
         });
 
         Assertions.assertDoesNotThrow(() -> {
@@ -41,19 +44,34 @@ class CarteTest {
         carte.editVerso(new_verso);
         assertEquals(new_recto, carte.recto);
         assertEquals(new_verso, carte.verso);
-        String verso = "oloY", recto = "tulaS";
+
+    }
+    @Test
+    public void testEditPasVide() {
+        String verso = "Ça va ?", recto = "Oui bien";
+        String recto_vide = "";
+        String verso_vide= "";
+        String recto_null = null;
+        String verso_null= null;
+
+        Carte carte1 = new Carte(1, recto, verso);
+
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte1 = new Carte(1, "", verso);
+            carte1.editRecto(recto_vide);
         });
 
-        Assertions.assertDoesNotThrow(() -> {
-            Carte carte1 = new Carte(1,  recto, verso);
-        });
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte1 = new Carte(2, recto, "");
+            carte1.editVerso(verso_vide);;
         });
-        Assertions.assertDoesNotThrow(() -> {
-            Carte carte1 = new Carte(2,  recto, verso);
+
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            carte1.editRecto(recto_null);
         });
+
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            carte1.editVerso(verso_null);;
+        });
+
     }
 }
+
