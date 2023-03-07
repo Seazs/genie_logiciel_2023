@@ -49,7 +49,7 @@ class GestionnairePaquetTest {
     public void testSauvegardePaquet() throws IOException{
 
         Paquet paquet = new Paquet("Maths","BA-1");
-        String path = dossierTemporaire.getPath() + File.separator + paquet.getName();
+        String path = dossierTemporaire.getPath() + File.separator + paquet.getNom();
         File fichier = File.createTempFile(path,".ulb");
 
         assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier));
@@ -67,7 +67,7 @@ class GestionnairePaquetTest {
     public void testSupprimePaquet() throws IOException{
         Paquet paquet = new Paquet("Maths","BA-1");
 
-        String path = dossierTemporaire.getPath() + File.separator + paquet.getName();
+        String path = dossierTemporaire.getPath() + File.separator + paquet.getNom();
         File fichier = File.createTempFile(path,".ulb");
 
         assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier));
@@ -85,7 +85,7 @@ class GestionnairePaquetTest {
     public void testChargementPaquet() throws IOException {
         Paquet paquet = new Paquet("Maths","BA-1");
 
-        String path = dossierTemporaire.getPath() + File.separator + paquet.getName();
+        String path = dossierTemporaire.getPath() + File.separator + paquet.getNom();
         File fichier = File.createTempFile(path,".ulb");
 
         assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier));

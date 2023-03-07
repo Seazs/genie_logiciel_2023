@@ -35,8 +35,8 @@ class PaquetTest {
                 paquet2 = new Paquet(nom,"BA-1"),
                 paquet3 = new Paquet(nom,"BA-2");
 
-        Assertions.assertEquals(nom+" (1)",paquet2.getName());
-        Assertions.assertEquals(nom+" (2)",paquet3.getName());
+        Assertions.assertEquals(nom+" (1)",paquet2.getNom());
+        Assertions.assertEquals(nom+" (2)",paquet3.getNom());
     }
 
     @Test

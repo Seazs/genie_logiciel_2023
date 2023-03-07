@@ -1,10 +1,14 @@
 package ulb.infof307.g12.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 import java.util.Objects;
 
 public class Paquet {
 
+    @Getter
     private String nom, categorie;
 
     /**
@@ -20,25 +24,13 @@ public class Paquet {
         this.categorie = categorie;
     }
 
-    /**
-     *
-     * @return le nom du paquet
-     */
-    public String getName(){
-        return nom;
-    }
-
-    public String getCategorie(){
-        return categorie;
-    }
-
     @Override
     public boolean equals(Object objects) {
         if(!(objects instanceof Paquet)) {
             return false;
         }
         Paquet obj = (Paquet) objects;
-        return (this.getName().equals(obj.getName()) && this.getCategorie().equals(obj.categorie));
+        return (this.getNom().equals(obj.getNom()) && this.getCategorie().equals(obj.categorie));
     }
 
 }
