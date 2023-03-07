@@ -1,6 +1,7 @@
 package ulb.infof307.g12.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Paquet {
 
@@ -31,5 +32,13 @@ public class Paquet {
         return categorie;
     }
 
+    @Override
+    public boolean equals(Object objects) {
+        if(!(objects instanceof Paquet)) {
+            return false;
+        }
+        Paquet obj = (Paquet) objects;
+        return (this.getName().equals(obj.getName()) && this.getCategorie().equals(obj.categorie));
+    }
 
 }

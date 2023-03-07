@@ -12,38 +12,31 @@ public class GestionnairePaquet {
      * - categorie
      *
      * @param paquet
-     * @param dossier
+     * @param sauvegarde
      * @throws IOException
      */
-    public static void save(Paquet paquet, File dossier) throws IOException {
-
-        if(!dossier.exists())
-            dossier.mkdir();
-
-        File sauvegarde = new File(dossier.getPath()+"/"+paquet.getName()+".ulb");
+    public static void save(Paquet paquet, File sauvegarde) throws IOException {
 
         if(!sauvegarde.exists())
             sauvegarde.mkdir();
 
-        FileWriter fileWriter = new FileWriter(sauvegarde);
+        sauvegarde.setWritable(true);
+        FileWriter fileWriter = new FileWriter(sauvegarde,true);
         BufferedWriter writer = new BufferedWriter(fileWriter);
 
         writer.write(paquet.getCategorie());
+
+        writer.close();
 
     }
 
     /**
      * Charge un paquet en mémoire à partir de son nom et du dossier où il est stocké
-     * @param nom
-     * @param dossier
+     * @param sauvegarde
      * @return le paquet si le fichier existe et qu'il n'y a pas de corruption de donnée
      * @throws IOException
      */
-    public static Paquet load(String nom, File dossier) {
-        if(!dossier.exists())
-            dossier.mkdir();
-
-        File sauvegarde = new File(dossier.getPath()+"/"+nom+".ulb");
+    public static Paquet load(File sauvegarde) {
 
         if(!sauvegarde.exists())
             sauvegarde.mkdir();
@@ -54,7 +47,9 @@ public class GestionnairePaquet {
 
             String categorie = reader.readLine();
 
-            return new Paquet(nom, categorie);
+            reader.close();
+
+            return new Paquet(sauvegarde.getName().replace(".ulb",""), categorie);
         }catch (IOException erreur){
             return null;
         }

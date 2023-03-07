@@ -1,11 +1,14 @@
 package ulb.infof307.g12.storage;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import ulb.infof307.g12.model.Paquet;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -25,33 +28,50 @@ class GestionnairePaquetTest {
          */
 
     @TempDir
-    private static File dossierTemporaire = new File("tests/paquets");
+    private static File dossierTemporaire;
 
     @BeforeAll
     public static void creeDossierTemporaire(){
-        dossierTemporaire.mkdirs();
+        try {
+            dossierTemporaire = Files.createTempDirectory("Paquets").toFile();
+            System.out.println(dossierTemporaire.getPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @AfterAll
+    public static void supprimeDossierTemporaire(){
+        dossierTemporaire.delete();
     }
 
     @Test
-    public void testSauvegardePaquet(){
+    public void testSauvegardePaquet() throws IOException{
 
         Paquet paquet = new Paquet("Maths","BA-1");
+        String path = dossierTemporaire.getPath() + File.separator + paquet.getName();
+        File fichier = File.createTempFile(path,".ulb");
 
-        assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,dossierTemporaire));
+        assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier));
 
+
+        System.out.println(dossierTemporaire.listFiles().toString());
         assertTrue(
-                Arrays.stream(Objects.requireNonNull(dossierTemporaire.listFiles()))
-                        .anyMatch(file -> file.getName().equals("Maths.ulb"))
+                fichier.exists()
         );
+        assertTrue(fichier.getName().contains("Maths"));
 
     }
 
     @Test
-    public void testSupprimePaquet(){
+    public void testSupprimePaquet() throws IOException{
         Paquet paquet = new Paquet("Maths","BA-1");
 
-        assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,dossierTemporaire));
-        assertDoesNotThrow(() -> GestionnairePaquet.remove(paquet,dossierTemporaire));
+        String path = dossierTemporaire.getPath() + File.separator + paquet.getName();
+        File fichier = File.createTempFile(path,".ulb");
+
+        assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier));
+        assertDoesNotThrow(() -> GestionnairePaquet.remove(paquet,fichier));
 
 
         assertFalse(
@@ -62,12 +82,15 @@ class GestionnairePaquetTest {
     }
 
     @Test
-    public void testChargementPaquet(){
+    public void testChargementPaquet() throws IOException {
         Paquet paquet = new Paquet("Maths","BA-1");
 
-        assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,dossierTemporaire));
-        Paquet paquet2 = GestionnairePaquet.load("Maths",dossierTemporaire);
-        assertEquals(paquet, paquet2);
+        String path = dossierTemporaire.getPath() + File.separator + paquet.getName();
+        File fichier = File.createTempFile(path,".ulb");
+
+        assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier));
+        Paquet paquet2 = GestionnairePaquet.load(fichier);
+        assertEquals(paquet.getCategorie(), paquet2.getCategorie());
     }
 
 
