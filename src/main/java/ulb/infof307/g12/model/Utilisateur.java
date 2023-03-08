@@ -1,4 +1,4 @@
-package ulb.infof307.g12.connexion;
+package ulb.infof307.g12.model;
 
 //Création de la classe utilisateur
 import java.util.ArrayList;

@@ -1,10 +1,9 @@
-package ulb.infof307.g12.connexion;
+package ulb.infof307.g12.view.connection;
 
-import ulb.infof307.g12.connexion.Utilisateur;
+import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 

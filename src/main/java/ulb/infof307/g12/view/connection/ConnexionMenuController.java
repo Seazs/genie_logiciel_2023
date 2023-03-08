@@ -1,4 +1,4 @@
-package ulb.infof307.g12.connexion;
+package ulb.infof307.g12.view.connection;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

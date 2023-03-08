@@ -1,14 +1,7 @@
 package ulb.infof307.g12.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.List;
-import java.util.Objects;
-
 public class Paquet {
 
-    @Getter
     private String nom, categorie;
 
     /**
@@ -33,4 +26,11 @@ public class Paquet {
         return (this.getNom().equals(obj.getNom()) && this.getCategorie().equals(obj.categorie));
     }
 
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public String getNom() {
+        return nom;
+    }
 }
