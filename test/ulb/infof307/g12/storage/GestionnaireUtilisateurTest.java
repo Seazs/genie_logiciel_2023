@@ -1,6 +1,7 @@
 package ulb.infof307.g12.storage;
 
 import org.junit.jupiter.api.Test;
+import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.File;
@@ -8,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GestionnaireUtilisateurTest {
 
