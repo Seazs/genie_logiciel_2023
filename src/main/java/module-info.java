@@ -3,6 +3,7 @@ module connection {
     requires javafx.fxml;
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
+    requires static lombok;
 
     opens ulb.infof307.g12.view.connection to javafx.fxml;
     exports ulb.infof307.g12.view.connection;

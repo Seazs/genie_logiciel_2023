@@ -1,11 +1,14 @@
 package ulb.infof307.g12.model;
 
 
+import lombok.Getter;
+
 public class
 Carte {
     public int id;
-    public String recto;
-    public String verso;
+
+    @Getter
+    public String recto, verso;
 
     /**
      * Crée une carte dont ni le verso ni le recto ne peuvent être vides.
@@ -43,20 +46,5 @@ Carte {
         if (new_verso == null || new_verso.equals(""))
             throw new IllegalArgumentException("La carte doit posséder un verso");
         verso = new_verso;
-    }
-
-
-    /**
-     * @return recto
-     */
-    public String getRecto() {
-        return recto;
-    }
-
-    /**
-     * @return verso
-     */
-    public String getVerso() {
-        return verso;
     }
 }
