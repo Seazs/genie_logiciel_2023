@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.connection.ConnexionMenuController">
+   <children>
+      <Label alignment="CENTER" layoutX="40.0" layoutY="75.0" prefHeight="38.0" prefWidth="270.0" text="Application Title" textAlignment="CENTER" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="75.0">
+         <font>
+            <Font name="Marlett" size="36.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="100.0" layoutY="241.0" prefHeight="89.0" prefWidth="201.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.4000244140625" minWidth="10.0" prefWidth="68.79998779296875" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.20001220703125" minWidth="10.0" prefWidth="131.20001220703125" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Username :" />
+            <Label text="Password :" GridPane.rowIndex="1" />
+            <TextField fx:id="usernameField" prefWidth="133.0" GridPane.columnIndex="1" />
+            <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Label fx:id="messageLabel" alignment="CENTER" layoutX="67.0" layoutY="373.0" prefHeight="52.0" prefWidth="266.0" textAlignment="CENTER" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="67.0" />
+      <Button fx:id="connecterButton" layoutX="157.0" layoutY="448.0" mnemonicParsing="false" onAction="#onConnectButtonClick" text="Se connecter" AnchorPane.leftAnchor="157.0" AnchorPane.rightAnchor="158.2" />
+      <Button fx:id="creerButton" layoutX="148.0" layoutY="511.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" text="Créer un compte" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="147.2" />
+   </children>
+</AnchorPane>
