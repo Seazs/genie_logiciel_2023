@@ -1,6 +1,7 @@
-package com.example.javafxmodule;
+package ulb.infof307.g12.view.paquets;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,7 +12,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
+import ulb.infof307.g12.model.Paquet;
+import ulb.infof307.g12.view.connection.Main;
+import ulb.infof307.g12.view.profiles.ProfilController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +45,7 @@ public class MenuPaquetController implements Initializable {
                 } else {
                     try {
                         // Charger la vue FXML pour la cellule
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("paquetDeCarte.fxml"));
+                        FXMLLoader loader = new FXMLLoader(MenuPaquetController.class.getResource("paquetDeCarte.fxml"));
                         BorderPane cellLayout = loader.load();
 
                         // Obtenir le contrôleur pour la vue FXML
@@ -62,7 +65,7 @@ public class MenuPaquetController implements Initializable {
     }
 
     public void ouvirProfil(ActionEvent event) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("profil.fxml"));
+        FXMLLoader loader = new FXMLLoader(ProfilController.class.getResource("profil.fxml"));
         Parent nouvellePage = loader.load();
 
         // Créer une nouvelle scène à partir de la racine de la nouvelle page
