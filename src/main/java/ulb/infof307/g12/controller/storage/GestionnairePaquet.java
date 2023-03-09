@@ -27,7 +27,7 @@ public class GestionnairePaquet {
         BufferedWriter writer = new BufferedWriter(fileWriter);
 
         writer.write(paquet.getCategorie());
-
+        writer.newLine();
         writer.close();
         sauvegardeCartes(paquet,sauvegarde);
     }
@@ -48,21 +48,20 @@ public class GestionnairePaquet {
             BufferedReader reader = new BufferedReader(fileReader);
 
             String line = reader.readLine();
-            new Paquet(sauvegarde.getName().replace(".ulb",""), line);
-            new Carte bufferCarte =
+            Paquet paquet = new Paquet(sauvegarde.getName().replace(".ulb",""), line);
+            Carte bufferCarte = new Carte(1, "recto", "verso");
+            line = reader.readLine();
             while(line != null) {
+                String[] listdata = line.split("#");
+                bufferCarte.recto = listdata[0].strip();
+                bufferCarte.verso = listdata[1].strip();
+
+                paquet.ajouterCarte(bufferCarte);
+
                 line = reader.readLine();
-
-                if (!line.isBlank()) {
-                    String[] listdata = line.split("#");
-                    listeUtilisateur.add(new Utilisateur(listdata[0].strip(), listdata[1].strip()));
-                }
             }
-
-
             reader.close();
-
-            return Paquet;
+            return paquet;
         }catch (IOException erreur){
             return null;
         }
@@ -72,6 +71,12 @@ public class GestionnairePaquet {
 
     }
 
+    /**
+     * Sauvegarde les cartes sous format recto#verso par lignes dans le fichier sauvegarde
+     * @param paquet
+     * @param sauvegarde
+     * @throws IOException
+     */
     public static void sauvegardeCartes(Paquet paquet, File sauvegarde) throws IOException {
         if(!sauvegarde.exists())
             sauvegarde.mkdir();
@@ -80,11 +85,12 @@ public class GestionnairePaquet {
         FileWriter fileWriter = new FileWriter(sauvegarde,true);
         BufferedWriter writer = new BufferedWriter(fileWriter);
 
-        for(int i = 0; i < paquet.cartes.length ; i++){
-            Carte carte = paquet.cartes[i];
+        for(int i = 0; i < paquet.cartes.size() ; i++){
+            Carte carte = paquet.cartes.get(i);
 
-            writer.newLine();
+
             writer.write(carte.getRecto() + "#" + carte.getVerso());
+            writer.newLine();
         }
 
         writer.close();

@@ -8,8 +8,8 @@ public class Paquet {
 
     @Getter
     private String nom, categorie;
-    public Carte [] cartes;
-    private int length = 1;
+    public ArrayList<Carte> cartes = new ArrayList<Carte>();
+    private int length;
 
     /**
      * Crée un paquet dont le nom doit être unique.
@@ -38,8 +38,7 @@ public class Paquet {
      * @param carte
      */
     public void ajouterCarte(Carte carte){
-        this.cartes[length] = carte;
-        this.length += 1;
+        cartes.add(carte);
     }
 
 

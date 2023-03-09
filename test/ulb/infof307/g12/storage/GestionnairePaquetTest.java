@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
+import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
 
 import java.io.File;
@@ -50,6 +51,11 @@ class GestionnairePaquetTest {
     public void testSauvegardePaquet() throws IOException{
 
         Paquet paquet = new Paquet("Maths","BA-1");
+        Carte carte1 = new Carte(1, "1", "1");
+        Carte carte2 = new Carte(2, "2", "2");
+        paquet.ajouterCarte(carte1);
+        paquet.ajouterCarte(carte2);
+
         String path = dossierTemporaire.getPath() + File.separator + paquet.getNom();
         File fichier = File.createTempFile(path,".ulb");
 
@@ -85,15 +91,24 @@ class GestionnairePaquetTest {
     @Test
     public void testChargementPaquet() throws IOException {
         Paquet paquet = new Paquet("Maths","BA-1");
+        Carte carte1 = new Carte (1, "1r", "1v");
+        Carte carte2 = new Carte (2, "2r", "2v");
+
+        paquet.ajouterCarte(carte1);
+        paquet.ajouterCarte(carte2);
 
         String path = dossierTemporaire.getPath() + File.separator + paquet.getNom();
         File fichier = File.createTempFile(path,".ulb");
 
-        assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier));
-        Paquet paquet2 = GestionnairePaquet.load(fichier);
+        assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier)); // Sauvegarde le paquet
+        Paquet paquet2 = GestionnairePaquet.load(fichier); // Charge le paquet dans un nouvel objet
         assertEquals(paquet.getCategorie(), paquet2.getCategorie());
-    }
+        //assertEquals(paquet.cartes.get(0).recto, paquet2.cartes.get(0).recto);
+        assertEquals(paquet.cartes.get(0).verso, paquet2.cartes.get(0).verso);
+        assertEquals(paquet.cartes.get(1).recto, paquet2.cartes.get(1).recto);
+        assertEquals(paquet.cartes.get(1).verso, paquet2.cartes.get(1).verso);
 
+    }
 
 
 }
