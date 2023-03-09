@@ -54,8 +54,6 @@ class PaquetTest {
         Carte carte1 = new Carte(1, "r2", "v2");
         paquet.ajouterCarte(carte);
         paquet.ajouterCarte(carte1);
-        System.out.println(paquet.cartes.get(0).recto);
-        System.out.println(paquet.cartes.get(1).recto);
         Assertions.assertEquals(carte, paquet.cartes.get(0));
         Assertions.assertEquals(carte1, paquet.cartes.get(1));
 

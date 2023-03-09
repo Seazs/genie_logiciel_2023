@@ -48,14 +48,15 @@ public class GestionnairePaquet {
 
             String line = reader.readLine();
             Paquet paquet = new Paquet(sauvegarde.getName().replace(".ulb",""), line);
-            Carte bufferCarte = new Carte(1, "recto", "verso");
+
             while((line = reader.readLine())!=null) {
                 String[] listdata = line.split("#");
+
+                Carte bufferCarte = new Carte(1, "recto", "verso");
+
                 bufferCarte.recto = listdata[0].strip();
                 bufferCarte.verso = listdata[1].strip();
-
                 paquet.ajouterCarte(bufferCarte);
-                System.out.println(bufferCarte.recto + "#" + bufferCarte.verso);
 
             }
             reader.close();
@@ -85,7 +86,6 @@ public class GestionnairePaquet {
 
         for(int i = 0; i < paquet.cartes.size() ; i++){
             Carte carte = paquet.cartes.get(i);
-            System.out.println(paquet.cartes.get(i).recto + "#" + paquet.cartes.get(i).verso);
             writer.newLine();
             writer.write(carte.getRecto() + "#" + carte.getVerso());
         }

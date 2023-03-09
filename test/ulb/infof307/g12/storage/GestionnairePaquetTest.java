@@ -103,7 +103,7 @@ class GestionnairePaquetTest {
         assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier)); // Sauvegarde le paquet
         Paquet paquet2 = GestionnairePaquet.load(fichier); // Charge le paquet dans un nouvel objet
         assertEquals(paquet.getCategorie(), paquet2.getCategorie());
-        //assertEquals(paquet.cartes.get(0).recto, paquet2.cartes.get(0).recto);
+        assertEquals(paquet.cartes.get(0).recto, paquet2.cartes.get(0).recto);
         assertEquals(paquet.cartes.get(0).verso, paquet2.cartes.get(0).verso);
         assertEquals(paquet.cartes.get(1).recto, paquet2.cartes.get(1).recto);
         assertEquals(paquet.cartes.get(1).verso, paquet2.cartes.get(1).verso);
