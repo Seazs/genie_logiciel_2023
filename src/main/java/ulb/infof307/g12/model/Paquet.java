@@ -22,6 +22,7 @@ public class Paquet {
 
         this.nom = nom;
         this.categorie = categorie;
+        this.length=0;
     }
 
     @Override
@@ -38,8 +39,20 @@ public class Paquet {
      * @param carte
      */
     public void ajouterCarte(Carte carte){
+        for(Carte car: this.cartes){
+            if(car.id==carte.id) {
+                throw new IllegalArgumentException("La carte existe déjà");
+            }
+        }
         cartes.add(carte);
+        this.length++;
     }
-
+    public void supprimerCarte(Carte carte){
+        if(!(cartes.contains(carte))) {
+            throw new IllegalArgumentException("La carte n'existait pas");
+        }
+        cartes.remove(cartes.indexOf(carte));
+        this.length--;
+    }
 
 }

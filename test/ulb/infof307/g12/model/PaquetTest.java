@@ -51,7 +51,7 @@ class PaquetTest {
     public void testAjoutCarte(){
         Paquet paquet = new Paquet("Maths","BA-1");
         Carte carte = new Carte(1, "r1", "v1");
-        Carte carte1 = new Carte(1, "r2", "v2");
+        Carte carte1 = new Carte(4, "r2", "v2");
         paquet.ajouterCarte(carte);
         paquet.ajouterCarte(carte1);
         Assertions.assertEquals(carte, paquet.cartes.get(0));
