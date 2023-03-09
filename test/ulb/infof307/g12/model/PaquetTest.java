@@ -47,4 +47,12 @@ class PaquetTest {
         Assertions.assertEquals(paquet2,paquet);
     }
 
+    @Test
+    public void testAjoutCarte(){
+        Paquet paquet = new Paquet("Maths","BA-1");
+        Carte carte = new Carte(1, "recto", "verso");
+        paquet.ajouterCarte(carte);
+        Assertions.assertEquals(carte, paquet.cartes[1]);
+    }
+
 }

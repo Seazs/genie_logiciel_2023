@@ -59,4 +59,8 @@ public class GestionnairePaquet {
 
     }
 
+    public void sauvegardeCartes(Paquet paquet, File dossier){
+
+    }
+
 }
