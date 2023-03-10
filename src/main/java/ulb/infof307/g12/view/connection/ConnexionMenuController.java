@@ -43,9 +43,12 @@ public class ConnexionMenuController {
         {
             switch (gestionnaire.getStatus()) {
                 case USERNAME_DOES_NOT_EXIST ->
-                        messageLabel.setText("Username does not exist. Please try again or create your account!");
-                case WRONG_PASSWORD -> messageLabel.setText("Wrong password. Please try again.");
-
+                        messageLabel.setText("Ce pseudo n'existe pas");
+                case WRONG_PASSWORD -> messageLabel.setText("Mauvais mot de passe");
+                case USERNAME_IS_NOT_VALID ->
+                        messageLabel.setText("Le pseudo contient des caractères interdits.");
+                case PASSWORD_IS_NOT_VALID ->
+                        messageLabel.setText("Le mot de passe contient des caractères interdits.");
             }
         }
     }
@@ -62,8 +65,11 @@ public class ConnexionMenuController {
             switch (gestionnaire.getStatus())
             {
                 case USERNAME_DOES_ALREADY_EXIST ->
-                        messageLabel.setText("Username does already exist. Please try another username!");
-
+                        messageLabel.setText("Le pseudo existe déjà!");
+                case USERNAME_IS_NOT_VALID ->
+                    messageLabel.setText("Le pseudo contient des caractères interdits.");
+                case PASSWORD_IS_NOT_VALID ->
+                        messageLabel.setText("Le mot de passe contient des caractères interdits.");
             }
         }
     }

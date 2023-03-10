@@ -9,12 +9,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GestionnaireUtilisateur {
+    private final List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
+    private final File userdatabase;
     public STATUS status;
-    private List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
-    private File userdatabase;
 
     /**
      * Constructeur de GestionnaireUtilisateur, en paramètre c'est le fichier dont on doit charger les utilisateurs
+     *
      * @param fichier
      * @throws FileNotFoundException
      */
@@ -23,9 +24,10 @@ public class GestionnaireUtilisateur {
         load();
         status = STATUS.OK;
     }
+
     public GestionnaireUtilisateur() throws IOException {
         userdatabase = new File("stockUser.txt");
-        if (!userdatabase.createNewFile()){
+        if (!userdatabase.createNewFile()) {
             load();
         }
         status = STATUS.OK;
@@ -33,13 +35,14 @@ public class GestionnaireUtilisateur {
 
     /**
      * Sauvegarde la liste des utilisateurs dans un fichier .txt
+     *
      * @throws IOException
      */
     public void save() throws IOException {
-        FileWriter writer = new  FileWriter(userdatabase);
+        FileWriter writer = new FileWriter(userdatabase);
         BufferedWriter out = new BufferedWriter(writer);
 
-        for(Utilisateur utilisateur : listeUtilisateur) {
+        for (Utilisateur utilisateur : listeUtilisateur) {
             out.write(utilisateur.getPseudo() + "#" + utilisateur.getMdp());
             out.newLine();
         }
@@ -48,20 +51,21 @@ public class GestionnaireUtilisateur {
 
     /**
      * Charge les utilisateurs à partir d'un fichier
+     *
      * @throws FileNotFoundException
      */
     public void load() throws FileNotFoundException {
         listeUtilisateur.clear();
-        if (!userdatabase.exists()){
+        if (!userdatabase.exists()) {
             throw new FileNotFoundException("Le fichier n'existe pas");
         }
         Scanner myReader = new Scanner(userdatabase);
-        while (myReader.hasNextLine()){
+        while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
 
             if (!data.isBlank()) {
                 String[] listdata = data.split("#");
-                listeUtilisateur.add(new Utilisateur(listdata[0].strip(),listdata[1].strip()));
+                listeUtilisateur.add(new Utilisateur(listdata[0].strip(), listdata[1].strip()));
             }
         }
         myReader.close();
@@ -72,21 +76,19 @@ public class GestionnaireUtilisateur {
     }
 
     public boolean connect(String username, String password) throws FileNotFoundException {
+        if (!estUtilisateurValide(username, password))
+            return false;
         this.load();
-        for (Utilisateur u : listeUtilisateur)
-        {
-            if (u.getPseudo().equals(username))
-            {
-                System.out.println(u.getMdp()+ password);
-                if (!u.getMdp().equals(password))
-                {
-                    status = STATUS.WRONG_PASSWORD;
-                    System.out.println("WRONG PASSWORD");
-                    return false;
+        for (Utilisateur u : listeUtilisateur) {
+            if (u.getPseudo().equals(username)) {
+                if (u.getMdp().equals(password)) {
+                    status = STATUS.OK;
+                    System.out.println("AUTHORIZED ACCESS");
+                    return true;
                 }
-                status = STATUS.OK;
-                System.out.println("AUTHORIZED ACCESS");
-                return true;
+                status = STATUS.WRONG_PASSWORD;
+                System.out.println("WRONG PASSWORD");
+                return false;
             }
         }
         System.out.println("USERNAME DOES NOT EXIST");
@@ -99,9 +101,10 @@ public class GestionnaireUtilisateur {
     }
 
     public boolean register(String username, String password) throws IOException {
+        if (!estUtilisateurValide(username, password))
+            return false;
         Utilisateur new_user = new Utilisateur(username, password);
-        for (Utilisateur u : listeUtilisateur)
-        {
+        for (Utilisateur u : listeUtilisateur) {
             if (u.getPseudo().equals(username)) {
                 status = STATUS.USERNAME_DOES_ALREADY_EXIST;
                 System.out.println("USERNAME DOES ALREADY EXIST");
@@ -113,5 +116,27 @@ public class GestionnaireUtilisateur {
         listeUtilisateur.add(new_user);
         this.save();
         return true;
+
     }
+
+    private boolean estUtilisateurValide(String pseudo, String mdp) {
+
+        if (!estStringValide(pseudo)) {
+            status = STATUS.USERNAME_IS_NOT_VALID;
+            System.out.println("USERNAME_IS_NOT_VALID");
+            return false;
+        } else if (!estStringValide(mdp)) {
+            status = STATUS.PASSWORD_IS_NOT_VALID;
+            System.out.println("PASSWORD_IS_NOT_VALID");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean estStringValide(String string){
+        return (!string.contains("#") &&
+                !string.equals("") &&
+                !string.contains(" "));
+    }
+
 }
