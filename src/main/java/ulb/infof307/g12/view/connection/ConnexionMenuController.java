@@ -1,10 +1,17 @@
 package ulb.infof307.g12.view.connection;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
+import ulb.infof307.g12.view.paquets.MenuPaquetController;
 
 import java.io.IOException;
 
@@ -18,12 +25,19 @@ public class ConnexionMenuController {
     private PasswordField passwordField;
 
     @FXML
-    protected void onConnectButtonClick() throws IOException {
+    protected void onConnectButtonClick(ActionEvent event) throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
         GestionnaireUtilisateur gestionnaire = new GestionnaireUtilisateur();
         if (gestionnaire.connect(username, password)) {
             messageLabel.setText("Connecting: " + usernameField.getText() + " = " + passwordField.getText());
+            FXMLLoader loader = new FXMLLoader(MenuPaquetController.class.getResource("menuPaquet.fxml"));
+            Parent root = loader.<Parent>load();
+            Scene scene = new Scene(root);
+            MenuPaquetController controller = loader.getController();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
         }
         else
         {
