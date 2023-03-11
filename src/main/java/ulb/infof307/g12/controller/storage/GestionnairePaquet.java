@@ -46,7 +46,7 @@ public class GestionnairePaquet {
 
         try {
             File userfolder = new File("./stockage/"+user.getPseudo());
-            File[] listOfFilePaquet = userfolder.listFiles();
+            File[] listOfFilePaquet = userfolder.listFiles(); //Enumère les fichiers dans le dossier de l'utilisateur
             List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
 
             for (File file : listOfFilePaquet) {
@@ -76,31 +76,24 @@ public class GestionnairePaquet {
         }
     }
 
-    public static void remove(Paquet paquet, File dossier){
-
-    }
-
     /**
-     * Sauvegarde les cartes sous format recto#verso par lignes dans le fichier sauvegarde
+     * Supprime le fichier associé au paquet voulu
+     * @param user
      * @param paquet
-     * @param sauvegarde
-     * @throws IOException
+     * @throws FileNotFoundException
      */
-    public static void sauvegardeCartes(Paquet paquet, File sauvegarde) throws IOException {
-        if(!sauvegarde.exists())
-            sauvegarde.mkdir();
-
-        sauvegarde.setWritable(true);
-        FileWriter fileWriter = new FileWriter(sauvegarde,true);
-        BufferedWriter writer = new BufferedWriter(fileWriter);
-
-        for(int i = 0; i < paquet.cartes.size() ; i++){
-            Carte carte = paquet.cartes.get(i);
-            writer.newLine();
-            writer.write(carte.getRecto() + "#" + carte.getVerso());
+    public static void remove(Utilisateur user, Paquet paquet) throws FileNotFoundException {
+        File f = new File("./stockage/"+user.getPseudo()+"/"+paquet.getNom());
+        try{
+            if(f.exists()){
+                f.delete();
+                user.removePaquet(paquet.getNom());
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
-        writer.close();
+
     }
 
 }
