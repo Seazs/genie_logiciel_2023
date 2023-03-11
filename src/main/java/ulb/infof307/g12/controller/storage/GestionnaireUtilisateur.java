@@ -24,7 +24,7 @@ public class GestionnaireUtilisateur {
         status = STATUS.OK;
     }
     public GestionnaireUtilisateur() throws IOException {
-        userdatabase = new File("stockUser.txt");
+        userdatabase = new File("./stockage","stockUser.txt");
         if (!userdatabase.createNewFile()){
             load();
         }
@@ -111,6 +111,8 @@ public class GestionnaireUtilisateur {
         status = STATUS.OK;
         System.out.println("NEW USER REGISTERED");
         listeUtilisateur.add(new_user);
+        File f = new File("./stockage",username);
+        f.mkdir();
         this.save();
         return true;
     }

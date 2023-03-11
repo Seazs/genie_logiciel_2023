@@ -18,6 +18,7 @@ public class Utilisateur {
     private String mdp;
 
     @Getter
+    @Setter
     private List<Paquet> listPaquet= new ArrayList<Paquet>();
 
     /**
