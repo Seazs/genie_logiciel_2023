@@ -37,7 +37,8 @@ public class Utilisateur {
         listPaquet.removeIf(paquet -> Objects.equals(paquet.getNom(), nom));
     }
 
-
-
+    public List<Paquet> getPaquet(Utilisateur utilisateur){
+        return utilisateur.listPaquet;
+    }
 
 }

@@ -28,4 +28,10 @@ public class Paquet {
         Paquet obj = (Paquet) objects;
         return (this.getNom().equals(obj.getNom()) && this.getCategorie().equals(obj.categorie));
     }
+    public String getNom(Paquet paquet){
+        return this.nom;
+    }
+    public String getCategorie(Paquet paquet){
+        return this.categorie;
+    }
 }
