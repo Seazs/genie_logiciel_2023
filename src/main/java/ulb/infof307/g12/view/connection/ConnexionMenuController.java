@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -15,7 +14,6 @@ import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.view.paquets.MenuPaquetController;
 
 import java.io.IOException;
-import java.util.EventObject;
 
 public class ConnexionMenuController {
     @FXML
@@ -34,13 +32,12 @@ public class ConnexionMenuController {
         if (gestionnaire.connect(username, password)) {
             messageLabel.setText("Connecting: " + usernameField.getText() + " = " + passwordField.getText());
             FXMLLoader loader = new FXMLLoader(MenuPaquetController.class.getResource("menuPaquet.fxml"));
-            Parent root = loader.load();
+            Parent root = loader.<Parent>load();
             Scene scene = new Scene(root);
             MenuPaquetController controller = loader.getController();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-
         }
         else
         {
