@@ -12,6 +12,7 @@ public class GestionnaireUtilisateur {
     private final List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
     private final File userdatabase;
     public STATUS status;
+    public static Utilisateur utilisateurConnected ;
 
     /**
      * Constructeur de GestionnaireUtilisateur, en paramètre c'est le fichier dont on doit charger les utilisateurs
@@ -85,6 +86,7 @@ public class GestionnaireUtilisateur {
                 if (u.getMdp().equals(password)) {
                     status = STATUS.OK;
                     System.out.println("AUTHORIZED ACCESS");
+                    utilisateurConnected = u ;
                     return true;
                 }
                 status = STATUS.WRONG_PASSWORD;

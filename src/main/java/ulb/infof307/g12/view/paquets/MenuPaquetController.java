@@ -64,7 +64,7 @@ public class MenuPaquetController implements Initializable {
         });
     }
 
-    public void ouvirProfil(ActionEvent event) throws Exception {
+    public void ouvrirProfil(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(ProfilController.class.getResource("profil.fxml"));
         Parent nouvellePage = loader.load();
 

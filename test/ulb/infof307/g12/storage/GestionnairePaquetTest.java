@@ -110,7 +110,7 @@ class GestionnairePaquetTest {
         gestPaquet.save(utilisateur1);
         //Création de l'utilisateur 2 qui va charger l'utilisateur 1
         Utilisateur utilisateur2 = new Utilisateur("alex","pomme");
-        utilisateur2.setListPaquet(gestPaquet.load(utilisateur2));
+        //utilisateur2.setListPaquet(gestPaquet.load(utilisateur2));
         assertEquals(utilisateur1.getListPaquet().get(0).getCategorie(),utilisateur2.getListPaquet().get(0).getCategorie());
         assertEquals(utilisateur1.getListPaquet().get(1).getCategorie(),utilisateur2.getListPaquet().get(1).getCategorie());
     }

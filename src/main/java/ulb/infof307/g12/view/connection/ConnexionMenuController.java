@@ -40,20 +40,16 @@ public class ConnexionMenuController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-        }
-        else
-        {
+        } else {
             switch (gestionnaire.getStatus()) {
-                case USERNAME_DOES_NOT_EXIST ->
-                        messageLabel.setText("Ce pseudo n'existe pas");
+                case USERNAME_DOES_NOT_EXIST -> messageLabel.setText("Ce pseudo n'existe pas");
                 case WRONG_PASSWORD -> messageLabel.setText("Mauvais mot de passe");
-                case USERNAME_IS_NOT_VALID ->
-                        messageLabel.setText("Le pseudo contient des caractères interdits.");
-                case PASSWORD_IS_NOT_VALID ->
-                        messageLabel.setText("Le mot de passe contient des caractères interdits.");
+                case USERNAME_IS_NOT_VALID -> messageLabel.setText("Le pseudo contient des caractères interdits.");
+                case PASSWORD_IS_NOT_VALID -> messageLabel.setText("Le mot de passe contient des caractères interdits.");
             }
         }
     }
+
     @FXML
     protected void onRegisterButtonClick() throws IOException {
         String username = usernameField.getText();
@@ -61,40 +57,11 @@ public class ConnexionMenuController {
         GestionnaireUtilisateur gestionnaire = new GestionnaireUtilisateur();
         if (gestionnaire.register(username, password)) {
             messageLabel.setText("Register: " + usernameField.getText() + " = " + passwordField.getText());
-        }
-        else
-        {
-            switch (gestionnaire.getStatus())
-            {
-                case USERNAME_DOES_ALREADY_EXIST ->
-                        messageLabel.setText("Le pseudo existe déjà!");
-                case USERNAME_IS_NOT_VALID ->
-                    messageLabel.setText("Le pseudo contient des caractères interdits.");
-                case PASSWORD_IS_NOT_VALID ->
-                        messageLabel.setText("Le mot de passe contient des caractères interdits.");
-            }
-        }
-    }
-    @FXML
-    protected void onChangePasswordButtonClick() throws IOException{
-        String username = usernameField.getText();
-        String oldPassword = passwordField.getText();
-        TextInputDialog dialog = new TextInputDialog("");
-        dialog.setTitle("Change password");
-        dialog.setHeaderText("Enter your new password:");
-        Optional<String> result = dialog.showAndWait();
-        if (result.isPresent()) {
-            String newPassword = result.get();
-            GestionnaireUtilisateur gestionnaire = new GestionnaireUtilisateur();
-            if (gestionnaire.modifierMotDePasse(username, newPassword, oldPassword)) {
-                messageLabel.setText("Password changed successfully.");
-            } else {
-                switch (gestionnaire.getStatus()) {
-                    case USERNAME_DOES_NOT_EXIST ->
-                            messageLabel.setText("Username does not exist. Please try again.");
-                    case WRONG_PASSWORD ->
-                            messageLabel.setText("Wrong password. Please try again.");
-                }
+        } else {
+            switch (gestionnaire.getStatus()) {
+                case USERNAME_DOES_ALREADY_EXIST -> messageLabel.setText("Le pseudo existe déjà!");
+                case USERNAME_IS_NOT_VALID -> messageLabel.setText("Le pseudo contient des caractères interdits.");
+                case PASSWORD_IS_NOT_VALID -> messageLabel.setText("Le mot de passe contient des caractères interdits.");
             }
         }
     }
