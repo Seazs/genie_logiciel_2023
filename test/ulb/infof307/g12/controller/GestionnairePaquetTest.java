@@ -1,10 +1,9 @@
-package ulb.infof307.g12.storage;
+package ulb.infof307.g12.controller;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
@@ -12,8 +11,6 @@ import ulb.infof307.g12.model.Utilisateur;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -110,7 +107,7 @@ class GestionnairePaquetTest {
         gestPaquet.save(utilisateur1);
         //Création de l'utilisateur 2 qui va charger l'utilisateur 1
         Utilisateur utilisateur2 = new Utilisateur("alex","pomme");
-        //utilisateur2.setListPaquet(gestPaquet.load(utilisateur2));
+        utilisateur2.setListPaquet(gestPaquet.load(utilisateur2));
         assertEquals(utilisateur1.getListPaquet().get(0).getCategorie(),utilisateur2.getListPaquet().get(0).getCategorie());
         assertEquals(utilisateur1.getListPaquet().get(1).getCategorie(),utilisateur2.getListPaquet().get(1).getCategorie());
     }

@@ -1,4 +1,4 @@
-package ulb.infof307.g12.controller.storage;
+package ulb.infof307.g12.controller;
 
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
@@ -38,7 +38,7 @@ public class GestionnairePaquet {
     }
 
     /**
-     * Charge la liste des paquets en mémoire à partir de l'utilisateur
+     * Charge la liste des paquets correspondant a l'utilisateur en mémoire
      * @param user
      * @return
      */
@@ -77,7 +77,7 @@ public class GestionnairePaquet {
     }
 
     /**
-     * Supprime le fichier associé au paquet voulu
+     * Supprime le fichier associé au paquet voulu et supprime le paquet de la mémoire
      * @param user
      * @param paquet
      * @throws FileNotFoundException

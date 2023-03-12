@@ -1,9 +1,7 @@
-package ulb.infof307.g12.storage;
+package ulb.infof307.g12.controller;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.STATUS;
 import ulb.infof307.g12.model.Utilisateur;
 
@@ -184,5 +182,16 @@ class GestionnaireUtilisateurTest {
         assertTrue(gestionnaire.connect("ismail", "poire"));
         assertEquals(STATUS.OK, gestionnaire.getStatus());
         tmp.delete();
+    }
+
+    @Test
+    void removeUserTest() throws IOException{
+        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
+        Utilisateur user1 = new Utilisateur("Alex","meilleuramipourlavie");
+        gestuser.register(user1.getPseudo(), user1.getMdp());
+        gestuser.removeUser(user1);
+        //Test
+        File f = new File("./stockage/"+user1.getPseudo());
+        assertFalse(f.exists());
     }
 }

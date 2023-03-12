@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ulb.infof307.g12.view.paquets.MenuPaquetController;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -19,6 +20,10 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        File stockage = new File("./stockage");
+        if (!stockage.exists()){
+            stockage.mkdir();
+        }
         launch();
     }
 

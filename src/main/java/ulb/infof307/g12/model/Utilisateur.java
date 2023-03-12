@@ -3,6 +3,7 @@ package ulb.infof307.g12.model;
 //Création de la classe utilisateur
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,8 @@ public class Utilisateur {
     @Getter
     private String mdp;
     @Getter
-    private final List<Paquet> listPaquet = new ArrayList<Paquet>();
+    @Setter
+    private List<Paquet> listPaquet = new ArrayList<Paquet>();
 
     /**
      * Constructeur de la classe utilisateur
