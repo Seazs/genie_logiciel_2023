@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
+import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
+import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,14 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class GestionnairePaquetTest {
 
     /*
-        - dossier de stockage
+        - dossier "stockage"
+            -Fichier stockUser
             - <utilisateur>
-                - fichier login
-                - fichier <decks>
-
-
-                branch -> travail -> commits
-                travail fini: merge {main sur ta branche} -> résoud les conflits -> merge{ ta branche sur main}
+                - fichier <paquet1>
+                - fichier <paquet2>
          */
 
     @TempDir
@@ -48,52 +47,73 @@ class GestionnairePaquetTest {
 
     @Test
     public void testSauvegardePaquet() throws IOException{
-
-        Paquet paquet = new Paquet("Maths","BA-1");
-        String path = dossierTemporaire.getPath() + File.separator + paquet.getNom();
-        File fichier = File.createTempFile(path,".ulb");
-
-        assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier));
-
-
-        System.out.println(dossierTemporaire.listFiles().toString());
-        assertTrue(
-                fichier.exists()
-        );
-        assertTrue(fichier.getName().contains("Maths"));
-
-    }
-
-    @Test
-    public void testSupprimePaquet() throws IOException{
-        Paquet paquet = new Paquet("Maths","BA-1");
-
-        String path = dossierTemporaire.getPath() + File.separator + paquet.getNom();
-        File fichier = File.createTempFile(path,".ulb");
-
-        assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier));
-        assertDoesNotThrow(() -> GestionnairePaquet.remove(paquet,fichier));
-
-
-        assertFalse(
-                Arrays.stream(Objects.requireNonNull(dossierTemporaire.listFiles()))
-                        .anyMatch(file -> file.getName().equals("Maths.ulb"))
-        );
+        Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
+        Paquet paquet1 = new Paquet("Maths","BA-1");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
+        paquet1.ajouterCarte(carte1);
+        paquet1.ajouterCarte(carte2);
+        Paquet paquet2 = new Paquet("Chimie","BA-1");
+        Carte carte3 = new Carte(3, "redox", "Non");
+        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui");
+        paquet2.ajouterCarte(carte3);
+        paquet2.ajouterCarte(carte4);
+        utilisateur1.addPaquet(paquet1);
+        utilisateur1.addPaquet(paquet2);
+        GestionnairePaquet gestPaquet = new GestionnairePaquet();
+        gestPaquet.save(utilisateur1);
+        //Test d'assertion
+        File f = new File("./stockage/"+utilisateur1.getPseudo()+"/"+"Maths");
+        assertTrue(f.exists());
 
     }
 
     @Test
-    public void testChargementPaquet() throws IOException {
-        Paquet paquet = new Paquet("Maths","BA-1");
-
-        String path = dossierTemporaire.getPath() + File.separator + paquet.getNom();
-        File fichier = File.createTempFile(path,".ulb");
-
-        assertDoesNotThrow(() -> GestionnairePaquet.save(paquet,fichier));
-        Paquet paquet2 = GestionnairePaquet.load(fichier);
-        assertEquals(paquet.getCategorie(), paquet2.getCategorie());
+    public void testremove() throws IOException{
+        Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
+        Paquet paquet1 = new Paquet("Maths","BA-1");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
+        paquet1.ajouterCarte(carte1);
+        paquet1.ajouterCarte(carte2);
+        Paquet paquet2 = new Paquet("Chimie","BA-1");
+        Carte carte3 = new Carte(3, "redox", "Non");
+        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui");
+        paquet2.ajouterCarte(carte3);
+        paquet2.ajouterCarte(carte4);
+        utilisateur1.addPaquet(paquet1);
+        utilisateur1.addPaquet(paquet2);
+        GestionnairePaquet gestPaquet = new GestionnairePaquet();
+        gestPaquet.save(utilisateur1);
+        //Test de suppression
+        gestPaquet.remove(utilisateur1,paquet1);
+        File f = new File("./stockage/"+utilisateur1.getPseudo()+"/"+paquet1.getNom());
+        assertFalse(f.exists());
     }
 
+    @Test
+    public void testLoadPaquet() throws IOException {
+        Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
+        Paquet paquet1 = new Paquet("Maths","BA-1");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
+        paquet1.ajouterCarte(carte1);
+        paquet1.ajouterCarte(carte2);
+        Paquet paquet2 = new Paquet("Chimie","BA-1");
+        Carte carte3 = new Carte(3, "redox", "Non");
+        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui");
+        paquet2.ajouterCarte(carte3);
+        paquet2.ajouterCarte(carte4);
+        utilisateur1.addPaquet(paquet1);
+        utilisateur1.addPaquet(paquet2);
+        GestionnairePaquet gestPaquet = new GestionnairePaquet();
+        gestPaquet.save(utilisateur1);
+        //Création de l'utilisateur 2 qui va charger l'utilisateur 1
+        Utilisateur utilisateur2 = new Utilisateur("alex","pomme");
+        utilisateur2.setListPaquet(gestPaquet.load(utilisateur2));
+        assertEquals(utilisateur1.getListPaquet().get(0).getCategorie(),utilisateur2.getListPaquet().get(0).getCategorie());
+        assertEquals(utilisateur1.getListPaquet().get(1).getCategorie(),utilisateur2.getListPaquet().get(1).getCategorie());
+    }
 
 
 }

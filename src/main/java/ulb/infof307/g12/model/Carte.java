@@ -16,7 +16,7 @@ Carte {
      * @param recto
      * @param verso
      */
-    Carte(int id, String recto,  String verso){
+    public Carte(int id, String recto, String verso){
         if(recto == null || recto.equals(""))
             throw new IllegalArgumentException("La carte doit posséder un recto");
 
