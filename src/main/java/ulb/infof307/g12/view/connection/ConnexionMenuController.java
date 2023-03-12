@@ -9,13 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
-import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
+import ulb.infof307.g12.controller.GestionnaireUtilisateur;
 import ulb.infof307.g12.view.paquets.MenuPaquetController;
 
 import java.io.IOException;
-import java.util.Optional;
 
 public class ConnexionMenuController {
     @FXML

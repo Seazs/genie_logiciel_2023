@@ -1,4 +1,4 @@
-package ulb.infof307.g12.controller.storage;
+package ulb.infof307.g12.controller;
 
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
