@@ -31,6 +31,7 @@ public class GestionnaireUtilisateur {
         status = STATUS.OK;
     }
 
+
     /**
      * Sauvegarde la liste des utilisateurs dans un fichier .txt
      * @throws IOException
@@ -50,6 +51,7 @@ public class GestionnaireUtilisateur {
      * Charge les utilisateurs à partir d'un fichier
      * @throws FileNotFoundException
      */
+
     public void load() throws FileNotFoundException {
         listeUtilisateur.clear();
         if (!userdatabase.exists()){
@@ -58,14 +60,18 @@ public class GestionnaireUtilisateur {
         Scanner myReader = new Scanner(userdatabase);
         while (myReader.hasNextLine()){
             String data = myReader.nextLine();
-
             if (!data.isBlank()) {
                 String[] listdata = data.split("#");
-                listeUtilisateur.add(new Utilisateur(listdata[0].strip(),listdata[1].strip()));
+                if (listdata.length >= 2) {
+                    listeUtilisateur.add(new Utilisateur(listdata[0].strip(),listdata[1].strip()));
+                } else {
+                    System.out.println("Erreur : la ligne ne contient pas les informations attendues.");
+                }
             }
         }
         myReader.close();
     }
+
 
     public List<Utilisateur> getListeUtilisateur() {
         return listeUtilisateur;
@@ -113,5 +119,32 @@ public class GestionnaireUtilisateur {
         listeUtilisateur.add(new_user);
         this.save();
         return true;
+    }
+
+    public Utilisateur trouverUtilisateur(String nomUtilisateur) {
+        for (Utilisateur utilisateur : listeUtilisateur) {
+            if (utilisateur.getPseudo().equals(nomUtilisateur)) {
+                return utilisateur;
+            }
+        }
+        return null;
+    }
+
+
+    public boolean modifierMotDePasse(String username, String newPassword, String oldPassword) throws IOException {
+        Utilisateur utilisateur = trouverUtilisateur(username);
+        if (utilisateur != null) {
+            if (utilisateur.getMdp().equals(oldPassword)) {
+                utilisateur.setMdp(newPassword);
+                save();
+                return true;
+            } else {
+                status = STATUS.WRONG_PASSWORD;
+                return false;
+            }
+        } else {
+            status = STATUS.USERNAME_DOES_NOT_EXIST;
+            return false;
+        }
     }
 }
