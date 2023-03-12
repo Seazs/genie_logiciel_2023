@@ -62,7 +62,11 @@ public class GestionnaireUtilisateur {
 
             if (!data.isBlank()) {
                 String[] listdata = data.split("#");
-                listeUtilisateur.add(new Utilisateur(listdata[0].strip(),listdata[1].strip()));
+                if (listdata.length >= 2) {
+                    listeUtilisateur.add(new Utilisateur(listdata[0].strip(),listdata[1].strip()));
+                } else {
+                    System.out.println("Erreur : la ligne ne contient pas les informations attendues.");
+                }
             }
         }
         myReader.close();
@@ -135,6 +139,33 @@ public class GestionnaireUtilisateur {
         return (!string.contains("#") &&
                 !string.equals("") &&
                 !string.contains(" "));
+    }
+
+    public Utilisateur trouverUtilisateur(String nomUtilisateur) {
+        for (Utilisateur utilisateur : listeUtilisateur) {
+            if (utilisateur.getPseudo().equals(nomUtilisateur)) {
+                return utilisateur;
+            }
+        }
+        return null;
+    }
+
+
+    public boolean modifierMotDePasse(String username, String newPassword, String oldPassword) throws IOException {
+        Utilisateur utilisateur = trouverUtilisateur(username);
+        if (utilisateur != null) {
+            if (utilisateur.getMdp().equals(oldPassword)) {
+                utilisateur.setMdp(newPassword);
+                save();
+                return true;
+            } else {
+                status = STATUS.WRONG_PASSWORD;
+                return false;
+            }
+        } else {
+            status = STATUS.USERNAME_DOES_NOT_EXIST;
+            return false;
+        }
     }
 
 }
