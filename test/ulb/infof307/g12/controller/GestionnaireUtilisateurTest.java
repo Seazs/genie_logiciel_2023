@@ -187,11 +187,12 @@ class GestionnaireUtilisateurTest {
     @Test
     void removeUserTest() throws IOException{
         GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
-        Utilisateur user1 = new Utilisateur("Alex","meilleuramipourlavie");
+        Utilisateur user1 = new Utilisateur("felix","meilleuramipourlavie");
         gestuser.register(user1.getPseudo(), user1.getMdp());
         gestuser.removeUser(user1);
         //Test
         File f = new File("./stockage/"+user1.getPseudo());
         assertFalse(f.exists());
+        assertFalse(gestuser.getListeUtilisateur().contains(user1));
     }
 }

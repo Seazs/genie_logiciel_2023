@@ -7,10 +7,11 @@ import ulb.infof307.g12.model.Utilisateur;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class GestionnaireUtilisateur {
-    private final List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
+    private static final List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
     private final File userdatabase;
     public STATUS status;
     public static Utilisateur utilisateurConnected ;
@@ -209,10 +210,19 @@ public class GestionnaireUtilisateur {
      * @param user
      * @throws FileNotFoundException
      */
-    public static void removeUser(Utilisateur user) throws FileNotFoundException {
+    public void removeUser(Utilisateur user) throws FileNotFoundException {
         File f = new File("./stockage/" + user.getPseudo());
         try {
             if (f.exists()) {
+                int index=0;
+                for (Utilisateur util : listeUtilisateur){
+                    if (Objects.equals(util.getPseudo(), user.getPseudo())){
+                        listeUtilisateur.remove(index);
+                        break;
+                    }
+                    index++;
+                }
+                this.save();
                 f.delete();
             }
         } catch (Exception ex) {

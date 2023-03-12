@@ -57,6 +57,8 @@ class GestionnairePaquetTest {
         paquet2.ajouterCarte(carte4);
         utilisateur1.addPaquet(paquet1);
         utilisateur1.addPaquet(paquet2);
+        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
+        gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
         GestionnairePaquet gestPaquet = new GestionnairePaquet();
         gestPaquet.save(utilisateur1);
         //Test d'assertion
@@ -80,6 +82,8 @@ class GestionnairePaquetTest {
         paquet2.ajouterCarte(carte4);
         utilisateur1.addPaquet(paquet1);
         utilisateur1.addPaquet(paquet2);
+        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
+        gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
         GestionnairePaquet gestPaquet = new GestionnairePaquet();
         gestPaquet.save(utilisateur1);
         //Test de suppression
@@ -104,6 +108,8 @@ class GestionnairePaquetTest {
         utilisateur1.addPaquet(paquet1);
         utilisateur1.addPaquet(paquet2);
         GestionnairePaquet gestPaquet = new GestionnairePaquet();
+        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
+        gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
         gestPaquet.save(utilisateur1);
         //Création de l'utilisateur 2 qui va charger l'utilisateur 1
         Utilisateur utilisateur2 = new Utilisateur("alex","pomme");
