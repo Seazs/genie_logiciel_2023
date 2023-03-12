@@ -1,5 +1,6 @@
 package ulb.infof307.g12.controller;
 
+import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.STATUS;
 import ulb.infof307.g12.model.Utilisateur;
 
@@ -77,6 +78,13 @@ public class GestionnaireUtilisateur {
         return listeUtilisateur;
     }
 
+    /**
+     * Vérifie si l'utilisateur à déjà un compte
+     * @param username
+     * @param password
+     * @return
+     * @throws FileNotFoundException
+     */
     public boolean connect(String username, String password) throws FileNotFoundException {
         if (!estUtilisateurValide(username, password))
             return false;
@@ -103,6 +111,13 @@ public class GestionnaireUtilisateur {
         return status;
     }
 
+    /**
+     * Permet de créer un nouveau compte d'utilisateur
+     * @param username
+     * @param password
+     * @return
+     * @throws IOException
+     */
     public boolean register(String username, String password) throws IOException {
         if (!estUtilisateurValide(username, password))
             return false;
@@ -123,6 +138,12 @@ public class GestionnaireUtilisateur {
         return true;
     }
 
+    /**
+     * Vérifie si le pseudo et le mot de passe sont valides
+     * @param pseudo
+     * @param mdp
+     * @return
+     */
     private boolean estUtilisateurValide(String pseudo, String mdp) {
 
         if (!estStringValide(pseudo)) {
@@ -143,6 +164,11 @@ public class GestionnaireUtilisateur {
                 !string.contains(" "));
     }
 
+    /**
+     *
+     * @param nomUtilisateur
+     * @return
+     */
     public Utilisateur trouverUtilisateur(String nomUtilisateur) {
         for (Utilisateur utilisateur : listeUtilisateur) {
             if (utilisateur.getPseudo().equals(nomUtilisateur)) {
@@ -153,6 +179,14 @@ public class GestionnaireUtilisateur {
     }
 
 
+    /**
+     * Modifie le mot de passe associé au pseudo
+     * @param username
+     * @param newPassword
+     * @param oldPassword
+     * @return
+     * @throws IOException
+     */
     public boolean modifierMotDePasse(String username, String newPassword, String oldPassword) throws IOException {
         Utilisateur utilisateur = trouverUtilisateur(username);
         if (utilisateur != null) {
@@ -170,4 +204,19 @@ public class GestionnaireUtilisateur {
         }
     }
 
-}
+    /**
+     * Supprime le dossier utilisateur
+     * @param user
+     * @throws FileNotFoundException
+     */
+    public static void removeUser(Utilisateur user) throws FileNotFoundException {
+        File f = new File("./stockage/" + user.getPseudo());
+        try {
+            if (f.exists()) {
+                f.delete();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    }
