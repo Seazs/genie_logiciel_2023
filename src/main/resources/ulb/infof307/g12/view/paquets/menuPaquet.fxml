@@ -4,11 +4,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.MenuPaquetController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.MenuPaquetController">
     <ListView fx:id="paquetListView" editable="true" layoutX="14.0" layoutY="85.0" prefHeight="267.0" prefWidth="457.0" />
     <Label alignment="CENTER" contentDisplay="TOP" layoutX="13.0" layoutY="14.0" prefHeight="48.0" prefWidth="458.0" text="liste des paquets">
         <font>
             <Font size="36.0" />
         </font>
     </Label>
+   <Button onAction="#ouvrirProfil" layoutX="493.0" layoutY="14.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="82.0" text="Profil" />
 </AnchorPane>
