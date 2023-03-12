@@ -78,6 +78,5 @@ public class MenuPaquetController implements Initializable {
         // Définir la nouvelle scène sur le stage actuel et afficher le stage
         stageActuel.setScene(nouvelleScene);
         stageActuel.show();
-
     }
 }

@@ -1,61 +1,98 @@
 package ulb.infof307.g12.controller.storage;
 
+import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
+import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GestionnairePaquet {
 
+
     /**
-     * Sauvegarde un paquet de cartes sous forme de fichier.
-     * Format:
-     * - categorie
-     *
-     * @param paquet
-     * @param sauvegarde
+     * Sauvegarde un paquet de cartes sous forme de fichier dans le dossier de l'utilisateur.
+     * @param user
      * @throws IOException
      */
-    public static void save(Paquet paquet, File sauvegarde) throws IOException {
+    public static void save(Utilisateur user) throws IOException {
+        List<Paquet> listPaquet = user.getListPaquet();
+        for (Paquet paquet : listPaquet){
+            File paquetdatabase = new File("./stockage/"+user.getPseudo(),paquet.getNom()); // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
+            FileWriter writer = new  FileWriter(paquetdatabase);
+            BufferedWriter out = new BufferedWriter(writer);
 
-        if(!sauvegarde.exists())
-            sauvegarde.mkdir();
+            out.write(paquet.getNom());
+            out.newLine();
+            out.write(paquet.getCategorie());
 
-        sauvegarde.setWritable(true);
-        FileWriter fileWriter = new FileWriter(sauvegarde,true);
-        BufferedWriter writer = new BufferedWriter(fileWriter);
-
-        writer.write(paquet.getCategorie());
-
-        writer.close();
+            for(int i = 0; i < paquet.cartes.size() ; i++){ //Ecriture de toutes les cartes dans le fichier
+                Carte carte = paquet.cartes.get(i);
+                out.newLine();
+                out.write(carte.getRecto() + "#" + carte.getVerso());
+            }
+            out.close();
+        }
 
     }
 
     /**
-     * Charge un paquet en mémoire à partir de son nom et du dossier où il est stocké
-     * @param sauvegarde
-     * @return le paquet si le fichier existe et qu'il n'y a pas de corruption de donnée
-     * @throws IOException
+     * Charge la liste des paquets en mémoire à partir de l'utilisateur
+     * @param user
+     * @return
      */
-    public static Paquet load(File sauvegarde) {
-
-        if(!sauvegarde.exists())
-            sauvegarde.mkdir();
+    public static List<Paquet> load(Utilisateur user) {
 
         try {
-            FileReader fileReader = new FileReader(sauvegarde);
-            BufferedReader reader = new BufferedReader(fileReader);
+            File userfolder = new File("./stockage/"+user.getPseudo());
+            File[] listOfFilePaquet = userfolder.listFiles(); //Enumère les fichiers dans le dossier de l'utilisateur
+            List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
 
-            String categorie = reader.readLine();
+            for (File file : listOfFilePaquet) {
+                FileReader fileReader = new FileReader(file);
+                BufferedReader reader = new BufferedReader(fileReader);
 
-            reader.close();
+                String lineNom = reader.readLine();
+                String lineCategorie = reader.readLine();
+                Paquet newPaquet = new Paquet(lineNom, lineCategorie);
+                int i=0;
+                String line;
+                while((line = reader.readLine())!=null) {
+                    String[] listdata = line.split("#");
 
-            return new Paquet(sauvegarde.getName().replace(".ulb",""), categorie);
+                    Carte bufferCarte = new Carte(i, "recto", "verso");
+
+                    bufferCarte.recto = listdata[0].strip();
+                    bufferCarte.verso = listdata[1].strip();
+                    newPaquet.ajouterCarte(bufferCarte);
+                    i++;}
+                loadedListOfPaquet.add(newPaquet);
+                reader.close();
+            }
+            return loadedListOfPaquet;
         }catch (IOException erreur){
             return null;
         }
     }
 
-    public static void remove(Paquet paquet, File dossier){
+    /**
+     * Supprime le fichier associé au paquet voulu
+     * @param user
+     * @param paquet
+     * @throws FileNotFoundException
+     */
+    public static void remove(Utilisateur user, Paquet paquet) throws FileNotFoundException {
+        File f = new File("./stockage/"+user.getPseudo()+"/"+paquet.getNom());
+        try{
+            if(f.exists()){
+                f.delete();
+                user.removePaquet(paquet.getNom());
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
 
     }
 

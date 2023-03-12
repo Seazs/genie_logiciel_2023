@@ -15,7 +15,6 @@ public class GestionnaireUtilisateur {
 
     /**
      * Constructeur de GestionnaireUtilisateur, en paramètre c'est le fichier dont on doit charger les utilisateurs
-     *
      * @param fichier
      * @throws FileNotFoundException
      */
@@ -26,8 +25,8 @@ public class GestionnaireUtilisateur {
     }
 
     public GestionnaireUtilisateur() throws IOException {
-        userdatabase = new File("stockUser.txt");
-        if (!userdatabase.createNewFile()) {
+        userdatabase = new File("./stockage","stockUser.txt");
+        if (!userdatabase.createNewFile()){
             load();
         }
         status = STATUS.OK;
@@ -35,14 +34,13 @@ public class GestionnaireUtilisateur {
 
     /**
      * Sauvegarde la liste des utilisateurs dans un fichier .txt
-     *
      * @throws IOException
      */
     public void save() throws IOException {
-        FileWriter writer = new FileWriter(userdatabase);
+        FileWriter writer = new  FileWriter(userdatabase);
         BufferedWriter out = new BufferedWriter(writer);
 
-        for (Utilisateur utilisateur : listeUtilisateur) {
+        for(Utilisateur utilisateur : listeUtilisateur) {
             out.write(utilisateur.getPseudo() + "#" + utilisateur.getMdp());
             out.newLine();
         }
@@ -51,21 +49,20 @@ public class GestionnaireUtilisateur {
 
     /**
      * Charge les utilisateurs à partir d'un fichier
-     *
      * @throws FileNotFoundException
      */
     public void load() throws FileNotFoundException {
         listeUtilisateur.clear();
-        if (!userdatabase.exists()) {
+        if (!userdatabase.exists()){
             throw new FileNotFoundException("Le fichier n'existe pas");
         }
         Scanner myReader = new Scanner(userdatabase);
-        while (myReader.hasNextLine()) {
+        while (myReader.hasNextLine()){
             String data = myReader.nextLine();
 
             if (!data.isBlank()) {
                 String[] listdata = data.split("#");
-                listeUtilisateur.add(new Utilisateur(listdata[0].strip(), listdata[1].strip()));
+                listeUtilisateur.add(new Utilisateur(listdata[0].strip(),listdata[1].strip()));
             }
         }
         myReader.close();
@@ -114,9 +111,10 @@ public class GestionnaireUtilisateur {
         status = STATUS.OK;
         System.out.println("NEW USER REGISTERED");
         listeUtilisateur.add(new_user);
+        File f = new File("./stockage",username);
+        f.mkdir();
         this.save();
         return true;
-
     }
 
     private boolean estUtilisateurValide(String pseudo, String mdp) {
