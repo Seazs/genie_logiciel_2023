@@ -13,7 +13,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.view.connection.Main;
 import ulb.infof307.g12.view.profiles.ProfilController;
 
 import java.io.IOException;
