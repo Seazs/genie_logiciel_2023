@@ -1,6 +1,5 @@
-package ulb.infof307.g12.controller;
+package ulb.infof307.g12.controller.storage;
 
-import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.STATUS;
 import ulb.infof307.g12.model.Utilisateur;
 
@@ -11,7 +10,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class GestionnaireUtilisateur {
-    private static final List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
+    private static final List<Utilisateur> listeUtilisateur = new ArrayList<>();
     private final File userdatabase;
     public STATUS status;
     public static Utilisateur utilisateurConnected ;
@@ -27,12 +26,16 @@ public class GestionnaireUtilisateur {
         status = STATUS.OK;
     }
 
-    public GestionnaireUtilisateur() throws IOException {
+    public GestionnaireUtilisateur() {
         userdatabase = new File("./stockage","stockUser.txt");
-        if (!userdatabase.createNewFile()){
-            load();
+        try {
+            if (!userdatabase.createNewFile()){
+                load();
+            }
+            status = STATUS.OK;
+        } catch (IOException e) {
+            status = STATUS.FILE_NOT_LOADED;
         }
-        status = STATUS.OK;
     }
 
     /**
@@ -188,21 +191,27 @@ public class GestionnaireUtilisateur {
      * @return
      * @throws IOException
      */
-    public boolean modifierMotDePasse(String username, String newPassword, String oldPassword) throws IOException {
-        Utilisateur utilisateur = trouverUtilisateur(username);
-        if (utilisateur != null) {
-            if (utilisateur.getMdp().equals(oldPassword)) {
-                utilisateur.setMdp(newPassword);
-                save();
-                return true;
-            } else {
-                status = STATUS.WRONG_PASSWORD;
-                return false;
-            }
-        } else {
-            status = STATUS.USERNAME_DOES_NOT_EXIST;
-            return false;
+    public void modifierMotDePasse(String username, String newPassword, String oldPassword) throws IOException {
+        if(!estStringValide(newPassword)) {
+            status = STATUS.PASSWORD_IS_NOT_VALID;
+            return;
         }
+
+        Utilisateur utilisateur = trouverUtilisateur(username);
+
+        if (utilisateur == null) {
+            status = STATUS.USERNAME_DOES_NOT_EXIST;
+            return;
+        }
+
+        if (!utilisateur.getMdp().equals(oldPassword)) {
+            status = STATUS.WRONG_PASSWORD;
+            return;
+        }
+
+        utilisateur.setMdp(newPassword);
+        save();
+        status = STATUS.OK;
     }
 
     /**
@@ -229,4 +238,9 @@ public class GestionnaireUtilisateur {
             ex.printStackTrace();
         }
     }
+
+    public String getStatusMsg(){
+        return this.status.getMsg();
     }
+
+}

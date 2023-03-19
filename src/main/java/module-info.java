@@ -13,4 +13,9 @@ module connection {
 
     opens ulb.infof307.g12.view.paquets to javafx.fxml;
     exports ulb.infof307.g12.view.paquets;
+
+    opens ulb.infof307.g12.view.connection to javafx.fxml;
+    exports ulb.infof307.g12.view.connection;
+    exports ulb.infof307.g12.controller.javafx.paquets;
+    opens ulb.infof307.g12.controller.javafx.paquets to javafx.fxml;
 }

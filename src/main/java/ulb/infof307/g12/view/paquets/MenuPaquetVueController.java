@@ -5,23 +5,27 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
+import lombok.Setter;
+import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.view.profiles.ProfilController;
+import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuPaquetController implements Initializable {
+public class MenuPaquetVueController implements Initializable {
     @FXML
     private ListView<Paquet> paquetListView;
+
+    @Setter
+    private MenuPaquetListener listener;
+
+    private Utilisateur user;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -44,11 +48,11 @@ public class MenuPaquetController implements Initializable {
                 } else {
                     try {
                         // Charger la vue FXML pour la cellule
-                        FXMLLoader loader = new FXMLLoader(MenuPaquetController.class.getResource("paquetDeCarte.fxml"));
+                        FXMLLoader loader = new FXMLLoader(MenuPaquetVueController.class.getResource("paquetDeCarte.fxml"));
                         BorderPane cellLayout = loader.load();
 
                         // Obtenir le contrôleur pour la vue FXML
-                        PaquetDeCartesController controller = loader.getController();
+                        PaquetDeCartesVueController controller = loader.getController();
 
                         // Définir les valeurs des éléments de la vue FXML à partir de l'objet PaquetDeCartes
                         controller.setPaquetDeCartes(item);
@@ -64,18 +68,8 @@ public class MenuPaquetController implements Initializable {
     }
 
     public void ouvrirProfil(ActionEvent event) throws Exception {
-        FXMLLoader loader = new FXMLLoader(ProfilController.class.getResource("profil.fxml"));
-        Parent nouvellePage = loader.load();
-
-        // Créer une nouvelle scène à partir de la racine de la nouvelle page
-        Scene nouvelleScene = new Scene(nouvellePage);
-
-        // Obtenir une référence au stage actuel
-        Button bouton = (Button) event.getSource();
-        Stage stageActuel = (Stage) bouton.getScene().getWindow();
-
-        // Définir la nouvelle scène sur le stage actuel et afficher le stage
-        stageActuel.setScene(nouvelleScene);
-        stageActuel.show();
+        listener.openProfile(user);
     }
+
+
 }

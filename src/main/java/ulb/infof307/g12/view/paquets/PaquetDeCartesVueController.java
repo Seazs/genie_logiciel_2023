@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import ulb.infof307.g12.model.Paquet;
 
-public class PaquetDeCartesController {
+public class PaquetDeCartesVueController {
     @FXML
     private Label nomLabel;
     @FXML

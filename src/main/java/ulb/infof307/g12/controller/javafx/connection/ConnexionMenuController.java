@@ -1,36 +1,32 @@
 package ulb.infof307.g12.controller.javafx.connection;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import ulb.infof307.g12.controller.GestionnaireUtilisateur;
-import ulb.infof307.g12.view.paquets.MenuPaquetController;
+import ulb.infof307.g12.controller.javafx.BaseController;
+import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
+import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
+import ulb.infof307.g12.model.Utilisateur;
+import ulb.infof307.g12.view.connection.ConnectionVueController;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class ConnexionMenuController {
-    @FXML
-    private Label messageLabel;
-    @FXML
-    private TextField usernameField;
-    @FXML
+public class ConnexionMenuController extends BaseController implements UserCredentialsListener {
 
-    private PasswordField passwordField;
+    private GestionnaireUtilisateur gestionnaire;
+    private ConnexionSuccessListener listener;
 
-    @FXML
+    public ConnexionMenuController(Stage stage,GestionnaireUtilisateur gestionnaireUtilisateur,ConnexionSuccessListener listener) throws IOException {
+        super(stage,ConnectionVueController.class.getResource("connexion-menu-view.fxml"),"Application Title");
+        this.listener = listener;
+        gestionnaire = gestionnaireUtilisateur;
+
+        ConnectionVueController controller = (ConnectionVueController) super.controller;
+        controller.setListener(this);
+    }
+
+    /*
     protected void onConnectButtonClick(ActionEvent event) throws IOException {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        GestionnaireUtilisateur gestionnaire = new GestionnaireUtilisateur();
-        if (gestionnaire.connect(username, password)) {
-            messageLabel.setText("Connecting: " + usernameField.getText() + " = " + passwordField.getText());
+
             FXMLLoader loader = new FXMLLoader(MenuPaquetController.class.getResource("menuPaquet.fxml"));
             Parent root = loader.<Parent>load();
             Scene scene = new Scene(root);
@@ -38,29 +34,54 @@ public class ConnexionMenuController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-        } else {
-            switch (gestionnaire.getStatus()) {
-                case USERNAME_DOES_NOT_EXIST -> messageLabel.setText("Ce pseudo n'existe pas");
-                case WRONG_PASSWORD -> messageLabel.setText("Mauvais mot de passe");
-                case USERNAME_IS_NOT_VALID -> messageLabel.setText("Le pseudo contient des caractères interdits.");
-                case PASSWORD_IS_NOT_VALID -> messageLabel.setText("Le mot de passe contient des caractères interdits.");
+    }
+    */
+
+    @Override
+    public String onRegister(String username, String password) {
+
+        String result = "";
+
+        try {
+            if (gestionnaire.register(username, password)) {
+                result = "Register: " + username + " = " + password;
+            } else {
+                result = gestionnaire.getStatusMsg();
             }
+        } catch (IOException e) {
+            //
         }
+
+        return result;
+
     }
 
-    @FXML
-    protected void onRegisterButtonClick() throws IOException {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        GestionnaireUtilisateur gestionnaire = new GestionnaireUtilisateur();
-        if (gestionnaire.register(username, password)) {
-            messageLabel.setText("Register: " + usernameField.getText() + " = " + passwordField.getText());
-        } else {
-            switch (gestionnaire.getStatus()) {
-                case USERNAME_DOES_ALREADY_EXIST -> messageLabel.setText("Le pseudo existe déjà!");
-                case USERNAME_IS_NOT_VALID -> messageLabel.setText("Le pseudo contient des caractères interdits.");
-                case PASSWORD_IS_NOT_VALID -> messageLabel.setText("Le mot de passe contient des caractères interdits.");
+    @Override
+    public String onLogin(String username, String password) {
+        String result = "";
+
+        try {
+            if (gestionnaire.connect(username, password)) {
+                result = "Connecting: " + username + " = " + password;
+
+                Utilisateur connectedUser = new Utilisateur(username,password);
+
+                listener.connect(connectedUser,this);
+            } else {
+                result = gestionnaire.getStatusMsg();
             }
+        } catch (FileNotFoundException e) {
+            //
         }
+
+        return result;
     }
+
+
+    public interface ConnexionSuccessListener{
+
+        void connect(Utilisateur user,ConnexionMenuController parent);
+
+    }
+
 }
