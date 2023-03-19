@@ -115,7 +115,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ulb.infof307.g12.view.connection.MenuPrincipal</mainClass>
+                            <mainClass>ulb.infof307.g12.controller.javafx.connection.MenuPrincipal</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

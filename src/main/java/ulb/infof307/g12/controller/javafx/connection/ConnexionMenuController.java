@@ -1,4 +1,4 @@
-package ulb.infof307.g12.view.connection;
+package ulb.infof307.g12.controller.javafx.connection;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

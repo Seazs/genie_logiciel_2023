@@ -1,8 +1,6 @@
 package ulb.infof307.g12;
 
-import ulb.infof307.g12.view.connection.MenuPrincipal;
-
-import java.io.File;
+import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 
 public class Main {
 
