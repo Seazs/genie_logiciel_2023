@@ -111,6 +111,18 @@ public class GestionnaireUtilisateur {
         return false;
     }
 
+    /**
+     * Permet de reset l'utilisateur connecté
+     * @param user
+     * @return
+     */
+    public boolean disconnect(Utilisateur user){
+        if (Objects.equals(user.getPseudo(), utilisateurConnected.getPseudo())){
+            utilisateurConnected = null;
+            return true;
+        }
+        return false;
+    }
     public STATUS getStatus() {
         return status;
     }
