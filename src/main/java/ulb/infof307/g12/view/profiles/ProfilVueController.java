@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import lombok.Setter;
+import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.ProfilVueListener;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
@@ -26,17 +27,8 @@ public class ProfilVueController {
     private ProfilVueListener listener;
 
 
-    public void retourMenuPaquet(ActionEvent event) throws Exception{
-
-        FXMLLoader loader = new FXMLLoader(MenuPaquetVueController.class.getResource("menuPaquet.fxml"));
-        Parent menuPaquet = loader.load();
-
-        // Créer une nouvelle scène à partir de la racine de la nouvelle page
-        Scene menuPaquetScene = new Scene(menuPaquet);
-
-        // Obtenir une référence au stage actuel et fermer la fenêtre
-        Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stageActuel.setScene(menuPaquetScene);
+    public void retourMenuPaquet(ActionEvent event){
+        MenuPrincipal.getINSTANCE().returnToMenuPaquet();
     }
 
 

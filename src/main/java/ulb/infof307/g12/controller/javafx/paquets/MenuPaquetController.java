@@ -3,6 +3,7 @@ package ulb.infof307.g12.controller.javafx.paquets;
 import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
+import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
@@ -24,20 +25,6 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         controller.setListener(this);
 
     }
-
-
-    @Override
-    public void openProfile(Utilisateur user) {
-        ProfilController profilController = null;
-        try {
-            profilController = new ProfilController(stage,this);
-            this.hide();
-            profilController.show();
-        } catch (IOException e) {
-            //TODO: Renvoyer l'erreur à l'utilisateur
-        }
-    }
-
     @Override
     public void openPaquet(Paquet paquet) {
         //TODO: faire le paquet

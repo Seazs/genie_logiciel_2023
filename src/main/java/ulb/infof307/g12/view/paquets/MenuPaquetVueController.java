@@ -9,6 +9,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import lombok.Setter;
+import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
@@ -20,12 +21,6 @@ import java.util.ResourceBundle;
 public class MenuPaquetVueController implements Initializable {
     @FXML
     private ListView<Paquet> paquetListView;
-
-    @Setter
-    private MenuPaquetListener listener;
-
-    private Utilisateur user;
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -68,8 +63,6 @@ public class MenuPaquetVueController implements Initializable {
     }
 
     public void ouvrirProfil(ActionEvent event) throws Exception {
-        listener.openProfile(user);
+        MenuPrincipal.getINSTANCE().openProfile();
     }
-
-
 }

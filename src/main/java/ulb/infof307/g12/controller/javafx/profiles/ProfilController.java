@@ -15,23 +15,14 @@ import java.util.Optional;
 public class ProfilController extends BaseController implements ProfilVueListener {
 
     private Utilisateur user;
-    private MenuPaquetController parent;
 
-    public ProfilController(Stage stage, MenuPaquetController parent) throws IOException {
+    public ProfilController(Stage stage, Utilisateur user) throws IOException {
         super(stage,ProfilVueController.class.getResource("profil.fxml"),"");
-        user = parent.getUser();
-        this.parent = parent;
+        this.user = user;
 
         ProfilVueController controller = (ProfilVueController) super.controller;
         controller.setListener(this);
 
-    }
-
-
-    @Override
-    public void parentReturn() {
-        this.hide();
-        parent.show();
     }
 
     @Override
