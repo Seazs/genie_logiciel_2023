@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
-import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
+import ulb.infof307.g12.controller.javafx.paquets.profiles.ProfilController;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Utilisateur;
 

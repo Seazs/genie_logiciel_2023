@@ -3,15 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0"
-            prefWidth="304.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ulb.infof307.g12.view.paquets.PaquetDeCartesController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="304.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.PaquetDeCartesVueController">
     <top>
-        <Label fx:id="nomLabel" alignment="CENTER" prefHeight="54.0" prefWidth="150.0" text="Label"
-               BorderPane.alignment="CENTER_LEFT"/>
+        <Label fx:id="nomLabel" alignment="CENTER" prefHeight="54.0" prefWidth="150.0" text="Label" BorderPane.alignment="CENTER_LEFT" />
     </top>
     <center>
-        <Label fx:id="categorieLabel" alignment="CENTER" prefHeight="46.0" prefWidth="150.0" text="label"
-               BorderPane.alignment="CENTER_LEFT"/>
+        <Label fx:id="categorieLabel" alignment="CENTER" prefHeight="46.0" prefWidth="150.0" text="label" BorderPane.alignment="CENTER_LEFT" />
     </center>
+   <right>
+      <Button mnemonicParsing="false" text="Modifier" BorderPane.alignment="CENTER" />
+   </right>
+   <left>
+      <Button mnemonicParsing="false" text="Jouer" BorderPane.alignment="CENTER" />
+   </left>
 </BorderPane>

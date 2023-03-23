@@ -1,4 +1,4 @@
-package ulb.infof307.g12.controller.javafx.profiles;
+package ulb.infof307.g12.controller.javafx.paquets.profiles;
 
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;

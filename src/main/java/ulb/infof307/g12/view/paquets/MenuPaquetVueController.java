@@ -16,19 +16,22 @@ import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MenuPaquetVueController implements Initializable {
     @FXML
     private ListView<Paquet> paquetListView;
 
+    @Setter
+    private MenuPaquetListener listener ;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Ajouter les paquets de cartes à la liste
+
         paquetListView.getItems().addAll(
-                new Paquet("Paquet 1", "Catégorie 1"),
-                new Paquet("Paquet 2", "Catégorie 2"),
-                new Paquet("Paquet 3", "Catégorie 3")
+                //listener.getUserList()
         );
 
         // Personnaliser l'affichage des éléments de la liste
@@ -64,5 +67,14 @@ public class MenuPaquetVueController implements Initializable {
 
     public void ouvrirProfil(ActionEvent event) throws Exception {
         MenuPrincipal.getINSTANCE().openProfile();
+    }
+
+    public void creerPaquet() throws IOException {
+        Paquet nouveauPaquet = listener.creerPaquet() ;
+        ajouterPaquetAListe(nouveauPaquet);
+    }
+
+    public void ajouterPaquetAListe(Paquet paquet){
+        paquetListView.getItems().addAll(paquet);
     }
 }
