@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="304.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.PaquetDeCartesVueController">
-    <top>
-        <Label fx:id="nomLabel" alignment="CENTER" prefHeight="54.0" prefWidth="150.0" text="Label" BorderPane.alignment="CENTER_LEFT" />
-    </top>
-    <center>
-        <Label fx:id="categorieLabel" alignment="CENTER" prefHeight="46.0" prefWidth="150.0" text="label" BorderPane.alignment="CENTER_LEFT" />
-    </center>
-   <right>
-      <Button mnemonicParsing="false" text="Modifier" BorderPane.alignment="CENTER" />
-   </right>
-   <left>
-      <Button mnemonicParsing="false" text="Jouer" BorderPane.alignment="CENTER" />
-   </left>
-</BorderPane>
+
+<AnchorPane prefHeight="77.0" prefWidth="272.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.PaquetDeCartesVueController">
+   <children>
+        <Label fx:id="categorieLabel" alignment="CENTER" layoutY="32.0" prefHeight="36.0" prefWidth="196.0" text="label" />
+        <Label fx:id="nomLabel" alignment="CENTER" layoutX="4.0" layoutY="1.0" prefHeight="26.0" prefWidth="186.0" text="Label" />
+      <Button fx:id="jouerBouton" layoutX="219.0" layoutY="14.0" mnemonicParsing="false" onAction="#jouerPaquet" text="Jouer" />
+      <Button fx:id="modifierBouton" layoutX="210.0" layoutY="49.0" mnemonicParsing="false" onAction="#modifierPaquet" text="Modifier" />
+   </children>
+</AnchorPane>

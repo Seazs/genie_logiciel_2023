@@ -7,10 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
+import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
 
@@ -47,7 +49,7 @@ public class MenuPaquetVueController implements Initializable {
                     try {
                         // Charger la vue FXML pour la cellule
                         FXMLLoader loader = new FXMLLoader(MenuPaquetVueController.class.getResource("paquetDeCarte.fxml"));
-                        BorderPane cellLayout = loader.load();
+                        AnchorPane cellLayout = loader.load();
 
                         // Obtenir le contrôleur pour la vue FXML
                         PaquetDeCartesVueController controller = loader.getController();

@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import ulb.infof307.g12.controller.javafx.paquets.EditionController;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.javafx.paquets.profiles.ProfilController;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
+import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.File;
@@ -19,6 +21,7 @@ public class MenuPrincipal extends Application {
     private ConnexionMenuController connexionController;
     private MenuPaquetController menuPaquetController;
     private ProfilController profilController;
+    private EditionController editionController;
     @Setter
     private Utilisateur userPrincipale;
     @Override
@@ -65,5 +68,16 @@ public class MenuPrincipal extends Application {
     public void returnToConnexionMenu() {
         profilController.hide();
         connexionController.show();
+    }
+
+    public void afficherMenuEdition(Paquet paquet) {
+        try{
+            editionController = new EditionController(new Stage(),paquet);
+            menuPaquetController.hide();
+            editionController.show();
+        } catch (IOException e) {
+            //TODO: Renvoyer l'erreur à l'utilisateur
+        }
+
     }
 }
