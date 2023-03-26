@@ -7,31 +7,39 @@ import java.util.ArrayList;
 public class Paquet {
 
     @Getter
-    private String nom, categorie;
+    private String nom;
+
+    @Getter
+    private ArrayList<String> categories = new ArrayList<String>();
+
     public ArrayList<Carte> cartes = new ArrayList<Carte>();
     private int length;
 
     /**
      * Crée un paquet dont le nom doit être unique.
      * @param nom
-     * @param categorie
+     * @param categories
      */
-    public Paquet(String nom, String categorie){
+    public Paquet(String nom, ArrayList<String> categories){
         if(nom == null || nom == "")
             throw new IllegalArgumentException("Le paquet doit posséder un nom");
 
         this.nom = nom;
-        this.categorie = categorie;
+        this.categories = categories;
         this.length=0;
     }
 
+    /**
+     * @param objects
+     * @return True si l'objet est le meme paquet
+     */
     @Override
     public boolean equals(Object objects) {
         if(!(objects instanceof Paquet)) {
             return false;
         }
         Paquet obj = (Paquet) objects;
-        return (this.getNom().equals(obj.getNom()) && this.getCategorie().equals(obj.categorie));
+        return (this.getNom().equals(obj.getNom()) && this.getCategories().equals(obj.categories));
     }
 
     /**
@@ -53,6 +61,16 @@ public class Paquet {
         }
         cartes.remove(cartes.indexOf(carte));
         this.length--;
+    }
+
+    /**
+     * @param categorie
+     */
+    public static void addCategorie(String categorie){
+        if(this.categories.contains(categorie)){
+            return;
+        }
+        this.categories.add(categorie);
     }
 
 }

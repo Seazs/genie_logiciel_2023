@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
+import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
@@ -64,5 +65,8 @@ public class MenuPaquetVueController implements Initializable {
 
     public void ouvrirProfil(ActionEvent event) throws Exception {
         MenuPrincipal.getINSTANCE().openProfile();
+    }
+
+    public void setListener(MenuPaquetController menuPaquetController) {
     }
 }

@@ -25,7 +25,7 @@ public class GestionnairePaquet {
 
             out.write(paquet.getNom());
             out.newLine();
-            out.write(paquet.getCategorie());
+            out.write(paquet.getCategories());
 
             for(int i = 0; i < paquet.cartes.size() ; i++){ //Ecriture de toutes les cartes dans le fichier
                 Carte carte = paquet.cartes.get(i);
@@ -94,6 +94,11 @@ public class GestionnairePaquet {
         }
 
 
+    }
+    private void saveCategories(BufferedWriter out, ArrayList<String> categories, Paquet paquet){
+        for (int i = 0; i < paquet.getCategories().size(); i++){
+
+        }
     }
 
 }

@@ -59,5 +59,18 @@ class PaquetTest {
         Assertions.assertEquals(carte1, paquet.cartes.get(1));
 
     }
+    @Test
+    public void testAjouterCategorie(){
+        ArrayList<String> categorie = new ArrayList<String>();
+        categorie.add("BA1");
+        Paquet paquet = new Paquet("Maths",categorie);
+        Paquet.addCategorie("BA2") ;
+        ArrayList<String> categorie2 = new ArrayList<String>();
+        categorie2.add("BA1");
+        categorie2.add("BA2");
+        Paquet paquet2 = new Paquet("Maths", categorie2) ;
+        Assertions.assertEquals(paquet,paquet2) ;
+
+    }
 
 }
