@@ -3,6 +3,7 @@ package ulb.infof307.g12.model;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Paquet {
 
@@ -18,14 +19,14 @@ public class Paquet {
     /**
      * Crée un paquet dont le nom doit être unique.
      * @param nom
-     * @param categories
+     * @param categorie
      */
-    public Paquet(String nom, ArrayList<String> categories){
-        if(nom == null || nom == "")
+    public Paquet(String nom, String... categorie){
+        if(nom == null || nom.equals(""))
             throw new IllegalArgumentException("Le paquet doit posséder un nom");
 
         this.nom = nom;
-        this.categories = categories;
+        this.categories.addAll(Arrays.asList(categorie));
         this.length=0;
     }
 
@@ -59,18 +60,28 @@ public class Paquet {
         if(!(cartes.contains(carte))) {
             throw new IllegalArgumentException("La carte n'existait pas");
         }
-        cartes.remove(cartes.indexOf(carte));
+        cartes.remove(carte);
         this.length--;
     }
 
     /**
      * @param categorie
      */
-    public static void addCategorie(String categorie){
-        if(this.categories.contains(categorie)){
-            return;
+    public void ajouterCategorie(String categorie){
+        if(!this.categories.contains(categorie)){
+            this.categories.add(categorie);
         }
-        this.categories.add(categorie);
+    }
+
+    /**
+     * Fonction qui supprime la catégorie de la liste des catégories (si elle existe)
+     * @param categorie
+     */
+    public void supprimerCategorie(String categorie){
+        if(this.categories.contains(categorie)){
+            this.categories.remove(categorie);
+        }
+
     }
 
 }

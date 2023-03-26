@@ -12,6 +12,6 @@ public class PaquetDeCartesVueController {
 
     public void setPaquetDeCartes(Paquet paquetDeCartes) {
         nomLabel.setText(paquetDeCartes.getNom());
-        categorieLabel.setText(paquetDeCartes.getCategorie());
+        //categorieLabel.setText(paquetDeCartes.getCategories());
     }
 }

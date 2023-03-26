@@ -25,7 +25,7 @@ public class GestionnairePaquet {
 
             out.write(paquet.getNom());
             out.newLine();
-            out.write(paquet.getCategories());
+            out.write(saveCategories(paquet));
 
             for(int i = 0; i < paquet.cartes.size() ; i++){ //Ecriture de toutes les cartes dans le fichier
                 Carte carte = paquet.cartes.get(i);
@@ -55,7 +55,7 @@ public class GestionnairePaquet {
 
                 String lineNom = reader.readLine();
                 String lineCategorie = reader.readLine();
-                Paquet newPaquet = new Paquet(lineNom, lineCategorie);
+                Paquet newPaquet = new Paquet(lineNom, loadCategories(lineCategorie));
                 int i=0;
                 String line;
                 while((line = reader.readLine())!=null) {
@@ -95,10 +95,30 @@ public class GestionnairePaquet {
 
 
     }
-    private void saveCategories(BufferedWriter out, ArrayList<String> categories, Paquet paquet){
-        for (int i = 0; i < paquet.getCategories().size(); i++){
 
-        }
+
+    /**
+     * @param line
+     * @return String[] des catégories
+     */
+    private static String[] loadCategories(String line){
+        return line.split("#");
     }
+
+
+    /**
+     * @param paquet
+     * @return cat1#cat2#cat3#
+     */
+    public static String saveCategories(Paquet paquet){
+        String save = "";
+        for (int i = 0; i < paquet.getCategories().size(); i++){
+            paquet.getCategories().get(i);
+            save = save + paquet.getCategories().get(i)+ "#";
+        }
+        return save;
+    }
+
+
 
 }
