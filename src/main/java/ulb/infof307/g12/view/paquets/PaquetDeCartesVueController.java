@@ -12,9 +12,12 @@ public class PaquetDeCartesVueController {
     @FXML
     private Label categorieLabel;
 
+    /**
+     * applique le nom et les catégories aux labels associés
+     * @param paquetDeCartes
+     */
     public void setPaquetDeCartes(Paquet paquetDeCartes) {
         nomLabel.setText(paquetDeCartes.getNom());
-
         String textCategories = "";
         ArrayList<String> categories = paquetDeCartes.getCategories();
         for(int i = 0; i<categories.size(); i++){

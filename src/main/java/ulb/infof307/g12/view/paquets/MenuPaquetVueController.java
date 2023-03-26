@@ -1,7 +1,6 @@
 package ulb.infof307.g12.view.paquets;
 
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,19 +14,17 @@ import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class MenuPaquetVueController implements Initializable {
     @FXML
     private ListView<Paquet> paquetListView;
-    List<Paquet> saveList = new ArrayList<>();
+    List<Paquet> saveListPaquet = new ArrayList<>();
 
     @FXML
     private TextField RechercheLabel;
@@ -46,14 +43,17 @@ public class MenuPaquetVueController implements Initializable {
                 new Paquet("Paquet 7", "Catégorie 1"),
                 new Paquet("Paquet 8", "Catégorie 3")
         );
-        saveList.addAll(paquetListView.getItems());
+        saveListPaquet.addAll(paquetListView.getItems());
               // Personnaliser l'affichage des éléments de la liste
-        updateVisuel(paquetListView);
+        updateVisuel();
 
     }
 
-    private void updateVisuel(ListView<Paquet> paquetListViewFiltere) {
-        paquetListViewFiltere.setCellFactory(param -> new ListCell<Paquet>() {
+    /**
+     * charge le fichier FXML paquet de carte en chargeant les noms et catégories de chaque paquet
+     */
+    private void updateVisuel() {
+        paquetListView.setCellFactory(param -> new ListCell<Paquet>() {
             @Override
             protected void updateItem(Paquet item, boolean empty) {
                 super.updateItem(item, empty);
@@ -90,13 +90,17 @@ public class MenuPaquetVueController implements Initializable {
     public void setListener(MenuPaquetController menuPaquetController) {
     }
 
+    /**
+     * mets à jour la liste visuel des paquets en fonction du filtre entré
+     * @param event
+     */
     public void rechercheBoutton(ActionEvent event) {
         paquetListView.getItems().clear();
         if (RechercheLabel.getText() == null ||  RechercheLabel.getText().isEmpty()) {
-            paquetListView.getItems().addAll(saveList);
+            paquetListView.getItems().addAll(saveListPaquet);
         }
         else{
-            for (Paquet paq : saveList) {
+            for (Paquet paq : saveListPaquet) {
                 if (paq.getCategories().contains(RechercheLabel.getText())) {
                     paquetListView.getItems().addAll(paq);
                 }
