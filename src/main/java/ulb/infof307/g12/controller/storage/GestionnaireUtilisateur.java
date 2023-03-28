@@ -111,6 +111,15 @@ public class GestionnaireUtilisateur {
         return false;
     }
 
+    public boolean disconnect(){
+        if (utilisateurConnected!=null){
+            utilisateurConnected = null;
+            return true;
+        }
+        return false;
+
+    }
+
     public STATUS getStatus() {
         return status;
     }
