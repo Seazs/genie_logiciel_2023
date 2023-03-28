@@ -7,23 +7,29 @@ import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.paquets.EditionController;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.javafx.paquets.profiles.ProfilController;
+import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 @Getter
 public class MenuPrincipal extends Application {
     @Getter(lazy = true)
     private static final MenuPrincipal INSTANCE = new MenuPrincipal();
     private GestionnaireUtilisateur gestionnaireUtilisateur = new GestionnaireUtilisateur();
+    private GestionnairePaquet gestionnairepaquet = new GestionnairePaquet();
     private ConnexionMenuController connexionController;
     private MenuPaquetController menuPaquetController;
     private ProfilController profilController;
     private EditionController editionController;
     @Setter
     private Utilisateur userPrincipale;
+    @Getter
+    private List<Paquet> userPaquets;
     @Override
     public void start(Stage stage) throws IOException {
         connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
@@ -42,9 +48,12 @@ public class MenuPrincipal extends Application {
         try {
             this.userPrincipale = user;
             menuPaquetController = new MenuPaquetController(user,new Stage());
+            userPaquets = gestionnairepaquet.load(userPrincipale);
+            System.out.print(userPaquets);
             parent.hide();
             menuPaquetController.show();
         } catch (IOException e) {
+            System.out.print(e);
             //TODO: Avertir l'utilisateur
         }
     }

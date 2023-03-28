@@ -31,9 +31,8 @@ public class MenuPaquetVueController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Ajouter les paquets de cartes à la liste
-
         paquetListView.getItems().addAll(
-                //listener.getUserList()
+                MenuPrincipal.getINSTANCE().getUserPaquets().get(0)
         );
 
         // Personnaliser l'affichage des éléments de la liste

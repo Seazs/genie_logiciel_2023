@@ -3,6 +3,7 @@ package ulb.infof307.g12.controller.javafx.paquets;
 import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
+import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.model.Paquet;
@@ -36,8 +37,8 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     public Paquet creerPaquet() throws IOException {
         Paquet nouveauPaquet = new Paquet("Nouveau Paquet", "Catégorie") ;
         user.addPaquet(nouveauPaquet) ;
-        GestionnairePaquet gestio = new GestionnairePaquet() ;
-                gestio.save(user);
+        GestionnairePaquet gestio = MenuPrincipal.getINSTANCE().getGestionnairepaquet();
+        gestio.save(user);
         return nouveauPaquet ;
     }
 

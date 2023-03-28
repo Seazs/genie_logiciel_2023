@@ -42,7 +42,7 @@ public class GestionnairePaquet {
      * @param user
      * @return
      */
-    public static List<Paquet> load(Utilisateur user) {
+    public List<Paquet> load(Utilisateur user) {
 
         try {
             File userfolder = new File("./stockage/"+user.getPseudo());
