@@ -44,4 +44,7 @@ public class ProfilController extends BaseController implements ProfilVueListene
         }
         return result;
     }
+
+    public boolean deconnexion(){
+    return true;}
 }

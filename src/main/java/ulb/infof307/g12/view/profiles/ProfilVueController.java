@@ -6,13 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.ProfilVueListener;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
+import ulb.infof307.g12.view.connection.ConnectionVueController;
 import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
 
 import java.io.IOException;
@@ -44,6 +44,20 @@ public class ProfilVueController {
         String result = listener.changePassword(newPassword);
 
         messageLabelProfil.setText(result);
+    }
+
+    @FXML
+    private Button deconnexionButton;
+    @FXML
+    protected void onDeconnexionButtonClick() throws Exception{
+        FXMLLoader loader = new FXMLLoader(ConnectionVueController.class.getResource("connexion-menu-view.fxml"));
+
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) deconnexionButton.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
     }
 
 }
