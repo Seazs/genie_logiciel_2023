@@ -45,10 +45,11 @@ public class MenuPaquetVueController implements Initializable {
                 new Paquet("Paquet 8", "Catégorie 3")
         );
         saveListPaquet.addAll(paquetListView.getItems());
-              // Personnaliser l'affichage des éléments de la liste
-        updateVisuel();
+        // Personnaliser l'affichage des éléments de la liste
+        updateVisuelListePaquet();
+
         RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> {
-            rechercheBoutton();
+            filtrageCategorie();
         });
 
     }
@@ -56,7 +57,7 @@ public class MenuPaquetVueController implements Initializable {
     /**
      * charge le fichier FXML paquet de carte en chargeant les noms et catégories de chaque paquet
      */
-    private void updateVisuel() {
+    private void updateVisuelListePaquet() {
         paquetListView.setCellFactory(param -> new ListCell<Paquet>() {
             @Override
             protected void updateItem(Paquet item, boolean empty) {
@@ -96,15 +97,15 @@ public class MenuPaquetVueController implements Initializable {
 
     /**
      * mets à jour la liste visuel des paquets en fonction du filtre entré
-     * @param
+     *
      */
 
-    public void rechercheBoutton() {
+    public void filtrageCategorie() {
+        String recherche = RechercheLabel.getText().toLowerCase();
         paquetListView.getItems().clear();
-        if (RechercheLabel.getText() == null || RechercheLabel.getText().isEmpty()) {
+        if (recherche.isEmpty()) {
             paquetListView.getItems().addAll(saveListPaquet);
         } else {
-            String recherche = RechercheLabel.getText().toLowerCase();
             for (Paquet paq : saveListPaquet) {
                 for (String categorie : paq.getCategories()) {
                     if (categorie.toLowerCase().startsWith(recherche)) {
