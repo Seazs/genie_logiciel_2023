@@ -46,8 +46,15 @@ public class MenuPrincipal extends Application {
         }
     }
     public void showConnexionMenu(ProfilController parent){
-        parent.hide();
-        connexionController.show();
+        try {
+            parent.hide();
+            Stage stage = new Stage();
+            connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
+            connexionController.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void openProfile(){
