@@ -28,6 +28,7 @@ public class MenuPaquetVueController implements Initializable {
 
     @FXML
     private TextField RechercheLabel;
+
     @Setter
     private MenuPaquetListener listener;
 
@@ -37,15 +38,18 @@ public class MenuPaquetVueController implements Initializable {
         paquetListView.getItems().addAll(
                 new Paquet("Paquet 1", "Catégorie 1","cat 2"),
                 new Paquet("Paquet 2", "Catégorie 2","cat 3"),
-                new Paquet("Paquet 3", "Catégorie 3"),
-                new Paquet("Paquet 5", "Catégorie 2"),
-                new Paquet("Paquet 6", "Catégorie 1"),
+                new Paquet("Paquet 3", "Cat 3"),
+                new Paquet("Paquet 5", "Cat 2"),
+                new Paquet("Paquet 6", "lala"),
                 new Paquet("Paquet 7", "Catégorie 1"),
                 new Paquet("Paquet 8", "Catégorie 3")
         );
         saveListPaquet.addAll(paquetListView.getItems());
               // Personnaliser l'affichage des éléments de la liste
         updateVisuel();
+        RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            rechercheBoutton();
+        });
 
     }
 
@@ -92,19 +96,24 @@ public class MenuPaquetVueController implements Initializable {
 
     /**
      * mets à jour la liste visuel des paquets en fonction du filtre entré
-     * @param event
+     * @param
      */
-    public void rechercheBoutton(ActionEvent event) {
+
+    public void rechercheBoutton() {
         paquetListView.getItems().clear();
-        if (RechercheLabel.getText() == null ||  RechercheLabel.getText().isEmpty()) {
+        if (RechercheLabel.getText() == null || RechercheLabel.getText().isEmpty()) {
             paquetListView.getItems().addAll(saveListPaquet);
-        }
-        else{
+        } else {
+            String recherche = RechercheLabel.getText().toLowerCase();
             for (Paquet paq : saveListPaquet) {
-                if (paq.getCategories().contains(RechercheLabel.getText())) {
-                    paquetListView.getItems().addAll(paq);
+                for (String categorie : paq.getCategories()) {
+                    if (categorie.toLowerCase().startsWith(recherche)) {
+                        paquetListView.getItems().addAll(paq);
+                        break;
+                    }
                 }
             }
         }
     }
+
 }
