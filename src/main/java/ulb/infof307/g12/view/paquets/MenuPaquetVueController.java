@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 public class MenuPaquetVueController implements Initializable {
     @FXML
@@ -103,18 +104,15 @@ public class MenuPaquetVueController implements Initializable {
     public void filtrageCategorie() {
         String recherche = RechercheLabel.getText().toLowerCase();
         paquetListView.getItems().clear();
-        if (recherche.isEmpty()) {
-            paquetListView.getItems().addAll(saveListPaquet);
-        } else {
-            for (Paquet paq : saveListPaquet) {
-                for (String categorie : paq.getCategories()) {
-                    if (categorie.toLowerCase().startsWith(recherche)) {
-                        paquetListView.getItems().addAll(paq);
-                        break;
-                    }
-                }
-            }
-        }
+        saveListPaquet.stream().forEach(
+                paquet -> {
+            boolean result = paquet.getCategories()
+                    .stream()
+                    .anyMatch(s -> s.toLowerCase().contains(recherche.toLowerCase()));
+            if(result && ! paquetListView.getItems().contains(paquet))
+                paquetListView.getItems().add(paquet);
+
+        });
     }
 
 }
