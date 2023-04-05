@@ -10,5 +10,7 @@ import java.util.List;
 public interface MenuPaquetListener {
     void openPaquet(Paquet paquet);
     Paquet creerPaquet() throws IOException;
-    List<Paquet> getUserList() ;
+    void editerPaquet(Paquet paquet) ;
+
+
 }

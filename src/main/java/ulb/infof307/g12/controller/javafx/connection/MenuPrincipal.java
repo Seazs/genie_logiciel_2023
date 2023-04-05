@@ -47,9 +47,8 @@ public class MenuPrincipal extends Application {
     public void showMenuPaquet(Utilisateur user, ConnexionMenuController parent) {
         try {
             this.userPrincipale = user;
-            menuPaquetController = new MenuPaquetController(user,new Stage());
             userPaquets = gestionnairepaquet.load(userPrincipale);
-            System.out.print(userPaquets);
+            menuPaquetController = new MenuPaquetController(user,new Stage());
             parent.hide();
             menuPaquetController.show();
         } catch (IOException e) {
@@ -79,13 +78,15 @@ public class MenuPrincipal extends Application {
         connexionController.show();
     }
 
-    public void afficherMenuEdition(Paquet paquet) {
+    public void showMenuEdition(Paquet paquet) {
         try{
             editionController = new EditionController(new Stage(),paquet);
-            menuPaquetController.hide();
+            //menuPaquetController.hide();
             editionController.show();
+
         } catch (IOException e) {
             //TODO: Renvoyer l'erreur à l'utilisateur
+            System.out.println(e);
         }
 
     }

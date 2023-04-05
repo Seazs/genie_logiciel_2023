@@ -34,6 +34,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         //TODO: faire le paquet
     }
 
+    @Override
     public Paquet creerPaquet() throws IOException {
         Paquet nouveauPaquet = new Paquet("Nouveau Paquet", "Catégorie") ;
         user.addPaquet(nouveauPaquet) ;
@@ -43,8 +44,8 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     }
 
     @Override
-    public List<Paquet> getUserList() {
-        return user.getListPaquet();
+    public void editerPaquet(Paquet paquet) {
+        MenuPrincipal.getINSTANCE().showMenuEdition(paquet);
     }
 
 

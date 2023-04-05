@@ -32,7 +32,7 @@ public class MenuPaquetVueController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Ajouter les paquets de cartes à la liste
         paquetListView.getItems().addAll(
-                MenuPrincipal.getINSTANCE().getUserPaquets().get(0)
+                MenuPrincipal.getINSTANCE().getUserPaquets()
         );
 
         // Personnaliser l'affichage des éléments de la liste
@@ -78,4 +78,10 @@ public class MenuPaquetVueController implements Initializable {
     public void ajouterPaquetAListe(Paquet paquet){
         paquetListView.getItems().addAll(paquet);
     }
+
+    public void ouvrirEdition(ActionEvent event) throws Exception {
+        Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
+        listener.editerPaquet(paquet);
+    }
+
 }

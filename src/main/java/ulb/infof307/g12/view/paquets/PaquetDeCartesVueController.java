@@ -22,10 +22,4 @@ public class PaquetDeCartesVueController {
         categorieLabel.setText(paquetDeCartes.getCategorie());
     }
 
-    public void modifierPaquet(ActionEvent actionEvent) {
-        //TODO: Afficher interface d'édition + connecter au controller
-        //TODO: Identifier à quel paquet ce bouton est associé
-        Paquet paquet = new Paquet("Hello", "World");
-        MenuPrincipal.getINSTANCE().afficherMenuEdition(paquet);
-    }
 }

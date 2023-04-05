@@ -8,6 +8,7 @@ public class Paquet {
 
     @Getter
     private String nom, categorie;
+    @Getter
     public ArrayList<Carte> cartes = new ArrayList<Carte>();
     private int length;
 
