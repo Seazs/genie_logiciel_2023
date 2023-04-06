@@ -45,6 +45,17 @@ public class MenuPrincipal extends Application {
             //TODO: Avertir l'utilisateur
         }
     }
+    public void showConnexionMenu(ProfilController parent){
+        try {
+            parent.hide();
+            Stage stage = new Stage();
+            connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
+            connexionController.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     public void openProfile(){
         profilController = null;

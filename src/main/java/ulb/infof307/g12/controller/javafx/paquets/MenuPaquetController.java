@@ -22,7 +22,6 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         this.user = user;
 
         MenuPaquetVueController controller = (MenuPaquetVueController) super.controller;
-        controller.setListener(this);
 
     }
     @Override

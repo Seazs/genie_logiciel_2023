@@ -1,5 +1,7 @@
 package ulb.infof307.g12.controller.javafx.profiles;
 
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
@@ -45,6 +47,10 @@ public class ProfilController extends BaseController implements ProfilVueListene
         return result;
     }
 
-    public boolean deconnexion(){
-    return true;}
+    @Override
+    public void deconnexion(){
+        MenuPrincipal instance = MenuPrincipal.getINSTANCE();
+        instance.getGestionnaireUtilisateur().disconnect();
+        instance.showConnexionMenu(this);
+    }
 }

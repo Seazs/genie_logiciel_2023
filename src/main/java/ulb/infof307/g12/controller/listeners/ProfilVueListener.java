@@ -4,4 +4,5 @@ import java.util.Optional;
 
 public interface ProfilVueListener {
     String changePassword(Optional<String> password);
+    void deconnexion();
 }
