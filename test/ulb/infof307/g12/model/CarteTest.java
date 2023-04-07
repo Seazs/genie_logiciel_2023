@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CarteTest {
 
     @Test
-    public void testRiendeVide(){
+    public void testRienDeVide(){
         String recto = "Bonjour", verso = "Au revoir";
 
         Assertions.assertThrows(IllegalArgumentException.class,() -> {

@@ -8,6 +8,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class GestionnairePaquet {
 
 
@@ -31,6 +33,7 @@ public class GestionnairePaquet {
                 Carte carte = paquet.cartes.get(i);
                 out.newLine();
                 out.write(carte.getRecto() + "#" + carte.getVerso());
+                out.write("#" + carte.getConnaissance());
             }
             out.close();
         }
@@ -65,6 +68,7 @@ public class GestionnairePaquet {
 
                     bufferCarte.recto = listdata[0].strip();
                     bufferCarte.verso = listdata[1].strip();
+                    bufferCarte.setConnaissance(parseInt(listdata[2].strip()));
                     newPaquet.ajouterCarte(bufferCarte);
                     i++;}
                 loadedListOfPaquet.add(newPaquet);
