@@ -50,13 +50,13 @@ class GestionnairePaquetTest {
     public void testSauvegardePaquet() throws IOException{
         Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
         Paquet paquet1 = new Paquet("Maths","BA1");
-        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
-        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non", "");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui", "");
         paquet1.ajouterCarte(carte1);
         paquet1.ajouterCarte(carte2);
         Paquet paquet2 = new Paquet("Chimie","BA1");
-        Carte carte3 = new Carte(3, "redox", "Non");
-        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui");
+        Carte carte3 = new Carte(3, "redox", "Non", "");
+        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui", "");
         paquet2.ajouterCarte(carte3);
         paquet2.ajouterCarte(carte4);
         utilisateur1.addPaquet(paquet1);
@@ -75,13 +75,13 @@ class GestionnairePaquetTest {
     public void testremove() throws IOException{
         Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
         Paquet paquet1 = new Paquet("Maths","BA1");
-        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
-        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non", "");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui", "");
         paquet1.ajouterCarte(carte1);
         paquet1.ajouterCarte(carte2);
         Paquet paquet2 = new Paquet("Chimie","BA1");
-        Carte carte3 = new Carte(3, "redox", "Non");
-        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui");
+        Carte carte3 = new Carte(3, "redox", "Non", "");
+        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui", "");
         paquet2.ajouterCarte(carte3);
         paquet2.ajouterCarte(carte4);
         utilisateur1.addPaquet(paquet1);
@@ -100,13 +100,13 @@ class GestionnairePaquetTest {
     public void testLoadPaquet() throws IOException {
         Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
         Paquet paquet1 = new Paquet("Maths","BA1");
-        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
-        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non", "");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui", "");
         paquet1.ajouterCarte(carte1);
         paquet1.ajouterCarte(carte2);
         Paquet paquet2 = new Paquet("Chimie","BA1");
-        Carte carte3 = new Carte(3, "redox", "Non");
-        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui");
+        Carte carte3 = new Carte(3, "redox", "Non", "");
+        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui", "");
         paquet2.ajouterCarte(carte3);
         paquet2.ajouterCarte(carte4);
         utilisateur1.addPaquet(paquet1);
@@ -140,7 +140,6 @@ class GestionnairePaquetTest {
         utilisateur2.setListPaquet(GestionnairePaquet.load(utilisateur2));
         assertEquals("cat1", utilisateur2.getListPaquet().get(0).getCategories().get(0));
         assertEquals("cat2", utilisateur2.getListPaquet().get(0).getCategories().get(1));
-
     }
 
 }

@@ -22,19 +22,27 @@ public class GestionnairePaquet {
             File paquetdatabase = new File("./stockage/"+user.getPseudo(),paquet.getNom()); // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
             FileWriter writer = new  FileWriter(paquetdatabase);
             BufferedWriter out = new BufferedWriter(writer);
-
             out.write(paquet.getNom());
             out.newLine();
             out.write(saveCategories(paquet));
-
-            for(int i = 0; i < paquet.cartes.size() ; i++){ //Ecriture de toutes les cartes dans le fichier
-                Carte carte = paquet.cartes.get(i);
-                out.newLine();
-                out.write(carte.getRecto() + "#" + carte.getVerso());
-            }
+            save_card(paquet, out);
             out.close();
         }
 
+    }
+
+    /**
+     * Sauvegarde une carte
+     * @param paquet
+     * @param out
+     * @throws IOException
+     */
+    private static void save_card(Paquet paquet, BufferedWriter out) throws IOException {
+        for(int i = 0; i < paquet.cartes.size() ; i++){ //Ecriture de toutes les cartes dans le fichier
+            Carte carte = paquet.cartes.get(i);
+            out.newLine();
+            out.write(carte.getType()+ "#"+ carte.getRecto() + "#" + carte.getVerso());
+        }
     }
 
     /**
@@ -52,21 +60,10 @@ public class GestionnairePaquet {
             for (File file : listOfFilePaquet) {
                 FileReader fileReader = new FileReader(file);
                 BufferedReader reader = new BufferedReader(fileReader);
-
                 String lineNom = reader.readLine();
                 String lineCategorie = reader.readLine();
                 Paquet newPaquet = new Paquet(lineNom, loadCategories(lineCategorie));
-                int i=0;
-                String line;
-                while((line = reader.readLine())!=null) {
-                    String[] listdata = line.split("#");
-
-                    Carte bufferCarte = new Carte(i, "recto", "verso");
-
-                    bufferCarte.recto = listdata[0].strip();
-                    bufferCarte.verso = listdata[1].strip();
-                    newPaquet.ajouterCarte(bufferCarte);
-                    i++;}
+                load_all_cards(reader, newPaquet);
                 loadedListOfPaquet.add(newPaquet);
                 reader.close();
             }
@@ -74,6 +71,26 @@ public class GestionnairePaquet {
         }catch (IOException erreur){
             return null;
         }
+    }
+
+    /**
+     * Load toutes les cartes du paquet
+     * @param reader
+     * @param newPaquet
+     * @throws IOException
+     */
+    private static void load_all_cards(BufferedReader reader, Paquet newPaquet) throws IOException {
+        int i=0;
+        String line;
+        while((line = reader.readLine())!=null) {
+            String[] listdata = line.split("#");
+
+            Carte bufferCarte = new Carte(i, "recto", "verso", "");
+            bufferCarte.setType(listdata[0].strip());
+            bufferCarte.setRecto(listdata[1].strip());
+            bufferCarte.setVerso(listdata[2].strip()) ;
+            newPaquet.ajouterCarte(bufferCarte);
+            i++;}
     }
 
     /**
@@ -118,7 +135,5 @@ public class GestionnairePaquet {
         }
         return save;
     }
-
-
 
 }

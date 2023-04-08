@@ -22,8 +22,8 @@ public class Paquet {
      * @param categorie
      */
     public Paquet(String nom, String... categorie){
-        if(nom == null || nom.equals(""))
-            throw new IllegalArgumentException("Le paquet doit posséder un nom");
+        if(nom == null || nom.equals("") || categorie == null)
+            throw new IllegalArgumentException("Le paquet doit posséder un nom ou une catégorie");
 
         this.nom = nom;
         this.categories.addAll(Arrays.asList(categorie));
@@ -49,7 +49,7 @@ public class Paquet {
      */
     public void ajouterCarte(Carte carte){
         for(Carte car: this.cartes){
-            if(car.id==carte.id) {
+            if(car.getId()==carte.getId()) {
                 throw new IllegalArgumentException("La carte existe déjà");
             }
         }

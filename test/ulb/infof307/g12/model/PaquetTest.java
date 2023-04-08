@@ -18,7 +18,7 @@ class PaquetTest {
             Paquet paquet = new Paquet("",categorie);
         });
 
-        Assertions.assertDoesNotThrow(() -> {
+        Assertions.assertThrows(IllegalArgumentException.class,()  -> {
             Paquet paquet = new Paquet(nom,null);
         });
     }
@@ -48,8 +48,8 @@ class PaquetTest {
     @Test
     public void testAjoutCarte(){
         Paquet paquet = new Paquet("Maths","BA-1");
-        Carte carte = new Carte(1, "r1", "v1");
-        Carte carte1 = new Carte(4, "r2", "v2");
+        Carte carte = new Carte(1, "r1", "v1", "");
+        Carte carte1 = new Carte(4, "r2", "v2", "");
         paquet.ajouterCarte(carte);
         paquet.ajouterCarte(carte1);
         Assertions.assertEquals(carte, paquet.cartes.get(0));
