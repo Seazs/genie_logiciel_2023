@@ -46,4 +46,11 @@ public class ProfilVueController {
         messageLabelProfil.setText(result);
     }
 
+    @FXML
+    public void onDeconnexionButtonclick(ActionEvent e){
+        if (listener!=null){
+            listener.deconnexion();
+        }
+    }
+
 }

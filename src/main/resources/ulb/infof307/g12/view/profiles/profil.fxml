@@ -16,6 +16,7 @@
         <Button fx:id="retourButton" layoutX="12.0" layoutY="11.0" mnemonicParsing="false" onAction="#retourMenuPaquet" prefHeight="46.0" prefWidth="72.0" text="retour" />
         <Button fx:id="changerMdp" layoutX="38.0" layoutY="271.0" mnemonicParsing="false" onAction="#onChangePasswordButtonClick" text="Changer mot de passe" />
         <Label fx:id="messageLabelProfil" alignment="CENTER" layoutX="67.0" layoutY="373.0" prefHeight="58.0" prefWidth="309.0" textAlignment="CENTER" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="249.0" />
+      <Button layoutX="67.0" layoutY="361.0" mnemonicParsing="false" onAction="#onDeconnexionButtonclick" text="Deconnexion" />
 
     </children>
 </AnchorPane>
