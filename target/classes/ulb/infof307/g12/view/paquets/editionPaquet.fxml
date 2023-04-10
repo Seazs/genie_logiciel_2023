@@ -17,8 +17,8 @@
       <Button fx:id="enregistrerBouton" layoutX="481.0" layoutY="33.0" mnemonicParsing="false" onAction="#enregistrerPaquet" prefHeight="63.0" prefWidth="80.0" text="Enregistrer" />
       <TableView fx:id="tableQR" editable="true" layoutX="50.0" layoutY="137.0" prefHeight="163.0" prefWidth="511.0">
         <columns>
-          <TableColumn fx:id="questionCol" prefWidth="75.0" text="Question" />
-          <TableColumn fx:id="reponseCol" prefWidth="75.0" text="Réponse" />
+          <TableColumn fx:id="questionCol" editable="true" prefWidth="75.0" text="Question" />
+          <TableColumn fx:id="reponseCol" editable="true" prefWidth="75.0" text="Réponse" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -27,6 +27,6 @@
       <Button fx:id="retourBouton" layoutX="50.0" layoutY="33.0" mnemonicParsing="false" onAction="#annulerEdition" prefHeight="63.0" prefWidth="80.0" text="Retour" />
       <TextField fx:id="questionTextField" layoutX="50.0" layoutY="313.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0" promptText="Question" />
       <TextField fx:id="reponseTextField" layoutX="312.0" layoutY="313.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0" promptText="Réponse" />
-      <Button fx:id="ajouterCarte" layoutX="263.0" layoutY="350.0" mnemonicParsing="false" text="Ajouter Carte" />
+      <Button fx:id="ajouterCarte" layoutX="263.0" layoutY="350.0" mnemonicParsing="false" text="Ajouter Carte" onAction="#ajouterCarte"/>
    </children>
 </AnchorPane>

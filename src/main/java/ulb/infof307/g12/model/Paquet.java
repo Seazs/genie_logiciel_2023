@@ -1,11 +1,13 @@
 package ulb.infof307.g12.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
 public class Paquet {
 
+    @Setter
     @Getter
     private String nom, categorie;
     @Getter

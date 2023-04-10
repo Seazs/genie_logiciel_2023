@@ -1,6 +1,8 @@
 package ulb.infof307.g12.view.paquets;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,11 +15,13 @@ import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
+import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -82,6 +86,14 @@ public class MenuPaquetVueController implements Initializable {
     public void ouvrirEdition(ActionEvent event) throws Exception {
         Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
         listener.editerPaquet(paquet);
+        rechargerListView();
+    }
+
+    public void rechargerListView(){
+        ObservableList<Paquet> data = FXCollections.<Paquet>observableArrayList();
+        data.addAll(MenuPrincipal.getINSTANCE().getUserPaquets()) ;
+        paquetListView.setItems(data) ;
+
     }
 
 }

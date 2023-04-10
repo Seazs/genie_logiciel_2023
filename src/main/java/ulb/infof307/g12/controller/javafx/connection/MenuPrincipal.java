@@ -73,6 +73,12 @@ public class MenuPrincipal extends Application {
         menuPaquetController.show();
     }
 
+    public void cancelEdition() {
+        menuPaquetController.show();
+        editionController.hide();
+
+    }
+
     public void returnToConnexionMenu() {
         profilController.hide();
         connexionController.show();
@@ -81,7 +87,7 @@ public class MenuPrincipal extends Application {
     public void showMenuEdition(Paquet paquet) {
         try{
             editionController = new EditionController(new Stage(),paquet);
-            //menuPaquetController.hide();
+            menuPaquetController.hide();
             editionController.show();
 
         } catch (IOException e) {

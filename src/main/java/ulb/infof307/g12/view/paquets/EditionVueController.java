@@ -3,17 +3,24 @@ package ulb.infof307.g12.view.paquets;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.EditionVueListener;
+import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.model.Carte;
+import ulb.infof307.g12.model.Paquet;
+import ulb.infof307.g12.model.Utilisateur;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditionVueController {
@@ -41,29 +48,60 @@ public class EditionVueController {
     private EditionVueListener listener;
 
 
-    public void chargerEditionVue() {
-        System.out.println("VueController oui oui");
-        ObservableList<Carte> data = FXCollections.<Carte>observableArrayList();
-        ArrayList<Carte> cartes = listener.loadCartes();
-
-        data.addAll(cartes) ;
-        System.out.println(data);
+    public void chargerEditionVue(Paquet paquet) {
+        categoriePaquetTextField.setText(paquet.getCategorie());
+        nomPaquetTextField.setText(paquet.getNom());
 
         questionCol.setCellValueFactory(new PropertyValueFactory<Carte,String>("recto"));
         reponseCol.setCellValueFactory(new PropertyValueFactory<Carte,String>("verso"));
 
-        tableQR.setItems(data);
+        questionCol.setEditable(true);
+        reponseCol.setEditable(true);
+
+        questionCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        reponseCol.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        questionCol.setOnEditCommit(event -> {
+            Carte carte = event.getRowValue();
+            carte.editRecto(event.getNewValue());
+        });
+
+        reponseCol.setOnEditCommit(event -> {
+            Carte carte = event.getRowValue();
+            carte.editVerso(event.getNewValue());
+        });
+
+
+        reloadTable();
 
     }
 
     @FXML
     void annulerEdition(ActionEvent event) {
-        MenuPrincipal.getINSTANCE().returnToMenuPaquet();
+        MenuPrincipal.getINSTANCE().cancelEdition();
     }
 
     @FXML
-    void enregistrerPaquet(ActionEvent event) {
-        System.out.println("enregistrerPaquet");
+    void ajouterCarte(ActionEvent event){
+        String recto = questionTextField.getText();
+        String verso = reponseTextField.getText() ;
+        listener.ajouterCarte(recto, verso);
+        reloadTable();
+
+    }
+
+    void reloadTable(){
+        ObservableList<Carte> data = FXCollections.<Carte>observableArrayList();
+        ArrayList<Carte> cartes = listener.loadCartes();
+        data.addAll(cartes) ;
+        tableQR.setItems(data);
+    }
+
+    @FXML
+    void enregistrerPaquet() throws IOException {
+        String nouveauNom = nomPaquetTextField.getText() ;
+        String nouvelleCategorie = categoriePaquetTextField.getText() ;
+        listener.enregistrerPaquet(nouveauNom, nouvelleCategorie);
     }
 
 }
