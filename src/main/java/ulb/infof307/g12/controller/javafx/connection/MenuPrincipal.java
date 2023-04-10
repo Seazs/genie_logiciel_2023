@@ -4,13 +4,19 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import ulb.infof307.g12.controller.javafx.BaseController;
+import ulb.infof307.g12.controller.javafx.cartes.CarteQCMController;
+import ulb.infof307.g12.controller.javafx.cartes.CarteReponseController;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
+import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.ResponseCache;
+
 @Getter
 public class MenuPrincipal extends Application {
     @Getter(lazy = true)
@@ -76,5 +82,23 @@ public class MenuPrincipal extends Application {
     public void returnToConnexionMenu() {
         profilController.hide();
         connexionController.show();
+    }
+    public void showCarteQCM() throws IOException {
+        Carte carte = new Carte(1,"Q§R1§R2§R3§R4","R3","qcm");
+        CarteQCMController controller = new CarteQCMController(new Stage(),"Title",carte);
+        menuPaquetController.hide();
+        controller.show();
+    }
+
+    public void showResponse(String userReponse, String rightAnswer, BaseController controller) {
+        try {
+            controller.hide();
+            CarteReponseController carteReponseController = new CarteReponseController(new Stage(),"title",userReponse,rightAnswer);
+            carteReponseController.show();
+        } catch (IOException e) {
+            //TODO:erreur show Response
+            e.printStackTrace();
+        }
+
     }
 }

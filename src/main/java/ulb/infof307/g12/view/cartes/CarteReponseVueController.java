@@ -1,0 +1,20 @@
+package ulb.infof307.g12.view.cartes;
+
+import javafx.fxml.FXML;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import ulb.infof307.g12.model.Carte;
+
+import java.util.ArrayList;
+
+public class CarteReponseVueController {
+    @FXML
+    TextFlow resultText, rightAnswerText;
+
+    public void showReponse(String result, String rightAnswer){
+        Text resulttxt = new Text("Votre réponse est " + result);
+        Text rightAnswertxt = new Text("Le bon résultat est " + rightAnswer);
+        resultText.getChildren().addAll(resulttxt);
+        rightAnswerText.getChildren().addAll(rightAnswertxt);
+    }
+}

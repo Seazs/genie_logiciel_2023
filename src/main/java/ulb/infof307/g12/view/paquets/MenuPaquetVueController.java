@@ -5,15 +5,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import lombok.Setter;
+import ulb.infof307.g12.controller.javafx.cartes.CarteQCMController;
 import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
+import ulb.infof307.g12.view.cartes.CarteQCMVueController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +27,11 @@ import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
 public class MenuPaquetVueController implements Initializable {
+    @FXML
+    Button test;
+    public void TestCarte(ActionEvent e) throws IOException {
+        MenuPrincipal.getINSTANCE().showCarteQCM();
+    }
     @FXML
     private ListView<Paquet> paquetListView;
     List<Paquet> saveListPaquet = new ArrayList<>();

@@ -11,8 +11,8 @@ import java.net.URL;
 import java.util.Objects;
 
 public class CarteQCMController extends BaseController implements QCMListener {
-    public CarteQCMController(Stage stage, URL resource, String title,Carte carte) throws IOException {
-        super(stage, resource, title);
+    public CarteQCMController(Stage stage, String title,Carte carte) throws IOException {
+        super(stage, CarteQCMVueController.class.getResource("CarteQCM.fxml"), title);
         if (!Objects.equals(carte.getType(), "qcm")) throw new IllegalArgumentException();
         CarteQCMVueController controller = (CarteQCMVueController) super.controller;
         controller.showCarte(carte);
