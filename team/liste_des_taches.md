@@ -28,7 +28,7 @@ Tâche 3 : Interface connexion – 2 points
 Tâche 1 : Stockage des Utilisateurs et Paquets – 4 points
 
 - Alexandre A. et Ismail
-- Description :
+- Description : Cette tâche consistait à implémenter un système de stockage des utilisateurs et de leurs paquets associés. La méthode choisie a été de créer un dossier pour chaque utilisateur contenant tous les fichiers "paquets" qui lui sont associés. 
 
 Tâche 2: Fusion des branches– 2 points
 
@@ -97,7 +97,7 @@ Tâche 3 : Filtre des catégories – 2 points
 Tâche 1 : Session d’étude (interface comprise) – 2,5 points
 
 - Alexandre A et Lina
-- Description : texte qui décrit la tâche
+- Description : Faire en sorte que lorsqu'on choisit d'étudier un paquet, les cartes s'affichent aléatoirement et des boutons de connaissance apparaissent ("très mauvais","mauvais","moyen","bon","très bon").
 
 Tâche 2 : Score des cartes et sauvegarde du score (+ interface) – 2,5 points
 
