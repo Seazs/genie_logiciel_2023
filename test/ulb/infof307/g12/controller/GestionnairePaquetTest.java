@@ -1,6 +1,5 @@
 package ulb.infof307.g12.controller;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import ulb.infof307.g12.model.Utilisateur;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +25,6 @@ class GestionnairePaquetTest {
                 - fichier <paquet1>
                 - fichier <paquet2>
          */
-
     @TempDir
     private static File dossierTemporaire;
 
@@ -64,7 +61,7 @@ class GestionnairePaquetTest {
         GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
         gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
         GestionnairePaquet gestPaquet = new GestionnairePaquet();
-        GestionnairePaquet.save(utilisateur1);
+        gestPaquet.save(utilisateur1);
         //Test d'assertion
         File f = new File("./stockage/"+utilisateur1.getPseudo()+"/"+"Maths");
         assertTrue(f.exists());
@@ -89,9 +86,9 @@ class GestionnairePaquetTest {
         GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
         gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
         GestionnairePaquet gestPaquet = new GestionnairePaquet();
-        GestionnairePaquet.save(utilisateur1);
+        gestPaquet.save(utilisateur1);
         //Test de suppression
-        GestionnairePaquet.remove(utilisateur1,paquet1);
+        gestPaquet.remove(utilisateur1,paquet1);
         File f = new File("./stockage/"+utilisateur1.getPseudo()+"/"+paquet1.getNom());
         assertFalse(f.exists());
     }
@@ -114,10 +111,10 @@ class GestionnairePaquetTest {
         GestionnairePaquet gestPaquet = new GestionnairePaquet();
         GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
         gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
-        GestionnairePaquet.save(utilisateur1);
+        gestPaquet.save(utilisateur1);
         //Création de l'utilisateur 2 qui va charger l'utilisateur 1
         Utilisateur utilisateur2 = new Utilisateur("alex","pomme");
-        utilisateur2.setListPaquet(GestionnairePaquet.load(utilisateur2));
+        utilisateur2.setListPaquet(gestPaquet.load(utilisateur2));
         assertEquals(utilisateur1.getListPaquet().get(0).getCategories(),utilisateur2.getListPaquet().get(0).getCategories());
         assertEquals(utilisateur1.getListPaquet().get(1).getCategories(),utilisateur2.getListPaquet().get(1).getCategories());
     }
@@ -125,19 +122,21 @@ class GestionnairePaquetTest {
 
     @Test
     public void testSaveCategorie(){
+        GestionnairePaquet gestPaquet = new GestionnairePaquet();
         Paquet paquet = new Paquet("Nom", "cat1", "cat2");
-        String categories = GestionnairePaquet.saveCategories(paquet);
+        String categories = gestPaquet.saveCategories(paquet);
         assertEquals(categories, "cat1#cat2#");
     }
     @Test
     public void testLoadCategorie() throws IOException {
+        GestionnairePaquet gestPaquet = new GestionnairePaquet();
         Utilisateur utilisateur1 = new Utilisateur("tom","pomme");
         Paquet paquet = new Paquet("Nom", "cat1", "cat2");
         utilisateur1.addPaquet(paquet);
-        GestionnairePaquet.save(utilisateur1);
+        gestPaquet.save(utilisateur1);
 
         Utilisateur utilisateur2 = new Utilisateur("tom","pomme");
-        utilisateur2.setListPaquet(GestionnairePaquet.load(utilisateur2));
+        utilisateur2.setListPaquet(gestPaquet.load(utilisateur2));
         assertEquals("cat1", utilisateur2.getListPaquet().get(0).getCategories().get(0));
         assertEquals("cat2", utilisateur2.getListPaquet().get(0).getCategories().get(1));
     }

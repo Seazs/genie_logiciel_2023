@@ -35,7 +35,7 @@ public class EditionController extends BaseController implements EditionVueListe
         GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet() ;
         Utilisateur user = MenuPrincipal.getINSTANCE().getUserPrincipale();
         List<Paquet> listePaquetUser = user.getListPaquet();
-        GestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
+        gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
     }
 
     public ArrayList<Carte> loadCartes() {
