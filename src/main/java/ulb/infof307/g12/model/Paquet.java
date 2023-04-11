@@ -1,12 +1,14 @@
 package ulb.infof307.g12.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Paquet {
 
+    @Setter
     @Getter
     private String nom;
 

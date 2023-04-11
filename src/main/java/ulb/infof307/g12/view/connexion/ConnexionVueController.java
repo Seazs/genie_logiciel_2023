@@ -1,4 +1,4 @@
-package ulb.infof307.g12.view.connection;
+package ulb.infof307.g12.view.connexion;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import lombok.Setter;
 import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
 
-public class ConnectionVueController {
+public class ConnexionVueController {
     @FXML
     private Label messageLabel;
     @FXML

@@ -1,12 +1,15 @@
 package ulb.infof307.g12.view.paquets;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import ulb.infof307.g12.model.Paquet;
 
 import java.util.ArrayList;
 
 public class PaquetDeCartesVueController {
+    public Button jouerBouton;
+    public Button modifierBouton;
     @FXML
     private Label nomLabel;
     @FXML

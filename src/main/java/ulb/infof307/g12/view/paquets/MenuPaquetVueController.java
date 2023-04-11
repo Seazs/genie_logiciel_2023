@@ -1,6 +1,8 @@
 package ulb.infof307.g12.view.paquets;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +11,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
@@ -37,13 +41,7 @@ public class MenuPaquetVueController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Ajouter les paquets de cartes à la liste
         paquetListView.getItems().addAll(
-                new Paquet("Paquet 1", "Catégorie 1","cat 2"),
-                new Paquet("Paquet 2", "Catégorie 2","cat 3"),
-                new Paquet("Paquet 3", "Cat 3"),
-                new Paquet("Paquet 5", "Cat 2"),
-                new Paquet("Paquet 6", "lala"),
-                new Paquet("Paquet 7", "Catégorie 1"),
-                new Paquet("Paquet 8", "Catégorie 3")
+                MenuPrincipal.getINSTANCE().getUserPaquets()
         );
         saveListPaquet.addAll(paquetListView.getItems());
         // Personnaliser l'affichage des éléments de la liste
@@ -71,7 +69,7 @@ public class MenuPaquetVueController implements Initializable {
                     try {
                         // Charger la vue FXML pour la cellule
                         FXMLLoader loader = new FXMLLoader(MenuPaquetVueController.class.getResource("paquetDeCarte.fxml"));
-                        BorderPane cellLayout = loader.load();
+                        AnchorPane cellLayout = loader.load();
 
                         // Obtenir le contrôleur pour la vue FXML
                         PaquetDeCartesVueController controller = loader.getController();
@@ -93,7 +91,22 @@ public class MenuPaquetVueController implements Initializable {
         MenuPrincipal.getINSTANCE().openProfile();
     }
 
-    public void setListener(MenuPaquetController menuPaquetController) {
+    public void creerPaquet() throws IOException {
+        Paquet nouveauPaquet = listener.creerPaquet() ;
+        paquetListView.getItems().addAll(nouveauPaquet);
+    }
+
+    public void ouvrirEdition(ActionEvent event) throws Exception {
+        Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
+        listener.editerPaquet(paquet);
+        rechargerListView();
+    }
+
+    public void rechargerListView(){
+        ObservableList<Paquet> data = FXCollections.observableArrayList();
+        data.addAll(MenuPrincipal.getINSTANCE().getUserPaquets()) ;
+        paquetListView.setItems(data) ;
+
     }
 
     /**
