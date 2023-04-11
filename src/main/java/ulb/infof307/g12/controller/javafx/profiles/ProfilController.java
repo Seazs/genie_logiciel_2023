@@ -1,9 +1,8 @@
-package ulb.infof307.g12.controller.javafx.paquets.profiles;
+package ulb.infof307.g12.controller.javafx.profiles;
 
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
-import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
-import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.ProfilVueListener;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Utilisateur;

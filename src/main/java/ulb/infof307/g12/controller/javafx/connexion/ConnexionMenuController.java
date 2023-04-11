@@ -1,4 +1,4 @@
-package ulb.infof307.g12.controller.javafx.connection;
+package ulb.infof307.g12.controller.javafx.connexion;
 
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
@@ -6,7 +6,7 @@ import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Utilisateur;
-import ulb.infof307.g12.view.connection.ConnectionVueController;
+import ulb.infof307.g12.view.connexion.ConnexionVueController;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,10 +16,10 @@ public class ConnexionMenuController extends BaseController implements UserCrede
     private GestionnaireUtilisateur gestionnaireUtilisateur;
 
     public ConnexionMenuController(Stage stage,GestionnaireUtilisateur gestionnaireUtilisateur) throws IOException {
-        super(stage,ConnectionVueController.class.getResource("connexion-menu-view.fxml"),"Application Title");
+        super(stage, ConnexionVueController.class.getResource("connexion-menu-view.fxml"),"Application Title");
         this.gestionnaireUtilisateur = gestionnaireUtilisateur;
 
-        ConnectionVueController controller = (ConnectionVueController) super.controller;
+        ConnexionVueController controller = (ConnexionVueController) super.controller;
         controller.setListener(this);
     }
 

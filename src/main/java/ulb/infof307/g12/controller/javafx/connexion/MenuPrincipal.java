@@ -1,4 +1,4 @@
-package ulb.infof307.g12.controller.javafx.connection;
+package ulb.infof307.g12.controller.javafx.connexion;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.paquets.EditionController;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
-import ulb.infof307.g12.controller.javafx.paquets.profiles.ProfilController;
+import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Paquet;

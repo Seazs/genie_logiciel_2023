@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import lombok.Setter;
-import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.EditionVueListener;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
