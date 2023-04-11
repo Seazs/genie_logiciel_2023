@@ -31,7 +31,7 @@ public class EditionController extends BaseController implements EditionVueListe
     @Override
     public void enregistrerPaquet(String nom, String categorie) throws IOException {
         paquet.setNom(nom);
-        paquet.setCategorie(categorie);
+        paquet.ajouterCategorie(categorie);
         GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet() ;
         Utilisateur user = MenuPrincipal.getINSTANCE().getUserPrincipale();
         List<Paquet> listePaquetUser = user.getListPaquet();
@@ -44,7 +44,7 @@ public class EditionController extends BaseController implements EditionVueListe
 
     public void ajouterCarte(String recto, String verso){
         int id = paquet.getCartes().size() + 1 ;
-        Carte carte = new Carte(id, recto, verso) ;
+        Carte carte = new Carte(id, recto, verso, "") ;
         paquet.ajouterCarte(carte);
     }
 

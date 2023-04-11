@@ -10,12 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
-import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
 
@@ -24,7 +21,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Stream;
 
 public class MenuPaquetVueController implements Initializable {
     @FXML
