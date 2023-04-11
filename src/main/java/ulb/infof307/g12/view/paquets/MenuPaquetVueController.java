@@ -10,19 +10,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
-import ulb.infof307.g12.controller.storage.GestionnairePaquet;
-import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class MenuPaquetVueController implements Initializable {
@@ -76,11 +70,7 @@ public class MenuPaquetVueController implements Initializable {
 
     public void creerPaquet() throws IOException {
         Paquet nouveauPaquet = listener.creerPaquet() ;
-        ajouterPaquetAListe(nouveauPaquet);
-    }
-
-    public void ajouterPaquetAListe(Paquet paquet){
-        paquetListView.getItems().addAll(paquet);
+        paquetListView.getItems().addAll(nouveauPaquet);
     }
 
     public void ouvrirEdition(ActionEvent event) throws Exception {
@@ -90,7 +80,7 @@ public class MenuPaquetVueController implements Initializable {
     }
 
     public void rechargerListView(){
-        ObservableList<Paquet> data = FXCollections.<Paquet>observableArrayList();
+        ObservableList<Paquet> data = FXCollections.observableArrayList();
         data.addAll(MenuPrincipal.getINSTANCE().getUserPaquets()) ;
         paquetListView.setItems(data) ;
 

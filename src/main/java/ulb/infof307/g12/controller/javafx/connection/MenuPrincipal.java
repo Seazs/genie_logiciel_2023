@@ -21,7 +21,7 @@ public class MenuPrincipal extends Application {
     @Getter(lazy = true)
     private static final MenuPrincipal INSTANCE = new MenuPrincipal();
     private GestionnaireUtilisateur gestionnaireUtilisateur = new GestionnaireUtilisateur();
-    private GestionnairePaquet gestionnairepaquet = new GestionnairePaquet();
+    private GestionnairePaquet gestionnairePaquet = new GestionnairePaquet();
     private ConnexionMenuController connexionController;
     private MenuPaquetController menuPaquetController;
     private ProfilController profilController;
@@ -47,7 +47,7 @@ public class MenuPrincipal extends Application {
     public void showMenuPaquet(Utilisateur user, ConnexionMenuController parent) {
         try {
             this.userPrincipale = user;
-            userPaquets = gestionnairepaquet.load(userPrincipale);
+            userPaquets = user.getListPaquet();
             menuPaquetController = new MenuPaquetController(user,new Stage());
             parent.hide();
             menuPaquetController.show();
@@ -73,10 +73,9 @@ public class MenuPrincipal extends Application {
         menuPaquetController.show();
     }
 
-    public void cancelEdition() {
+    public void returnFromEditionToMenuPaquet() {
         menuPaquetController.show();
         editionController.hide();
-
     }
 
     public void returnToConnexionMenu() {
@@ -89,11 +88,11 @@ public class MenuPrincipal extends Application {
             editionController = new EditionController(new Stage(),paquet);
             menuPaquetController.hide();
             editionController.show();
-
         } catch (IOException e) {
             //TODO: Renvoyer l'erreur à l'utilisateur
             System.out.println(e);
         }
 
     }
+
 }

@@ -1,6 +1,5 @@
 package ulb.infof307.g12.controller.javafx.paquets;
 
-import javafx.scene.control.Menu;
 import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
@@ -9,11 +8,12 @@ import ulb.infof307.g12.controller.listeners.EditionVueListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
+import ulb.infof307.g12.model.Utilisateur;
 import ulb.infof307.g12.view.paquets.EditionVueController;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EditionController extends BaseController implements EditionVueListener {
 
@@ -22,7 +22,6 @@ public class EditionController extends BaseController implements EditionVueListe
 
     public EditionController(Stage stage, Paquet paquet) throws IOException {
         super(stage, EditionVueController.class.getResource("editionPaquet.fxml"), "");
-        System.out.println("Controller oui");
         this.paquet = paquet;
         EditionVueController controller = (EditionVueController) super.controller;
         controller.setListener(this);
@@ -33,9 +32,10 @@ public class EditionController extends BaseController implements EditionVueListe
     public void enregistrerPaquet(String nom, String categorie) throws IOException {
         paquet.setNom(nom);
         paquet.setCategorie(categorie);
-        GestionnairePaquet gestionnairepaquet = MenuPrincipal.getINSTANCE().getGestionnairepaquet() ;
-        gestionnairepaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
-
+        GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet() ;
+        Utilisateur user = MenuPrincipal.getINSTANCE().getUserPrincipale();
+        List<Paquet> listePaquetUser = user.getListPaquet();
+        GestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
     }
 
     public ArrayList<Carte> loadCartes() {

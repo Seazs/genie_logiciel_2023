@@ -3,8 +3,6 @@ package ulb.infof307.g12.view.paquets;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -15,10 +13,8 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.EditionVueListener;
-import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,7 +74,7 @@ public class EditionVueController {
 
     @FXML
     void annulerEdition(ActionEvent event) {
-        MenuPrincipal.getINSTANCE().cancelEdition();
+        MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();
     }
 
     @FXML
@@ -86,8 +82,9 @@ public class EditionVueController {
         String recto = questionTextField.getText();
         String verso = reponseTextField.getText() ;
         listener.ajouterCarte(recto, verso);
+        questionTextField.clear();
+        reponseTextField.clear();
         reloadTable();
-
     }
 
     void reloadTable(){
@@ -102,6 +99,7 @@ public class EditionVueController {
         String nouveauNom = nomPaquetTextField.getText() ;
         String nouvelleCategorie = categoriePaquetTextField.getText() ;
         listener.enregistrerPaquet(nouveauNom, nouvelleCategorie);
+        MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();
     }
 
 }
