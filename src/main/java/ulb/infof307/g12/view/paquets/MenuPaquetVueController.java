@@ -129,6 +129,7 @@ public class MenuPaquetVueController implements Initializable {
     public void sessionEtude(ActionEvent event){
         if (listener!=null) {
             listener.CarteEtude();
+
         }
 
 }}

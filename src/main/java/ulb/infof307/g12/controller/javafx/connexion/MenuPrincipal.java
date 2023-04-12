@@ -71,8 +71,13 @@ public class MenuPrincipal extends Application {
     }
 
     public void showCarteEtude(){
-        menuPaquetController.hide();
-        carteEtudeController.show();
+        try{
+            carteEtudeController = new CarteEtudeController(new Stage());
+            menuPaquetController.hide();
+            carteEtudeController.show();}
+        catch (Exception ignored) {
+
+        }
     }
 
     public void openProfile(){
