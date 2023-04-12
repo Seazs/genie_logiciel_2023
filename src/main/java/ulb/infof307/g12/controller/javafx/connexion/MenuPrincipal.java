@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import ulb.infof307.g12.controller.javafx.paquets.CarteEtudeController;
 import ulb.infof307.g12.controller.javafx.paquets.EditionController;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
@@ -26,6 +27,7 @@ public class MenuPrincipal extends Application {
     private MenuPaquetController menuPaquetController;
     private ProfilController profilController;
     private EditionController editionController;
+    private CarteEtudeController carteEtudeController;
     @Setter
     private Utilisateur userPrincipale;
     @Getter
@@ -66,6 +68,11 @@ public class MenuPrincipal extends Application {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void showCarteEtude(){
+        menuPaquetController.hide();
+        carteEtudeController.show();
     }
 
     public void openProfile(){

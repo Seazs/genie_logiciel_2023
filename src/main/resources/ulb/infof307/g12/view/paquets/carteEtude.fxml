@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.CarteEtude">
+   <children>
+      <TextField layoutX="140.0" layoutY="71.0" prefHeight="198.0" prefWidth="323.0" />
+      <Button layoutX="48.0" layoutY="313.0" mnemonicParsing="false" onAction="#ConnaissanceTrèsMauvaise" text="Très mauvaise" />
+      <Button layoutX="140.0" layoutY="313.0" mnemonicParsing="false" onAction="#ConnaissanceMauvaise" prefHeight="25.0" prefWidth="82.0" text="Mauvaise" />
+      <Button layoutX="222.0" layoutY="313.0" mnemonicParsing="false" onAction="#ConnaissanceMoyenne" prefHeight="25.0" prefWidth="82.0" text="Moyenne" />
+      <Button layoutX="304.0" layoutY="313.0" mnemonicParsing="false" onAction="#ConnaissanceBonne" prefHeight="25.0" prefWidth="82.0" text="Bonne" />
+      <Button layoutX="386.0" layoutY="313.0" mnemonicParsing="false" onAction="#ConnaissanceTrèsBonne" prefHeight="25.0" prefWidth="91.0" text="Très bonne" />
+   </children>
+</AnchorPane>

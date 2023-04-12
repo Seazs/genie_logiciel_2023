@@ -11,6 +11,7 @@ public interface MenuPaquetListener {
     void openPaquet(Paquet paquet);
     Paquet creerPaquet() throws IOException;
     void editerPaquet(Paquet paquet) ;
+    void CarteEtude();
 
 
 }
