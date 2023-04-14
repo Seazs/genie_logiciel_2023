@@ -70,11 +70,11 @@ public class MenuPrincipal extends Application {
 
     }
 
-    public void showCarteEtude(MenuPaquetController parent){
+    public void showCarteEtude(MenuPaquetController parent,Paquet paquet){
         try{
             parent.hide();
             Stage stage = new Stage();
-            carteEtudeController = new CarteEtudeController(stage);
+            carteEtudeController = new CarteEtudeController(stage,paquet);
             carteEtudeController.show();
         }catch (IOException event){
             throw new RuntimeException(event);

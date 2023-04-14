@@ -41,9 +41,9 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     }
 
     @Override
-    public void CarteEtude(){
+    public void CarteEtude(Paquet paquet){
         MenuPrincipal instance = MenuPrincipal.getINSTANCE();
-        instance.showCarteEtude(this);
+        instance.showCarteEtude(this,paquet);
     }
 
 
