@@ -1,18 +1,20 @@
 package ulb.infof307.g12.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Paquet {
 
+    @Setter
     @Getter
     private String nom;
 
     @Getter
     private ArrayList<String> categories = new ArrayList<String>();
-
+    @Getter
     public ArrayList<Carte> cartes = new ArrayList<Carte>();
     private int length;
 

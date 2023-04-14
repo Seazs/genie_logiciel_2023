@@ -1,24 +1,25 @@
-package ulb.infof307.g12.controller.javafx.connection;
+package ulb.infof307.g12.controller.javafx.connexion;
 
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
+import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Utilisateur;
-import ulb.infof307.g12.view.connection.ConnectionVueController;
+import ulb.infof307.g12.view.connexion.ConnexionVueController;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ConnexionMenuController extends BaseController implements UserCredentialsListener {
 
-    private GestionnaireUtilisateur gestionnaire;
+    private GestionnaireUtilisateur gestionnaireUtilisateur;
 
     public ConnexionMenuController(Stage stage,GestionnaireUtilisateur gestionnaireUtilisateur) throws IOException {
-        super(stage,ConnectionVueController.class.getResource("connexion-menu-view.fxml"),"Application Title");
-        gestionnaire = gestionnaireUtilisateur;
+        super(stage, ConnexionVueController.class.getResource("connexion-menu-view.fxml"),"Application Title");
+        this.gestionnaireUtilisateur = gestionnaireUtilisateur;
 
-        ConnectionVueController controller = (ConnectionVueController) super.controller;
+        ConnexionVueController controller = (ConnexionVueController) super.controller;
         controller.setListener(this);
     }
 
@@ -28,10 +29,10 @@ public class ConnexionMenuController extends BaseController implements UserCrede
         String result = "";
 
         try {
-            if (gestionnaire.register(username, password)) {
+            if (gestionnaireUtilisateur.register(username, password)) {
                 result = "Register: " + username + " = " + password;
             } else {
-                result = gestionnaire.getStatusMsg();
+                result = gestionnaireUtilisateur.getStatusMsg();
             }
         } catch (IOException e) {
             //
@@ -46,13 +47,15 @@ public class ConnexionMenuController extends BaseController implements UserCrede
         String result = "";
 
         try {
-            if (gestionnaire.connect(username, password)) {
+            if (gestionnaireUtilisateur.connect(username, password)) {
                 result = "Connecting: " + username + " = " + password;
 
                 Utilisateur connectedUser = new Utilisateur(username,password);
+                GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
+                connectedUser.setListPaquet(gestionnairePaquet.load(connectedUser));
                 MenuPrincipal.getINSTANCE().showMenuPaquet(connectedUser,this);
             } else {
-                result = gestionnaire.getStatusMsg();
+                result = gestionnaireUtilisateur.getStatusMsg();
             }
         } catch (FileNotFoundException e) {
             //

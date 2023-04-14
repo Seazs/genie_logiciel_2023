@@ -1,6 +1,6 @@
 package ulb.infof307.g12;
 
-import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 
 public class Main {
 

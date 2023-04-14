@@ -8,25 +8,33 @@ import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.cartes.CarteQCMController;
 import ulb.infof307.g12.controller.javafx.cartes.CarteReponseController;
 import ulb.infof307.g12.controller.javafx.cartes.CarteTTController;
+import ulb.infof307.g12.controller.javafx.paquets.EditionController;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
+import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
+import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Getter
 public class MenuPrincipal extends Application {
     @Getter(lazy = true)
     private static final MenuPrincipal INSTANCE = new MenuPrincipal();
     private GestionnaireUtilisateur gestionnaireUtilisateur = new GestionnaireUtilisateur();
+    private GestionnairePaquet gestionnairePaquet = new GestionnairePaquet();
     private ConnexionMenuController connexionController;
     private MenuPaquetController menuPaquetController;
     private ProfilController profilController;
+    private EditionController editionController;
     @Setter
     private Utilisateur userPrincipale;
+    @Getter
+    private List<Paquet> userPaquets;
     private CarteQCMController carteQCMController;
     private CarteTTController carteTTController;
     @Override
@@ -46,10 +54,12 @@ public class MenuPrincipal extends Application {
     public void showMenuPaquet(Utilisateur user, ConnexionMenuController parent) {
         try {
             this.userPrincipale = user;
+            userPaquets = user.getListPaquet();
             menuPaquetController = new MenuPaquetController(user,new Stage());
             parent.hide();
             menuPaquetController.show();
         } catch (IOException e) {
+            System.out.print(e);
             //TODO: Avertir l'utilisateur
         }
     }
@@ -79,6 +89,11 @@ public class MenuPrincipal extends Application {
     public void returnToMenuPaquet() {
         profilController.hide();
         menuPaquetController.show();
+    }
+
+    public void returnFromEditionToMenuPaquet() {
+        menuPaquetController.show();
+        editionController.hide();
     }
 
     public void returnToConnexionMenu() {
@@ -116,6 +131,19 @@ public class MenuPrincipal extends Application {
 
     public void showTTResponse(String userReponse, String rightAnswer){
         showResponse(userReponse,rightAnswer,carteTTController);
+    }
+
+
+    public void showMenuEdition(Paquet paquet) {
+        try{
+            editionController = new EditionController(new Stage(),paquet);
+            menuPaquetController.hide();
+            editionController.show();
+        } catch (IOException e) {
+            //TODO: Renvoyer l'erreur à l'utilisateur
+            System.out.println(e);
+        }
+
     }
 
 }

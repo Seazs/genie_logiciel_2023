@@ -16,7 +16,7 @@ public class GestionnairePaquet {
      * @param user
      * @throws IOException
      */
-    public static void save(Utilisateur user) throws IOException {
+    public void save(Utilisateur user) throws IOException {
         List<Paquet> listPaquet = user.getListPaquet();
         for (Paquet paquet : listPaquet){
             File paquetdatabase = new File("./stockage/"+user.getPseudo(),paquet.getNom()); // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
@@ -37,7 +37,7 @@ public class GestionnairePaquet {
      * @param out
      * @throws IOException
      */
-    private static void save_card(Paquet paquet, BufferedWriter out) throws IOException {
+    private void save_card(Paquet paquet, BufferedWriter out) throws IOException {
         for(int i = 0; i < paquet.cartes.size() ; i++){ //Ecriture de toutes les cartes dans le fichier
             Carte carte = paquet.cartes.get(i);
             out.newLine();
@@ -50,7 +50,7 @@ public class GestionnairePaquet {
      * @param user
      * @return
      */
-    public static List<Paquet> load(Utilisateur user) {
+    public List<Paquet> load(Utilisateur user) {
 
         try {
             File userfolder = new File("./stockage/"+user.getPseudo());
@@ -79,7 +79,7 @@ public class GestionnairePaquet {
      * @param newPaquet
      * @throws IOException
      */
-    private static void load_all_cards(BufferedReader reader, Paquet newPaquet) throws IOException {
+    private void load_all_cards(BufferedReader reader, Paquet newPaquet) throws IOException {
         int i=0;
         String line;
         while((line = reader.readLine())!=null) {
@@ -99,7 +99,7 @@ public class GestionnairePaquet {
      * @param paquet
      * @throws FileNotFoundException
      */
-    public static void remove(Utilisateur user, Paquet paquet) throws FileNotFoundException {
+    public void remove(Utilisateur user, Paquet paquet) throws FileNotFoundException {
         File f = new File("./stockage/"+user.getPseudo()+"/"+paquet.getNom());
         try{
             if(f.exists()){
@@ -118,7 +118,7 @@ public class GestionnairePaquet {
      * @param line
      * @return String[] des catégories
      */
-    private static String[] loadCategories(String line){
+    private String[] loadCategories(String line){
         return line.split("#");
     }
 
