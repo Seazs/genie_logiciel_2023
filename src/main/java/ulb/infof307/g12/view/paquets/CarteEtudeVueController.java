@@ -1,6 +1,7 @@
 package ulb.infof307.g12.view.paquets;
 
 import javafx.event.ActionEvent;
+import java.util.concurrent.ThreadLocalRandom;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,6 +17,8 @@ import ulb.infof307.g12.model.Paquet;
 
 import java.util.ArrayList;
 
+
+
 public class CarteEtudeVueController{
     @Setter
     private CarteEtudeListener listener;
@@ -25,18 +28,9 @@ public class CarteEtudeVueController{
     private Button boutonSuivant;
     @FXML
     private Button boutonChange;
-    @FXML
-    private Button boutonTB;
-    @FXML
-    private Button boutonB;
-    @FXML
-    private Button boutonM;
-    @FXML
-    private Button boutonBad;
-    @FXML
-    private Button boutonVeryBad;
     private ArrayList<Carte> cartesEtude;
     private ArrayList<Integer> cartesEtudeScore;
+
     private int indexCarte = 0;
     private int cote = 0; // 0 = recto, 1 = verso
 
@@ -63,6 +57,7 @@ public class CarteEtudeVueController{
         cartesEtude = listener.getCartesEtude();
         if (indexCarte < cartesEtude.size()-1){
             indexCarte++;
+            int i=indexRandom();
             affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
             if (cote == 1){
                 changeCote();
@@ -70,9 +65,6 @@ public class CarteEtudeVueController{
             if (indexCarte == cartesEtude.size()-1){
                 boutonSuivant.setText("Terminer");
             }
-        }
-        else{
-            MenuPrincipal.getINSTANCE().returnFromCarteEtudeToMenuPaquet();
         }
     }
     public void cartePrecedente(){
@@ -84,12 +76,35 @@ public class CarteEtudeVueController{
                 changeCote();
             }
         }
+        listener.saveCartes();
     }
-    public void changeScore(){
-        cartesEtudeScore = listener.getCartesEtudeScore();
-        //TODO
-        //  Mettre un score différent pour chaque bouton
-        // update les scores dans carteEtudeController et sauver dans le fichier
+    public void terminer() {
+        MenuPrincipal.getINSTANCE().returnFromCarteEtudeToMenuPaquet();
+        listener.saveCartes();
+    }
+    @FXML
+    public void veryBad() {
+        listener.tresMauvais(indexCarte);
 
+    }
+
+    public void bad() {
+        listener.mauvais(indexCarte);
+    }
+
+    public void middle() {
+        listener.moyen(indexCarte);
+    }
+
+    public void good() {
+        listener.bon(indexCarte);
+    }
+
+    public void veryGood() {
+        listener.tresBon(indexCarte);
+    }
+    public int indexRandom(){
+        int randomNum = ThreadLocalRandom.current().nextInt(0, cartesEtude.size());
+        return randomNum;
     }
 }
