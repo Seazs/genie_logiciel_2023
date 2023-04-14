@@ -13,6 +13,9 @@ import ulb.infof307.g12.model.Utilisateur;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -117,6 +120,7 @@ class GestionnairePaquetTest {
         utilisateur2.setListPaquet(gestPaquet.load(utilisateur2));
         assertEquals(utilisateur1.getListPaquet().get(0).getCategories(),utilisateur2.getListPaquet().get(0).getCategories());
         assertEquals(utilisateur1.getListPaquet().get(1).getCategories(),utilisateur2.getListPaquet().get(1).getCategories());
+
     }
 
 
@@ -133,6 +137,8 @@ class GestionnairePaquetTest {
         Utilisateur utilisateur1 = new Utilisateur("tom","pomme");
         Paquet paquet = new Paquet("Nom", "cat1", "cat2");
         utilisateur1.addPaquet(paquet);
+        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
+        gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
         gestPaquet.save(utilisateur1);
 
         Utilisateur utilisateur2 = new Utilisateur("tom","pomme");
