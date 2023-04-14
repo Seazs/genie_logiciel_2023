@@ -77,13 +77,14 @@ public class MenuPaquetVueController implements Initializable {
                         setGraphic(cellLayout);
                     } catch (IOException e) {
                         e.printStackTrace();
+                        MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de charger les textures du paquet de carte");
                     }
                 }
             }
         });
     }
 
-    public void ouvrirProfil(ActionEvent event) throws Exception {
+    public void ouvrirProfil(ActionEvent event) {
         MenuPrincipal.getINSTANCE().openProfile();
     }
 
@@ -92,7 +93,7 @@ public class MenuPaquetVueController implements Initializable {
         paquetListView.getItems().addAll(nouveauPaquet);
     }
 
-    public void ouvrirEdition(ActionEvent event) throws Exception {
+    public void ouvrirEdition(ActionEvent event) {
         Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
         listener.editerPaquet(paquet);
         rechargerListView();
@@ -106,10 +107,9 @@ public class MenuPaquetVueController implements Initializable {
     }
 
     /**
-     * mets à jour la liste visuel des paquets en fonction du filtre entré
+     * met à jour la liste visuel des paquets en fonction du filtre entré
      *
      */
-
     public void filtrageCategorie() {
         String recherche = RechercheLabel.getText().toLowerCase();
         paquetListView.getItems().clear();

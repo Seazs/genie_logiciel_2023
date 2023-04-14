@@ -95,7 +95,7 @@ public class EditionVueController {
     }
 
     @FXML
-    void enregistrerPaquet() throws IOException {
+    void enregistrerPaquet() {
         String nouveauNom = nomPaquetTextField.getText() ;
         String nouvelleCategorie = categoriePaquetTextField.getText() ;
         listener.enregistrerPaquet(nouveauNom, nouvelleCategorie);

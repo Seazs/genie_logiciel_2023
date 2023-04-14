@@ -23,14 +23,16 @@ public class ConnexionVueController {
     protected void onConnectButtonClick(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        listener.onLogin(username,password);
+        String result = listener.onLogin(username,password);
+        messageLabel.setText(result);
     }
 
     @FXML
     public void onRegisterButtonClick(ActionEvent actionEvent) {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        listener.onRegister(username,password);
+        String result = listener.onRegister(username,password);
+        messageLabel.setText(result);
     }
 
 

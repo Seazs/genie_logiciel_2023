@@ -26,7 +26,7 @@ public class CarteQCMVueController {
         response = list.get(list.size()-1);
     }
 
-    public void onClick(ActionEvent e) throws IOException {
+    public void onClick(ActionEvent e){
         String userReponse = reponsesList.getSelectionModel().getSelectedItem();
         MenuPrincipal.getINSTANCE().showQCMResponse(userReponse,response);
     }
