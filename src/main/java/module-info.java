@@ -5,8 +5,8 @@ module connection {
     requires org.kordamp.bootstrapfx.core;
     requires static lombok;
 
-    opens ulb.infof307.g12.controller.javafx.connection to javafx.fxml;
-    exports ulb.infof307.g12.controller.javafx.connection;
+    opens ulb.infof307.g12.controller.javafx.connexion to javafx.fxml;
+    exports ulb.infof307.g12.controller.javafx.connexion;
 
     opens ulb.infof307.g12.view.profiles to javafx.fxml;
     exports ulb.infof307.g12.view.profiles;
@@ -14,10 +14,14 @@ module connection {
     opens ulb.infof307.g12.view.paquets to javafx.fxml;
     exports ulb.infof307.g12.view.paquets;
 
-    opens ulb.infof307.g12.view.connection to javafx.fxml;
-    exports ulb.infof307.g12.view.connection;
+    opens ulb.infof307.g12.view.connexion to javafx.fxml;
+    exports ulb.infof307.g12.view.connexion;
+
     exports ulb.infof307.g12.controller.javafx.paquets;
     opens ulb.infof307.g12.controller.javafx.paquets to javafx.fxml;
+
     opens ulb.infof307.g12.view.cartes;
     exports ulb.infof307.g12.view.cartes to javafx.fxml;
+
+    opens ulb.infof307.g12.model to javafx.base;
 }

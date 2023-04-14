@@ -1,4 +1,4 @@
-package ulb.infof307.g12.controller.javafx.connection;
+package ulb.infof307.g12.controller.javafx.connexion;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

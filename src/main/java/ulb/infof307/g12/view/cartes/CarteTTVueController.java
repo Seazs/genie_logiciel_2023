@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.Carte;
 
 import java.util.ArrayList;

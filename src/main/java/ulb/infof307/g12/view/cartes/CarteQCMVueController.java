@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.Carte;
 
 import java.io.IOException;
