@@ -5,11 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import lombok.Setter;
-import ulb.infof307.g12.controller.javafx.BaseController;
-import ulb.infof307.g12.controller.javafx.cartes.CarteQCMController;
 import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
-import ulb.infof307.g12.controller.listeners.QCMListener;
 import ulb.infof307.g12.model.Carte;
 
 import java.io.IOException;
@@ -20,12 +16,8 @@ public class CarteQCMVueController {
     TextFlow questionText;
     @FXML
     ListView<String> reponsesList;
-    private Carte carte;
     private String response;
-    @Setter
-    private QCMListener listener;
     public void showCarte(Carte carte){
-        this.carte = carte;
         ArrayList<String> list = carte.getQCMOrTTInfo();
 
         Text text = new Text(list.get(0));
@@ -36,7 +28,7 @@ public class CarteQCMVueController {
 
     public void onClick(ActionEvent e) throws IOException {
         String userReponse = reponsesList.getSelectionModel().getSelectedItem();
-        MenuPrincipal.getINSTANCE().showResponse(userReponse,response,(CarteQCMController) listener);
+        MenuPrincipal.getINSTANCE().showQCMResponse(userReponse,response);
     }
 
 }

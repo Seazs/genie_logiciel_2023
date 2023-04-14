@@ -12,6 +12,8 @@ public class CarteReponseVueController {
     TextFlow resultText, rightAnswerText;
 
     public void showReponse(String result, String rightAnswer){
+        if(result == null)
+            result = "";
         Text resulttxt = new Text("Votre réponse est " + result);
         Text rightAnswertxt = new Text("Le bon résultat est " + rightAnswer);
         resultText.getChildren().addAll(resulttxt);

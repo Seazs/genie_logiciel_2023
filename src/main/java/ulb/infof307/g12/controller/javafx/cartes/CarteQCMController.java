@@ -16,6 +16,5 @@ public class CarteQCMController extends BaseController implements QCMListener {
         if (!Objects.equals(carte.getType(), "qcm")) throw new IllegalArgumentException();
         CarteQCMVueController controller = (CarteQCMVueController) super.controller;
         controller.showCarte(carte);
-        controller.setListener(this);
     }
 }

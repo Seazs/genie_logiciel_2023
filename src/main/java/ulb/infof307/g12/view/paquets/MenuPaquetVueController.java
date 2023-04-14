@@ -27,11 +27,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
 public class MenuPaquetVueController implements Initializable {
-    @FXML
-    Button test;
-    public void TestCarte(ActionEvent e) throws IOException {
-        MenuPrincipal.getINSTANCE().showCarteQCM();
-    }
+
     @FXML
     private ListView<Paquet> paquetListView;
     List<Paquet> saveListPaquet = new ArrayList<>();
