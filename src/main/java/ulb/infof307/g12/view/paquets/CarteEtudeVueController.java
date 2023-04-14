@@ -104,6 +104,11 @@ public class CarteEtudeVueController{
         cartesEtude = listener.getCartesEtude();
         if(cartesLues()){
             indexCarte = ThreadLocalRandom.current().nextInt(0, cartesEtude.size());
+            int apparition = ThreadLocalRandom.current().nextInt(0,(cartesEtude.get(indexCarte).getConnaissance()*10)+1);
+            while(apparition>20){
+                indexCarte = ThreadLocalRandom.current().nextInt(0, cartesEtude.size());
+                apparition = ThreadLocalRandom.current().nextInt(0,(cartesEtude.get(indexCarte).getConnaissance()*10)+1);
+            }
         }
         return indexCarte;
     }
