@@ -1,6 +1,9 @@
 package ulb.infof307.g12.view.paquets;
 
 import javafx.event.ActionEvent;
+
+
+import java.util.concurrent.ThreadLocalRandom;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,6 +19,8 @@ import ulb.infof307.g12.model.Paquet;
 
 import java.util.ArrayList;
 
+
+
 public class CarteEtudeVueController{
     @Setter
     private CarteEtudeListener listener;
@@ -25,25 +30,17 @@ public class CarteEtudeVueController{
     private Button boutonSuivant;
     @FXML
     private Button boutonChange;
-    @FXML
-    private Button boutonTB;
-    @FXML
-    private Button boutonB;
-    @FXML
-    private Button boutonM;
-    @FXML
-    private Button boutonBad;
-    @FXML
-    private Button boutonVeryBad;
     private ArrayList<Carte> cartesEtude;
     private ArrayList<Integer> cartesEtudeScore;
+
     private int indexCarte = 0;
     private int cote = 0; // 0 = recto, 1 = verso
 
 
 
     public void chargerCarteEtudeVue(ArrayList<Carte> cartesEtude) {
-        affichageCarte.setText(cartesEtude.get(0).getRecto());
+        indexCarte=indexRandom();
+        affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
     }
 
     public void changeCote(){
@@ -61,19 +58,11 @@ public class CarteEtudeVueController{
     }
     public void carteSuivante(){
         cartesEtude = listener.getCartesEtude();
-        if (indexCarte < cartesEtude.size()-1){
-            indexCarte++;
-            affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
-            if (cote == 1){
-                changeCote();
+        indexCarte=indexRandom();
+        affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
+        if (cote == 1){
+            changeCote();
             }
-            if (indexCarte == cartesEtude.size()-1){
-                boutonSuivant.setText("Terminer");
-            }
-        }
-        else{
-            MenuPrincipal.getINSTANCE().returnFromCarteEtudeToMenuPaquet();
-        }
     }
     public void cartePrecedente(){
         cartesEtude = listener.getCartesEtude();
@@ -84,12 +73,54 @@ public class CarteEtudeVueController{
                 changeCote();
             }
         }
-    }
-    public void changeScore(){
-        cartesEtudeScore = listener.getCartesEtudeScore();
-        //TODO
-        //  Mettre un score différent pour chaque bouton
-        // update les scores dans carteEtudeController et sauver dans le fichier
 
+    }
+    public void terminer() {
+        MenuPrincipal.getINSTANCE().returnFromCarteEtudeToMenuPaquet();
+        listener.saveCartes();
+    }
+    @FXML
+    public void veryBad() {
+        listener.tresMauvais(indexCarte);
+
+    }
+
+    public void bad() {
+        listener.mauvais(indexCarte);
+    }
+
+    public void middle() {
+        listener.moyen(indexCarte);
+    }
+
+    public void good() {
+        listener.bon(indexCarte);
+    }
+
+    public void veryGood() {
+        listener.tresBon(indexCarte);
+    }
+    public int indexRandom(){
+        cartesEtude = listener.getCartesEtude();
+        if(cartesLues()){
+            indexCarte = ThreadLocalRandom.current().nextInt(0, cartesEtude.size());
+            int apparition = ThreadLocalRandom.current().nextInt(0,(cartesEtude.get(indexCarte).getConnaissance()*10)+1);
+            while(apparition>20){
+                indexCarte = ThreadLocalRandom.current().nextInt(0, cartesEtude.size());
+                apparition = ThreadLocalRandom.current().nextInt(0,(cartesEtude.get(indexCarte).getConnaissance()*10)+1);
+            }
+        }
+        return indexCarte;
+    }
+    public boolean cartesLues() {
+        cartesEtude = listener.getCartesEtude();
+        indexCarte=0;
+        while (indexCarte < cartesEtude.size()-1) {
+            indexCarte++;
+            if (cartesEtude.get(indexCarte).getConnaissance() == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

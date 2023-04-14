@@ -9,6 +9,13 @@ import java.util.Collections;
 
 public class
 Carte {
+    /**
+     * Connaissance est un int de 0 à 5, avec 1 qui est très mauvais et 5 très bon.
+     * Si la connaissance est à 0, c’est que la carte n’a pas encore été vue/étudiée.
+     */
+    @Getter
+    public int connaissance = 0;
+
     @Getter
     private int id;
 
@@ -121,5 +128,16 @@ Carte {
         else{
             throw new IllegalArgumentException("La carte doit être de type TT");
         }
+    }
+
+    /**
+     * Fonctio pour set la connaissance. prends en entrée un int entre 0 et 5.
+     * @param connaissance
+     */
+    public void setConnaissance(int connaissance){
+        if (connaissance > 5 || connaissance < 0)
+            throw new IllegalArgumentException("L’argument connaissance dois être un int entre 0 et 5");
+
+        this.connaissance = connaissance;
     }
 }

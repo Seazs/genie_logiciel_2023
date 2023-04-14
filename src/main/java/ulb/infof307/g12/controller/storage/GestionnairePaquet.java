@@ -9,6 +9,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class GestionnairePaquet {
 
 
@@ -23,6 +25,7 @@ public class GestionnairePaquet {
             File paquetdatabase = new File("./stockage/"+user.getPseudo(),paquet.getNom()); // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
             FileWriter writer = new  FileWriter(paquetdatabase);
             BufferedWriter out = new BufferedWriter(writer);
+
             out.write(paquet.getNom());
             out.newLine();
             out.write(saveCategories(paquet));
@@ -43,7 +46,9 @@ public class GestionnairePaquet {
             Carte carte = paquet.cartes.get(i);
             out.newLine();
             out.write(carte.getType()+ "#"+ carte.getRecto() + "#" + carte.getVerso());
+            out.write("#" + carte.getConnaissance());
         }
+
     }
 
     /**
@@ -90,6 +95,7 @@ public class GestionnairePaquet {
             bufferCarte.setType(listdata[0].strip());
             bufferCarte.setRecto(listdata[1].strip());
             bufferCarte.setVerso(listdata[2].strip()) ;
+            bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
             newPaquet.ajouterCarte(bufferCarte);
             i++;}
     }
