@@ -39,6 +39,7 @@ public class MenuPrincipal extends Application {
     private List<Paquet> userPaquets;
     private CarteQCMController carteQCMController;
     private CarteTTController carteTTController;
+    private CarteReponseController carteReponseController;
     @Override
     public void start(Stage stage) throws IOException {
         connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
@@ -108,6 +109,10 @@ public class MenuPrincipal extends Application {
         menuPaquetController.show();
         editionController.hide();
     }
+    public void returnFromCarteEtudeToMenuPaquet() {
+        menuPaquetController.show();
+        carteEtudeController.hide();
+    }
 
     public void returnToConnexionMenu() {
         profilController.hide();
@@ -129,7 +134,7 @@ public class MenuPrincipal extends Application {
     private void showResponse(String userReponse, String rightAnswer, BaseController controller) {
         try {
             controller.hide();
-            CarteReponseController carteReponseController = new CarteReponseController(new Stage(),"title",userReponse,rightAnswer);
+            carteReponseController = new CarteReponseController(new Stage(),"title",userReponse,rightAnswer);
             carteReponseController.show();
         } catch (IOException e) {
             //TODO:erreur show Response

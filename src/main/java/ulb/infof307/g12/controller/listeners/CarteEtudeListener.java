@@ -7,4 +7,5 @@ import java.util.ArrayList;
 public interface CarteEtudeListener {
     public ArrayList<Carte> getCartesEtude();
 
+    public ArrayList<Integer> getCartesEtudeScore();
 }
