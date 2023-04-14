@@ -1,6 +1,8 @@
 package ulb.infof307.g12.view.paquets;
 
 import javafx.event.ActionEvent;
+
+
 import java.util.concurrent.ThreadLocalRandom;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,7 +39,8 @@ public class CarteEtudeVueController{
 
 
     public void chargerCarteEtudeVue(ArrayList<Carte> cartesEtude) {
-        affichageCarte.setText(cartesEtude.get(0).getRecto());
+        indexCarte=indexRandom();
+        affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
     }
 
     public void changeCote(){
@@ -55,17 +58,11 @@ public class CarteEtudeVueController{
     }
     public void carteSuivante(){
         cartesEtude = listener.getCartesEtude();
-        if (indexCarte < cartesEtude.size()-1){
-            indexCarte++;
-            int i=indexRandom();
-            affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
-            if (cote == 1){
-                changeCote();
+        indexCarte=indexRandom();
+        affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
+        if (cote == 1){
+            changeCote();
             }
-            if (indexCarte == cartesEtude.size()-1){
-                boutonSuivant.setText("Terminer");
-            }
-        }
     }
     public void cartePrecedente(){
         cartesEtude = listener.getCartesEtude();
@@ -76,7 +73,7 @@ public class CarteEtudeVueController{
                 changeCote();
             }
         }
-        listener.saveCartes();
+
     }
     public void terminer() {
         MenuPrincipal.getINSTANCE().returnFromCarteEtudeToMenuPaquet();
@@ -104,7 +101,21 @@ public class CarteEtudeVueController{
         listener.tresBon(indexCarte);
     }
     public int indexRandom(){
-        int randomNum = ThreadLocalRandom.current().nextInt(0, cartesEtude.size());
-        return randomNum;
+        cartesEtude = listener.getCartesEtude();
+        if(cartesLues()){
+            indexCarte = ThreadLocalRandom.current().nextInt(0, cartesEtude.size());
+        }
+        return indexCarte;
+    }
+    public boolean cartesLues() {
+        cartesEtude = listener.getCartesEtude();
+        indexCarte=0;
+        while (indexCarte < cartesEtude.size()-1) {
+            indexCarte++;
+            if (cartesEtude.get(indexCarte).getConnaissance() == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
