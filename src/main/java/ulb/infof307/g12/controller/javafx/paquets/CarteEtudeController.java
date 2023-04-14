@@ -17,7 +17,9 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class CarteEtudeController extends BaseController implements CarteEtudeListener {
+    @Getter
     private ArrayList<Carte> cartesEtude = new ArrayList<Carte>();
+
     private ArrayList<Carte> cartesEtudeScore = new ArrayList<Carte>();
     @Getter
     private Paquet paquet;
@@ -29,6 +31,11 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
         cartesEtude = paquet.getCartes();
         controller.chargerCarteEtudeVue(cartesEtude);
     }
+    @Override
+    public ArrayList<Carte> getCartesEtude(){
+        return cartesEtude;
+    }
+
 }
 
 

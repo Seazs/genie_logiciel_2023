@@ -15,7 +15,6 @@ import ulb.infof307.g12.model.Paquet;
 
 import java.util.ArrayList;
 
-
 public class CarteEtudeVueController{
     @Setter
     private CarteEtudeListener listener;
@@ -25,10 +24,20 @@ public class CarteEtudeVueController{
     private Button BoutonSuivant;
     @FXML
     private Text affichageCarte;
+    @FXML
+    private Button boutonChange;
+    private ArrayList<Carte> cartesEtude;
 
 
 
     public void chargerCarteEtudeVue(ArrayList<Carte> cartesEtude) {
         affichageCarte.setText(cartesEtude.get(0).getRecto());
+    }
+
+    public void changeCote(){
+        cartesEtude = listener.getCartesEtude();
+        affichageCarte.setText(cartesEtude.get(0).getVerso());
+        boutonChange.setText("Recto");
+
     }
 }
