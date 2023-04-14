@@ -1,5 +1,6 @@
 package ulb.infof307.g12.controller.storage;
 
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
@@ -18,7 +19,7 @@ public class GestionnairePaquet {
      * @param user
      * @throws IOException
      */
-    public static void save(Utilisateur user) throws IOException {
+    public void save(Utilisateur user) throws IOException {
         List<Paquet> listPaquet = user.getListPaquet();
         for (Paquet paquet : listPaquet){
             File paquetdatabase = new File("./stockage/"+user.getPseudo(),paquet.getNom()); // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
@@ -27,15 +28,25 @@ public class GestionnairePaquet {
 
             out.write(paquet.getNom());
             out.newLine();
-            out.write(paquet.getCategorie());
-
-            for(int i = 0; i < paquet.cartes.size() ; i++){ //Ecriture de toutes les cartes dans le fichier
-                Carte carte = paquet.cartes.get(i);
-                out.newLine();
-                out.write(carte.getRecto() + "#" + carte.getVerso());
-                out.write("#" + carte.getConnaissance());
-            }
+            out.write(saveCategories(paquet));
+            save_card(paquet, out);
             out.close();
+        }
+
+    }
+
+    /**
+     * Sauvegarde une carte
+     * @param paquet
+     * @param out
+     * @throws IOException
+     */
+    private void save_card(Paquet paquet, BufferedWriter out) throws IOException {
+        for(int i = 0; i < paquet.cartes.size() ; i++){ //Ecriture de toutes les cartes dans le fichier
+            Carte carte = paquet.cartes.get(i);
+            out.newLine();
+            out.write(carte.getType()+ "#"+ carte.getRecto() + "#" + carte.getVerso());
+            out.write("#" + carte.getConnaissance());
         }
 
     }
@@ -45,7 +56,7 @@ public class GestionnairePaquet {
      * @param user
      * @return
      */
-    public static List<Paquet> load(Utilisateur user) {
+    public List<Paquet> load(Utilisateur user) {
 
         try {
             File userfolder = new File("./stockage/"+user.getPseudo());
@@ -55,22 +66,10 @@ public class GestionnairePaquet {
             for (File file : listOfFilePaquet) {
                 FileReader fileReader = new FileReader(file);
                 BufferedReader reader = new BufferedReader(fileReader);
-
                 String lineNom = reader.readLine();
                 String lineCategorie = reader.readLine();
-                Paquet newPaquet = new Paquet(lineNom, lineCategorie);
-                int i=0;
-                String line;
-                while((line = reader.readLine())!=null) {
-                    String[] listdata = line.split("#");
-
-                    Carte bufferCarte = new Carte(i, "recto", "verso");
-
-                    bufferCarte.recto = listdata[0].strip();
-                    bufferCarte.verso = listdata[1].strip();
-                    bufferCarte.setConnaissance(parseInt(listdata[2].strip()));
-                    newPaquet.ajouterCarte(bufferCarte);
-                    i++;}
+                Paquet newPaquet = new Paquet(lineNom, loadCategories(lineCategorie));
+                load_all_cards(reader, newPaquet);
                 loadedListOfPaquet.add(newPaquet);
                 reader.close();
             }
@@ -81,23 +80,67 @@ public class GestionnairePaquet {
     }
 
     /**
+     * Load toutes les cartes du paquet
+     * @param reader
+     * @param newPaquet
+     * @throws IOException
+     */
+    private void load_all_cards(BufferedReader reader, Paquet newPaquet) throws IOException {
+        int i=0;
+        String line;
+        while((line = reader.readLine())!=null) {
+            String[] listdata = line.split("#");
+
+            Carte bufferCarte = new Carte(i, "recto", "verso", "");
+            bufferCarte.setType(listdata[0].strip());
+            bufferCarte.setRecto(listdata[1].strip());
+            bufferCarte.setVerso(listdata[2].strip()) ;
+            bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
+            newPaquet.ajouterCarte(bufferCarte);
+            i++;}
+    }
+
+    /**
      * Supprime le fichier associé au paquet voulu et supprime le paquet de la mémoire
      * @param user
      * @param paquet
-     * @throws FileNotFoundException
      */
-    public static void remove(Utilisateur user, Paquet paquet) throws FileNotFoundException {
+    public void remove(Utilisateur user, Paquet paquet) {
         File f = new File("./stockage/"+user.getPseudo()+"/"+paquet.getNom());
         try{
             if(f.exists()){
                 f.delete();
                 user.removePaquet(paquet.getNom());
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+            MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de retirer le paquet "+paquet.getNom()+" rattaché à l'utilisateur "+user.getPseudo()+" !");
         }
 
 
+    }
+
+
+    /**
+     * @param line
+     * @return String[] des catégories
+     */
+    private String[] loadCategories(String line){
+        return line.split("#");
+    }
+
+
+    /**
+     * @param paquet
+     * @return cat1#cat2#cat3#
+     */
+    public static String saveCategories(Paquet paquet){
+        String save = "";
+        for (int i = 0; i < paquet.getCategories().size(); i++){
+            paquet.getCategories().get(i);
+            save = save + paquet.getCategories().get(i)+ "#";
+        }
+        return save;
     }
 
 }

@@ -1,4 +1,4 @@
-package ulb.infof307.g12.view.connection;
+package ulb.infof307.g12.view.connexion;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import lombok.Setter;
 import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
 
-public class ConnectionVueController {
+public class ConnexionVueController {
     @FXML
     private Label messageLabel;
     @FXML
@@ -23,14 +23,16 @@ public class ConnectionVueController {
     protected void onConnectButtonClick(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        listener.onLogin(username,password);
+        String result = listener.onLogin(username,password);
+        messageLabel.setText(result);
     }
 
     @FXML
     public void onRegisterButtonClick(ActionEvent actionEvent) {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        listener.onRegister(username,password);
+        String result = listener.onRegister(username,password);
+        messageLabel.setText(result);
     }
 
 

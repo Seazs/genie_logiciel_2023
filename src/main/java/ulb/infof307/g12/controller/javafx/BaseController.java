@@ -3,8 +3,6 @@ package ulb.infof307.g12.controller.javafx;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import lombok.AllArgsConstructor;
-import ulb.infof307.g12.view.connection.ConnectionVueController;
 
 import java.io.IOException;
 import java.net.URL;

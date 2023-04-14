@@ -4,11 +4,11 @@ import lombok.Getter;
 
 public enum STATUS {
     OK(""),
-    USERNAME_DOES_NOT_EXIST(""),
+    USERNAME_DOES_NOT_EXIST("L'utilisateur n'existe pas !"),
     USERNAME_DOES_ALREADY_EXIST("Le pseudo existe déjà!"),
     USERNAME_IS_NOT_VALID("Le pseudo contient des caractères interdits."),
     PASSWORD_IS_NOT_VALID("Le mot de passe contient des caractères interdits."),
-    WRONG_PASSWORD(""),
+    WRONG_PASSWORD("Le mot de passe est incorrect !"),
     FILE_NOT_LOADED("Le fichier n'existe pas !")
     ;
 

@@ -1,5 +1,6 @@
 package ulb.infof307.g12.controller.storage;
 
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.STATUS;
 import ulb.infof307.g12.model.Utilisateur;
 
@@ -226,9 +227,8 @@ public class GestionnaireUtilisateur {
     /**
      * Supprime le dossier utilisateur
      * @param user
-     * @throws FileNotFoundException
      */
-    public void removeUser(Utilisateur user) throws FileNotFoundException {
+    public void removeUser(Utilisateur user) {
         File f = new File("./stockage/" + user.getPseudo());
         try {
             if (f.exists()) {
@@ -243,8 +243,9 @@ public class GestionnaireUtilisateur {
                 this.save();
                 f.delete();
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+            MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de supprimer l'utilisateur !");
         }
     }
 

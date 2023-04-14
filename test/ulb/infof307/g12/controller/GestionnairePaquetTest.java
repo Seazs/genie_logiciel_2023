@@ -13,6 +13,9 @@ import ulb.infof307.g12.model.Utilisateur;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +28,6 @@ class GestionnairePaquetTest {
                 - fichier <paquet1>
                 - fichier <paquet2>
          */
-
     @TempDir
     private static File dossierTemporaire;
 
@@ -47,14 +49,14 @@ class GestionnairePaquetTest {
     @Test
     public void testSauvegardePaquet() throws IOException{
         Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
-        Paquet paquet1 = new Paquet("Maths","BA-1");
-        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
-        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
+        Paquet paquet1 = new Paquet("Maths","BA1");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non", "");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui", "");
         paquet1.ajouterCarte(carte1);
         paquet1.ajouterCarte(carte2);
-        Paquet paquet2 = new Paquet("Chimie","BA-1");
-        Carte carte3 = new Carte(3, "redox", "Non");
-        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui");
+        Paquet paquet2 = new Paquet("Chimie","BA1");
+        Carte carte3 = new Carte(3, "redox", "Non", "");
+        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui", "");
         paquet2.ajouterCarte(carte3);
         paquet2.ajouterCarte(carte4);
         utilisateur1.addPaquet(paquet1);
@@ -72,14 +74,14 @@ class GestionnairePaquetTest {
     @Test
     public void testremove() throws IOException{
         Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
-        Paquet paquet1 = new Paquet("Maths","BA-1");
-        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
-        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
+        Paquet paquet1 = new Paquet("Maths","BA1");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non", "");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui", "");
         paquet1.ajouterCarte(carte1);
         paquet1.ajouterCarte(carte2);
-        Paquet paquet2 = new Paquet("Chimie","BA-1");
-        Carte carte3 = new Carte(3, "redox", "Non");
-        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui");
+        Paquet paquet2 = new Paquet("Chimie","BA1");
+        Carte carte3 = new Carte(3, "redox", "Non", "");
+        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui", "");
         paquet2.ajouterCarte(carte3);
         paquet2.ajouterCarte(carte4);
         utilisateur1.addPaquet(paquet1);
@@ -97,14 +99,14 @@ class GestionnairePaquetTest {
     @Test
     public void testLoadPaquet() throws IOException {
         Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
-        Paquet paquet1 = new Paquet("Maths","BA-1");
-        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
-        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
+        Paquet paquet1 = new Paquet("Maths","BA1");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non", "");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui", "");
         paquet1.ajouterCarte(carte1);
         paquet1.ajouterCarte(carte2);
-        Paquet paquet2 = new Paquet("Chimie","BA-1");
-        Carte carte3 = new Carte(3, "redox", "Non");
-        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui");
+        Paquet paquet2 = new Paquet("Chimie","BA1");
+        Carte carte3 = new Carte(3, "redox", "Non", "");
+        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui", "");
         paquet2.ajouterCarte(carte3);
         paquet2.ajouterCarte(carte4);
         utilisateur1.addPaquet(paquet1);
@@ -116,9 +118,33 @@ class GestionnairePaquetTest {
         //Création de l'utilisateur 2 qui va charger l'utilisateur 1
         Utilisateur utilisateur2 = new Utilisateur("alex","pomme");
         utilisateur2.setListPaquet(gestPaquet.load(utilisateur2));
-        assertEquals(utilisateur1.getListPaquet().get(0).getCategorie(),utilisateur2.getListPaquet().get(0).getCategorie());
-        assertEquals(utilisateur1.getListPaquet().get(1).getCategorie(),utilisateur2.getListPaquet().get(1).getCategorie());
+        assertEquals(utilisateur1.getListPaquet().get(0).getCategories(),utilisateur2.getListPaquet().get(0).getCategories());
+        assertEquals(utilisateur1.getListPaquet().get(1).getCategories(),utilisateur2.getListPaquet().get(1).getCategories());
+
     }
 
+
+    @Test
+    public void testSaveCategorie(){
+        GestionnairePaquet gestPaquet = new GestionnairePaquet();
+        Paquet paquet = new Paquet("Nom", "cat1", "cat2");
+        String categories = gestPaquet.saveCategories(paquet);
+        assertEquals(categories, "cat1#cat2#");
+    }
+    @Test
+    public void testLoadCategorie() throws IOException {
+        GestionnairePaquet gestPaquet = new GestionnairePaquet();
+        Utilisateur utilisateur1 = new Utilisateur("tom","pomme");
+        Paquet paquet = new Paquet("Nom", "cat1", "cat2");
+        utilisateur1.addPaquet(paquet);
+        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
+        gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
+        gestPaquet.save(utilisateur1);
+
+        Utilisateur utilisateur2 = new Utilisateur("tom","pomme");
+        utilisateur2.setListPaquet(gestPaquet.load(utilisateur2));
+        assertEquals("cat1", utilisateur2.getListPaquet().get(0).getCategories().get(0));
+        assertEquals("cat2", utilisateur2.getListPaquet().get(0).getCategories().get(1));
+    }
 
 }

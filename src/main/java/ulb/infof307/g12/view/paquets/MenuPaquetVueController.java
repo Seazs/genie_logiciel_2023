@@ -1,37 +1,58 @@
 package ulb.infof307.g12.view.paquets;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
-import ulb.infof307.g12.controller.javafx.connection.MenuPrincipal;
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MenuPaquetVueController implements Initializable {
     @FXML
     private ListView<Paquet> paquetListView;
+    List<Paquet> saveListPaquet = new ArrayList<>();
+
+    @FXML
+    private TextField RechercheLabel;
+
+    @Setter
+    private MenuPaquetListener listener;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Ajouter les paquets de cartes à la liste
         paquetListView.getItems().addAll(
-                new Paquet("Paquet 1", "Catégorie 1"),
-                new Paquet("Paquet 2", "Catégorie 2"),
-                new Paquet("Paquet 3", "Catégorie 3")
+                MenuPrincipal.getINSTANCE().getUserPaquets()
         );
-
+        saveListPaquet.addAll(paquetListView.getItems());
         // Personnaliser l'affichage des éléments de la liste
+        updateVisuelListePaquet();
+
+        RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            filtrageCategorie();
+        });
+
+    }
+
+    /**
+     * charge le fichier FXML paquet de carte en chargeant les noms et catégories de chaque paquet
+     */
+    private void updateVisuelListePaquet() {
         paquetListView.setCellFactory(param -> new ListCell<Paquet>() {
             @Override
             protected void updateItem(Paquet item, boolean empty) {
@@ -44,7 +65,7 @@ public class MenuPaquetVueController implements Initializable {
                     try {
                         // Charger la vue FXML pour la cellule
                         FXMLLoader loader = new FXMLLoader(MenuPaquetVueController.class.getResource("paquetDeCarte.fxml"));
-                        BorderPane cellLayout = loader.load();
+                        AnchorPane cellLayout = loader.load();
 
                         // Obtenir le contrôleur pour la vue FXML
                         PaquetDeCartesVueController controller = loader.getController();
@@ -56,13 +77,59 @@ public class MenuPaquetVueController implements Initializable {
                         setGraphic(cellLayout);
                     } catch (IOException e) {
                         e.printStackTrace();
+                        MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de charger les textures du paquet de carte");
                     }
                 }
             }
         });
     }
 
-    public void ouvrirProfil(ActionEvent event) throws Exception {
+    public void ouvrirProfil(ActionEvent event) {
         MenuPrincipal.getINSTANCE().openProfile();
     }
-}
+
+    public void creerPaquet() throws IOException {
+        Paquet nouveauPaquet = listener.creerPaquet() ;
+        paquetListView.getItems().addAll(nouveauPaquet);
+    }
+
+    public void ouvrirEdition(ActionEvent event) {
+        Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
+        listener.editerPaquet(paquet);
+        rechargerListView();
+    }
+
+    public void rechargerListView(){
+        ObservableList<Paquet> data = FXCollections.observableArrayList();
+        data.addAll(MenuPrincipal.getINSTANCE().getUserPaquets()) ;
+        paquetListView.setItems(data) ;
+
+    }
+
+    /**
+     * met à jour la liste visuel des paquets en fonction du filtre entré
+     *
+     */
+    public void filtrageCategorie() {
+        String recherche = RechercheLabel.getText().toLowerCase();
+        paquetListView.getItems().clear();
+        saveListPaquet.stream().forEach(
+                paquet -> {
+            boolean result = paquet.getCategories()
+                    .stream()
+                    .anyMatch(s -> s.toLowerCase().contains(recherche.toLowerCase()));
+            if(result && ! paquetListView.getItems().contains(paquet))
+                paquetListView.getItems().add(paquet);
+
+        });
+    }
+
+
+    @FXML
+    public void sessionEtude(ActionEvent event){
+        if (listener!=null) {
+            Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
+            listener.CarteEtude(paquet);
+        }
+
+}}

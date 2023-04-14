@@ -45,23 +45,7 @@ class GestionnaireUtilisateurTest {
         tmpVide.delete();
         tmp.delete();
     }
-    /*
-    @Test
-    void loadTestNoArgument() throws IOException {
-        File tmp = File.createTempFile("stockUser",".txt");
-        FileWriter writer = new FileWriter(tmp);
-        writer.write("alex#pomme\n");
-        writer.write("wassim#orange");
-        writer.close();
-        GestionnaireUtilisateur gest = new GestionnaireUtilisateur();
-        List<Utilisateur> list = gest.getListeUtilisateur();
-        assertEquals("alex",list.get(0).getPseudo());
-        assertEquals("wassim",list.get(1).getPseudo());
-        assertEquals("pomme",list.get(0).getMdp());
-        assertEquals("orange",list.get(1).getMdp());
-        if(tmp.delete()){throw new Error("Fichier temporaire non effacé");}
-    }
-     */
+
     @Test void saveTest() throws IOException {
         GestionnaireUtilisateur gest1 = new GestionnaireUtilisateur(tmp);
         FileWriter writer2 = new FileWriter(tmp);

@@ -3,9 +3,6 @@ package ulb.infof307.g12.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class PaquetTest {
 
 
@@ -21,7 +18,7 @@ class PaquetTest {
             Paquet paquet = new Paquet("",categorie);
         });
 
-        Assertions.assertDoesNotThrow(() -> {
+        Assertions.assertThrows(IllegalArgumentException.class,()  -> {
             Paquet paquet = new Paquet(nom,null);
         });
     }
@@ -51,12 +48,29 @@ class PaquetTest {
     @Test
     public void testAjoutCarte(){
         Paquet paquet = new Paquet("Maths","BA-1");
-        Carte carte = new Carte(1, "r1", "v1");
-        Carte carte1 = new Carte(4, "r2", "v2");
+        Carte carte = new Carte(1, "r1", "v1", "");
+        Carte carte1 = new Carte(4, "r2", "v2", "");
         paquet.ajouterCarte(carte);
         paquet.ajouterCarte(carte1);
         Assertions.assertEquals(carte, paquet.cartes.get(0));
         Assertions.assertEquals(carte1, paquet.cartes.get(1));
+
+    }
+    @Test
+    public void testAjouterCategorie(){
+        Paquet paquet = new Paquet("Maths","BA1");
+        paquet.ajouterCategorie("BA2");
+        Paquet paquet2 = new Paquet("Maths", "BA1", "BA2") ;
+        Assertions.assertEquals(paquet,paquet2) ;
+
+    }
+
+    @Test
+    public void testSupprimerCategorie(){
+        Paquet paquet = new Paquet("Maths","BA1", "BA2");
+        paquet.supprimerCategorie("BA2");
+        Paquet paquet2 = new Paquet("Maths", "BA1") ;
+        Assertions.assertEquals(paquet,paquet2) ;
 
     }
 
