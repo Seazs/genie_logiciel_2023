@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import ulb.infof307.g12.controller.javafx.paquets.CarteEtudeController;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.cartes.CarteQCMController;
 import ulb.infof307.g12.controller.javafx.cartes.CarteReponseController;
@@ -33,6 +34,7 @@ public class MenuPrincipal extends Application {
     private MenuPaquetController menuPaquetController;
     private ProfilController profilController;
     private EditionController editionController;
+    private CarteEtudeController carteEtudeController;
     @Setter
     private Utilisateur userPrincipale;
     @Getter
@@ -40,6 +42,7 @@ public class MenuPrincipal extends Application {
     private CarteQCMController carteQCMController;
     private CarteTTController carteTTController;
     private ExceptionPopupController exceptionPopupController;
+    private CarteReponseController carteReponseController;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -81,6 +84,18 @@ public class MenuPrincipal extends Application {
 
     }
 
+    public void showCarteEtude(MenuPaquetController parent,Paquet paquet){
+        try{
+            parent.hide();
+            Stage stage = new Stage();
+            carteEtudeController = new CarteEtudeController(stage,paquet);
+            carteEtudeController.show();
+        }catch (IOException e){
+            e.printStackTrace();
+            showErrorPopup("Impossible de lancer une session d'étude !");
+        }
+    }
+
     public void openProfile(){
         profilController = null;
         try {
@@ -101,6 +116,10 @@ public class MenuPrincipal extends Application {
     public void returnFromEditionToMenuPaquet() {
         menuPaquetController.show();
         editionController.hide();
+    }
+    public void returnFromCarteEtudeToMenuPaquet() {
+        menuPaquetController.show();
+        carteEtudeController.hide();
     }
 
     public void returnToConnexionMenu() {
@@ -134,7 +153,7 @@ public class MenuPrincipal extends Application {
     private void showResponse(String userReponse, String rightAnswer, BaseController controller) {
         try {
             controller.hide();
-            CarteReponseController carteReponseController = new CarteReponseController(new Stage(),"title",userReponse,rightAnswer);
+            carteReponseController = new CarteReponseController(new Stage(),"title",userReponse,rightAnswer);
             carteReponseController.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -124,4 +124,12 @@ public class MenuPaquetVueController implements Initializable {
         });
     }
 
-}
+
+    @FXML
+    public void sessionEtude(ActionEvent event){
+        if (listener!=null) {
+            Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
+            listener.CarteEtude(paquet);
+        }
+
+}}
