@@ -29,7 +29,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     }
 
     @Override
-    public Paquet creerPaquet() throws IOException {
+    public Paquet creerPaquet() {
         Paquet nouveauPaquet = new Paquet("Nouveau Paquet", "Catégorie") ;
         user.addPaquet(nouveauPaquet);
         return nouveauPaquet;

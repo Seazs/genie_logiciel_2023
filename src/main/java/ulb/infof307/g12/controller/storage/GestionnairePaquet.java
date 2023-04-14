@@ -1,5 +1,6 @@
 package ulb.infof307.g12.controller.storage;
 
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
@@ -97,17 +98,17 @@ public class GestionnairePaquet {
      * Supprime le fichier associé au paquet voulu et supprime le paquet de la mémoire
      * @param user
      * @param paquet
-     * @throws FileNotFoundException
      */
-    public void remove(Utilisateur user, Paquet paquet) throws FileNotFoundException {
+    public void remove(Utilisateur user, Paquet paquet) {
         File f = new File("./stockage/"+user.getPseudo()+"/"+paquet.getNom());
         try{
             if(f.exists()){
                 f.delete();
                 user.removePaquet(paquet.getNom());
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+            MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de retirer le paquet "+paquet.getNom()+" rattaché à l'utilisateur "+user.getPseudo()+" !");
         }
 
 

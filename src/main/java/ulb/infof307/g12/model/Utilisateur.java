@@ -38,7 +38,12 @@ public class Utilisateur {
 
     }
 
-    public void setMdp(String mdp) {
+    /**
+     * Change le mot de passe de l'utilisateur
+     * @param mdp
+     * @throws IllegalArgumentException
+     */
+    public void setMdp(String mdp) throws IllegalArgumentException{
         if (estValide(mdp))
             this.mdp = mdp;
         else

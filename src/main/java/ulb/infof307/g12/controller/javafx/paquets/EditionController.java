@@ -29,17 +29,22 @@ public class EditionController extends BaseController implements EditionVueListe
     }
 
     @Override
-    public void enregistrerPaquet(String nom, String categorie) throws IOException {
-        paquet.setNom(nom);
-        paquet.ajouterCategorie(categorie);
-        GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet() ;
-        Utilisateur user = MenuPrincipal.getINSTANCE().getUserPrincipale();
-        List<Paquet> listePaquetUser = user.getListPaquet();
-        gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
+    public void enregistrerPaquet(String nom, String categorie){
+        try {
+            paquet.setNom(nom);
+            paquet.ajouterCategorie(categorie);
+            GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
+            Utilisateur user = MenuPrincipal.getINSTANCE().getUserPrincipale();
+            List<Paquet> listePaquetUser = user.getListPaquet();
+            gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
+        }catch (IOException e){
+            e.printStackTrace();
+            MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de sauvegarder le paquet !");
+        }
     }
 
     public ArrayList<Carte> loadCartes() {
-        return paquet.getCartes() ;
+        return paquet.getCartes();
     }
 
     public void ajouterCarte(String recto, String verso){

@@ -8,6 +8,7 @@ import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.cartes.CarteQCMController;
 import ulb.infof307.g12.controller.javafx.cartes.CarteReponseController;
 import ulb.infof307.g12.controller.javafx.cartes.CarteTTController;
+import ulb.infof307.g12.controller.javafx.exception.ExceptionPopupController;
 import ulb.infof307.g12.controller.javafx.paquets.EditionController;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
@@ -16,6 +17,7 @@ import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Utilisateur;
+import ulb.infof307.g12.view.exception.ExceptionPopupVueController;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,8 +39,11 @@ public class MenuPrincipal extends Application {
     private List<Paquet> userPaquets;
     private CarteQCMController carteQCMController;
     private CarteTTController carteTTController;
+    private ExceptionPopupController exceptionPopupController;
+
     @Override
     public void start(Stage stage) throws IOException {
+        exceptionPopupController = new ExceptionPopupController(new Stage());
         connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
         connexionController.show();
     }
@@ -59,8 +64,8 @@ public class MenuPrincipal extends Application {
             parent.hide();
             menuPaquetController.show();
         } catch (IOException e) {
-            System.out.print(e);
-            //TODO: Avertir l'utilisateur
+            e.printStackTrace();
+            showErrorPopup("Impossible de charger les paquets !");
         }
     }
     public void showConnexionMenu(ProfilController parent){
@@ -70,7 +75,8 @@ public class MenuPrincipal extends Application {
             connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
             connexionController.show();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            showErrorPopup("Un problème est survenu lors du chargement du menu de connexion.");
         }
 
     }
@@ -82,7 +88,8 @@ public class MenuPrincipal extends Application {
             menuPaquetController.hide();
             profilController.show();
         } catch (IOException e) {
-            //TODO: Renvoyer l'erreur à l'utilisateur
+            e.printStackTrace();
+            showErrorPopup("Impossible de charger le profil !");
         }
     }
 
@@ -100,16 +107,27 @@ public class MenuPrincipal extends Application {
         profilController.hide();
         connexionController.show();
     }
-    public void showCarteQCM(Carte card) throws IOException {
-        carteQCMController = new CarteQCMController(new Stage(),"Title",card);
-        menuPaquetController.hide();
-        carteQCMController.show();
+    public void showCarteQCM(Carte card) {
+        try {
+            carteQCMController = new CarteQCMController(new Stage(),"Title",card);
+            menuPaquetController.hide();
+            carteQCMController.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorPopup("Impossible de charger la carte QCM !");
+        }
+
     }
 
-    public void showCarteTT(Carte card) throws IOException {
+    public void showCarteTT(Carte card) {
+        try{
         carteTTController = new CarteTTController(new Stage(),"",card);
         menuPaquetController.hide();
         carteTTController.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorPopup("Impossible de charger la carte Texte à Trou !");
+        }
     }
 
 
@@ -119,8 +137,8 @@ public class MenuPrincipal extends Application {
             CarteReponseController carteReponseController = new CarteReponseController(new Stage(),"title",userReponse,rightAnswer);
             carteReponseController.show();
         } catch (IOException e) {
-            //TODO:erreur show Response
             e.printStackTrace();
+            showErrorPopup("Impossible d'afficher la réponse !");
         }
 
     }
@@ -140,10 +158,15 @@ public class MenuPrincipal extends Application {
             menuPaquetController.hide();
             editionController.show();
         } catch (IOException e) {
-            //TODO: Renvoyer l'erreur à l'utilisateur
-            System.out.println(e);
+            e.printStackTrace();
+            showErrorPopup("Impossible de charger le menu d'édition !");
         }
 
     }
+
+    public void showErrorPopup(String error){
+        exceptionPopupController.createError(error);
+    }
+
 
 }

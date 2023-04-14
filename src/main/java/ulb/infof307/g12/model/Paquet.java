@@ -22,8 +22,9 @@ public class Paquet {
      * Crée un paquet dont le nom doit être unique.
      * @param nom
      * @param categorie
+     * @throws IllegalArgumentException
      */
-    public Paquet(String nom, String... categorie){
+    public Paquet(String nom, String... categorie) throws IllegalArgumentException{
         if(nom == null || nom.equals("") || categorie == null)
             throw new IllegalArgumentException("Le paquet doit posséder un nom ou une catégorie");
 
@@ -48,8 +49,9 @@ public class Paquet {
     /**
      * Fonction qui ajoute une carte au paquet
      * @param carte
+     * @throws IllegalArgumentException
      */
-    public void ajouterCarte(Carte carte){
+    public void ajouterCarte(Carte carte) throws IllegalArgumentException{
         for(Carte car: this.cartes){
             if(car.getId()==carte.getId()) {
                 throw new IllegalArgumentException("La carte existe déjà");
@@ -58,15 +60,22 @@ public class Paquet {
         cartes.add(carte);
         this.length++;
     }
-    public void supprimerCarte(Carte carte){
+
+    /**
+     * Supprime une carte du paquet
+     * @param carte
+     * @throws IllegalArgumentException
+     */
+    public void supprimerCarte(Carte carte) throws IllegalArgumentException{
         if(!(cartes.contains(carte))) {
-            throw new IllegalArgumentException("La carte n'existait pas");
+            throw new IllegalArgumentException("La carte n'existe pas");
         }
         cartes.remove(carte);
         this.length--;
     }
 
     /**
+     * Ajoute une catégorie au paquet
      * @param categorie
      */
     public void ajouterCategorie(String categorie){
