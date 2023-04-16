@@ -88,20 +88,37 @@ public class MenuPaquetVueController implements Initializable {
         MenuPrincipal.getINSTANCE().openProfile();
     }
 
+    /**
+     * Créer un nouveau paquet vide
+     * @throws IOException Erreur de la création de nouveau paquet vide
+     */
     public void creerPaquet() throws IOException {
+        // Envoyer au listener
         Paquet nouveauPaquet = listener.creerPaquet() ;
+        // Ajouter le nouveau paquet provenant du listener à la vue
         paquetListView.getItems().addAll(nouveauPaquet);
     }
 
+    /**
+     * Ouvrir le menu d'édition de paquet
+     */
     public void ouvrirEdition(ActionEvent event) {
+        // Obtenir le paquet selectionné pour modifier
         Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
+        // Envoyer demande de modification au listener
         listener.editerPaquet(paquet);
+        // Après la modification, recharger la vue pour tenir compte des modifications
         rechargerListView();
     }
 
+    /**
+     * Recharger la vue contenant la liste de paquets de l'utilisateur
+     */
     public void rechargerListView(){
+        // Créer et initialiser un observableArrayList nécessaire pour l'utilisation d'un ListView
         ObservableList<Paquet> data = FXCollections.observableArrayList();
         data.addAll(MenuPrincipal.getINSTANCE().getUserPaquets()) ;
+        // Injecter les données de l'observableArrayList dans la ListView
         paquetListView.setItems(data) ;
 
     }

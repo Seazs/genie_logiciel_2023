@@ -28,14 +28,18 @@ public class EditionController extends BaseController implements EditionVueListe
         controller.chargerEditionVue(paquet);
     }
 
+    /**
+     * Sauvegarder le paquet suite à des modifications
+     * @param nom Nom du paquet
+     * @param categorie Catégorie à être rajoutée
+     */
     @Override
     public void enregistrerPaquet(String nom, String categorie){
         try {
+            // Enregistrer le nom et ajouter la nouvelle categorie
             paquet.setNom(nom);
             paquet.ajouterCategorie(categorie);
             GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
-            Utilisateur user = MenuPrincipal.getINSTANCE().getUserPrincipale();
-            List<Paquet> listePaquetUser = user.getListPaquet();
             gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
         }catch (IOException e){
             e.printStackTrace();
@@ -43,11 +47,21 @@ public class EditionController extends BaseController implements EditionVueListe
         }
     }
 
+    /**
+     * Renvoyer les cartes du paquet
+     * @return ArrayList<Carte>
+     */
     public ArrayList<Carte> loadCartes() {
         return paquet.getCartes();
     }
 
+    /**
+     * Créer une nouvelle carte et l'ajoute au paquet qui est modifié
+     * @param recto Recto de la carte
+     * @param verso Verso de la carte
+     */
     public void ajouterCarte(String recto, String verso){
+
         int id = paquet.getCartes().size() + 1 ;
         Carte carte = new Carte(id, recto, verso, "") ;
         paquet.ajouterCarte(carte);
