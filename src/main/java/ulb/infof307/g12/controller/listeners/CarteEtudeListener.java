@@ -8,10 +8,35 @@ import java.util.ArrayList;
 public interface CarteEtudeListener {
     public ArrayList<Carte> getCartesEtude();
 
+    public ArrayList<Integer> getCartesEtudeScore();
+
+    /**
+     * @param index
+     */
     public void tresMauvais(int index);
+
+    /**
+     * @param index
+     */
     public void mauvais(int index);
+
+    /**
+     * @param index
+     */
     public void moyen(int index);
+
+    /**
+     * @param index
+     */
     public void bon(int index);
+
+    /**
+     * @param index
+     */
     public void tresBon(int index);
+
+    /**
+     * Sauvegarde des cartes
+     */
     public void saveCartes();
 }

@@ -13,10 +13,9 @@ public class Paquet {
     private String nom;
 
     @Getter
-    private ArrayList<String> categories = new ArrayList<String>();
+    private final ArrayList<String> categories = new ArrayList<String>();
     @Getter
     public ArrayList<Carte> cartes = new ArrayList<Carte>();
-    private int length;
 
     /**
      * Crée un paquet dont le nom doit être unique.
@@ -30,7 +29,6 @@ public class Paquet {
 
         this.nom = nom;
         this.categories.addAll(Arrays.asList(categorie));
-        this.length=0;
     }
 
     /**
@@ -39,10 +37,9 @@ public class Paquet {
      */
     @Override
     public boolean equals(Object objects) {
-        if(!(objects instanceof Paquet)) {
+        if(!(objects instanceof Paquet obj)) {
             return false;
         }
-        Paquet obj = (Paquet) objects;
         return (this.getNom().equals(obj.getNom()) && this.getCategories().equals(obj.categories));
     }
 
@@ -58,11 +55,10 @@ public class Paquet {
             }
         }
         cartes.add(carte);
-        this.length++;
     }
 
     /**
-     * Supprime une carte du paquet
+     * Supprime une carte du paquet --> pas encore implémenté dans le code (test à rajouter)
      * @param carte
      * @throws IllegalArgumentException
      */
@@ -71,7 +67,6 @@ public class Paquet {
             throw new IllegalArgumentException("La carte n'existe pas");
         }
         cartes.remove(carte);
-        this.length--;
     }
 
     /**
@@ -89,9 +84,7 @@ public class Paquet {
      * @param categorie
      */
     public void supprimerCategorie(String categorie){
-        if(this.categories.contains(categorie)){
-            this.categories.remove(categorie);
-        }
+        this.categories.remove(categorie);
 
     }
 

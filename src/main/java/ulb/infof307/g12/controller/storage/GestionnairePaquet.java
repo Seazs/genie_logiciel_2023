@@ -52,7 +52,7 @@ public class GestionnairePaquet {
     }
 
     /**
-     * Charge la liste des paquets correspondant a l'utilisateur en mémoire
+     * Charge la liste des paquets correspondant à l'utilisateur en mémoire
      * @param user
      * @return
      */
@@ -63,7 +63,8 @@ public class GestionnairePaquet {
             File[] listOfFilePaquet = userfolder.listFiles(); //Enumère les fichiers dans le dossier de l'utilisateur
             List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
 
-            for (File file : listOfFilePaquet) {
+            assert listOfFilePaquet != null; //Si le dossier est vide, on renvoie une liste vide
+            for (File file : listOfFilePaquet) { //Pour chaque fichier dans le dossier de l'utilisateur
                 FileReader fileReader = new FileReader(file);
                 BufferedReader reader = new BufferedReader(fileReader);
                 String lineNom = reader.readLine();
@@ -122,7 +123,8 @@ public class GestionnairePaquet {
 
 
     /**
-     * @param line
+     * Récupération des catégories sous forme de liste
+     * @param line de type cat1#cat2#...#cat3
      * @return String[] des catégories
      */
     private String[] loadCategories(String line){
@@ -131,6 +133,7 @@ public class GestionnairePaquet {
 
 
     /**
+     * Liste les catégories dans un string dans le bon format pour le stockage
      * @param paquet
      * @return cat1#cat2#cat3#
      */
@@ -142,5 +145,4 @@ public class GestionnairePaquet {
         }
         return save;
     }
-
 }

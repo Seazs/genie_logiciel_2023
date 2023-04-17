@@ -9,6 +9,13 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class CarteQCMController extends BaseController {
+    /**
+     * Controller de la carteQCM
+     * @param stage stage
+     * @param title titre
+     * @param carte carte
+     * @throws IOException exception
+     */
     public CarteQCMController(Stage stage, String title,Carte carte) throws IOException {
         super(stage, CarteQCMVueController.class.getResource("CarteQCM.fxml"), title);
         if (!Objects.equals(carte.getType(), "qcm")) throw new IllegalArgumentException();

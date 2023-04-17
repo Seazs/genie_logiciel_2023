@@ -32,17 +32,25 @@ public class CarteEtudeVueController{
     @FXML
     private Button boutonChange;
     private ArrayList<Carte> cartesEtude;
+    private ArrayList<Integer> cartesEtudeScore;
 
     private int indexCarte = 0;
     private int cote = 0; // 0 = recto, 1 = verso
 
 
-
+    /**
+     * Chargement de la vue des cartes d'études
+     * @param cartesEtude
+     */
     public void chargerCarteEtudeVue(ArrayList<Carte> cartesEtude) {
         indexCarte=indexRandom();
         affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
     }
 
+    /**
+     * Change de coté de la carte entre recto et verso
+     * @return
+     */
     public void changeCote(){
         cartesEtude = listener.getCartesEtude();
         if (cote == 0){
@@ -56,6 +64,10 @@ public class CarteEtudeVueController{
             cote = 0;
         }
     }
+
+    /**
+     * Passe à la carte suivante
+     */
     public void carteSuivante(){
         cartesEtude = listener.getCartesEtude();
         indexCarte=indexRandom();
@@ -64,6 +76,10 @@ public class CarteEtudeVueController{
             changeCote();
             }
     }
+
+    /**
+     * Retourne à la carte précédente
+     */
     public void cartePrecedente(){
         cartesEtude = listener.getCartesEtude();
         if (indexCarte > 0){
@@ -75,25 +91,45 @@ public class CarteEtudeVueController{
         }
 
     }
+
+    /**
+     * Fonction qui appelle la fonction terminer de CarteEtudeListener
+     */
     public void terminer() {
         MenuPrincipal.getINSTANCE().returnFromCarteEtudeToMenuPaquet();
         listener.saveCartes();
     }
+
+    /**
+     * Fonction qui appelle la fonction tresMauvais de CarteEtudeListener
+     */
     @FXML
     public void veryBad() { listener.tresMauvais(indexCarte); }
 
+    /**
+     * Fonction qui appelle la fonction mauvais de CarteEtudeListener
+     */
     public void bad() {
         listener.mauvais(indexCarte);
     }
 
+    /**
+     * Fonction qui appelle la fonction moyen de CarteEtudeListener
+     */
     public void middle() {
         listener.moyen(indexCarte);
     }
 
+    /**
+     * Fonction qui appelle la fonction bon de CarteEtudeListener
+     */
     public void good() {
         listener.bon(indexCarte);
     }
 
+    /**
+     * Fonction qui appelle la fonction tresBon de CarteEtudeListener
+     */
     public void veryGood() {
         listener.tresBon(indexCarte);
     }
@@ -116,9 +152,10 @@ public class CarteEtudeVueController{
         }
         return indexCarte;
     }
+
     /**
-     * Lis le score de connaissance des cartes du paquet et renvoie false si une des cartes n’a pas été étudiée.
-     * indexCarte est également modifié pour pointé vers la première carte du paquet qui n’a pas été étudiée.
+     * Fonction qui vérifie si toutes les cartes ont été lues
+     * @return true si toutes les cartes ont été lues
      */
     public boolean cartesLues() {
         cartesEtude = listener.getCartesEtude();

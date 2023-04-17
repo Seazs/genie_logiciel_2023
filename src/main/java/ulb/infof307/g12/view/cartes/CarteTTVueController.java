@@ -22,6 +22,10 @@ public class CarteTTVueController {
     Carte card;
 
 
+    /**
+     * Affichage de la carte
+     * @param card
+     */
     public void showCarte(Carte card){
         this.card = card;
         ArrayList<String> list = card.getQCMOrTTInfo();
@@ -33,8 +37,11 @@ public class CarteTTVueController {
         showedText.getChildren().addAll(textBefore,userAnswerField,textAfter);
     }
 
+    /**
+     * Montre la réponse lorsqu'une réponse est validée
+     * @param e
+     */
     public void checkAnswer(ActionEvent e){
         MenuPrincipal.getINSTANCE().showTTResponse(userAnswerField.getText(),answer);
     }
-
 }

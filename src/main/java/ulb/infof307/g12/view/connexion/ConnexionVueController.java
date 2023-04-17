@@ -19,6 +19,10 @@ public class ConnexionVueController {
     @Setter
     private UserCredentialsListener listener;
 
+    /**
+     * Ce qui s'exécute lorsqu'on clique sur le bouton de connexion
+     * @param event
+     */
     @FXML
     protected void onConnectButtonClick(ActionEvent event) {
         String username = usernameField.getText();
@@ -27,6 +31,10 @@ public class ConnexionVueController {
         messageLabel.setText(result);
     }
 
+    /**
+     * Ce qui s'exécute lorsqu'on clique sur le bouton de registration
+     * @param actionEvent
+     */
     @FXML
     public void onRegisterButtonClick(ActionEvent actionEvent) {
         String username = usernameField.getText();
@@ -34,6 +42,4 @@ public class ConnexionVueController {
         String result = listener.onRegister(username,password);
         messageLabel.setText(result);
     }
-
-
 }

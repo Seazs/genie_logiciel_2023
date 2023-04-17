@@ -12,10 +12,19 @@ import java.net.URL;
 public class ExceptionPopupController extends BaseController {
 
 
+    /**
+     * Controller des exceptions des pop up
+     * @param stage stage
+     * @throws IOException exception
+     */
     public ExceptionPopupController(Stage stage) throws IOException {
         super(stage, CarteReponseVueController.class.getResource("CarteReponse.fxml"), "Erreur !");
     }
 
+    /**
+     * Création d'une erreur
+     * @param msg message d'erreur
+     */
     public void createError(String msg){
         ExceptionPopupVueController controller = (ExceptionPopupVueController) super.controller;
         controller.setErrorMsg(msg);

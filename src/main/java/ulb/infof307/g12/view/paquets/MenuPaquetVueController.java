@@ -34,6 +34,11 @@ public class MenuPaquetVueController implements Initializable {
     @Setter
     private MenuPaquetListener listener;
 
+    /**
+     * Initialiser la vue du menu paquet
+     * @param url adresse
+     * @param rb ressource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Ajouter les paquets de cartes à la liste
@@ -51,7 +56,7 @@ public class MenuPaquetVueController implements Initializable {
     }
 
     /**
-     * charge le fichier FXML paquet de carte en chargeant les noms et catégories de chaque paquet
+     * Charge le fichier FXML paquet de carte en chargeant les noms et catégories de chaque paquet
      */
     private void updateVisuelListePaquet() {
         paquetListView.setCellFactory(param -> new ListCell<Paquet>() {
@@ -85,7 +90,11 @@ public class MenuPaquetVueController implements Initializable {
         });
     }
 
-    public void ouvrirProfil(ActionEvent event){
+    /**
+     * Ouvre la view profil
+     * @param event event
+     */
+    public void ouvrirProfil(ActionEvent event) {
         MenuPrincipal.getINSTANCE().openProfile();
     }
 
@@ -125,13 +134,12 @@ public class MenuPaquetVueController implements Initializable {
     }
 
     /**
-     * met à jour la liste visuel des paquets en fonction du filtre entré
-     *
+     * Met à jour la liste visuel des paquets en fonction du filtre entré
      */
     public void filtrageCategorie() {
         String recherche = RechercheLabel.getText().toLowerCase();
         paquetListView.getItems().clear();
-        saveListPaquet.stream().forEach(
+        saveListPaquet.forEach(
                 paquet -> {
             boolean result = paquet.getCategories()
                     .stream()
@@ -143,6 +151,10 @@ public class MenuPaquetVueController implements Initializable {
     }
 
 
+    /**
+     * Permet de changer vers une view "session d'étude"
+     * @param event event
+     */
     @FXML
     public void sessionEtude(ActionEvent event){
         if (listener!=null) {

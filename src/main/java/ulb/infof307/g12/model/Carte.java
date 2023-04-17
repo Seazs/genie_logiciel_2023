@@ -30,7 +30,7 @@ Carte {
      * @param id
      * @param recto
      * @param verso
-     * @param type peut être "rv" "tt" "qcm" ou ""
+     * @param type Peut-être "rv" "tt" "qcm" ou ""
      */
     public Carte(int id, String recto, String verso, String type){
         //type = "rv"/"qcm"/"tt"
@@ -132,7 +132,7 @@ Carte {
     }
 
     /**
-     * Fonctio pour set la connaissance. prends en entrée un int entre 0 et 5.
+     * Fonction pour set la connaissance. Prends en entrée un int entre 0 et 5.
      * @param connaissance
      */
     public void setConnaissance(int connaissance){

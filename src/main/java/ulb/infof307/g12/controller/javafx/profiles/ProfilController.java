@@ -19,6 +19,12 @@ public class ProfilController extends BaseController implements ProfilVueListene
     @Getter
     private Utilisateur user;
 
+    /**
+     * Controller du profil
+     * @param stage
+     * @param user
+     * @throws IOException
+     */
     public ProfilController(Stage stage, Utilisateur user) throws IOException {
         super(stage,ProfilVueController.class.getResource("profil.fxml"),"");
         this.user = user;
@@ -29,6 +35,11 @@ public class ProfilController extends BaseController implements ProfilVueListene
         controller.setMdpLabel(user.getMdp());
     }
 
+    /**
+     * Changement de mot de passe de l'utilisateur
+     * @param password nouveau mot de passe
+     * @return
+     */
     @Override
     public String changePassword(Optional<String> password) {
         String username = user.getPseudo(),
@@ -50,6 +61,9 @@ public class ProfilController extends BaseController implements ProfilVueListene
         return result;
     }
 
+    /**
+     * Déconnexion de l'utilisateur
+     */
     @Override
     public void deconnexion(){
         MenuPrincipal instance = MenuPrincipal.getINSTANCE();
