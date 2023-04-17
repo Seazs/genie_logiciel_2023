@@ -19,11 +19,18 @@ public class ProfilVueController {
     private ProfilVueListener listener;
 
 
+    /**
+     * Ce qui s'exécute lorsqu'on clique sur le bouton de retour au menu principal
+     * @param event l'événement qui a déclenché l'action
+     */
     public void retourMenuPaquet(ActionEvent event){
         MenuPrincipal.getINSTANCE().returnToMenuPaquet();
     }
 
 
+    /**
+     * Ce qui s'exécute lorsqu'on clique sur le bouton de changement de mot de passe
+     */
     @FXML
     protected void onChangePasswordButtonClick() {
 
@@ -38,6 +45,10 @@ public class ProfilVueController {
         messageLabelProfil.setText(result);
     }
 
+    /**
+     * Ce qui s'exécute lorsqu'on clique sur le bouton de déconnexion
+     * @param e l'événement qui a déclenché l'action
+     */
     @FXML
     public void onDeconnexionButtonclick(ActionEvent e){
         if (listener!=null){

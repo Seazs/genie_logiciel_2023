@@ -79,7 +79,6 @@ public class CarteEtudeVueController{
                 changeCote();
             }
         }
-
     }
     public void terminer() {
         MenuPrincipal.getINSTANCE().returnFromCarteEtudeToMenuPaquet();
