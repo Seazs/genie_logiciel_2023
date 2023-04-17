@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
+<?import java.net.URL?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.EditionVueController">
    <children>
       <Label layoutX="155.0" layoutY="39.0" prefHeight="18.0" prefWidth="93.0" text="Nom du Paquet:" />
@@ -29,4 +30,9 @@
       <TextField fx:id="reponseTextField" layoutX="312.0" layoutY="313.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0" promptText="Réponse" />
       <Button fx:id="ajouterCarte" layoutX="263.0" layoutY="350.0" mnemonicParsing="false" text="Ajouter Carte" onAction="#ajouterCarte"/>
    </children>
+
+    <stylesheets>
+        <URL value="@menuPaquetStyle.css" />
+    </stylesheets>
+
 </AnchorPane>
