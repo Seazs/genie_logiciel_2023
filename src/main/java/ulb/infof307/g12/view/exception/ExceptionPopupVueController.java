@@ -11,6 +11,10 @@ public class ExceptionPopupVueController {
 
     private Text errorMsg = new Text();
 
+    /**
+     * Ajout du texte sur une erreur
+     * @param text
+     */
     public void setErrorMsg(String text){
         errorMsg.setText(text);
     }

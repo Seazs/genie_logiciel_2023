@@ -17,7 +17,7 @@ public class GestionnaireUtilisateur {
     public static Utilisateur utilisateurConnected ;
 
     /**
-     * Constructeur de GestionnaireUtilisateur, en paramètre c'est le fichier dont on doit charger les utilisateurs
+     * Constructeur de GestionnaireUtilisateur, en paramètre, c'est le fichier dont on doit charger les utilisateurs
      * @param fichier
      * @throws FileNotFoundException
      */
@@ -27,6 +27,9 @@ public class GestionnaireUtilisateur {
         status = STATUS.OK;
     }
 
+    /**
+     * Autre constructeur du gestionnaire utilisateur
+     */
     public GestionnaireUtilisateur() {
         userdatabase = new File("./stockage","stockUser.txt");
         try {
@@ -112,6 +115,10 @@ public class GestionnaireUtilisateur {
         return false;
     }
 
+    /**
+     * vérifie que l'utilisateur est déconnecté
+     * @return True si l'utilisateur est déconnecté
+     */
     public boolean disconnect(){
         if (utilisateurConnected!=null){
             utilisateurConnected = null;
@@ -121,6 +128,10 @@ public class GestionnaireUtilisateur {
 
     }
 
+    /**
+     * Retourne le statut
+     * @return statut
+     */
     public STATUS getStatus() {
         return status;
     }
@@ -172,6 +183,11 @@ public class GestionnaireUtilisateur {
         return true;
     }
 
+    /**
+     * Vérifie que le string est valide ou non
+     * @param string
+     * @return True si valide
+     */
     private boolean estStringValide(String string){
         return (!string.contains("#") &&
                 !string.equals("") &&
@@ -179,9 +195,9 @@ public class GestionnaireUtilisateur {
     }
 
     /**
-     *
+     * Trouver le nom d'utilisateur dans la liste des utilisateurs
      * @param nomUtilisateur
-     * @return
+     * @return l'utilisateur ou null s'il n'est pas trouvé
      */
     public Utilisateur trouverUtilisateur(String nomUtilisateur) {
         for (Utilisateur utilisateur : listeUtilisateur) {
@@ -249,6 +265,9 @@ public class GestionnaireUtilisateur {
         }
     }
 
+    /**
+     * @return Le statut du message
+     */
     public String getStatusMsg(){
         return this.status.getMsg();
     }

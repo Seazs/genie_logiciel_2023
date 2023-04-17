@@ -52,7 +52,7 @@ public class GestionnairePaquet {
     }
 
     /**
-     * Charge la liste des paquets correspondant a l'utilisateur en mémoire
+     * Charge la liste des paquets correspondant à l'utilisateur en mémoire
      * @param user
      * @return
      */
@@ -122,7 +122,8 @@ public class GestionnairePaquet {
 
 
     /**
-     * @param line
+     * Récupération des catégories sous forme de liste
+     * @param line de type cat1#cat2#...#cat3
      * @return String[] des catégories
      */
     private String[] loadCategories(String line){
@@ -131,6 +132,7 @@ public class GestionnairePaquet {
 
 
     /**
+     * Liste les catégories dans un string dans le bon format pour le stockage
      * @param paquet
      * @return cat1#cat2#cat3#
      */
@@ -142,5 +144,4 @@ public class GestionnairePaquet {
         }
         return save;
     }
-
 }

@@ -37,12 +37,18 @@ public class CarteEtudeVueController{
     private int cote = 0; // 0 = recto, 1 = verso
 
 
-
+    /**
+     * Chargement de la vue des cartes d'études
+     * @param cartesEtude
+     */
     public void chargerCarteEtudeVue(ArrayList<Carte> cartesEtude) {
         indexCarte=indexRandom();
         affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
     }
 
+    /**
+     *
+     */
     public void changeCote(){
         cartesEtude = listener.getCartesEtude();
         if (cote == 0){

@@ -11,6 +11,11 @@ public class CarteReponseVueController {
     @FXML
     TextFlow resultText, rightAnswerText;
 
+    /**
+     * Affichage de la réponse avec le résultat et la bonne réponse
+     * @param result
+     * @param rightAnswer
+     */
     public void showReponse(String result, String rightAnswer){
         if(result == null)
             result = "";

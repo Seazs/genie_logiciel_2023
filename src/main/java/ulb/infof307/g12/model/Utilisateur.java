@@ -52,15 +52,27 @@ public class Utilisateur {
     }
 
 
+    /**
+     * Ajoute le paquet à la liste des paquets
+     * @param paquet
+     */
     public void addPaquet(Paquet paquet) {
         listPaquet.add(paquet);
     }
 
+    /**
+     * Enlève le paquet de la liste de paquets
+     * @param nom
+     */
     public void removePaquet(String nom) {
         listPaquet.removeIf(paquet -> Objects.equals(paquet.getNom(), nom));
     }
 
 
+    /** Vérifie que le string est valide
+     * @param string
+     * @return True s'il est valide
+     */
     private boolean estValide(String string) {
         return (!string.contains("#") &&
                 !string.equals("") &&

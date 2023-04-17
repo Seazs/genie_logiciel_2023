@@ -17,6 +17,11 @@ public class CarteQCMVueController {
     @FXML
     ListView<String> reponsesList;
     private String response;
+
+    /**
+     * Affichage des cartes
+     * @param carte
+     */
     public void showCarte(Carte carte){
         ArrayList<String> list = carte.getQCMOrTTInfo();
 
@@ -26,6 +31,10 @@ public class CarteQCMVueController {
         response = list.get(list.size()-1);
     }
 
+    /**
+     * Effectue l'event lorsqu'il y a un clic
+     * @param e
+     */
     public void onClick(ActionEvent e){
         String userReponse = reponsesList.getSelectionModel().getSelectedItem();
         MenuPrincipal.getINSTANCE().showQCMResponse(userReponse,response);

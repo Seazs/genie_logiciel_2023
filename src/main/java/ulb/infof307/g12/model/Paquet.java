@@ -62,7 +62,7 @@ public class Paquet {
     }
 
     /**
-     * Supprime une carte du paquet
+     * Supprime une carte du paquet --> pas encore implémenté dans le code (test à rajouter)
      * @param carte
      * @throws IllegalArgumentException
      */
