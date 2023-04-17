@@ -134,4 +134,4 @@ Tâche 1 : MVC – 1 point
 Tâche 2 : Gestion des exceptions – 1 points
 
 - Nicolas et Wassim
-- Description :
+- Description : Trouver un moyen pour gérer les différentes exceptions qui peuvent survenir lors de l’utilisation de l’application.
