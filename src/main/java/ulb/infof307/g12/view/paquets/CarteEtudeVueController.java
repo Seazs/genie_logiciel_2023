@@ -89,31 +89,56 @@ public class CarteEtudeVueController{
             }
         }
     }
+
+    /**
+     * Fonction qui appelle la fonction terminer de CarteEtudeListener
+     */
     public void terminer() {
         MenuPrincipal.getINSTANCE().returnFromCarteEtudeToMenuPaquet();
         listener.saveCartes();
     }
+
+    /**
+     * Fonction qui appelle la fonction tresMauvais de CarteEtudeListener
+     */
     @FXML
     public void veryBad() {
         listener.tresMauvais(indexCarte);
 
     }
 
+    /**
+     * Fonction qui appelle la fonction mauvais de CarteEtudeListener
+     */
     public void bad() {
         listener.mauvais(indexCarte);
     }
 
+    /**
+     * Fonction qui appelle la fonction moyen de CarteEtudeListener
+     */
     public void middle() {
         listener.moyen(indexCarte);
     }
 
+    /**
+     * Fonction qui appelle la fonction bon de CarteEtudeListener
+     */
     public void good() {
         listener.bon(indexCarte);
     }
 
+    /**
+     * Fonction qui appelle la fonction tresBon de CarteEtudeListener
+     */
     public void veryGood() {
         listener.tresBon(indexCarte);
     }
+
+    /**
+     * Fonction qui retourne un index aléatoire de carte en fonction de la connaissance de la carte
+     * @return un index aléatoire de carte en fonction de la connaissance de la carte
+     */
     public int indexRandom(){
         cartesEtude = listener.getCartesEtude();
         if(cartesLues()){
@@ -126,6 +151,11 @@ public class CarteEtudeVueController{
         }
         return indexCarte;
     }
+
+    /**
+     * Fonction qui vérifie si toutes les cartes ont été lues
+     * @return true si toutes les cartes ont été lues
+     */
     public boolean cartesLues() {
         cartesEtude = listener.getCartesEtude();
         indexCarte=0;
