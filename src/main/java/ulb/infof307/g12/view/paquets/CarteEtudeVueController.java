@@ -3,6 +3,7 @@ package ulb.infof307.g12.view.paquets;
 import javafx.event.ActionEvent;
 
 
+import java.lang.annotation.Documented;
 import java.util.concurrent.ThreadLocalRandom;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,7 +32,6 @@ public class CarteEtudeVueController{
     @FXML
     private Button boutonChange;
     private ArrayList<Carte> cartesEtude;
-    private ArrayList<Integer> cartesEtudeScore;
 
     private int indexCarte = 0;
     private int cote = 0; // 0 = recto, 1 = verso
@@ -80,10 +80,7 @@ public class CarteEtudeVueController{
         listener.saveCartes();
     }
     @FXML
-    public void veryBad() {
-        listener.tresMauvais(indexCarte);
-
-    }
+    public void veryBad() { listener.tresMauvais(indexCarte); }
 
     public void bad() {
         listener.mauvais(indexCarte);
@@ -100,6 +97,13 @@ public class CarteEtudeVueController{
     public void veryGood() {
         listener.tresBon(indexCarte);
     }
+
+    /**
+     * Vérifie si toutes les cartes ont été vues au moins une fois. Si c’est le cas:
+     * On tire une carte du paquet au hasard. On tire un nombre "apparition" au hasard entre 0 et scoreConnaissance*10 + 1.
+     * tant que le nombre "apparition" est plus grand que 20, on continue à tirer une carte au hasard et une "apparition".
+     * Cela signifie que les cartes avec un score de connaissance élevé sont tirées moins souvent car leur "apparition" à plus de chance d’être supérieur à 20.
+     */
     public int indexRandom(){
         cartesEtude = listener.getCartesEtude();
         if(cartesLues()){
@@ -112,6 +116,10 @@ public class CarteEtudeVueController{
         }
         return indexCarte;
     }
+    /**
+     * Lis le score de connaissance des cartes du paquet et renvoie false si une des cartes n’a pas été étudiée.
+     * indexCarte est également modifié pour pointé vers la première carte du paquet qui n’a pas été étudiée.
+     */
     public boolean cartesLues() {
         cartesEtude = listener.getCartesEtude();
         indexCarte=0;

@@ -18,8 +18,6 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
     @Getter
     private ArrayList<Carte> cartesEtude = new ArrayList<Carte>();
     @Getter
-    private ArrayList<Integer> cartesEtudeScore = new ArrayList<Integer>();//liste des scores des cartes
-    @Getter
     private Paquet paquet;
     public CarteEtudeController(Stage stage, Paquet paquet) throws IOException {
         super(stage,CarteEtudeVueController.class.getResource("carteEtude.fxml"), "");
@@ -27,18 +25,11 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
         this.paquet=paquet;
         controller.setListener(this);
         cartesEtude = paquet.getCartes();
-        for(int i=0;i<cartesEtude.size();i++){
-            cartesEtudeScore.add(0);
-        }
         controller.chargerCarteEtudeVue(cartesEtude);
     }
     @Override
     public ArrayList<Carte> getCartesEtude(){
         return cartesEtude;
-    }
-    @Override
-    public ArrayList<Integer> getCartesEtudeScore(){
-        return cartesEtudeScore;
     }
     public void tresMauvais(int index){
         cartesEtude.get(index).setConnaissance(1);
