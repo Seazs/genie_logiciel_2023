@@ -8,11 +8,7 @@
 <?import java.net.URL?>
 <AnchorPane prefHeight="339.0" prefWidth="492.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.profiles.ProfilVueController">
     <children>
-        <Label alignment="CENTER" layoutX="175.0" layoutY="28.0" prefHeight="59.0" prefWidth="140.0" text="Profil">
-            <font>
-                <Font name="Legrand" size="54.0" />
-            </font>
-        </Label>
+        <Label fx:id="titre" alignment="CENTER" layoutX="175.0" layoutY="28.0" prefHeight="59.0" prefWidth="140.0" text="Profil"> </Label>
         <Label fx:id="pseudoLabel" alignment="BOTTOM_LEFT" layoutX="53.0" layoutY="139.0" prefHeight="18.0" prefWidth="206.0" text="Pseudo:" />
         <Label fx:id="mdpLabel" alignment="BOTTOM_LEFT" layoutX="53.0" layoutY="227.0" prefHeight="18.0" prefWidth="206.0" text="Mot de passe:" />
         <Button fx:id="retourButton" layoutX="31.0" layoutY="35.0" mnemonicParsing="false" onAction="#retourMenuPaquet" prefHeight="46.0" prefWidth="72.0" text="retour" />

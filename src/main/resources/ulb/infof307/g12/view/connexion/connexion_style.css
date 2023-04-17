@@ -2,6 +2,17 @@
     -fx-background-color: #ffffe6;
 }
 
+@font-face{
+    font-family: 'Legrand' ;
+    src: url('src/main/resources/ulb/infof307/g12/view/Legrand.ttf')
+}
+
+
+#titre{
+    -fx-font-family: "Legrand" ;
+    -fx-font-size: 45px;
+}
+
 .button{
     -fx-background-color: #f3f3db ;
 }
