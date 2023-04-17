@@ -28,12 +28,19 @@ class UtilisateurTest {
 
     @Test
     void addPaquetTest() {
-
+        Utilisateur pers1 = new Utilisateur("alex", "pomme");
+        Paquet paquet1 = new Paquet("Maths", "BA-1");
+        pers1.addPaquet(paquet1);
+        assertEquals(paquet1, pers1.getListPaquet().get(0));
     }
 
     @Test
     void rmPaquetTest() {
-
+        Utilisateur pers1 = new Utilisateur("alex", "pomme");
+        Paquet paquet1 = new Paquet("Maths", "BA-1");
+        pers1.addPaquet(paquet1);
+        pers1.removePaquet("Maths");
+        assertEquals(0, pers1.getListPaquet().size());
     }
 
     @Test

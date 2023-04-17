@@ -121,5 +121,18 @@ class CarteTest {
         });
 
     }
+
+    @Test
+    public void testSetConnaissence(){
+        Carte carte = new Carte(1, "recto", "verso", "");
+        carte.setConnaissance(2);
+        assertEquals(2, carte.getConnaissance());
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            carte.setConnaissance(6);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            carte.setConnaissance(-1);
+        });
+    }
 }
 
