@@ -1,4 +1,4 @@
-module connection {
+module connexion {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.controlsfx.controls;

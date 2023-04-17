@@ -43,9 +43,12 @@ public class EditionVueController {
     @Setter
     private EditionVueListener listener;
 
-
+    /**
+     * Charge la vue du menu d'édition avec les informations existantes du paquet
+     * @param paquet paquet à être modifié
+     */
     public void chargerEditionVue(Paquet paquet) {
-        categoriePaquetTextField.setText(paquet.getCategories().get(0));
+        categoriePaquetTextField.setPromptText("Catégorie");
         nomPaquetTextField.setText(paquet.getNom());
 
         questionCol.setCellValueFactory(new PropertyValueFactory<Carte,String>("recto"));
@@ -72,33 +75,54 @@ public class EditionVueController {
 
     }
 
+    /**
+     * Revenir sur le menu précedent sans sauvegarder les modifications
+     */
     @FXML
     void annulerEdition(ActionEvent event) {
         MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();
     }
 
+    /**
+     * Rajouter une carte au paquet
+     */
     @FXML
     void ajouterCarte(ActionEvent event){
+        // Prendre les informations
         String recto = questionTextField.getText();
         String verso = reponseTextField.getText() ;
+        // Envoyer au listener
         listener.ajouterCarte(recto, verso);
+        // Nettoyer les entrées
         questionTextField.clear();
         reponseTextField.clear();
+        // Recharger la table
         reloadTable();
     }
 
+    /**
+     * Recharger la table de cartes du parquet
+     */
     void reloadTable(){
+        // Création et initialisation d'un observableArrayList nécessaire pour l'usage du tableau
         ObservableList<Carte> data = FXCollections.<Carte>observableArrayList();
         ArrayList<Carte> cartes = listener.loadCartes();
         data.addAll(cartes) ;
+        // Injecter l'observableArrayList dans la table
         tableQR.setItems(data);
     }
 
+    /**
+     * Sauvergader les modifications du paquet et revenir sur le menu précedent
+     */
     @FXML
     void enregistrerPaquet() {
+        // Prendre les modifications du nom et la catégorie à rajouter
         String nouveauNom = nomPaquetTextField.getText() ;
         String nouvelleCategorie = categoriePaquetTextField.getText() ;
+        // Envoyer au listener
         listener.enregistrerPaquet(nouveauNom, nouvelleCategorie);
+        // Revenir sur le menu principal
         MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();
     }
 

@@ -28,13 +28,22 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         //TODO: faire le paquet
     }
 
+    /**
+     * Création d'un nouveau paquet vide
+     * @return Paquet vide avec un nom et catégorie génériques
+     */
     @Override
     public Paquet creerPaquet() {
-        Paquet nouveauPaquet = new Paquet("Nouveau Paquet", "Catégorie") ;
+        // Créer le paquet et l'ajouter à la liste de paquet de l'utilisateur
+        Paquet nouveauPaquet = new Paquet("Nouveau Paquet") ;
         user.addPaquet(nouveauPaquet);
         return nouveauPaquet;
     }
 
+    /**
+     * Lancer le menu d'édition avec le paquet choisit par l'utilisateur
+     * @param paquet Paquet choisit par l'utilisateur à être modifié
+     */
     @Override
     public void editerPaquet(Paquet paquet) {
         MenuPrincipal.getINSTANCE().showMenuEdition(paquet);
