@@ -2,20 +2,18 @@ package ulb.infof307.g12.controller.javafx.cartes;
 
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
-import ulb.infof307.g12.view.cartes.CarteQCMVueController;
 import ulb.infof307.g12.view.cartes.CarteReponseVueController;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class CarteReponseController extends BaseController {
     /**
      * Controller de la carte Réponse
-     * @param stage
-     * @param title
-     * @param result
-     * @param rightAnswer
-     * @throws IOException
+     * @param stage stage
+     * @param title titre
+     * @param result résultat
+     * @param rightAnswer bonne réponse
+     * @throws IOException exception
      */
     public CarteReponseController(Stage stage, String title,String result,String rightAnswer) throws IOException {
         super(stage, CarteReponseVueController.class.getResource("CarteReponse.fxml"), title);

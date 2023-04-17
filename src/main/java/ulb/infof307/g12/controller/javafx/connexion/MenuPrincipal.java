@@ -28,8 +28,8 @@ import java.util.List;
 public class MenuPrincipal extends Application {
     @Getter(lazy = true)
     private static final MenuPrincipal INSTANCE = new MenuPrincipal();
-    private GestionnaireUtilisateur gestionnaireUtilisateur = new GestionnaireUtilisateur();
-    private GestionnairePaquet gestionnairePaquet = new GestionnairePaquet();
+    private final GestionnaireUtilisateur gestionnaireUtilisateur = new GestionnaireUtilisateur();
+    private final GestionnairePaquet gestionnairePaquet = new GestionnairePaquet();
     private ConnexionMenuController connexionController;
     private MenuPaquetController menuPaquetController;
     private ProfilController profilController;
@@ -46,8 +46,8 @@ public class MenuPrincipal extends Application {
 
     /**
      * Démarrage de l'application
-     * @param stage
-     * @throws IOException
+     * @param stage stage
+     * @throws IOException exception
      */
     @Override
     public void start(Stage stage) throws IOException {
@@ -57,7 +57,7 @@ public class MenuPrincipal extends Application {
     }
 
     /**
-     * @param args
+     * @param args arguments
      */
     public static void main(String[] args) {
         File stockage = new File("./stockage");
@@ -69,8 +69,8 @@ public class MenuPrincipal extends Application {
 
     /**
      * Affichage du menu du Paquet
-     * @param user
-     * @param parent
+     * @param user utilisateur
+     * @param parent parent
      */
     public void showMenuPaquet(Utilisateur user, ConnexionMenuController parent) {
         try {
@@ -87,7 +87,7 @@ public class MenuPrincipal extends Application {
 
     /**
      * Affichage du menu de connexion
-     * @param parent
+     * @param parent parent
      */
     public void showConnexionMenu(ProfilController parent){
         try {
@@ -104,8 +104,8 @@ public class MenuPrincipal extends Application {
 
     /**
      * Affichage de l'étude de carte
-     * @param parent
-     * @param paquet
+     * @param parent parent
+     * @param paquet paquet
      */
     public void showCarteEtude(MenuPaquetController parent,Paquet paquet){
         try{
@@ -168,7 +168,7 @@ public class MenuPrincipal extends Application {
 
     /**
      * Affichage des cartes de type QCM
-     * @param card
+     * @param card carte
      */
     public void showCarteQCM(Carte card) {
         try {
@@ -184,7 +184,7 @@ public class MenuPrincipal extends Application {
 
     /**
      * Affichage des cartes de type texte à trou
-     * @param card
+     * @param card cartes
      */
     public void showCarteTT(Carte card) {
         try{
@@ -200,9 +200,9 @@ public class MenuPrincipal extends Application {
 
     /**
      * Affichage de la réponse
-     * @param userReponse
-     * @param rightAnswer
-     * @param controller
+     * @param userReponse réponse de l'utilisateur
+     * @param rightAnswer bonne réponse
+     * @param controller controller
      */
     private void showResponse(String userReponse, String rightAnswer, BaseController controller) {
         try {
@@ -218,8 +218,8 @@ public class MenuPrincipal extends Application {
 
     /**
      * Affichage de la réponse des cartes QCM
-     * @param userReponse
-     * @param rightAnswer
+     * @param userReponse réponse de l'utilisateur
+     * @param rightAnswer bonne réponse
      */
     public void showQCMResponse(String userReponse, String rightAnswer){
         showResponse(userReponse,rightAnswer,carteQCMController);
@@ -227,8 +227,8 @@ public class MenuPrincipal extends Application {
 
     /**
      * Affichage de la réponse des cartes textes à trous
-     * @param userReponse
-     * @param rightAnswer
+     * @param userReponse réponse de l'utilisateur
+     * @param rightAnswer bonne réponse
      */
     public void showTTResponse(String userReponse, String rightAnswer){
         showResponse(userReponse,rightAnswer,carteTTController);
@@ -237,7 +237,7 @@ public class MenuPrincipal extends Application {
 
     /**
      * Affichage du menu d'édition
-     * @param paquet
+     * @param paquet paquet
      */
     public void showMenuEdition(Paquet paquet) {
         try{
@@ -252,7 +252,7 @@ public class MenuPrincipal extends Application {
     }
 
     /**
-     * @param error
+     * @param error erreur String
      */
     public void showErrorPopup(String error){
         exceptionPopupController.createError(error);

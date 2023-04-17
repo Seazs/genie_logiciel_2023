@@ -8,25 +8,24 @@ import ulb.infof307.g12.controller.listeners.CarteEtudeListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Utilisateur;
 import ulb.infof307.g12.view.paquets.CarteEtudeVueController;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class CarteEtudeController extends BaseController implements CarteEtudeListener {
-    @Getter
+
     private ArrayList<Carte> cartesEtude = new ArrayList<Carte>();
+
+    private final ArrayList<Integer> cartesEtudeScore = new ArrayList<Integer>();//liste des scores des cartes
     @Getter
-    private ArrayList<Integer> cartesEtudeScore = new ArrayList<Integer>();//liste des scores des cartes
-    @Getter
-    private Paquet paquet;
+    private final Paquet paquet;
 
     /**
      * Controller de l'étude de carte
-     * @param stage
-     * @param paquet
-     * @throws IOException
+     * @param stage stage
+     * @param paquet paquet
+     * @throws IOException  exception
      */
     public CarteEtudeController(Stage stage, Paquet paquet) throws IOException {
         super(stage,CarteEtudeVueController.class.getResource("carteEtude.fxml"), "");
@@ -53,7 +52,7 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
     }
 
     /**
-     * @param index
+     * @param index  index
      */
     @Override
     public void tresMauvais(int index){
@@ -61,7 +60,7 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
     }
 
     /**
-     * @param index
+     * @param index index
      */
     @Override
     public void mauvais(int index){
@@ -69,7 +68,7 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
     }
 
     /**
-     * @param index
+     * @param index index
      */
     @Override
     public void moyen(int index){
@@ -77,7 +76,7 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
     }
 
     /**
-     * @param index
+     * @param index index
      */
     @Override
     public void bon(int index){
@@ -85,7 +84,7 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
     }
 
     /**
-     * @param index
+     * @param index index
      */
     @Override
     public void tresBon(int index){

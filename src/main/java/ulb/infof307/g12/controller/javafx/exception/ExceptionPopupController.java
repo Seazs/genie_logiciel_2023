@@ -14,8 +14,8 @@ public class ExceptionPopupController extends BaseController {
 
     /**
      * Controller des exceptions des pop up
-     * @param stage
-     * @throws IOException
+     * @param stage stage
+     * @throws IOException exception
      */
     public ExceptionPopupController(Stage stage) throws IOException {
         super(stage, CarteReponseVueController.class.getResource("CarteReponse.fxml"), "Erreur !");
@@ -23,7 +23,7 @@ public class ExceptionPopupController extends BaseController {
 
     /**
      * Création d'une erreur
-     * @param msg
+     * @param msg message d'erreur
      */
     public void createError(String msg){
         ExceptionPopupVueController controller = (ExceptionPopupVueController) super.controller;
