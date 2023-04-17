@@ -18,7 +18,7 @@ import java.util.List;
 public class EditionController extends BaseController implements EditionVueListener {
 
     @Getter
-    private Paquet paquet;
+    private final Paquet paquet;
 
     /**
      * Controller de l'édition

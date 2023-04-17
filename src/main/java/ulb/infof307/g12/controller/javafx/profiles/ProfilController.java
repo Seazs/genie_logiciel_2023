@@ -33,7 +33,7 @@ public class ProfilController extends BaseController implements ProfilVueListene
     }
 
     /**
-     * Changement de mot de passe
+     * Changement de mot de passe de l'utilisateur
      * @param password nouveau mot de passe
      * @return
      */
@@ -58,7 +58,7 @@ public class ProfilController extends BaseController implements ProfilVueListene
     }
 
     /**
-     * Déconnexion
+     * Déconnexion de l'utilisateur
      */
     @Override
     public void deconnexion(){

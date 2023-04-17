@@ -82,12 +82,16 @@ public class GestionnaireUtilisateur {
         myReader.close();
     }
 
+    /**
+     * Renvoie la liste des utilisateurs
+     * @return le status de la dernière opération
+     */
     public List<Utilisateur> getListeUtilisateur() {
         return listeUtilisateur;
     }
 
     /**
-     * Vérifie si l'utilisateur à déjà un compte
+     * Vérifie si l'utilisateur à déjà un compte et le connecte
      * @param username
      * @param password
      * @return

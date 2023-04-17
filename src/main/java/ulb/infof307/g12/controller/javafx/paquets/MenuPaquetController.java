@@ -15,7 +15,7 @@ import java.io.IOException;
 public class MenuPaquetController extends BaseController implements MenuPaquetListener {
 
     @Getter
-    private Utilisateur user;
+    private final Utilisateur user;
 
     /**
      * Controller du menuPaquet

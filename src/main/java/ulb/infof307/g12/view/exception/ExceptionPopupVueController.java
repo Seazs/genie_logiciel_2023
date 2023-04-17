@@ -9,7 +9,7 @@ public class ExceptionPopupVueController {
     @FXML
     TextFlow errorView;
 
-    private Text errorMsg = new Text();
+    private final Text errorMsg = new Text();
 
     /**
      * Ajout du texte sur une erreur

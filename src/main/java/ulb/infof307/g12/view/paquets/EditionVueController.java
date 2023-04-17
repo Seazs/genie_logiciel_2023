@@ -23,11 +23,7 @@ public class EditionVueController {
     @FXML
     private TableColumn<Carte, String> reponseCol;
     @FXML
-    private Button ajouterCarte;
-    @FXML
     private TextField categoriePaquetTextField;
-    @FXML
-    private Button enregistrerBouton;
     @FXML
     private TextField nomPaquetTextField;
     @FXML
@@ -36,8 +32,6 @@ public class EditionVueController {
     private TextField questionTextField;
     @FXML
     private TextField reponseTextField;
-    @FXML
-    private Button retourBouton;
     @FXML
     private TableView<Carte> tableQR;
     @Setter

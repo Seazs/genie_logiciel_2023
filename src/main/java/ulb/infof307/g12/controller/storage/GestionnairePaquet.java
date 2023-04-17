@@ -63,7 +63,8 @@ public class GestionnairePaquet {
             File[] listOfFilePaquet = userfolder.listFiles(); //Enumère les fichiers dans le dossier de l'utilisateur
             List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
 
-            for (File file : listOfFilePaquet) {
+            assert listOfFilePaquet != null; //Si le dossier est vide, on renvoie une liste vide
+            for (File file : listOfFilePaquet) { //Pour chaque fichier dans le dossier de l'utilisateur
                 FileReader fileReader = new FileReader(file);
                 BufferedReader reader = new BufferedReader(fileReader);
                 String lineNom = reader.readLine();

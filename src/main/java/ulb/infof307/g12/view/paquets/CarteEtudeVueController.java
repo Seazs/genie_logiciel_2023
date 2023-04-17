@@ -47,7 +47,8 @@ public class CarteEtudeVueController{
     }
 
     /**
-     *
+     * Change de coté de la carte entre recto et verso
+     * @return
      */
     public void changeCote(){
         cartesEtude = listener.getCartesEtude();
@@ -62,6 +63,10 @@ public class CarteEtudeVueController{
             cote = 0;
         }
     }
+
+    /**
+     * Passe à la carte suivante
+     */
     public void carteSuivante(){
         cartesEtude = listener.getCartesEtude();
         indexCarte=indexRandom();
@@ -70,6 +75,10 @@ public class CarteEtudeVueController{
             changeCote();
             }
     }
+
+    /**
+     * Retourne à la carte précédente
+     */
     public void cartePrecedente(){
         cartesEtude = listener.getCartesEtude();
         if (indexCarte > 0){
