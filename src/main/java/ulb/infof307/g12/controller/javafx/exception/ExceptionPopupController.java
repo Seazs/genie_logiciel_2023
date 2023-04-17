@@ -1,13 +1,11 @@
 package ulb.infof307.g12.controller.javafx.exception;
 
 import javafx.stage.Stage;
-import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.view.cartes.CarteReponseVueController;
 import ulb.infof307.g12.view.exception.ExceptionPopupVueController;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class ExceptionPopupController extends BaseController {
 
@@ -18,7 +16,7 @@ public class ExceptionPopupController extends BaseController {
      * @throws IOException exception
      */
     public ExceptionPopupController(Stage stage) throws IOException {
-        super(stage, CarteReponseVueController.class.getResource("CarteReponse.fxml"), "Erreur !");
+        super(stage, ExceptionPopupVueController.class.getResource("ExceptionPopup.fxml"), "Erreur !");
     }
 
     /**

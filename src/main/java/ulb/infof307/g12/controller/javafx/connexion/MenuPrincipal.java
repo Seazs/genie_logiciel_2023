@@ -4,21 +4,20 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
-import ulb.infof307.g12.controller.javafx.paquets.CarteEtudeController;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.cartes.CarteQCMController;
 import ulb.infof307.g12.controller.javafx.cartes.CarteReponseController;
 import ulb.infof307.g12.controller.javafx.cartes.CarteTTController;
 import ulb.infof307.g12.controller.javafx.exception.ExceptionPopupController;
+import ulb.infof307.g12.controller.javafx.paquets.CarteEtudeController;
 import ulb.infof307.g12.controller.javafx.paquets.EditionController;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
-import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Carte;
+import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
-import ulb.infof307.g12.view.exception.ExceptionPopupVueController;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,8 +50,8 @@ public class MenuPrincipal extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        exceptionPopupController = new ExceptionPopupController(new Stage());
         connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
+        exceptionPopupController = new ExceptionPopupController(new Stage());
         connexionController.show();
     }
 
@@ -255,6 +254,13 @@ public class MenuPrincipal extends Application {
      * @param error erreur String
      */
     public void showErrorPopup(String error){
+        if(exceptionPopupController == null) {
+            try {
+                exceptionPopupController = new ExceptionPopupController(new Stage());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         exceptionPopupController.createError(error);
     }
 

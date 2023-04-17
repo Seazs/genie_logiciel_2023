@@ -1,6 +1,8 @@
 package ulb.infof307.g12.view.exception;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -17,6 +19,7 @@ public class ExceptionPopupVueController {
      */
     public void setErrorMsg(String text){
         errorMsg.setText(text);
+        errorView.getChildren().add(errorMsg);
     }
 
 

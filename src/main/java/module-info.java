@@ -8,6 +8,12 @@ module connexion {
     opens ulb.infof307.g12.controller.javafx.connexion to javafx.fxml;
     exports ulb.infof307.g12.controller.javafx.connexion;
 
+    opens ulb.infof307.g12.view.exception to javafx.fxml;
+    exports ulb.infof307.g12.view.exception;
+
+    opens ulb.infof307.g12.controller.javafx.exception to javafx.fxml;
+    exports ulb.infof307.g12.controller.javafx.exception;
+
     opens ulb.infof307.g12.view.profiles to javafx.fxml;
     exports ulb.infof307.g12.view.profiles;
 
