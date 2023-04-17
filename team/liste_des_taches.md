@@ -33,17 +33,17 @@ Tâche 1 : Stockage des Utilisateurs et Paquets – 4 points
 Tâche 2: Fusion des branches– 2 points
 
 - Nicolas et Alexandre B.
-- Description :
+- Description : Cette tâche avait pour but de fusionner la plupart des branches présentes dans le main, ainsi que de régler les conflits associés à cette fusion.
 
 Tâche 3 : Création de Paquets– 2 points
 
 - Nicolas et Romain
-- Description :
+- Description : Cette tâche comprenait la création d'une classe représentant le paquet de cartes.
 
 Tâche 4 : Sauvegarde du paquet dans un fichier – 2 points
 
 - Romain et Nicolas
-- Description :
+- Description : Tâche consistant à sauvegarder/charger les paquets de l'utilisateur depuis un fichier contenu dans un dossier propre à l'utilisateur.
 
 Tâche 5 : Ajout des cartes dans paquet et sauvegarde – 2 points
 
