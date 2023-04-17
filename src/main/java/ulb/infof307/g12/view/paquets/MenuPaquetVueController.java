@@ -16,6 +16,7 @@ import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -84,7 +85,7 @@ public class MenuPaquetVueController implements Initializable {
         });
     }
 
-    public void ouvrirProfil(ActionEvent event) {
+    public void ouvrirProfil(ActionEvent event){
         MenuPrincipal.getINSTANCE().openProfile();
     }
 

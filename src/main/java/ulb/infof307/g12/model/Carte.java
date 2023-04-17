@@ -70,6 +70,7 @@ Carte {
         verso = new_verso;
     }
 
+
     /**
      * Prend une carte de type QCM en paramètre et décode le recto et le verso
      * le recto de base est de forme Question§reponse1§reponse2§reponse3

@@ -35,7 +35,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     @Override
     public Paquet creerPaquet() {
         // Créer le paquet et l'ajouter à la liste de paquet de l'utilisateur
-        Paquet nouveauPaquet = new Paquet("Nouveau Paquet", "Catégorie") ;
+        Paquet nouveauPaquet = new Paquet("Nouveau Paquet") ;
         user.addPaquet(nouveauPaquet);
         return nouveauPaquet;
     }

@@ -3,6 +3,7 @@ package ulb.infof307.g12.controller.javafx.profiles;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.stage.Stage;
+import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.ProfilVueListener;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 public class ProfilController extends BaseController implements ProfilVueListener {
 
+    @Getter
     private Utilisateur user;
 
     public ProfilController(Stage stage, Utilisateur user) throws IOException {
@@ -23,7 +25,8 @@ public class ProfilController extends BaseController implements ProfilVueListene
 
         ProfilVueController controller = (ProfilVueController) super.controller;
         controller.setListener(this);
-
+        controller.setPseudoLabel(user.getPseudo());
+        controller.setMdpLabel(user.getMdp());
     }
 
     @Override
@@ -37,6 +40,7 @@ public class ProfilController extends BaseController implements ProfilVueListene
             GestionnaireUtilisateur gestionnaire = MenuPrincipal.getINSTANCE().getGestionnaireUtilisateur();
             try {
                 gestionnaire.modifierMotDePasse(username,newPassword,oldPassword);
+                MenuPrincipal.getINSTANCE().getUserPrincipale().setMdp(newPassword);
                 result = gestionnaire.getStatusMsg();
             } catch (IOException e) {
                 result = "Une erreur s'est produite. Veuillez réessayer.";

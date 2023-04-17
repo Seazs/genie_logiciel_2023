@@ -48,7 +48,7 @@ public class EditionVueController {
      * @param paquet paquet à être modifié
      */
     public void chargerEditionVue(Paquet paquet) {
-        categoriePaquetTextField.setText(paquet.getCategories().get(0));
+        categoriePaquetTextField.setPromptText("Catégorie");
         nomPaquetTextField.setText(paquet.getNom());
 
         questionCol.setCellValueFactory(new PropertyValueFactory<Carte,String>("recto"));
