@@ -44,6 +44,11 @@ public class MenuPrincipal extends Application {
     private ExceptionPopupController exceptionPopupController;
     private CarteReponseController carteReponseController;
 
+    /**
+     * Démarrage de l'application
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         exceptionPopupController = new ExceptionPopupController(new Stage());
@@ -51,6 +56,9 @@ public class MenuPrincipal extends Application {
         connexionController.show();
     }
 
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         File stockage = new File("./stockage");
         if (!stockage.exists()){
@@ -59,6 +67,11 @@ public class MenuPrincipal extends Application {
         launch();
     }
 
+    /**
+     * Affichage du menu du Paquet
+     * @param user
+     * @param parent
+     */
     public void showMenuPaquet(Utilisateur user, ConnexionMenuController parent) {
         try {
             this.userPrincipale = user;
@@ -71,6 +84,11 @@ public class MenuPrincipal extends Application {
             showErrorPopup("Impossible de charger les paquets !");
         }
     }
+
+    /**
+     * Affichage du menu de connexion
+     * @param parent
+     */
     public void showConnexionMenu(ProfilController parent){
         try {
             parent.hide();
@@ -84,6 +102,11 @@ public class MenuPrincipal extends Application {
 
     }
 
+    /**
+     * Affichage de l'étude de carte
+     * @param parent
+     * @param paquet
+     */
     public void showCarteEtude(MenuPaquetController parent,Paquet paquet){
         try{
             parent.hide();
@@ -96,6 +119,9 @@ public class MenuPrincipal extends Application {
         }
     }
 
+    /**
+     * Ouverture du profil
+     */
     public void openProfile(){
         profilController = null;
         try {
@@ -108,24 +134,42 @@ public class MenuPrincipal extends Application {
         }
     }
 
+    /**
+     * Retour au menu Paquet
+     */
     public void returnToMenuPaquet() {
         profilController.hide();
         menuPaquetController.show();
     }
 
+    /**
+     * Retour au menu Paquet depuis l'édition de ce dernier
+     */
     public void returnFromEditionToMenuPaquet() {
         menuPaquetController.show();
         editionController.hide();
     }
+
+    /**
+     * Retour à l'étude de cartes depuis le menu du Paquet
+     */
     public void returnFromCarteEtudeToMenuPaquet() {
         menuPaquetController.show();
         carteEtudeController.hide();
     }
 
+    /**
+     * Retour au menu de connexion
+     */
     public void returnToConnexionMenu() {
         profilController.hide();
         connexionController.show();
     }
+
+    /**
+     * Affichage des cartes de type QCM
+     * @param card
+     */
     public void showCarteQCM(Carte card) {
         try {
             carteQCMController = new CarteQCMController(new Stage(),"Title",card);
@@ -138,6 +182,10 @@ public class MenuPrincipal extends Application {
 
     }
 
+    /**
+     * Affichage des cartes de type texte à trou
+     * @param card
+     */
     public void showCarteTT(Carte card) {
         try{
         carteTTController = new CarteTTController(new Stage(),"",card);
@@ -150,6 +198,12 @@ public class MenuPrincipal extends Application {
     }
 
 
+    /**
+     * Affichage de la réponse
+     * @param userReponse
+     * @param rightAnswer
+     * @param controller
+     */
     private void showResponse(String userReponse, String rightAnswer, BaseController controller) {
         try {
             controller.hide();
@@ -162,15 +216,29 @@ public class MenuPrincipal extends Application {
 
     }
 
+    /**
+     * Affichage de la réponse des cartes QCM
+     * @param userReponse
+     * @param rightAnswer
+     */
     public void showQCMResponse(String userReponse, String rightAnswer){
         showResponse(userReponse,rightAnswer,carteQCMController);
     }
 
+    /**
+     * Affichage de la réponse des cartes textes à trous
+     * @param userReponse
+     * @param rightAnswer
+     */
     public void showTTResponse(String userReponse, String rightAnswer){
         showResponse(userReponse,rightAnswer,carteTTController);
     }
 
 
+    /**
+     * Affichage du menu d'édition
+     * @param paquet
+     */
     public void showMenuEdition(Paquet paquet) {
         try{
             editionController = new EditionController(new Stage(),paquet);
@@ -183,6 +251,9 @@ public class MenuPrincipal extends Application {
 
     }
 
+    /**
+     * @param error
+     */
     public void showErrorPopup(String error){
         exceptionPopupController.createError(error);
     }

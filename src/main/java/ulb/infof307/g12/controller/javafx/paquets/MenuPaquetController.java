@@ -17,15 +17,17 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     @Getter
     private Utilisateur user;
 
+    /**
+     * Controller du menuPaquet
+     * @param user
+     * @param stage
+     * @throws IOException
+     */
     public MenuPaquetController(Utilisateur user,Stage stage) throws IOException {
         super(stage,MenuPaquetVueController.class.getResource("menuPaquet.fxml"),"");
         this.user = user;
         MenuPaquetVueController controller = (MenuPaquetVueController) super.controller;
         controller.setListener(this);
-    }
-    @Override
-    public void openPaquet(Paquet paquet) {
-        //TODO: faire le paquet
     }
 
     /**
@@ -49,6 +51,10 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         MenuPrincipal.getINSTANCE().showMenuEdition(paquet);
     }
 
+    /**
+     * Etude des cartes
+     * @param paquet Paquet choisit par l'utilisateur à être étudié
+     */
     @Override
     public void CarteEtude(Paquet paquet){
         MenuPrincipal instance = MenuPrincipal.getINSTANCE();

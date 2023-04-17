@@ -21,6 +21,13 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
     private ArrayList<Integer> cartesEtudeScore = new ArrayList<Integer>();//liste des scores des cartes
     @Getter
     private Paquet paquet;
+
+    /**
+     * Controller de l'étude de carte
+     * @param stage
+     * @param paquet
+     * @throws IOException
+     */
     public CarteEtudeController(Stage stage, Paquet paquet) throws IOException {
         super(stage,CarteEtudeVueController.class.getResource("carteEtude.fxml"), "");
         CarteEtudeVueController controller = (CarteEtudeVueController) super.controller;
@@ -32,6 +39,10 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
         }
         controller.chargerCarteEtudeVue(cartesEtude);
     }
+
+    /**
+     * @return CartesEtudes
+     */
     @Override
     public ArrayList<Carte> getCartesEtude(){
         return cartesEtude;
@@ -40,22 +51,52 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
     public ArrayList<Integer> getCartesEtudeScore(){
         return cartesEtudeScore;
     }
+
+    /**
+     * @param index
+     */
+    @Override
     public void tresMauvais(int index){
         cartesEtude.get(index).setConnaissance(1);
     }
+
+    /**
+     * @param index
+     */
+    @Override
     public void mauvais(int index){
         cartesEtude.get(index).setConnaissance(2);
     }
+
+    /**
+     * @param index
+     */
+    @Override
     public void moyen(int index){
         cartesEtude.get(index).setConnaissance(3);
     }
+
+    /**
+     * @param index
+     */
+    @Override
     public void bon(int index){
         cartesEtude.get(index).setConnaissance(4);
     }
+
+    /**
+     * @param index
+     */
+    @Override
     public void tresBon(int index){
         cartesEtude.get(index).setConnaissance(5);
 
     }
+
+    /**
+     * Sauvegarde des cartes
+     */
+    @Override
     public void saveCartes(){
         try {
             GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();

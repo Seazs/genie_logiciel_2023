@@ -20,6 +20,12 @@ public class EditionController extends BaseController implements EditionVueListe
     @Getter
     private Paquet paquet;
 
+    /**
+     * Controller de l'édition
+     * @param stage
+     * @param paquet
+     * @throws IOException
+     */
     public EditionController(Stage stage, Paquet paquet) throws IOException {
         super(stage, EditionVueController.class.getResource("editionPaquet.fxml"), "");
         this.paquet = paquet;

@@ -15,6 +15,12 @@ public class ConnexionMenuController extends BaseController implements UserCrede
 
     private GestionnaireUtilisateur gestionnaireUtilisateur;
 
+    /**
+     * Controller du menu de connexion
+     * @param stage
+     * @param gestionnaireUtilisateur
+     * @throws IOException
+     */
     public ConnexionMenuController(Stage stage,GestionnaireUtilisateur gestionnaireUtilisateur) throws IOException {
         super(stage, ConnexionVueController.class.getResource("connexion-menu-view.fxml"),"Application Title");
         this.gestionnaireUtilisateur = gestionnaireUtilisateur;
@@ -23,6 +29,12 @@ public class ConnexionMenuController extends BaseController implements UserCrede
         controller.setListener(this);
     }
 
+    /**
+     * Lorsqu'on s'enregistre
+     * @param username
+     * @param password
+     * @return
+     */
     @Override
     public String onRegister(String username, String password) {
 
@@ -43,6 +55,11 @@ public class ConnexionMenuController extends BaseController implements UserCrede
 
     }
 
+    /**
+     * @param username
+     * @param password
+     * @return le statut
+     */
     @Override
     public String onLogin(String username, String password) {
         String result = "";

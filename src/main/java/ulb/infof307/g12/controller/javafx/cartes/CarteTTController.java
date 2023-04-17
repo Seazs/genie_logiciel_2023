@@ -11,6 +11,13 @@ import java.util.Objects;
 
 public class CarteTTController extends BaseController {
 
+    /**
+     * Controller de la carte texte à trous
+     * @param stage
+     * @param title
+     * @param card
+     * @throws IOException
+     */
     public CarteTTController(Stage stage, String title, Carte card) throws IOException {
         super(stage, CarteTTVueController.class.getResource("CarteTT.fxml"), title);
         if (!Objects.equals(card.getType(), "tt")) throw new IllegalArgumentException();

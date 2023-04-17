@@ -13,6 +13,13 @@ public abstract class BaseController {
     protected Stage stage;
     protected Object controller;
 
+    /**
+     * Controller de base
+     * @param stage
+     * @param resource
+     * @param title
+     * @throws IOException
+     */
     public BaseController(Stage stage,URL resource,String title) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(resource);
@@ -28,10 +35,16 @@ public abstract class BaseController {
 
     }
 
+    /**
+     * Show
+     */
     public void show(){
         stage.show();
     }
 
+    /**
+     * Hide
+     */
     public void hide(){
         stage.hide();
     }
