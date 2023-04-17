@@ -1,0 +1,16 @@
+module:connexion
+ulb.infof307.g12
+ulb.infof307.g12.controller.javafx
+ulb.infof307.g12.controller.javafx.cartes
+ulb.infof307.g12.controller.javafx.connexion
+ulb.infof307.g12.controller.javafx.exception
+ulb.infof307.g12.controller.javafx.paquets
+ulb.infof307.g12.controller.javafx.profiles
+ulb.infof307.g12.controller.listeners
+ulb.infof307.g12.controller.storage
+ulb.infof307.g12.model
+ulb.infof307.g12.view.cartes
+ulb.infof307.g12.view.connexion
+ulb.infof307.g12.view.exception
+ulb.infof307.g12.view.paquets
+ulb.infof307.g12.view.profiles
