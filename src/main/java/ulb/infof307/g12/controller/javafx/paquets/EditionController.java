@@ -63,8 +63,16 @@ public class EditionController extends BaseController implements EditionVueListe
     public void ajouterCarte(String recto, String verso){
 
         int id = paquet.getCartes().size() + 1 ;
-        Carte carte = new Carte(id, recto, verso, "") ;
-        paquet.ajouterCarte(carte);
+        try {
+            Carte carte = new Carte(id, recto, verso, "") ;
+            paquet.ajouterCarte(carte);
+        }catch (IllegalArgumentException e){
+            // Attention, ici le e.printStackTrace fonctionne mais par contre le popup ne s’affiche pas et il provoque une null type error
+            e.printStackTrace();
+            MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posseder un recto et un verso !");
+        }
+
+
     }
 
 }

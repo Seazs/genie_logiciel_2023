@@ -50,9 +50,22 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     }
 
     @Override
-    public void CarteEtude(Paquet paquet){
+    public void CarteEtude(Paquet paquet) {
         MenuPrincipal instance = MenuPrincipal.getINSTANCE();
-        instance.showCarteEtude(this,paquet);
+        if (paquet == null) {
+            //Attention, le showErrorPopup ne fontionne pas, à corriger pour être plus propre.
+            instance.showErrorPopup("Vous devez sélectionner un paquet à jouer !");
+            throw new NullPointerException("Vous devez sélectionner un paquet à jouer !");
+        }
+        else if (paquet.cartes.size() == 0){
+            //Attention, le showErrorPopup ne fontionne pas, à corriger pour être plus propre.
+            instance.showErrorPopup("Vous devez creer des cartes avant de pouvoir les étudier !");
+            throw new IllegalArgumentException("Vous devez creer des cartes avant de pouvoir les étudier !");
+        }
+        else {
+            instance.showCarteEtude(this,paquet);
+        }
+
     }
 
 
