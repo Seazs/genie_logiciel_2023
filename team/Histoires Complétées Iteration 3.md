@@ -5,13 +5,11 @@ Les histoires, dont les précisions ont été discutées avec le client, sélect
 
 # Histoire 8 :
 
-Terminer l'implémentation des types de cartes (suite de l'itération 2).
+Terminer l'implémentation des différents types de cartes (suite de l'itération 2).
 
 * Points : 4
 * Risque : 2
 * Priorité : 2
-
-![](images/Histoire_8.png)
 
 # Histoire 10 :
 
