@@ -124,6 +124,11 @@ Tâche 2 : Types de cartes en eux même – 5 points
 - Raphaël et Alexandre B
 - Description : Créer et éditer différents types de cartes (textes à trou, questions choix multiples) dans le code et sauvegarde de ces dernières. Fonctions qui permet de set et de get les infos des textes à trous et qcm.
 
+Tâche 3 : Terminer l'implémentation des cartes de type(QCM et texte a trou)
+
+-
+- Lier toutes les différentes parties afin de l'histoire de pouvoir créer, modifier et jouer tout type de carte.
+
 ## Histoire 24 - 2 points
 
 Tâche 1 : MVC – 1 point
@@ -135,3 +140,59 @@ Tâche 2 : Gestion des exceptions – 1 points
 
 - Nicolas et Wassim
 - Description : Trouver un moyen pour gérer les différentes exceptions qui peuvent survenir lors de l’utilisation de l’application.
+
+## Histoire 10 - 10 points
+
+Tâche 1 : Création du serveur / protocole de communication - 3 points
+
+-
+- Description : Creér un serveur et gérer la connexion au serveur(pas à l'application) et recevoir/envoyer des infos au serveur.
+
+Tâche 2 : Login / register / envoie de paquets - 4 points 
+
+-
+- Description : Envoie du nom et du mdp par le client et check de la validité par le serveur. Envoie des paquets de l'utilisateurs à l'application.
+
+Tâche 3 : Gérer la database du serveur - 2 points
+
+- 
+- Description : Création des fichiers nécessaire au stockage des données de l'utilisateur.
+
+Tâche 4 : Implémentation de l'option en ligne ou hors ligne - 1 points
+
+- 
+- Description: Création d'un choix au menu de connexion qui détermine si l'applis est en mode en ligne ou hors ligne.
+
+# Histoire 11 - 10 points
+
+Tâche 1 : Gestion de la database du server - 2 points
+
+-
+- Description : Création des fichiers nécéssaire au stockage des paquets contenu dans le store
+
+Tâche 2 : Implémentation de l'affichage du store - 2 points
+
+-
+- Description : Créer l'affichage qui récupere tous les paquets se trouvant en ligne avec le moyen les télécharger (Frontend)
+
+Tâche 3 : Implémentation de l'affichage de upload - 2 points
+
+-
+- Description : Créer l'affichage qui permet de upload un fichier sur le store
+
+Tâche 4 : Créer le protocole de communaction store et client - 4 points
+
+-
+- Description : Créer le protocole permettant d'envoyer un paquet sur le store ainsi que de recevoir la liste de tous les paquets du store. 
+
+## Histoire 14 - 4 points 
+
+Tâche 1 : Création de l'interface audio pour chaque type de carte (Frontend) - 1 points
+
+-
+- Description : Créer l'interface nécessaire pour la lecture audio.(Frontend)
+
+Tâche 2 : Implémentation de la lecture audio (Back end) - 3 points
+
+-
+- Description : Implémenter la lecture des cartes avec la manière dont chaque cartes sera lue.
