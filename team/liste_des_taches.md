@@ -124,10 +124,6 @@ Tâche 2 : Types de cartes en eux même – 5 points
 - Raphaël et Alexandre B
 - Description : Créer et éditer différents types de cartes (textes à trou, questions choix multiples) dans le code et sauvegarde de ces dernières. Fonctions qui permet de set et de get les infos des textes à trous et qcm.
 
-Tâche 3 : Terminer l'implémentation des cartes de type(QCM et texte a trou)
-
--
-- Lier toutes les différentes parties afin de l'histoire de pouvoir créer, modifier et jouer tout type de carte.
 
 ## Histoire 24 - 2 points
 
@@ -140,6 +136,17 @@ Tâche 2 : Gestion des exceptions – 1 points
 
 - Nicolas et Wassim
 - Description : Trouver un moyen pour gérer les différentes exceptions qui peuvent survenir lors de l’utilisation de l’application.
+
+
+# Itération 3 - 28 points
+
+
+## Histoire 8 - 4 points
+
+Tâche 1 : Terminer l'implémentation des cartes de type(QCM et texte a trou) - 4 points
+
+-
+- Lier toutes les différentes parties afin de l'histoire de pouvoir créer, modifier et jouer tout type de carte.
 
 ## Histoire 10 - 10 points
 
