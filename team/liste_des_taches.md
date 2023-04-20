@@ -146,7 +146,7 @@ Tâche 2 : Gestion des exceptions – 1 points
 Tâche 1 : Terminer l'implémentation des cartes de type(QCM et texte a trou) - 4 points
 
 -
-- Lier toutes les différentes parties afin de l'histoire de pouvoir créer, modifier et jouer tout type de carte.
+- Description : Lier toutes les différentes parties afin de l'histoire de pouvoir créer, modifier et jouer tout type de carte.
 
 ## Histoire 10 - 10 points
 
