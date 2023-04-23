@@ -5,218 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2ca99f1-14a2-4767-bb05-1b7c55f36220" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../application/src/main/java/ulb/infof307/g12/model/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/api/PaquetController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/dao/PaquetDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/dao/PaquetDataAccessService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/model/Paquet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/service/PaquetService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dist/Projet_gestion_projet-Iteration-1.0-RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dist/Projet_gestion_projet-Iteration-2.0-RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dist/TOFILL.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/allclasses-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/allpackages-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/module-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/Main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/BaseController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/cartes/CarteQCMController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/cartes/CarteReponseController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/cartes/CarteTTController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/cartes/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/cartes/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/connexion/ConnexionMenuController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/connexion/MenuPrincipal.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/connexion/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/connexion/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/exception/ExceptionPopupController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/exception/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/exception/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/paquets/CarteEtudeController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/paquets/EditionController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/paquets/MenuPaquetController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/paquets/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/paquets/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/profiles/ProfilController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/profiles/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/javafx/profiles/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/listeners/CarteEtudeListener.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/listeners/EditionVueListener.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/listeners/MenuPaquetListener.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/listeners/ProfilVueListener.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/listeners/UserCredentialsListener.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/listeners/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/listeners/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/storage/GestionnairePaquet.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/storage/GestionnaireUtilisateur.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/storage/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/controller/storage/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/model/Carte.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/model/Paquet.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/model/STATUS.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/model/Utilisateur.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/model/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/model/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/cartes/CarteQCMVueController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/cartes/CarteReponseVueController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/cartes/CarteTTVueController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/cartes/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/cartes/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/connexion/ConnexionVueController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/connexion/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/connexion/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/exception/ExceptionPopupVueController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/exception/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/exception/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/paquets/CarteEtudeVueController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/paquets/EditionVueController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/paquets/MenuPaquetVueController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/paquets/PaquetDeCartesVueController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/paquets/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/paquets/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/profiles/ProfilVueController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/profiles/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/connexion/ulb/infof307/g12/view/profiles/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/copy.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/element-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/help-doc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-10.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-11.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-12.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-13.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-14.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-15.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-16.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-17.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-18.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-19.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-20.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-21.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-3.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-4.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-5.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-6.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-7.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-8.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index-files/index-9.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/legal/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/legal/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/legal/jquery.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/legal/jqueryUI.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/member-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/module-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/overview-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/package-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/resources/glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/resources/x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/script-dir/jquery-3.6.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/script-dir/jquery-ui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/script-dir/jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/search-page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/search.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/tag-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../javadoc/type-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/TOFILL.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/TOFILL.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/module-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/javafx/BaseController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/javafx/cartes/CarteQCMController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/javafx/cartes/CarteReponseController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/javafx/cartes/CarteTTController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/javafx/connexion/ConnexionMenuController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/javafx/connexion/MenuPrincipal.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/javafx/exception/ExceptionPopupController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/javafx/paquets/CarteEtudeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/javafx/paquets/EditionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/javafx/paquets/MenuPaquetController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/javafx/profiles/ProfilController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/listeners/CarteEtudeListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/listeners/EditionVueListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/listeners/MenuPaquetListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/listeners/ProfilVueListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/listeners/UserCredentialsListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/storage/GestionnairePaquet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/controller/storage/GestionnaireUtilisateur.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/model/Carte.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/model/Paquet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/model/STATUS.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/model/Utilisateur.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/view/cartes/CarteQCMVueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/view/cartes/CarteReponseVueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/view/cartes/CarteTTVueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/view/connexion/ConnexionVueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/view/exception/ExceptionPopupVueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/view/paquets/CarteEtudeVueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/view/paquets/EditionVueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/view/paquets/MenuPaquetVueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/view/paquets/PaquetDeCartesVueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/ulb/infof307/g12/view/profiles/ProfilVueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/Legrand.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/cartes/CarteQCM.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/cartes/CarteReponse.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/cartes/CarteTT.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/connexion/connexion-menu-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/connexion/connexion_style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/exception/ExceptionPopup.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/paquets/carteEtude.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/paquets/editionPaquet.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/paquets/menuPaquet.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/paquets/menuPaquetStyle.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/paquets/paquetDeCarte.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/profiles/profil.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/ulb/infof307/g12/view/profiles/profilStyle.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stockage/alex/Chimie" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stockage/alex/Maths" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stockage/stockUser.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/ulb/infof307/g12/view/paquets/carteEtude.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/ulb/infof307/g12/view/paquets/editionPaquet.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/ulb/infof307/g12/view/paquets/menuPaquet.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/ulb/infof307/g12/view/paquets/paquetDeCarte.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/ulb/infof307/g12/view/profiles/profil.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/BurndownGrp12_2.0.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/Histoires Complétées Iteration 1.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/Histoires Complétées Iteration 2.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/Histoires Complétées Iteration 3.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/Lombok.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/Suivi_de_planification_IT2.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/TemplateBurndown.ods" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/histoires/Histoire23.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/histoires/Stories.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/histoires/Stories_Complétés_It2.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/histoires/Stories_complété.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/Histoire_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/Histoire_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/Histoire_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/Histoire_14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/Histoire_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/Histoire_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/Histoire_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/Histoire_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/Histoire_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/readme/Configurations.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/readme/Creation configuration.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/images/readme/Vue Maven.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/liste_des_taches.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../team/pv/pv_0228.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/TOFILL.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/ulb/infof307/g12/controller/GestionnairePaquetTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/ulb/infof307/g12/controller/GestionnaireUtilisateurTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/ulb/infof307/g12/model/CarteTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/ulb/infof307/g12/model/PaquetTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/ulb/infof307/g12/model/UtilisateurTest.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../application/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../application/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../application/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../application/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application/src/main/java/ulb/infof307/g12/controller/javafx/connexion/MenuPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../application/src/main/java/ulb/infof307/g12/controller/javafx/connexion/MenuPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application/src/main/java/ulb/infof307/g12/model/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../application/src/main/java/ulb/infof307/g12/model/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/ServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/dao/PaquetDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/dao/PaquetDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/dao/PaquetDataAccessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/dao/PaquetDataAccessService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/service/PaquetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ulb/infof307/g12/server/service/PaquetService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ulb/infof307/g12/server/ServerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ulb/infof307/g12/server/ServerApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,7 +54,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/documents/GitHub/2023-groupe-12/application",
+    "last_opened_file_path": "D:/documents/GitHub/2023-groupe-12",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"

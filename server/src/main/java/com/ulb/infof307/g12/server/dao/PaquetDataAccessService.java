@@ -14,17 +14,27 @@ import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 // Ceci est la DataBase
 public class PaquetDataAccessService implements PaquetDao{
     private static List<Paquet> DB = new ArrayList<>();
+
+    /**
+     * @see PaquetDao#createPaquet(UUID, String)
+     */
     @Override
     public void createPaquet(UUID id, String nom) {
         DB.add(new Paquet(id,nom));
     }
 
 
+    /**
+     * @see PaquetDao#getPaquet(UUID)
+     */
     @Override
     public Optional<Paquet> getPaquet(UUID id) {
         return DB.stream().filter(paquet -> paquet.getId().equals(id)).findFirst();
     }
 
+    /**
+     * @see PaquetDao#getAllPaquets()
+     */
     @Override
     public List<Paquet> getAllPaquets() {
         return DB;
