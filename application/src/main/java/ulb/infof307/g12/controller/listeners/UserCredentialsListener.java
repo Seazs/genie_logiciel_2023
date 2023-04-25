@@ -15,5 +15,5 @@ public interface UserCredentialsListener {
      * @param password
      * @return
      */
-    String onLogin(String username, String password);
+    String onLogin(String username, String password, boolean isOnline);
 }

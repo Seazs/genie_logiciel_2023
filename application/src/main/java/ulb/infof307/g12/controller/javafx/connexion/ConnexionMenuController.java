@@ -62,10 +62,11 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      * @return le statut
      */
     @Override
-    public String onLogin(String username, String password) {
+    public String onLogin(String username, String password, boolean isOnline) {
         String result = "";
 
         try {
+            //TODO : se connecter de deux différentes manières (en ligne et hors ligne)
             if (gestionnaireUtilisateur.connect(username, password)) { // Si la connexion s'est bien passée
                 result = "Connecting: " + username + " = " + password;
 
