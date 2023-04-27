@@ -19,4 +19,18 @@ public interface EditionVueListener {
      * @param verso
      */
     void ajouterCarte(String recto, String verso);
+
+    /**
+     * Ajout de cartes
+     * @param recto
+     * @param verso
+     */
+    void ajouterCarteQCM(String recto, String verso);
+
+    /**
+     * Ajout de cartes
+     * @param recto
+     * @param verso
+     */
+    void ajouterCarteTT(String recto, String verso);
 }

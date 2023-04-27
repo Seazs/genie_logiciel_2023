@@ -78,6 +78,13 @@ public class EditionController extends BaseController implements EditionVueListe
             MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posseder un recto et un verso !");
         }
 
+    }
+
+    public void ajouterCarteQCM(String recto, String verso) {
+
+    }
+
+    public void ajouterCarteTT(String recto, String verso) {
 
     }
 

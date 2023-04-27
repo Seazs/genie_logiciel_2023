@@ -1,10 +1,7 @@
 package ulb.infof307.g12.controller.storage;
 
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.model.Carte;
-import ulb.infof307.g12.model.CarteQcm;
-import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Utilisateur;
+import ulb.infof307.g12.model.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -98,18 +95,15 @@ public class GestionnairePaquet {
                 newPaquet.ajouterCarte(bufferCarte);
             }
             else if(listdata[0].equals("Simple")){
-                Carte bufferCarte = new Carte(i, "recto", "verso");
+                Carte bufferCarte = new Carte(i, listdata[1], listdata[2]);
                 bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
                 newPaquet.ajouterCarte(bufferCarte);
             }
-            /*
-            bufferCarte.setType(listdata[0].strip());
-            bufferCarte.setRecto(listdata[1].strip());
-            bufferCarte.setVerso(listdata[2].strip()) ;
-
-            bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
-            newPaquet.ajouterCarte(bufferCarte);
-             */
+            else if(listdata[0].equals("TT")){
+                CarteTt bufferCarte = new CarteTt(i, listdata[1], listdata[2]);
+                bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
+                newPaquet.ajouterCarte(bufferCarte);
+            }
             i++;}
     }
 

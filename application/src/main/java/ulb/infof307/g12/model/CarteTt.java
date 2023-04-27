@@ -6,7 +6,7 @@ import java.util.Collections;
 public class CarteTt extends Carte{
     public CarteTt(int id, String recto, String verso) {
         super(id, recto, verso);
-        this.type="tt";
+        this.type="TT";
         editRecto(recto);
         this.verso = verso;
     }

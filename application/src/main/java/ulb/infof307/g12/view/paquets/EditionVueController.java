@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import lombok.Setter;
@@ -18,6 +15,7 @@ import ulb.infof307.g12.model.Paquet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class EditionVueController {
     @FXML
@@ -34,6 +32,8 @@ public class EditionVueController {
     private TextField reponseTextField;
     @FXML
     private TableView<Carte> tableQR;
+    @FXML
+    private ChoiceBox<String> typechoix;
     @Setter
     private EditionVueListener listener;
 
@@ -64,7 +64,7 @@ public class EditionVueController {
             carte.editVerso(event.getNewValue());
         });
 
-
+        setChoicebox();
         reloadTable();
 
     }
@@ -82,16 +82,43 @@ public class EditionVueController {
      */
     @FXML
     void ajouterCarte(ActionEvent event){
-        // Prendre les informations
-        String recto = questionTextField.getText();
-        String verso = reponseTextField.getText() ;
-        // Envoyer au listener
-        listener.ajouterCarte(recto, verso);
-        // Nettoyer les entrées
-        questionTextField.clear();
-        reponseTextField.clear();
-        // Recharger la table
-        reloadTable();
+        if (Objects.equals(typechoix.getValue(), "Simple")){
+            // Prendre les informations
+            String recto = questionTextField.getText();
+            String verso = reponseTextField.getText() ;
+            // Envoyer au listener
+            listener.ajouterCarte(recto, verso);
+            // Nettoyer les entrées
+            questionTextField.clear();
+            reponseTextField.clear();
+            // Recharger la table
+            reloadTable();
+        }
+        else if (Objects.equals(typechoix.getValue(), "QCM")){
+            // Prendre les informations
+            String recto = questionTextField.getText();
+            String verso = reponseTextField.getText() ;
+            // Envoyer au listener
+            listener.ajouterCarteQCM(recto, verso);
+            // Nettoyer les entrées
+            questionTextField.clear();
+            reponseTextField.clear();
+            // Recharger la table
+            reloadTable();
+        }
+        else if (Objects.equals(typechoix.getValue(), "Texte à trous")){
+            // Prendre les informations
+            String recto = questionTextField.getText();
+            String verso = reponseTextField.getText() ;
+            // Envoyer au listener
+            listener.ajouterCarteTT(recto, verso);
+            // Nettoyer les entrées
+            questionTextField.clear();
+            reponseTextField.clear();
+            // Recharger la table
+            reloadTable();
+        }
+
     }
 
     /**
@@ -120,4 +147,11 @@ public class EditionVueController {
         MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();
     }
 
+    /**
+     * Mets les options possibles dans la choicebox
+     */
+    void setChoicebox(){
+        typechoix.getItems().addAll("Simple", "QCM", "Texte à trous");
+        typechoix.setValue("Simple");
+    }
 }
