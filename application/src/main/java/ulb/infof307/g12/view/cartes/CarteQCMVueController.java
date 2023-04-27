@@ -6,7 +6,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.model.Carte;
+import ulb.infof307.g12.model.CarteQcm;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ public class CarteQCMVueController {
      * Affichage des cartes
      * @param carte
      */
-    public void showCarte(Carte carte){
-        ArrayList<String> list = carte.getQCMOrTTInfo();
+    public void showCarte(CarteQcm carte){
+        ArrayList<String> list = carte.getQCMInfo();
 
         Text text = new Text(list.get(0));
         questionText.getChildren().addAll(text);

@@ -3,7 +3,6 @@ package ulb.infof307.g12.view.cartes;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import ulb.infof307.g12.model.Carte;
 
 import java.util.ArrayList;
 

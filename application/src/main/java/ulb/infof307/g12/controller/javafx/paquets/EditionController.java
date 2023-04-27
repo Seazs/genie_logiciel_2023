@@ -70,7 +70,7 @@ public class EditionController extends BaseController implements EditionVueListe
 
         int id = paquet.getCartes().size() + 1 ;
         try {
-            Carte carte = new Carte(id, recto, verso, "") ;
+            Carte carte = new Carte(id, recto, verso) ;
             paquet.ajouterCarte(carte);
         }catch (IllegalArgumentException e){
             // Attention, ici le e.printStackTrace fonctionne mais par contre le popup ne s’affiche pas et il provoque une null type error

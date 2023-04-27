@@ -2,6 +2,7 @@ package ulb.infof307.g12.controller.storage;
 
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.Carte;
+import ulb.infof307.g12.model.CarteQcm;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
 
@@ -91,13 +92,24 @@ public class GestionnairePaquet {
         String line;
         while((line = reader.readLine())!=null) {
             String[] listdata = line.split("#");
-
-            Carte bufferCarte = new Carte(i, "recto", "verso", "");
+            if (listdata[0].equals("QCM")){ //Si la carte est un QCM
+                CarteQcm bufferCarte = new CarteQcm(i, listdata[1],  listdata[2]);
+                bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
+                newPaquet.ajouterCarte(bufferCarte);
+            }
+            else if(listdata[0].equals("Simple")){
+                Carte bufferCarte = new Carte(i, "recto", "verso");
+                bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
+                newPaquet.ajouterCarte(bufferCarte);
+            }
+            /*
             bufferCarte.setType(listdata[0].strip());
             bufferCarte.setRecto(listdata[1].strip());
             bufferCarte.setVerso(listdata[2].strip()) ;
+
             bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
             newPaquet.ajouterCarte(bufferCarte);
+             */
             i++;}
     }
 

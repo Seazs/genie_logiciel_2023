@@ -8,6 +8,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.Carte;
+import ulb.infof307.g12.model.CarteTt;
 
 import java.util.ArrayList;
 
@@ -26,9 +27,9 @@ public class CarteTTVueController {
      * Affichage de la carte
      * @param card
      */
-    public void showCarte(Carte card){
+    public void showCarte(CarteTt card){
         this.card = card;
-        ArrayList<String> list = card.getQCMOrTTInfo();
+        ArrayList<String> list = card.getTTInfo();
         Text textBefore = new Text(list.get(0)),
                 textAfter = new Text(list.get(1));
         userAnswerField = new TextField();

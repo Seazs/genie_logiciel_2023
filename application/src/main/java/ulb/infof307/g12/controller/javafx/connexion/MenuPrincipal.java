@@ -15,10 +15,7 @@ import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
-import ulb.infof307.g12.model.Carte;
-import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Server;
-import ulb.infof307.g12.model.Utilisateur;
+import ulb.infof307.g12.model.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -170,7 +167,7 @@ public class MenuPrincipal extends Application {
      * Affichage des cartes de type QCM
      * @param card carte
      */
-    public void showCarteQCM(Carte card) {
+    public void showCarteQCM(CarteQcm card) {
         try {
             carteQCMController = new CarteQCMController(new Stage(),"Title",card);
             menuPaquetController.hide();
@@ -186,7 +183,7 @@ public class MenuPrincipal extends Application {
      * Affichage des cartes de type texte à trou
      * @param card cartes
      */
-    public void showCarteTT(Carte card) {
+    public void showCarteTT(CarteTt card) {
         try{
         carteTTController = new CarteTTController(new Stage(),"",card);
         menuPaquetController.hide();
