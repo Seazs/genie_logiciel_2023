@@ -43,6 +43,8 @@ public class MenuPrincipal extends Application {
     private CarteTTController carteTTController;
     private ExceptionPopupController exceptionPopupController;
     private CarteReponseController carteReponseController;
+    @Getter
+    private Server server;
 
     /**
      * Démarrage de l'application
@@ -53,6 +55,7 @@ public class MenuPrincipal extends Application {
     public void start(Stage stage) throws IOException {
         connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
         exceptionPopupController = new ExceptionPopupController(new Stage());
+        server = new Server();
         connexionController.show();
     }
 

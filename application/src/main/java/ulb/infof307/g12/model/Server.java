@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
  * Class permettant de envoyer/recevoir les informations d'un serveur
  */
 public class Server {
-    private String url = "http://localhost:8080/api/v1/paquet";
+    private String url = "http://localhost:8080/api/v1/";
 
     /**
      * Envoie une requète GET au serveur et renvoie les données
@@ -17,7 +17,7 @@ public class Server {
      */
     public String getPaquets(){
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity(url+"paquet", String.class);
         String responseBody = response.getBody();
        return responseBody;
     }
@@ -32,7 +32,20 @@ public class Server {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
         HttpEntity<String> entity = new HttpEntity<>(nom, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(url+"paquet", entity, String.class);
         return response.getBody();
     }
+
+    /**
+     * Envoie une requète GET au serveur pour authentifier un utilisateur.
+     * @param username
+     * @return
+     */
+    public boolean getLogin(String username,String password){
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Boolean> response = restTemplate.getForEntity(url + "user/"+username+"/"+password+"/login", Boolean.class);
+        Boolean result = response.getBody();
+        return Boolean.TRUE.equals(result);
+    }
+
 }

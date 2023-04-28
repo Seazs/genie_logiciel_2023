@@ -59,14 +59,24 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      * Lorsqu'on se connecte
      * @param username username
      * @param password mot de passe
+     * @param isOnline si la connexion se fait en ligne
      * @return le statut
      */
     @Override
     public String onLogin(String username, String password, boolean isOnline) {
-        String result = "";
+        return (isOnline) ? onlineLogin(username,password) : offlineLogin(username,password);
+    }
 
+    /**
+     * Lorsqu'on se connecte de façon hors-ligne
+     * @See onLogin
+     * @param username nom d'utilisateur
+     * @param password mot de passe
+     * @return le statut
+     */
+    private String offlineLogin(String username, String password){
+        String result = "";
         try {
-            //TODO : se connecter de deux différentes manières (en ligne et hors ligne)
             if (gestionnaireUtilisateur.connect(username, password)) { // Si la connexion s'est bien passée
                 result = "Connecting: " + username + " = " + password;
 
@@ -78,12 +88,22 @@ public class ConnexionMenuController extends BaseController implements UserCrede
                 result = gestionnaireUtilisateur.getStatusMsg();
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de retrouver les informations de connexion !");
         }
 
         return result;
     }
 
+    /**
+     * Lorsque l'utilisateur se connecte au serveur
+     * @See onLogin
+     * @param username nom d'utilisateur
+     * @param password mot de passe
+     * @return le statut
+     */
+    private String onlineLogin(String username, String password){
+        String result = MenuPrincipal.getINSTANCE().getServer().getLogin(username,password) ? "Connected: " : "Wrong credentials !";
+        return result;
+    }
 
 }

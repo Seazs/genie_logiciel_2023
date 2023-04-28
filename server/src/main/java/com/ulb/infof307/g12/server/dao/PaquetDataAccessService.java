@@ -29,6 +29,8 @@ public class PaquetDataAccessService implements PaquetDao{
      */
     @Override
     public Optional<Paquet> getPaquet(UUID id) {
+        Optional<Paquet> t;
+
         return DB.stream().filter(paquet -> paquet.getId().equals(id)).findFirst();
     }
 
