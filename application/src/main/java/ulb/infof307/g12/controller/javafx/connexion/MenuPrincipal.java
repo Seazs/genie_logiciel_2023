@@ -174,10 +174,8 @@ public class MenuPrincipal extends Application {
             menuPaquetController.hide();
             carteQCMController.show();
         } catch (IOException e) {
-            e.printStackTrace();
             showErrorPopup("Impossible de charger la carte QCM !");
         }
-
     }
 
     /**

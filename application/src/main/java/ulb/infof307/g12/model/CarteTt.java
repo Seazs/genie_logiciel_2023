@@ -1,21 +1,31 @@
 package ulb.infof307.g12.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import lombok.Getter;
 
 public class CarteTt extends Carte{
+    @Getter
+    private String begin;
+    @Getter
+    private String end;
+    @Getter
+    private String answer;
     public CarteTt(int id, String recto, String verso) {
         super(id, recto, verso);
         this.type="TT";
         editRecto(recto);
         this.verso = verso;
+        getTTInfo();
     }
 
-    public ArrayList<String> getTTInfo(){
-        ArrayList<String> infos = new ArrayList<String>();
+    /**
+     * Complète les infos à partir des rectos et verso reçus au stockage
+     * recto = begin§end
+     * verso = reponse
+     */
+    public void getTTInfo(){
         String[] listinfos = this.getRecto().split("§");
-        Collections.addAll(infos, listinfos);
-        infos.add(this.getVerso());
-        return infos;
+        this.begin = listinfos[0];
+        this.end = listinfos[1];
+        this.answer = this.getVerso();
     }
 }

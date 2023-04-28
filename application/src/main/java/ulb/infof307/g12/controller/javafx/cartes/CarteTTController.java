@@ -2,7 +2,6 @@ package ulb.infof307.g12.controller.javafx.cartes;
 
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
-import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.CarteTt;
 import ulb.infof307.g12.view.cartes.CarteTTVueController;
 
@@ -24,4 +23,20 @@ public class CarteTTController extends BaseController {
         CarteTTVueController controller = (CarteTTVueController) super.controller;
         controller.showCarte(card);
     }
+
+    public CarteTt getCarteTt(CarteTt card){
+        return card;
+    }
+    public String getAnswer(CarteTt card){
+        return card.getAnswer();
+    }
+
+    public String getBegin(CarteTt card){
+        return card.getBegin();
+    }
+
+    public String getEnd(CarteTt card){
+        return card.getEnd();
+    }
+
 }

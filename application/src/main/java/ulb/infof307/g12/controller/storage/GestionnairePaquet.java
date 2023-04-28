@@ -14,8 +14,8 @@ public class GestionnairePaquet {
 
     /**
      * Sauvegarde un paquet de cartes sous forme de fichier dans le dossier de l'utilisateur.
-     * @param user
-     * @throws IOException
+     * @param user utilisateur
+     * @throws IOException exception
      */
     public void save(Utilisateur user) throws IOException {
         List<Paquet> listPaquet = user.getListPaquet();

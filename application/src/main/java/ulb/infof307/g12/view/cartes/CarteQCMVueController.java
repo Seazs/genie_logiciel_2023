@@ -6,11 +6,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.model.CarteQcm;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CarteQCMVueController {
     @FXML
@@ -21,20 +20,19 @@ public class CarteQCMVueController {
 
     /**
      * Affichage des cartes
-     * @param carte
      */
-    public void showCarte(CarteQcm carte){
-        ArrayList<String> list = carte.getQCMInfo();
-        Text text = new Text(list.get(0));
+    public void showCarte(String question, String[] propositions, String answer){
+        Text text = new Text(question);
+        ArrayList<String> list = new ArrayList<>();
+        Collections.addAll(list, propositions);
         questionText.getChildren().add(text);
         reponsesList.getItems().addAll(list.stream().toList().subList(1, list.size()-1));
-        response = list.get(list.size()-1);
-        MenuPrincipal.getINSTANCE().showCarteQCM(carte);
+        response = answer;
     }
 
     /**
      * Effectue l'event lorsqu'il y a un clic
-     * @param e
+     * @param e event
      */
     public void onClick(ActionEvent e){
         String userReponse = reponsesList.getSelectionModel().getSelectedItem();

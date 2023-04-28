@@ -25,16 +25,13 @@ public class CarteTTVueController {
 
     /**
      * Affichage de la carte
-     * @param card
+     * @param card carte à montrer
      */
     public void showCarte(CarteTt card){
-        this.card = card;
-        ArrayList<String> list = card.getTTInfo();
-        Text textBefore = new Text(list.get(0)),
-                textAfter = new Text(list.get(1));
+        Text textBefore = new Text(card.getBegin()),
+                textAfter = new Text(card.getEnd());
         userAnswerField = new TextField();
-        answer = list.get(2);
-
+        answer = card.getAnswer();
         showedText.getChildren().addAll(textBefore,userAnswerField,textAfter);
         MenuPrincipal.getINSTANCE().showCarteTT(card);
     }

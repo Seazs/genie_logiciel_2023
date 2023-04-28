@@ -21,6 +21,6 @@ public class CarteQCMController extends BaseController {
         super(stage, CarteQCMVueController.class.getResource("CarteQCM.fxml"), title);
         if (!Objects.equals(carte.getType(), "QCM")) throw new IllegalArgumentException();
         CarteQCMVueController controller = (CarteQCMVueController) super.controller;
-        controller.showCarte(carte);
+        controller.showCarte(carte.getQuestion(), carte.getPropositions(), carte.getAnswer());
     }
 }

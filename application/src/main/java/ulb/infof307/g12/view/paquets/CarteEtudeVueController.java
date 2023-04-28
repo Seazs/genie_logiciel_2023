@@ -1,22 +1,14 @@
 package ulb.infof307.g12.view.paquets;
 
-import javafx.event.ActionEvent;
 
-
-import java.lang.annotation.Documented;
 import java.util.concurrent.ThreadLocalRandom;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.CarteEtudeListener;
 import ulb.infof307.g12.model.Carte;
-import ulb.infof307.g12.model.Paquet;
 
 import java.util.ArrayList;
 
@@ -49,7 +41,7 @@ public class CarteEtudeVueController{
     }
 
     /**
-     * Change de coté de la carte entre recto et verso
+     * Change de côté de la carte entre recto et verso
      * @return
      */
     public void changeCote(){

@@ -15,10 +15,10 @@ public abstract class BaseController {
 
     /**
      * Controller de base
-     * @param stage
-     * @param resource
-     * @param title
-     * @throws IOException
+     * @param stage stage
+     * @param resource ressource
+     * @param title titre
+     * @throws IOException exception
      */
     public BaseController(Stage stage,URL resource,String title) throws IOException {
 
