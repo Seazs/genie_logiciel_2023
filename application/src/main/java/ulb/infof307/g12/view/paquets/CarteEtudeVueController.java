@@ -13,7 +13,6 @@ import ulb.infof307.g12.model.Carte;
 import java.util.ArrayList;
 
 
-
 public class CarteEtudeVueController{
     @Setter
     private CarteEtudeListener listener;
@@ -33,7 +32,7 @@ public class CarteEtudeVueController{
 
     /**
      * Chargement de la vue des cartes d'études
-     * @param cartesEtude
+     * @param cartesEtude cartes a étudier
      */
     public void chargerCarteEtudeVue(ArrayList<Carte> cartesEtude) {
         indexCarte=indexRandom();

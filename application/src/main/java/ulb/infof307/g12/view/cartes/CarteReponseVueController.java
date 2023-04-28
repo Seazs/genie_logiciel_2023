@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
-import java.util.ArrayList;
 
 public class CarteReponseVueController {
     @FXML

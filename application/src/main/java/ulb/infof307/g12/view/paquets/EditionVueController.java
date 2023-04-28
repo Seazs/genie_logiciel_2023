@@ -14,15 +14,18 @@ import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.EditionVueListener;
 import ulb.infof307.g12.model.Carte;
-import ulb.infof307.g12.model.Paquet;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class EditionVueController {
 
-    public AnchorPane editionqr;
+    private final EditCarteVueController editioncarte = new EditCarteVueController();
+
+    @FXML
+    private AnchorPane editionqr;
     @FXML
     private TableColumn<Carte, String> reponseCol;
     @FXML
@@ -32,9 +35,21 @@ public class EditionVueController {
     @FXML
     private TableColumn<Carte, String> questionCol;
     @FXML
-    private TextField questionTextField;
+    private TextField question;
     @FXML
-    private TextField reponseTextField;
+    private TextField rep1;
+    @FXML
+    private TextField rep2;
+    @FXML
+    private TextField rep3;
+    @FXML
+    private TextField rep;
+    @FXML
+    private TextField debutTextField;
+    @FXML
+    private TextField finTextField;
+    @FXML
+    private TextField reponsettTextField;
     @FXML
     private TableView<Carte> tableQR;
     @FXML
@@ -46,17 +61,16 @@ public class EditionVueController {
     /**
      * Charge la vue du menu d'édition avec les informations existantes du paquet
      *
-     * @param paquet paquet à être modifié
+     * @param name nom du paquet modifié
      */
-    public void chargerEditionVue(Paquet paquet) throws IOException {
+    public void chargerEditionVue(String name) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("editCarte.fxml"));
         Node view = loader.load();
         editionqr.getChildren().clear();
         editionqr.getChildren().add(view);
 
-
         categoriePaquetTextField.setPromptText("Catégorie");
-        nomPaquetTextField.setText(paquet.getNom());
+        nomPaquetTextField.setText(name);
 
         questionCol.setCellValueFactory(new PropertyValueFactory<Carte, String>("recto"));
         reponseCol.setCellValueFactory(new PropertyValueFactory<Carte, String>("verso"));
@@ -111,40 +125,63 @@ public class EditionVueController {
     @FXML
     void ajouterCarte(ActionEvent event) {
         if (Objects.equals(typechoix.getValue(), "Simple")) {
-            // Prendre les informations
-            String recto = questionTextField.getText();
-            String verso = reponseTextField.getText();
-            // Envoyer au listener
-            listener.ajouterCarte(recto, verso);
-            // Nettoyer les entrées
-            questionTextField.clear();
-            reponseTextField.clear();
-            // Recharger la table
-            reloadTable();
+            addCarteQr();
         } else if (Objects.equals(typechoix.getValue(), "QCM")) {
-            // Prendre les informations
-            String recto = questionTextField.getText();
-            String verso = reponseTextField.getText();
-            // Envoyer au listener
-            listener.ajouterCarteQCM(recto, verso);
-            // Nettoyer les entrées
-            questionTextField.clear();
-            reponseTextField.clear();
-            // Recharger la table
-            reloadTable();
+            addCarteQcm();
         } else if (Objects.equals(typechoix.getValue(), "Texte à trous")) {
-            // Prendre les informations
-            String recto = questionTextField.getText();
-            String verso = reponseTextField.getText();
-            // Envoyer au listener
-            listener.ajouterCarteTT(recto, verso);
-            // Nettoyer les entrées
-            questionTextField.clear();
-            reponseTextField.clear();
-            // Recharger la table
-            reloadTable();
+            addCarteTt();
         }
 
+    }
+
+    /**
+     * Ajoute une carte Texte à trou dans le paquet
+     */
+    private void addCarteTt() {
+        // Prendre les informations
+        String recto = editioncarte.getQuestionTextField();
+        String verso = editioncarte.getReponseTextField();
+        // Envoyer au listener
+        listener.ajouterCarteTT(recto, verso);
+        // Nettoyer les entrées
+        //questionTextField.clear();
+        //reponseTextField.clear();
+        // Recharger la table
+        reloadTable();
+    }
+
+    /**
+     * Ajoute une carte qcm dans le paquet
+     */
+    private void addCarteQcm() {
+        /*// Prendre les informations
+        String recto = questionTextField.getText();
+        String verso = reponseTextField.getText();
+        // Envoyer au listener
+        listener.ajouterCarteQCM(recto, verso);
+        // Nettoyer les entrées
+        questionTextField.clear();
+        reponseTextField.clear();
+        // Recharger la table*/
+        reloadTable();
+    }
+
+    /**
+     * Ajout d'une carte question réponse dans le paquet
+     */
+    private void addCarteQr() {
+        // Prendre les informations
+
+        /*String recto = questionTextField.getText();
+        String verso = reponseTextField.getText();
+        System.out.println(recto + " | " + verso);
+        // Envoyer au listener
+        listener.ajouterCarte(recto, verso);
+        // Nettoyer les entrées
+        questionTextField.clear();
+        reponseTextField.clear();
+        // Recharger la table*/
+        reloadTable();
     }
 
     /**
@@ -189,5 +226,4 @@ public class EditionVueController {
         });
 
     }
-
 }

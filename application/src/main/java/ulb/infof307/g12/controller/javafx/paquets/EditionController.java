@@ -11,7 +11,6 @@ import ulb.infof307.g12.view.paquets.EditionVueController;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class EditionController extends BaseController implements EditionVueListener {
 
@@ -20,16 +19,16 @@ public class EditionController extends BaseController implements EditionVueListe
 
     /**
      * Controller de l'édition
-     * @param stage
-     * @param paquet
-     * @throws IOException
+     * @param stage stage
+     * @param paquet paquet
+     * @throws IOException exception
      */
     public EditionController(Stage stage, Paquet paquet) throws IOException {
         super(stage, EditionVueController.class.getResource("editionPaquet.fxml"), "");
         this.paquet = paquet;
         EditionVueController controller = (EditionVueController) super.controller;
         controller.setListener(this);
-        controller.chargerEditionVue(paquet);
+        controller.chargerEditionVue(paquet.getNom());
     }
 
     /**

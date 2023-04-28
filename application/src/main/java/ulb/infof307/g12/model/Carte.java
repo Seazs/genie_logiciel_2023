@@ -30,9 +30,9 @@ Carte {
      * La carte se stocke dans le fichier de la façon suivante:
      * type#recto#verso
      * Selon le type le recto et le verso seront lus différemment
-     * @param id
-     * @param recto
-     * @param verso
+     * @param id id
+     * @param recto recto
+     * @param verso verso
      */
     public Carte(int id, String recto, String verso){
 
@@ -49,7 +49,7 @@ Carte {
 
     /**
      * Fonction qui édite la variable "recto" de la classe carte
-     * @param new_recto
+     * @param new_recto nouveau recto
      */
     public void editRecto(String new_recto){
         if (new_recto == null || new_recto.equals(""))
@@ -60,7 +60,7 @@ Carte {
 
     /**
      * Fonction qui édite la variable "verso" de la classe carte
-     * @param new_verso
+     * @param new_verso nouveau verso
      */
     public void editVerso(String new_verso){
         if (new_verso == null || new_verso.equals(""))
@@ -70,9 +70,9 @@ Carte {
 
     /**
      * Sauvegarde dans recto et verso le texte à trou et sa réponse pour une carte TT
-     * @param begin
-     * @param end
-     * @param gap
+     * @param begin begin of the sentence
+     * @param end end of the sentence
+     * @param gap solution
      */
     public void setTTInfo(String begin, String end, String gap){
         if (this.getType().equals("tt")){

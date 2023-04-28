@@ -20,7 +20,7 @@ public abstract class BaseController {
      * @param title titre
      * @throws IOException exception
      */
-    public BaseController(Stage stage,URL resource,String title) throws IOException {
+    public BaseController(Stage stage, URL resource, String title) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(resource);
 
