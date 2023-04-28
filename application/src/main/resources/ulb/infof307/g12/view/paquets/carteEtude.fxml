@@ -56,7 +56,7 @@
       <AnchorPane layoutX="87.0" layoutY="63.0" prefHeight="263.0" prefWidth="350.0">
          <children>
             <fx:include fx:id="viewFxml" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0" source="CarteQCM.fxml" visible="true" />
-            <Text fx:id="affichageCarte" layoutX="99.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="152.9999999999999">
+            <Text fx:id="affichageCarte" layoutX="99.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="152.9999999999999">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
