@@ -8,7 +8,6 @@ import ulb.infof307.g12.controller.listeners.CarteEtudeListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Utilisateur;
 import ulb.infof307.g12.view.paquets.CarteEtudeVueController;
 
 import java.io.IOException;

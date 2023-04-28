@@ -2,7 +2,6 @@ package ulb.infof307.g12.controller.javafx.cartes;
 
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
-import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.CarteQcm;
 import ulb.infof307.g12.view.cartes.CarteQCMVueController;
 
@@ -23,4 +22,6 @@ public class CarteQCMController extends BaseController {
         CarteQCMVueController controller = (CarteQCMVueController) super.controller;
         controller.showCarte(carte.getQuestion(), carte.getPropositions(), carte.getAnswer());
     }
+
+
 }

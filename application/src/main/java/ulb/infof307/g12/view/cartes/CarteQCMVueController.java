@@ -28,6 +28,8 @@ public class CarteQCMVueController {
         questionText.getChildren().add(text);
         reponsesList.getItems().addAll(list.stream().toList().subList(1, list.size()-1));
         response = answer;
+
+
     }
 
     /**

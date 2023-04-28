@@ -7,10 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.model.Carte;
-import ulb.infof307.g12.model.CarteTt;
-
-import java.util.ArrayList;
 
 public class CarteTTVueController {
 
@@ -20,20 +16,21 @@ public class CarteTTVueController {
     TextFlow showedText;
     String answer;
     TextField userAnswerField;
-    Carte card;
+
 
 
     /**
-     * Affichage de la carte
-     * @param card carte à montrer
+     * @param debut debut de la phrase
+     * @param fin fin de la phrase
+     * @param reponse réponse
+     * Affichage des cartes de type Tt
      */
-    public void showCarte(CarteTt card){
-        Text textBefore = new Text(card.getBegin()),
-                textAfter = new Text(card.getEnd());
+    public void showCarte(String debut,String fin,String reponse){
+        Text textBefore = new Text(debut),
+                textAfter = new Text(fin);
         userAnswerField = new TextField();
-        answer = card.getAnswer();
+        answer = reponse;
         showedText.getChildren().addAll(textBefore,userAnswerField,textAfter);
-        MenuPrincipal.getINSTANCE().showCarteTT(card);
     }
 
     /**

@@ -21,22 +21,7 @@ public class CarteTTController extends BaseController {
         super(stage, CarteTTVueController.class.getResource("CarteTT.fxml"), title);
         if (!Objects.equals(card.getType(), "tt")) throw new IllegalArgumentException();
         CarteTTVueController controller = (CarteTTVueController) super.controller;
-        controller.showCarte(card);
-    }
-
-    public CarteTt getCarteTt(CarteTt card){
-        return card;
-    }
-    public String getAnswer(CarteTt card){
-        return card.getAnswer();
-    }
-
-    public String getBegin(CarteTt card){
-        return card.getBegin();
-    }
-
-    public String getEnd(CarteTt card){
-        return card.getEnd();
+        controller.showCarte(card.getBegin(),card.getEnd(),card.getAnswer());
     }
 
 }
