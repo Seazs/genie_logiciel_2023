@@ -71,8 +71,6 @@ public class EditionController extends BaseController implements EditionVueListe
             Carte carte = new Carte(id, recto, verso) ;
             paquet.ajouterCarte(carte);
         }catch (IllegalArgumentException e){
-            // Attention, ici le e.printStackTrace fonctionne mais par contre le popup ne s’affiche pas et il provoque une null type error
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posseder un recto et un verso !");
         }
 
@@ -80,8 +78,8 @@ public class EditionController extends BaseController implements EditionVueListe
 
     /**
      * Créer une nouvelle carte QCM et l'ajoute au paquet qui est modifié
-     * @param recto
-     * @param verso
+     * @param recto recto
+     * @param verso verso
      */
     public void ajouterCarteQCM(String recto, String verso) {
         int id = paquet.getCartes().size() + 1 ;
@@ -89,16 +87,14 @@ public class EditionController extends BaseController implements EditionVueListe
             CarteQcm carte = new CarteQcm(id, recto, verso) ;
             paquet.ajouterCarte(carte);
         }catch (IllegalArgumentException e){
-            // Attention, ici le e.printStackTrace fonctionne mais par contre le popup ne s’affiche pas et il provoque une null type error
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posseder un recto et un verso !");
         }
     }
 
     /**
      * Créer une nouvelle carte Texte à Trou et l'ajoute au paquet qui est modifié
-     * @param recto
-     * @param verso
+     * @param recto recto
+     * @param verso verso
      */
     public void ajouterCarteTT(String recto, String verso) {
         int id = paquet.getCartes().size() + 1 ;
@@ -106,8 +102,6 @@ public class EditionController extends BaseController implements EditionVueListe
             CarteTt carte = new CarteTt(id, recto, verso) ;
             paquet.ajouterCarte(carte);
         }catch (IllegalArgumentException e){
-            // Attention, ici le e.printStackTrace fonctionne mais par contre le popup ne s’affiche pas et il provoque une null type error
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posseder un recto et un verso !");
         }
     }

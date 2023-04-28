@@ -21,10 +21,13 @@
          </columnResizePolicy>
       </TableView>
       <Button fx:id="retourBouton" layoutX="50.0" layoutY="33.0" mnemonicParsing="false" onAction="#annulerEdition" prefHeight="63.0" prefWidth="80.0" text="Retour" />
-      <TextField fx:id="questionTextField" layoutX="50.0" layoutY="313.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0" promptText="Question" />
-      <TextField fx:id="reponseTextField" layoutX="312.0" layoutY="313.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0" promptText="Réponse" />
-      <Button fx:id="ajouterCarte" layoutX="263.0" layoutY="350.0" mnemonicParsing="false" onAction="#ajouterCarte" text="Ajouter Carte" />
-      <ChoiceBox fx:id="typechoix" layoutX="362.0" layoutY="350.0" prefWidth="150.0" />
+       <Button fx:id="ajouterCarte" layoutX="478.0" layoutY="306.0" mnemonicParsing="false" onAction="#ajouterCarte" text="Ajouter Carte" />
+      <ChoiceBox fx:id="typechoix" layoutX="55.0" layoutY="306.0" prefWidth="150.0" />
+      <AnchorPane id="editqr" layoutX="40.0" layoutY="319.0" prefHeight="63.0" prefWidth="532.0">
+          <children>
+                <fx:include fx:id="editionqr" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0" source="editCarte.fxml" visible="true" />
+         </children>
+       </AnchorPane>
    </children>
 
     <stylesheets>
