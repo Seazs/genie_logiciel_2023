@@ -25,11 +25,11 @@ public class CarteQCMVueController {
      */
     public void showCarte(CarteQcm carte){
         ArrayList<String> list = carte.getQCMInfo();
-
         Text text = new Text(list.get(0));
-        questionText.getChildren().addAll(text);
+        questionText.getChildren().add(text);
         reponsesList.getItems().addAll(list.stream().toList().subList(1, list.size()-1));
         response = list.get(list.size()-1);
+        MenuPrincipal.getINSTANCE().showCarteQCM(carte);
     }
 
     /**

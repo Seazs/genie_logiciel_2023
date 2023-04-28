@@ -36,6 +36,7 @@ public class CarteTTVueController {
         answer = list.get(2);
 
         showedText.getChildren().addAll(textBefore,userAnswerField,textAfter);
+        MenuPrincipal.getINSTANCE().showCarteTT(card);
     }
 
     /**

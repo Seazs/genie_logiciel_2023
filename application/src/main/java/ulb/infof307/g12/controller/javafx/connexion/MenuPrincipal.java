@@ -41,6 +41,7 @@ public class MenuPrincipal extends Application {
     private ExceptionPopupController exceptionPopupController;
     private CarteReponseController carteReponseController;
 
+
     /**
      * Démarrage de l'application
      * @param stage stage
@@ -185,9 +186,9 @@ public class MenuPrincipal extends Application {
      */
     public void showCarteTT(CarteTt card) {
         try{
-        carteTTController = new CarteTTController(new Stage(),"",card);
-        menuPaquetController.hide();
-        carteTTController.show();
+            carteTTController = new CarteTTController(new Stage(),"",card);
+            menuPaquetController.hide();
+            carteTTController.show();
         } catch (IOException e) {
             e.printStackTrace();
             showErrorPopup("Impossible de charger la carte Texte à Trou !");

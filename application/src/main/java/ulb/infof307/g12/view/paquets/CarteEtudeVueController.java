@@ -33,6 +33,7 @@ public class CarteEtudeVueController{
     private Button boutonChange;
     private ArrayList<Carte> cartesEtude;
     private ArrayList<Integer> cartesEtudeScore;
+    @FXML
 
     private int indexCarte = 0;
     private int cote = 0; // 0 = recto, 1 = verso
