@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-//@RequestMapping("api/v1/user")
+@RequestMapping("api/v1/user")
+@RestController
 public class UserController {
 
     private final UserService userService;
@@ -25,9 +26,8 @@ public class UserController {
      * @param password le mot de passe
      * @return l'utilisateur correspondant à l'id ou null s'il n'existe pas
      */
-    @RequestMapping(method = RequestMethod.GET,value="api/v1/user/{username}/{password}/login")
+    @GetMapping(value="{username}/{password}")
     public ResponseEntity<Boolean> getUser(@PathVariable String username, @PathVariable String password){
-        System.out.println("Request for user: "+username+" Pass: "+password);
         Boolean result = userService.getUser(username,password).isPresent();
         return ResponseEntity.ok(result);
     }

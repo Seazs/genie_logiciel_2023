@@ -4,10 +4,11 @@ import com.ulb.infof307.g12.server.dao.UserDAO;
 import com.ulb.infof307.g12.server.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
+@Service
 public class UserService {
     private final UserDAO userDAO;
 
@@ -16,7 +17,7 @@ public class UserService {
      */
     @Autowired
     // Auto Wired crée une instance de PaquetDao (comme ça on doit pas s'occuper de le créer nous même)
-    public UserService(@Qualifier("user_db") UserDAO userDAO) {
+    public UserService(@Qualifier("users") UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 

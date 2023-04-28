@@ -5,12 +5,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository("user_db")
+@Repository("users")
 public class UserDataAccessService implements UserDAO{
 
     List<User> userList = new ArrayList<>();
 
     public UserDataAccessService() {
+        //TODO: retirer la valeur de test
         User user = new User("admin","test");
         createUser(user);
         System.out.println("User: "+user.getUsername()+" Pass: "+user.getPassword());
