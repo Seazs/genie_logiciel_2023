@@ -1,8 +1,7 @@
 package com.ulb.infof307.g12.server.dao;
 
+import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
-
-import java.util.Optional;
 
 public interface UserDAO {
 
@@ -15,9 +14,11 @@ public interface UserDAO {
 
     /**
      * crée un utilisateur sur le serveur
+     *
      * @param user l'utilisateur
+     * @return
      */
-    void createUser(User user);
+    STATUS createUser(User user);
 
     /**
      * Récupère le mot de passe d'un utilisateur
@@ -25,5 +26,11 @@ public interface UserDAO {
      * @return le mot de passe de l'utilisateur
      */
     String getPassword(String username);
+
+    /**
+     * Met à jour un utilisateur
+     * @param user l'utilisateur
+     */
+    void updateUser(User user);
 
 }

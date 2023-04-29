@@ -39,7 +39,8 @@ public class ConnexionVueController {
     public void onRegisterButtonClick(ActionEvent actionEvent) {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        String result = listener.onRegister(username,password);
+        boolean isOnline = onlineToggle.isSelected();
+        String result = listener.onRegister(username,password,isOnline);
         messageLabel.setText(result);
     }
 

@@ -7,7 +7,7 @@ public interface UserCredentialsListener {
      * @param password
      * @return
      */
-    String onRegister(String username, String password);
+    String onRegister(String username, String password, boolean isOnline);
 
     /**
      * Est appelé lorsqu'un utilisateur essaye de se login

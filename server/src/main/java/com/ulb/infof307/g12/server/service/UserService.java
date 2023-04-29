@@ -1,12 +1,11 @@
 package com.ulb.infof307.g12.server.service;
 
 import com.ulb.infof307.g12.server.dao.UserDAO;
+import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -32,9 +31,18 @@ public class UserService {
 
     /**
      * Enregistre un utilisateur dans le serveur
+     *
      * @param user l'utilisateur
+     * @return
      */
-    public void createUser(User user){
-        userDAO.createUser(user);
+    public STATUS createUser(User user){
+        return userDAO.createUser(user);
+    }
+
+    /**
+     * @see UserDAO#updateUser(User)
+     */
+    public void updateUser(User user){
+        userDAO.updateUser(user);
     }
 }

@@ -1,5 +1,6 @@
 package ulb.infof307.g12.controller.javafx.connexion;
 
+import javafx.scene.control.Menu;
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
@@ -37,8 +38,18 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      * @return le statut
      */
     @Override
-    public String onRegister(String username, String password) {
+    public String onRegister(String username, String password,boolean isOnline) {
+        return isOnline ? onlineRegister(username,password) : offlineRegister(username,password);
+    }
 
+
+    /**
+     * création d'un utilisateur en local
+     * @param username pseudo
+     * @param password mot de passe
+     * @return le statut
+     */
+    private String offlineRegister(String username, String password){
         String result = "";
 
         try {
@@ -53,7 +64,11 @@ public class ConnexionMenuController extends BaseController implements UserCrede
         }
 
         return result;
+    }
 
+    private String onlineRegister(String username, String password){
+
+        return MenuPrincipal.getINSTANCE().getServer().createUser(username,password);
     }
 
     /**

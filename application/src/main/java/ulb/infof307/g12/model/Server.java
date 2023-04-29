@@ -45,15 +45,25 @@ public class Server {
     public STATUS getLogin(String username,String password){
         RestTemplate restTemplate = new RestTemplate();
         try {
-            ResponseEntity<String> response = restTemplate.getForEntity(url + "user/" + username, String.class);
+            ResponseEntity<String> response = restTemplate.getForEntity(url + "user/login/" + username, String.class);
             String result = response.getBody();
             if(result.equals(password))
                 return STATUS.OK;
             else
                 return STATUS.WRONG_PASSWORD;
-        }catch (HttpClientErrorException e){
+        }catch (HttpClientErrorException | NullPointerException e){
             return STATUS.USERNAME_DOES_NOT_EXIST;
         }
+    }
+
+    public String createUser(String username, String password){
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+
+        HttpEntity<String> entity = new HttpEntity<>(username+"#"+password, headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(url+"user/register", entity, String.class);
+        return response.getBody();
     }
 
 }

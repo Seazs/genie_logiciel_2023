@@ -1,5 +1,6 @@
 package com.ulb.infof307.g12.server.dao;
 
+import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -29,12 +30,18 @@ public class UserDataAccessService implements UserDAO{
     }
 
     /**
-     * @see UserDAO#createUser(User)
      * @param user l'utilisateur
+     * @return
+     * @see UserDAO#createUser(User)
      */
     @Override
-    public void createUser(User user) {
+    public STATUS createUser(User user) {
+        System.out.println(user.getUsername()+" "+user.getPassword());
+        if(userList.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))){
+            return STATUS.USERNAME_DOES_ALREADY_EXIST;
+        }
         userList.add(user);
+        return STATUS.OK;
     }
 
     /**
@@ -49,5 +56,13 @@ public class UserDataAccessService implements UserDAO{
                 .findFirst()
                 .map(User::getPassword)
                 .orElse(null);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        Optional<User> userToUpdate = userList.stream()
+                .filter(u -> u.getUsername().equals(user.getUsername()))
+                .findFirst();
+        userToUpdate.ifPresent(value -> value.setPassword(user.getPassword()));
     }
 }
