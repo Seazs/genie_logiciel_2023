@@ -14,7 +14,7 @@ public class ConnexionVueController {
     @FXML
     private PasswordField passwordField;
     @FXML
-    private ToggleButton OnlineToggle;
+    private ToggleButton onlineToggle;
     @Setter
     private UserCredentialsListener listener;
 
@@ -26,7 +26,7 @@ public class ConnexionVueController {
     protected void onConnectButtonClick(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        boolean isOnline = OnlineToggle.isSelected();
+        boolean isOnline = onlineToggle.isSelected();
         String result = listener.onLogin(username,password,isOnline);
         messageLabel.setText(result);
     }
@@ -39,13 +39,14 @@ public class ConnexionVueController {
     public void onRegisterButtonClick(ActionEvent actionEvent) {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        String result = listener.onRegister(username,password);
+        boolean isOnline = onlineToggle.isSelected();
+        String result = listener.onRegister(username,password,isOnline);
         messageLabel.setText(result);
     }
 
     @FXML
     public void switchOnlineMode(ActionEvent actionEvent) {
-        String text = (OnlineToggle.isSelected()) ?"hors ligne" : "en ligne" ;
-        OnlineToggle.setText("Passer en mode " + text);
+        String text = (onlineToggle.isSelected()) ?"hors ligne" : "en ligne" ;
+        onlineToggle.setText("Passer en mode " + text);
     }
 }

@@ -43,6 +43,8 @@ public class MenuPrincipal extends Application {
     private CarteTTController carteTTController;
     private ExceptionPopupController exceptionPopupController;
     private CarteReponseController carteReponseController;
+    @Getter
+    private final Server server = new Server();
 
     /**
      * Démarrage de l'application

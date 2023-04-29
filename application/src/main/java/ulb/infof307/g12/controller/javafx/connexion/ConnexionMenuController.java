@@ -1,10 +1,12 @@
 package ulb.infof307.g12.controller.javafx.connexion;
 
+import javafx.scene.control.Menu;
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
+import ulb.infof307.g12.model.STATUS;
 import ulb.infof307.g12.model.Utilisateur;
 import ulb.infof307.g12.view.connexion.ConnexionVueController;
 
@@ -36,8 +38,18 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      * @return le statut
      */
     @Override
-    public String onRegister(String username, String password) {
+    public String onRegister(String username, String password,boolean isOnline) {
+        return isOnline ? onlineRegister(username,password) : offlineRegister(username,password);
+    }
 
+
+    /**
+     * création d'un utilisateur en local
+     * @param username pseudo
+     * @param password mot de passe
+     * @return le statut
+     */
+    private String offlineRegister(String username, String password){
         String result = "";
 
         try {
@@ -47,26 +59,38 @@ public class ConnexionMenuController extends BaseController implements UserCrede
                 result = gestionnaireUtilisateur.getStatusMsg();
             }
         } catch (IOException e) {
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible d'enregistrer le nouvel utilisateur !");
         }
 
         return result;
+    }
 
+    private String onlineRegister(String username, String password){
+        return MenuPrincipal.getINSTANCE().getServer().createUser(username,password);
     }
 
     /**
      * Lorsqu'on se connecte
      * @param username username
      * @param password mot de passe
+     * @param isOnline si la connexion se fait en ligne
      * @return le statut
      */
     @Override
     public String onLogin(String username, String password, boolean isOnline) {
-        String result = "";
+        return (isOnline) ? onlineLogin(username,password) : offlineLogin(username,password);
+    }
 
+    /**
+     * Lorsqu'on se connecte de façon hors-ligne
+     * @See onLogin
+     * @param username nom d'utilisateur
+     * @param password mot de passe
+     * @return le statut
+     */
+    private String offlineLogin(String username, String password){
+        String result = "";
         try {
-            //TODO : se connecter de deux différentes manières (en ligne et hors ligne)
             if (gestionnaireUtilisateur.connect(username, password)) { // Si la connexion s'est bien passée
                 result = "Connecting: " + username + " = " + password;
 
@@ -78,12 +102,23 @@ public class ConnexionMenuController extends BaseController implements UserCrede
                 result = gestionnaireUtilisateur.getStatusMsg();
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de retrouver les informations de connexion !");
         }
 
         return result;
     }
 
+    /**
+     * Lorsque l'utilisateur se connecte au serveur
+     * @See onLogin
+     * @param username nom d'utilisateur
+     * @param password mot de passe
+     * @return le statut
+     */
+    private String onlineLogin(String username, String password){
+        STATUS result = MenuPrincipal.getINSTANCE().getServer().getLogin(username,password);
+        // TODO: utilisateur connecté en ligne (changement de vue)
+        return result.getMsg();
+    }
 
 }
