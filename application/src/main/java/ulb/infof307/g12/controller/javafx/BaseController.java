@@ -32,7 +32,6 @@ public abstract class BaseController {
         controller = fxmlLoader.getController();
 
         this.stage = stage;
-
     }
 
     /**

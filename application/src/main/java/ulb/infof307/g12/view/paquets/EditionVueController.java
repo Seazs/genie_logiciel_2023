@@ -20,9 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class EditionVueController {
-
-    private final EditCarteVueController editioncarte = new EditCarteVueController();
+public class EditionVueController{
 
     @FXML
     private AnchorPane editionqr;
@@ -50,12 +48,17 @@ public class EditionVueController {
     private TextField finTextField;
     @FXML
     private TextField reponsettTextField;
+
     @FXML
     private TableView<Carte> tableQR;
     @FXML
     private ChoiceBox<String> typechoix;
     @Setter
     private EditionVueListener listener;
+    @FXML
+    private TextField questionTextField;
+    @FXML
+    private TextField reponseTextField;
 
 
     /**
@@ -139,14 +142,14 @@ public class EditionVueController {
      */
     private void addCarteTt() {
         // Prendre les informations
-        String recto = editioncarte.getQuestionTextField();
-        String verso = editioncarte.getReponseTextField();
+        /*String recto = questionTextField.getText();
+        String verso = reponseTextField.getText();
         // Envoyer au listener
         listener.ajouterCarteTT(recto, verso);
         // Nettoyer les entrées
-        //questionTextField.clear();
-        //reponseTextField.clear();
-        // Recharger la table
+        questionTextField.clear();
+        reponseTextField.clear();
+        // Recharger la table*/
         reloadTable();
     }
 
@@ -172,7 +175,7 @@ public class EditionVueController {
     private void addCarteQr() {
         // Prendre les informations
 
-        /*String recto = questionTextField.getText();
+        String recto = questionTextField.getText();
         String verso = reponseTextField.getText();
         System.out.println(recto + " | " + verso);
         // Envoyer au listener
@@ -180,7 +183,7 @@ public class EditionVueController {
         // Nettoyer les entrées
         questionTextField.clear();
         reponseTextField.clear();
-        // Recharger la table*/
+        // Recharger la table
         reloadTable();
     }
 
