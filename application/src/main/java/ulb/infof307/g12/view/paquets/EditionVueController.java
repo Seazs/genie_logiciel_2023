@@ -4,9 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
@@ -16,9 +18,9 @@ import ulb.infof307.g12.controller.listeners.EditionVueListener;
 import ulb.infof307.g12.model.Carte;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 
 public class EditionVueController{
 
@@ -33,21 +35,8 @@ public class EditionVueController{
     @FXML
     private TableColumn<Carte, String> questionCol;
     @FXML
-    private TextField question;
-    @FXML
-    private TextField rep1;
-    @FXML
-    private TextField rep2;
-    @FXML
-    private TextField rep3;
-    @FXML
-    private TextField rep;
-    @FXML
-    private TextField debutTextField;
-    @FXML
-    private TextField finTextField;
-    @FXML
-    private TextField reponsettTextField;
+    private TextField question,rep1, rep2, rep3,rep,
+            debutTextField, finTextField,reponsettTextField;
 
     @FXML
     private TableView<Carte> tableQR;
@@ -55,22 +44,14 @@ public class EditionVueController{
     private ChoiceBox<String> typechoix;
     @Setter
     private EditionVueListener listener;
-    @FXML
-    private TextField questionTextField;
-    @FXML
-    private TextField reponseTextField;
-
 
     /**
      * Charge la vue du menu d'édition avec les informations existantes du paquet
      *
      * @param name nom du paquet modifié
      */
-    public void chargerEditionVue(String name) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("editCarte.fxml"));
-        Node view = loader.load();
-        editionqr.getChildren().clear();
-        editionqr.getChildren().add(view);
+    public void chargerEditionVue(String name) {
+
 
         categoriePaquetTextField.setPromptText("Catégorie");
         nomPaquetTextField.setText(name);
@@ -103,15 +84,11 @@ public class EditionVueController{
 
      */
     void switchType(String value) throws IOException {
-        String fxmlFile = switch (value) {
-            case "QCM" -> "editCarteQcm.fxml";
-            case "Texte à trous" -> "editCarteTt.fxml";
-            default -> "editCarte.fxml";
-        };
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-        Node view = loader.load();
-        editionqr.getChildren().clear();
-        editionqr.getChildren().add(view);
+        Optional<Node> view = listener.changeCarteType(value);
+        if(view.isPresent()){
+            editionqr.getChildren().clear();
+            editionqr.getChildren().add(view.get());
+        }
     }
 
     /**
@@ -174,15 +151,9 @@ public class EditionVueController{
      */
     private void addCarteQr() {
         // Prendre les informations
-
-        String recto = questionTextField.getText();
-        String verso = reponseTextField.getText();
-        System.out.println(recto + " | " + verso);
         // Envoyer au listener
-        listener.ajouterCarte(recto, verso);
+        listener.ajouterCarte();
         // Nettoyer les entrées
-        questionTextField.clear();
-        reponseTextField.clear();
         // Recharger la table
         reloadTable();
     }
