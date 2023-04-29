@@ -106,4 +106,5 @@ Carte {
         info[2] = this.verso;
         return info;
     }
+
 }

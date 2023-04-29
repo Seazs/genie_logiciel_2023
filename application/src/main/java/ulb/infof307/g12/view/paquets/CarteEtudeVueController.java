@@ -6,27 +6,26 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.CarteEtudeListener;
 
-import java.util.ArrayList;
 
 
 public class CarteEtudeVueController{
     @Setter
     private CarteEtudeListener listener;
     @FXML
-    private Label qrText, questionQcmLabel;
+    private Label qrText, questionQcmLabel,answer;
     @FXML
     private Button boutonSuivant;
     @FXML
     private Button boutonChange, btnValidAnswer, boutonTerminer;
     @FXML
     private ListView<String> reponsesList;
-
-    private ArrayList<Integer> cartesEtudeScore;
     @FXML
+    private TextField reponseTt;
 
     private int indexCarte = 0;
     private int cote = 0; // 0 = recto, 1 = verso
@@ -49,11 +48,9 @@ public class CarteEtudeVueController{
         switch (type) {
             case "Simple" -> showQR();
             case "QCM" -> showQCMFront();
-            case "TT" -> showTT();
+            case "TT" -> showTTFront();
         }
-    }
-
-    private void showTT() {
+        answer.setText("");
     }
 
     /**
@@ -69,6 +66,20 @@ public class CarteEtudeVueController{
     }
 
     private void changeCoteTt() {
+        String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
+        if (cote == 0){
+            showTTFront();
+            qrText.setText(infos[0]+"___"+infos[1]);
+            boutonChange.setText("Réponse");
+            reponseTt.clear();
+            cote = 1;
+        }
+        else{
+            showTTBack();
+            qrText.setText(infos[2]); // affiche la bonne réponse
+            boutonChange.setText("Question");
+            cote = 0;
+        }
     }
 
     private void changeCoteQcm() {
@@ -87,6 +98,7 @@ public class CarteEtudeVueController{
             boutonChange.setText("Question");
             cote = 0;
         }
+
 
     }
 
@@ -113,6 +125,7 @@ public class CarteEtudeVueController{
         qrText.setVisible(true);
         questionQcmLabel.setVisible(false);
         boutonChange.setText("Verso");
+        reponseTt.setVisible(false);
         reponsesList.setVisible(false);
         qrText.setText(listener.getCartesEtude().get(indexCarte).getRecto());
     }
@@ -128,12 +141,27 @@ public class CarteEtudeVueController{
         questionQcmLabel.setVisible(true);
         boutonChange.setText("Réponse");
         reponsesList.setVisible(true);
+        reponseTt.setVisible(false);
         String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
         questionQcmLabel.setText(infos[0]);
         reponsesList.getItems().clear();
         reponsesList.getItems().addAll(infos[1], infos[2], infos[3]);
     }
 
+    /**
+     * Fonction qui affiche les éléments d'étude de carte de type TT
+     */
+    private void showTTFront() {
+        boutonChange.setVisible(true);
+        btnValidAnswer.setVisible(true);
+        qrText.setVisible(true);
+        questionQcmLabel.setVisible(false);
+        boutonChange.setText("Verso");
+        reponsesList.setVisible(false);
+        reponseTt.setVisible(true);
+        String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
+        qrText.setText(infos[0]+ "___" + infos[1]);
+    }
     /**
      * Fonction qui affiche les éléments d'étude de carte de type QCM
      */
@@ -142,23 +170,73 @@ public class CarteEtudeVueController{
         btnValidAnswer.setVisible(true);
         qrText.setVisible(true);
         questionQcmLabel.setVisible(true);
+        reponseTt.setVisible(false);
         boutonChange.setText("Question");
         reponsesList.setVisible(false);
         qrText.setText(listener.getCartesEtude().get(indexCarte).getVerso());
     }
+    /**
+     * Fonction qui affiche les éléments d'étude de carte de type TT
+     */
+    private void showTTBack() {
+        boutonChange.setVisible(true);
+        btnValidAnswer.setVisible(true);
+        qrText.setVisible(true);
+        reponseTt.setVisible(false);
+        questionQcmLabel.setVisible(false);
+        boutonChange.setText("Question");
+        reponsesList.setVisible(false);
+        qrText.setText(listener.getCartesEtude().get(indexCarte).getVerso());
+    }
+
 
     /**
      * Fonction appelée lors du clic sur le bouton "BoutonValidAnswer"
      */
     @FXML
     void choiceSelected() {
-        btnValidAnswer.setDisable(false);
-        // TO DO
+        String type = listener.getCartesEtude().get(indexCarte).getType();
+        switch (type) {
+            case "QCM" -> verfiedAnswerQcm();
+            case "TT" -> verifiedAnswerTt();
+        }
     }
+
+    /**
+     * Fonction qui verifie si la réponse est bonne pour les cartes Qcm
+     */
+    public void verfiedAnswerQcm(){
+        String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
+        if(reponsesList.getSelectionModel().getSelectedItem().equals(infos[4])){
+            answer.setText("T'es un bg en sah");
+            listener.tresBon(indexCarte);
+        }
+        else{
+            answer.setText("Tu pues ta grand mère");
+            listener.tresMauvais(indexCarte);
+        }
+    }
+
+    /**
+     * Fonction qui verifie si la réponse est bonne pour les cartes Tt
+     */
+    public void verifiedAnswerTt(){
+        String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
+        if(reponseTt.getText().equals(infos[2])){
+            answer.setText("T'es un bg en sah");
+            listener.tresBon(indexCarte);
+        }
+        else{
+            answer.setText("Tu pues ta grand mère");
+            listener.tresMauvais(indexCarte);
+        }
+    }
+
     /**
      * Passe à la carte suivante
      */
     public void carteSuivante(){
+        indexCarte++;
         indexCarte = indexRandom();
         showGoodTypeCard(listener.getCartesEtude().get(indexCarte).getType());
     }
@@ -167,8 +245,8 @@ public class CarteEtudeVueController{
      * Retourne à la carte précédente
      */
     public void cartePrecedente(){
-        if (indexCarte > 0){
-            indexCarte--;
+        if (indexCarte >= 0){
+            indexCarte=indexRandom();
             showGoodTypeCard(listener.getCartesEtude().get(indexCarte).getType());
         }
 
