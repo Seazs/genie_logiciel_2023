@@ -6,9 +6,18 @@ import java.util.List;
 
 public interface StoreVueListener {
 
+    /**
+     * @param paquet
+     */
     void uploadPaquet(Paquet paquet);
 
+    /**
+     * @param paquet
+     */
     void downloadPaquet(Paquet paquet);
 
+    /**
+     * @return liste des paquets du store
+     */
     List<Paquet> getStorePaquets();
 }

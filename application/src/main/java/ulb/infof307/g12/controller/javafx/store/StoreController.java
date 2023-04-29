@@ -12,6 +12,10 @@ import ulb.infof307.g12.view.store.StoreVueController;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller for the store view
+ *
+ */
 public class StoreController extends BaseController implements StoreVueListener {
 
 
@@ -23,17 +27,26 @@ public class StoreController extends BaseController implements StoreVueListener 
     }
 
 
+    /**
+     * @param paquet télécharger le paquet et l'ajoute a sa collection
+     */
     @Override
     public void downloadPaquet(Paquet paquet) {
 
     }
 
+    /**
+     * @return la liste des paquets du store pour l'affichage
+     */
     @Override
     public List<Paquet> getStorePaquets() {
 
         return null;
     }
 
+    /**
+     * @param paquet ajoute un paquet dans la liste des paquets du store
+     */
     public void uploadPaquet(Paquet paquet){
 
     }
