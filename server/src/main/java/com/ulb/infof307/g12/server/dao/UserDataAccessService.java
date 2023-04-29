@@ -28,18 +28,26 @@ public class UserDataAccessService implements UserDAO{
         createUser(user);
     }
 
+    /**
+     * @see UserDAO#createUser(User)
+     * @param user l'utilisateur
+     */
     @Override
     public void createUser(User user) {
         userList.add(user);
     }
 
     /**
-     * @see UserDAO#getUser(String, String)
+     * @see UserDAO#getPassword(String)
      * @param username pseudo
-     * @return l'utilisateur demandé
+     * @return le mot de passe de l'utilisateur
      */
     @Override
-    public Optional<User> getUser(String username,String password) {
-        return userList.stream().filter(user -> user.equals(username,password)).findFirst();
+    public String getPassword(String username) {
+        return userList.stream()
+                .filter(user -> user.getUsername().equals(username))
+                .findFirst()
+                .map(User::getPassword)
+                .orElse(null);
     }
 }

@@ -23,12 +23,11 @@ public class UserController {
     /**
      * Renvoie l'utilisateur correspondant à l'id
      * @param username le pseudo
-     * @param password le mot de passe
      * @return l'utilisateur correspondant à l'id ou null s'il n'existe pas
      */
-    @GetMapping(value="{username}/{password}")
-    public ResponseEntity<Boolean> getUser(@PathVariable String username, @PathVariable String password){
-        Boolean result = userService.getUser(username,password).isPresent();
+    @GetMapping(value="{username}")
+    public ResponseEntity<String> getUser(@PathVariable String username){
+        String result = userService.getPassword(username);
         return ResponseEntity.ok(result);
     }
 

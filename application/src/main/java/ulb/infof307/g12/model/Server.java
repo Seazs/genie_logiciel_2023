@@ -4,6 +4,7 @@ package ulb.infof307.g12.model;
 import java.net.URL;
 
 import org.springframework.http.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 /**
  * Class permettant de envoyer/recevoir les informations d'un serveur
@@ -41,11 +42,18 @@ public class Server {
      * @param username
      * @return
      */
-    public boolean getLogin(String username,String password){
+    public STATUS getLogin(String username,String password){
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Boolean> response = restTemplate.getForEntity(url + "user/"+username+"/"+password+"/login", Boolean.class);
-        Boolean result = response.getBody();
-        return Boolean.TRUE.equals(result);
+        try {
+            ResponseEntity<String> response = restTemplate.getForEntity(url + "user/" + username, String.class);
+            String result = response.getBody();
+            if(result.equals(password))
+                return STATUS.OK;
+            else
+                return STATUS.WRONG_PASSWORD;
+        }catch (HttpClientErrorException e){
+            return STATUS.USERNAME_DOES_NOT_EXIST;
+        }
     }
 
 }

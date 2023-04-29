@@ -44,7 +44,7 @@ public class MenuPrincipal extends Application {
     private ExceptionPopupController exceptionPopupController;
     private CarteReponseController carteReponseController;
     @Getter
-    private Server server;
+    private final Server server = new Server();
 
     /**
      * Démarrage de l'application
@@ -55,7 +55,6 @@ public class MenuPrincipal extends Application {
     public void start(Stage stage) throws IOException {
         connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
         exceptionPopupController = new ExceptionPopupController(new Stage());
-        server = new Server();
         connexionController.show();
     }
 

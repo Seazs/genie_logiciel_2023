@@ -3,7 +3,6 @@ package com.ulb.infof307.g12.server.dao;
 import com.ulb.infof307.g12.server.model.User;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public interface UserDAO {
 
@@ -21,10 +20,10 @@ public interface UserDAO {
     void createUser(User user);
 
     /**
-     * Récupère un utilisateur
-     * @param username pseudo
-     * @return
+     * Récupère le mot de passe d'un utilisateur
+     * @param username pseudo de l'utilisateur
+     * @return le mot de passe de l'utilisateur
      */
-    Optional<User> getUser(String username,String password);
+    String getPassword(String username);
 
 }

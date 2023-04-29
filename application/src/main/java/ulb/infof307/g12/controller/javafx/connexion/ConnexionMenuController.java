@@ -5,6 +5,7 @@ import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
+import ulb.infof307.g12.model.STATUS;
 import ulb.infof307.g12.model.Utilisateur;
 import ulb.infof307.g12.view.connexion.ConnexionVueController;
 
@@ -102,8 +103,9 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      * @return le statut
      */
     private String onlineLogin(String username, String password){
-        String result = MenuPrincipal.getINSTANCE().getServer().getLogin(username,password) ? "Connected: " : "Wrong credentials !";
-        return result;
+        STATUS result = MenuPrincipal.getINSTANCE().getServer().getLogin(username,password);
+        //TODO: utilisateur connecté en ligne (changement de vue)
+        return result.getMsg();
     }
 
 }

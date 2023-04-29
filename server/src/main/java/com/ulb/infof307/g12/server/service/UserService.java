@@ -22,21 +22,12 @@ public class UserService {
     }
 
     /**
-     * Récupère un utilisateur selon son pseudo
-     * @param username pseudo
-     * @return l'utilisateur ou null si il n'existe pas
+     * Récupère le mot de passe d'un utilisateur
+     * @param username pseudo de l'utilisateur
+     * @return le mot de passe de l'utilisateur
      */
-    public Optional<User> getUser(String username, String password){
-        return userDAO.getUser(username, password);
-    }
-
-    /**
-     * Enregistre un utilisateur dans le serveur
-     * @param username pseudo
-     * @param password mot de passe
-     */
-    public void createUser(String username, String password){
-        userDAO.createUser(username, password);
+    public String getPassword(String username){
+        return userDAO.getPassword(username);
     }
 
     /**
