@@ -34,4 +34,18 @@ public class CarteQcm extends Carte {
         this.answer = this.getVerso();
     }
 
+    /**
+     * @return les informations de la carte
+     */
+    @Override
+    public String[] getCarteInfo(){
+        String[] info = new String[5];
+        info[0] = this.question;
+        info[1] = this.propositions[0];
+        info[2] = this.propositions[1];
+        info[3] = this.propositions[2];
+        info[4] = this.answer;
+        return info;
+    }
+
 }

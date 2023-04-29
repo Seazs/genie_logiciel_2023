@@ -40,5 +40,4 @@ public class CarteQCMVueController {
         String userReponse = reponsesList.getSelectionModel().getSelectedItem();
         MenuPrincipal.getINSTANCE().showQCMResponse(userReponse,response);
     }
-
 }

@@ -94,4 +94,16 @@ Carte {
 
         this.connaissance = connaissance;
     }
+
+    /**
+     * Fonction qui retourne les infos de la carte
+     * @return les infos de la cartes
+     */
+    public String[] getCarteInfo(){
+        String[] info = new String[3];
+        info[0] = this.type;
+        info[1] = this.recto;
+        info[2] = this.verso;
+        return info;
+    }
 }
