@@ -31,6 +31,6 @@ public interface UserDAO {
      * Met à jour un utilisateur
      * @param user l'utilisateur
      */
-    void updateUser(User user);
+    STATUS updateUser(User user);
 
 }

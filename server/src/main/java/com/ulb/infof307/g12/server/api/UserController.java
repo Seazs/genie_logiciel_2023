@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RequestMapping("api/v1/user")
 @RestController
 public class UserController {
@@ -49,11 +47,15 @@ public class UserController {
     }
 
     /**
-     * Met à jour un utilisateur
-     * @param user l'utilisateur
+     * Change le mot de passe d'un utilisateur
+     * @param password le nouveau mot de passe
+     * @param username le pseudo de l'utilisateur
+     * @return le statut de la requête
      */
-    @PatchMapping("changepassword")
-    public void updateUser(@RequestBody User user){
-        userService.updateUser(user);
+    @PostMapping("changepassword/{username}")
+    public ResponseEntity<String> updateUser(@RequestBody String password, @PathVariable String username){
+        User user = new User(username, password);
+        STATUS result = userService.updateUser(user);
+        return ResponseEntity.ok(result.getMsg());
     }
 }

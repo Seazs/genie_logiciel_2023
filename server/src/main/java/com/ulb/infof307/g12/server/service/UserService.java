@@ -42,7 +42,7 @@ public class UserService {
     /**
      * @see UserDAO#updateUser(User)
      */
-    public void updateUser(User user){
-        userDAO.updateUser(user);
+    public STATUS updateUser(User user){
+        return userDAO.updateUser(user);
     }
 }

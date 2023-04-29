@@ -59,7 +59,6 @@ public class ConnexionMenuController extends BaseController implements UserCrede
                 result = gestionnaireUtilisateur.getStatusMsg();
             }
         } catch (IOException e) {
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible d'enregistrer le nouvel utilisateur !");
         }
 
@@ -67,7 +66,6 @@ public class ConnexionMenuController extends BaseController implements UserCrede
     }
 
     private String onlineRegister(String username, String password){
-
         return MenuPrincipal.getINSTANCE().getServer().createUser(username,password);
     }
 
@@ -119,7 +117,7 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      */
     private String onlineLogin(String username, String password){
         STATUS result = MenuPrincipal.getINSTANCE().getServer().getLogin(username,password);
-        //TODO: utilisateur connecté en ligne (changement de vue)
+        // TODO: utilisateur connecté en ligne (changement de vue)
         return result.getMsg();
     }
 

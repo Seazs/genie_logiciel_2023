@@ -59,10 +59,16 @@ public class UserDataAccessService implements UserDAO{
     }
 
     @Override
-    public void updateUser(User user) {
+    public STATUS updateUser(User user) {
         Optional<User> userToUpdate = userList.stream()
                 .filter(u -> u.getUsername().equals(user.getUsername()))
                 .findFirst();
-        userToUpdate.ifPresent(value -> value.setPassword(user.getPassword()));
+
+        if(userToUpdate.isEmpty()){
+            return STATUS.USERNAME_DOES_NOT_EXIST;
+        }
+
+        userToUpdate.get().setPassword(user.getPassword());
+        return STATUS.OK;
     }
 }

@@ -1,9 +1,10 @@
 package ulb.infof307.g12.model;
 
 
-import java.net.URL;
-
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 /**
@@ -39,8 +40,8 @@ public class Server {
 
     /**
      * Envoie une requète GET au serveur pour authentifier un utilisateur.
-     * @param username
-     * @return
+     * @param username le pseudo de l'utilisateur
+     * @return le statut de la requète
      */
     public STATUS getLogin(String username,String password){
         RestTemplate restTemplate = new RestTemplate();
@@ -56,6 +57,12 @@ public class Server {
         }
     }
 
+    /**
+     * Envoie une requète POST au serveur pour créer un utilisateur.
+     * @param username le pseudo de l'utilisateur
+     * @param password le mot de passe de l'utilisateur
+     * @return le statut de la requète
+     */
     public String createUser(String username, String password){
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -63,6 +70,22 @@ public class Server {
 
         HttpEntity<String> entity = new HttpEntity<>(username+"#"+password, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(url+"user/register", entity, String.class);
+        return response.getBody();
+    }
+
+    /**
+     * Envoie une requète POST au serveur pour changer le mot de passe d'un utilisateur.
+     * @param username le pseudo de l'utilisateur
+     * @param newPassword le nouveau mot de passe
+     * @return le statut de la requète
+     */
+    public String changeUserPassword(String username, String newPassword){
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+
+        HttpEntity<String> entity = new HttpEntity<>(newPassword, headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(url+"user/changepassword/"+username, entity, String.class);
         return response.getBody();
     }
 
