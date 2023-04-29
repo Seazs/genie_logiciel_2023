@@ -5,6 +5,7 @@ module connexion {
     requires org.kordamp.bootstrapfx.core;
     requires static lombok;
     requires spring.web;
+    requires freetts;
 
     opens ulb.infof307.g12.controller.javafx.connexion to javafx.fxml;
     exports ulb.infof307.g12.controller.javafx.connexion;

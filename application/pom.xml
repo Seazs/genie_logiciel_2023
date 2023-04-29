@@ -87,6 +87,13 @@
             <version>5.9.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.sun.speech</groupId>
+            <artifactId>freetts</artifactId>
+            <version>1.2.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/freetts-1.2.2.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
