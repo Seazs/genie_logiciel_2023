@@ -78,7 +78,6 @@ public class ConnexionMenuController extends BaseController implements UserCrede
                 result = gestionnaireUtilisateur.getStatusMsg();
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de retrouver les informations de connexion !");
         }
 

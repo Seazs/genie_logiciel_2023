@@ -35,9 +35,7 @@ public class EditionVueController{
     @FXML
     private TableColumn<Carte, String> questionCol;
     @FXML
-    private TextField question,rep1, rep2, rep3,rep,
-            debutTextField, finTextField,reponsettTextField;
-
+    private TextField rep1, rep2, rep3, reponsettTextField, questionTextField, reponseTextField;
     @FXML
     private TableView<Carte> tableQR;
     @FXML
@@ -51,7 +49,6 @@ public class EditionVueController{
      * @param name nom du paquet modifié
      */
     public void chargerEditionVue(String name) {
-
 
         categoriePaquetTextField.setPromptText("Catégorie");
         nomPaquetTextField.setText(name);
@@ -84,11 +81,55 @@ public class EditionVueController{
 
      */
     void switchType(String value) throws IOException {
-        Optional<Node> view = listener.changeCarteType(value);
-        if(view.isPresent()){
-            editionqr.getChildren().clear();
-            editionqr.getChildren().add(view.get());
+        switch (value) {
+            case "QCM" -> showQcm();
+            case "Simple" -> showQR();
+            case "Texte à trous" -> showTt();
+            default -> {
+            }
         }
+    }
+
+    /**
+     * Fonction qui affiche les éléments pour l'édition d'une carte QCM
+     */
+    void showQcm(){
+        rep1.setVisible(true);
+        rep2.setVisible(true);
+        rep3.setVisible(true);
+        reponseTextField.setVisible(true);
+        questionTextField.setVisible(true);
+        reponsettTextField.setVisible(false);
+        questionTextField.promptTextProperty().setValue("Question");
+        reponseTextField.promptTextProperty().setValue("Réponse");
+    }
+
+    /**
+     * Fonction qui affiche les éléments pour l'édition d'une carte QR
+     */
+    void showQR(){
+        rep1.setVisible(false);
+        rep2.setVisible(false);
+        rep3.setVisible(false);
+        reponseTextField.setVisible(true);
+        questionTextField.promptTextProperty().setValue("Question");
+        reponseTextField.promptTextProperty().setValue("Réponse");
+        questionTextField.setVisible(true);
+        reponsettTextField.setVisible(false);
+    }
+
+    /**
+     * Fonction qui affiche les éléments pour l'édition d'une carte Texte à trous
+     */
+    void showTt(){
+        rep1.setVisible(false);
+        rep2.setVisible(false);
+        rep3.setVisible(false);
+        reponseTextField.setVisible(true);
+        reponseTextField.promptTextProperty().setValue("Fin de phrase");
+        questionTextField.setVisible(true);
+        questionTextField.promptTextProperty().setValue("Début de phrase");
+        reponsettTextField.setVisible(true);
     }
 
     /**
@@ -119,13 +160,16 @@ public class EditionVueController{
      */
     private void addCarteTt() {
         // Prendre les informations
-        /*String recto = questionTextField.getText();
-        String verso = reponseTextField.getText();
+        String debut = questionTextField.getText();
+        String fin = reponseTextField.getText();
+        String verso = reponsettTextField.getText();
+        String recto = debut + "§" + fin;
         // Envoyer au listener
         listener.ajouterCarteTT(recto, verso);
         // Nettoyer les entrées
         questionTextField.clear();
         reponseTextField.clear();
+        reponsettTextField.clear();
         // Recharger la table*/
         reloadTable();
     }
@@ -134,27 +178,35 @@ public class EditionVueController{
      * Ajoute une carte qcm dans le paquet
      */
     private void addCarteQcm() {
-        /*// Prendre les informations
-        String recto = questionTextField.getText();
+        // Prendre les informations
+        String question = questionTextField.getText();
+        String choice1 = rep1.getText();
+        String choice2 = rep2.getText();
+        String choice3 = rep3.getText();
+        String recto = question + "§" + choice1 + "§" + choice2 + "§" + choice3;
         String verso = reponseTextField.getText();
         // Envoyer au listener
         listener.ajouterCarteQCM(recto, verso);
         // Nettoyer les entrées
         questionTextField.clear();
         reponseTextField.clear();
+        rep1.clear();
+        rep2.clear();
+        rep3.clear();
         // Recharger la table*/
         reloadTable();
     }
+
 
     /**
      * Ajout d'une carte question réponse dans le paquet
      */
     private void addCarteQr() {
-        // Prendre les informations
-        // Envoyer au listener
-        listener.ajouterCarte();
-        // Nettoyer les entrées
-        // Recharger la table
+        String recto = questionTextField.getText();
+        String verso = reponseTextField.getText();
+        listener.ajouterCarte(recto, verso);
+        questionTextField.clear();
+        reponseTextField.clear();
         reloadTable();
     }
 
