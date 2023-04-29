@@ -39,4 +39,6 @@ public interface CarteEtudeListener {
      * Sauvegarde des cartes
      */
     public void saveCartes();
+
+    public void parlerTexte(String texte);
 }

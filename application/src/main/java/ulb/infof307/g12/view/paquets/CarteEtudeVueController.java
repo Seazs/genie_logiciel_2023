@@ -31,6 +31,8 @@ public class CarteEtudeVueController{
     private Button boutonSuivant;
     @FXML
     private Button boutonChange;
+    @FXML
+    private Button boutonEcouter;
     private ArrayList<Carte> cartesEtude;
     private ArrayList<Integer> cartesEtudeScore;
 
@@ -167,5 +169,13 @@ public class CarteEtudeVueController{
             }
         }
         return true;
+    }
+    public void boutonParlerClick(ActionEvent actionEvent) {
+        if (cote== 0){
+            this.listener.parlerTexte(cartesEtude.get(indexCarte).getRecto());
+        }
+        else {
+            this.listener.parlerTexte(cartesEtude.get(indexCarte).getVerso());
+        }
     }
 }

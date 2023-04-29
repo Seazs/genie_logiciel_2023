@@ -6,10 +6,12 @@ import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.CarteEtudeListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
+import ulb.infof307.g12.controller.textToSpeech.textToSpeechController;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
 import ulb.infof307.g12.view.paquets.CarteEtudeVueController;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +23,8 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
     private final ArrayList<Integer> cartesEtudeScore = new ArrayList<Integer>();//liste des scores des cartes
     @Getter
     private final Paquet paquet;
+
+    private final textToSpeechController textToSpeechController = new textToSpeechController();
 
     /**
      * Controller de l'étude de carte
@@ -100,6 +104,11 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
             e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de sauvegarder le paquet !");
         }
+    }
+
+    @Override
+    public void parlerTexte(String text){
+        textToSpeechController.synthese_vocal(text);
     }
 
 }
