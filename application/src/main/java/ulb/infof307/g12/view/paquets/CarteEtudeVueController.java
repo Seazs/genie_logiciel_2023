@@ -51,6 +51,7 @@ public class CarteEtudeVueController{
             case "TT" -> showTTFront();
         }
         answer.setText("");
+        reponseTt.clear();
     }
 
     /**
