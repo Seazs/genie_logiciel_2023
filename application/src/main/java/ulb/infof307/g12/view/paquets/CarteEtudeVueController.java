@@ -5,6 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.CarteEtudeListener;
@@ -17,11 +18,13 @@ public class CarteEtudeVueController{
     @Setter
     private CarteEtudeListener listener;
     @FXML
-    private Text affichageCarte;
+    private Text QrText;
     @FXML
     private Button boutonSuivant;
     @FXML
-    private Button boutonChange;
+    private Button boutonChange, btnValidAnswer, boutonTerminer;
+    @FXML
+    private TextFlow questionQcmTextFlow;
     private ArrayList<Carte> cartesEtude;
     private ArrayList<Integer> cartesEtudeScore;
     @FXML
@@ -36,22 +39,21 @@ public class CarteEtudeVueController{
      */
     public void chargerCarteEtudeVue(ArrayList<Carte> cartesEtude) {
         indexCarte=indexRandom();
-        affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
+        QrText.setText(cartesEtude.get(indexCarte).getRecto());
     }
 
     /**
      * Change de côté de la carte entre recto et verso
-     * @return
      */
     public void changeCote(){
         cartesEtude = listener.getCartesEtude();
         if (cote == 0){
-            affichageCarte.setText(cartesEtude.get(indexCarte).getVerso());
+            QrText.setText(cartesEtude.get(indexCarte).getVerso());
             boutonChange.setText("Recto");
             cote = 1;
         }
         else{
-            affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
+            QrText.setText(cartesEtude.get(indexCarte).getRecto());
             boutonChange.setText("Verso");
             cote = 0;
         }
@@ -63,7 +65,7 @@ public class CarteEtudeVueController{
     public void carteSuivante(){
         cartesEtude = listener.getCartesEtude();
         indexCarte=indexRandom();
-        affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
+        QrText.setText(cartesEtude.get(indexCarte).getRecto());
         if (cote == 1){
             changeCote();
             }
@@ -76,7 +78,7 @@ public class CarteEtudeVueController{
         cartesEtude = listener.getCartesEtude();
         if (indexCarte > 0){
             indexCarte--;
-            affichageCarte.setText(cartesEtude.get(indexCarte).getRecto());
+            QrText.setText(cartesEtude.get(indexCarte).getRecto());
             if (cote == 1){
                 changeCote();
             }
