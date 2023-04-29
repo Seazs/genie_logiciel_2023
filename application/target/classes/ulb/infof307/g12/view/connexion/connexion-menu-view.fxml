@@ -34,7 +34,7 @@
             <Font name="System Bold" size="12.0" />
          </font></Button>
       <Button fx:id="creerButton" contentDisplay="CENTER" layoutX="135.0" layoutY="425.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="38.0" prefWidth="133.0" text="Créer un compte" textAlignment="CENTER" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="132.0" />
-      <ToggleButton fx:id="OnlineToggle" layoutX="127.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchOnlineMode" text="Passer en mode en ligne" />
+      <ToggleButton fx:id="onlineToggle" layoutX="127.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchOnlineMode" text="Passer en mode en ligne" />
    </children>
     <stylesheets>
         <URL value="@connexion_style.css" />
