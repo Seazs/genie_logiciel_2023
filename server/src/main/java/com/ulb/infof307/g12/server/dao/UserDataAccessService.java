@@ -1,17 +1,23 @@
 package com.ulb.infof307.g12.server.dao;
 
-import com.ulb.infof307.g12.server.database.Database;
 import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
+import lombok.Getter;
 import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 @Repository("users")
 public class UserDataAccessService implements UserDAO{
+    private final File db_user_file;
+    public STATUS status;
+    private List<User> db_user;
 
-    private Database db = Database.getInstance();
+    public UserDataAccessService() throws FileNotFoundException, IOException {
+        db_user_file = new File("./stockage","stockUser.txt");
+        db_user = this.load();
+    }
 
     /**
      * @see UserDAO#createUser(String, String)
@@ -32,14 +38,13 @@ public class UserDataAccessService implements UserDAO{
     @Override
     public STATUS createUser(User user) {
         // Vérification de nom d'utilisateur unique
-        List<User> userList = db.getDb_user();
-        if(userList.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))){
+        if(db_user.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))){
             return STATUS.USERNAME_DOES_ALREADY_EXIST;
         }
-        userList.add(user);
+        db_user.add(user);
         // Si nom d'utilisateur unique, ajouter à la db
         try {
-            db.save();
+            this.save();
         } catch (IOException e) {
             return STATUS.DB_COULD_NOT_BE_SAVED;
         }
@@ -53,8 +58,7 @@ public class UserDataAccessService implements UserDAO{
      */
     @Override
     public String getPassword(String username) {
-        List<User> userList = db.getDb_user();
-        return userList.stream()
+        return db_user.stream()
                 .filter(user -> user.getUsername().equals(username))
                 .findFirst()
                 .map(User::getPassword)
@@ -63,10 +67,8 @@ public class UserDataAccessService implements UserDAO{
 
     @Override
     public STATUS updateUser(User user) {
-        // Charger la liste courant d'utilisateur de la db
-        List<User> userList = db.getDb_user();
         // Trouver le bon utilisateur
-        Optional<User> userToUpdate = userList.stream()
+        Optional<User> userToUpdate = db_user.stream()
                 .filter(u -> u.getUsername().equals(user.getUsername()))
                 .findFirst();
 
@@ -77,7 +79,7 @@ public class UserDataAccessService implements UserDAO{
         userToUpdate.get().setPassword(user.getPassword());
         // Sauvegarder la db
         try {
-            db.save();
+            this.save();
         }catch (IOException exception){
             return STATUS.DB_COULD_NOT_BE_SAVED;
         }
@@ -87,18 +89,57 @@ public class UserDataAccessService implements UserDAO{
 
     @Override
     public List<User> getAllUsers() {
-        return db.getDb_user();
+        return db_user;
     }
 
-    public STATUS deleteUser(String username){
-        List<User> listUser =  db.getDb_user();
-        listUser.removeIf(person -> person.getUsername().equals(username));
-        try {
-            db.save();
-        }catch (IOException exception){
-            return STATUS.DB_COULD_NOT_BE_SAVED;
+    /**
+     * Sauvegarde la liste des utilisateurs dans un fichier .txt
+     * @throws IOException
+     */
+    public void save() throws IOException {
+        if (!db_user_file.exists()) {
+            db_user_file.getParentFile().mkdirs();
+            db_user_file.createNewFile();
         }
 
-        return STATUS.OK;
+        FileWriter writer = new  FileWriter(db_user_file);
+        BufferedWriter out = new BufferedWriter(writer);
+
+        for(User utilisateur : db_user) {
+            out.write(utilisateur.getUsername() + "#" + utilisateur.getPassword());
+            out.newLine();
+        }
+        out.close();
     }
+
+    /**
+     * Charge les utilisateurs à partir d'un fichier
+     * @throws FileNotFoundException
+     */
+    public List<User> load() throws IOException, FileNotFoundException {
+        ArrayList<User> new_db_user = new ArrayList<>();
+        if (!db_user_file.exists()){
+            throw new FileNotFoundException("Le fichier n'existe pas");
+        }
+        try {
+            Scanner myReader = new Scanner(db_user_file);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+
+                if (!data.isBlank()) {
+                    String[] listdata = data.split("#");
+                    if (listdata.length >= 2) {
+                        new_db_user.add(new User(listdata[0].strip(), listdata[1].strip()));
+                    } else {
+                        System.out.println("Erreur : la ligne ne contient pas les informations attendues.");
+                    }
+                }
+            }
+            myReader.close();
+        }catch (IOException exception){
+            throw new IOException("Erreur dans la lecture du fichier.");
+        }
+        return new_db_user;
+    }
+
 }

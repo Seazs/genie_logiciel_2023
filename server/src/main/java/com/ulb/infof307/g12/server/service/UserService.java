@@ -5,6 +5,7 @@ import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NameNotFoundException;
@@ -53,7 +54,4 @@ public class UserService {
         return userDAO.getAllUsers();
     }
 
-    public STATUS deleteUser(String username){
-        return userDAO.deleteUser(username);
-    }
 }

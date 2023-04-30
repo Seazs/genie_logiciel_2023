@@ -3,6 +3,7 @@ package com.ulb.infof307.g12.server.dao;
 import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UserDAO {
@@ -38,5 +39,5 @@ public interface UserDAO {
 
     List<User> getAllUsers();
 
-    STATUS deleteUser(String username);
+    void save() throws IOException;
 }
