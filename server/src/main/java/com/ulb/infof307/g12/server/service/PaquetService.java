@@ -1,13 +1,14 @@
 package com.ulb.infof307.g12.server.service;
 
 import com.ulb.infof307.g12.server.dao.PaquetDao;
+import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.Paquet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,8 +28,8 @@ public class PaquetService {
      * Crée un paquet avec le nom donné
      * @param nom nom du paquet
      */
-    public void createPaquet(String nom){
-        paquetDao.createPaquet(nom);
+    public UUID createPaquet(String nom, ArrayList<String> categories, ArrayList<Carte> cartes){
+        return paquetDao.createPaquet(nom, categories, cartes);
     }
 
     /**
@@ -36,7 +37,7 @@ public class PaquetService {
      * @param id id du paquet
      * @return le paquet correspondant à l'id ou null si il n'existe pas
      */
-    public Optional<Paquet> getPaquet(UUID id){
+    public Paquet getPaquet(UUID id){
         return paquetDao.getPaquet(id);
     }
 
