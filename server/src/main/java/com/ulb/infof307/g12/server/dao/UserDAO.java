@@ -37,4 +37,6 @@ public interface UserDAO {
 
 
     List<User> getAllUsers();
+
+    STATUS deleteUser(String username);
 }

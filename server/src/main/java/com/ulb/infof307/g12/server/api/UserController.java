@@ -74,6 +74,15 @@ public class UserController {
         return ResponseEntity.ok(result.getMsg());
     }
 
-    // DELETE USER METHOD
+    /**
+     * Supprime un utilisateur
+     * @param username
+     * @return le statut de la requete
+     */
+    @DeleteMapping
+    public ResponseEntity<String> deleteUser(@RequestBody String username){
+        STATUS result = userService.deleteUser(username);
+        return ResponseEntity.ok(result.getMsg());
+    }
 
 }

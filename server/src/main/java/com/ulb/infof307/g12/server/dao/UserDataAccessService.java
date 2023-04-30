@@ -11,11 +11,7 @@ import java.util.*;
 @Repository("users")
 public class UserDataAccessService implements UserDAO{
 
-    private Database db;
-
-    public UserDataAccessService() {
-        this.db = Database.getInstance();
-    }
+    private Database db = Database.getInstance();
 
     /**
      * @see UserDAO#createUser(String, String)
@@ -40,6 +36,7 @@ public class UserDataAccessService implements UserDAO{
         if(userList.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))){
             return STATUS.USERNAME_DOES_ALREADY_EXIST;
         }
+        userList.add(user);
         // Si nom d'utilisateur unique, ajouter à la db
         try {
             db.save();
@@ -93,4 +90,15 @@ public class UserDataAccessService implements UserDAO{
         return db.getDb_user();
     }
 
+    public STATUS deleteUser(String username){
+        List<User> listUser =  db.getDb_user();
+        listUser.removeIf(person -> person.getUsername().equals(username));
+        try {
+            db.save();
+        }catch (IOException exception){
+            return STATUS.DB_COULD_NOT_BE_SAVED;
+        }
+
+        return STATUS.OK;
+    }
 }

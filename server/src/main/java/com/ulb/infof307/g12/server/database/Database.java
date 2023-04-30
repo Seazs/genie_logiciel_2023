@@ -19,7 +19,10 @@ public class Database {
     public Database() {
         this.db_user_file = new File("./stockage","stockUser.txt");
         try {
-            if (!db_user_file.createNewFile()){
+            if (!db_user_file.exists()) {
+                db_user_file.getParentFile().mkdirs();
+                db_user_file.createNewFile();
+            } else {
                 load();
             }
             status = STATUS.OK;
