@@ -3,6 +3,7 @@ package ulb.infof307.g12.controller.javafx.store;
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
 
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.StoreVueListener;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.paquets.EditionVueController;
@@ -48,7 +49,7 @@ public class StoreController extends BaseController implements StoreVueListener 
      * @param paquet ajoute un paquet dans la liste des paquets du store
      */
     public void uploadPaquet(Paquet paquet){
-        //TODO j verrai bien une requete http ici (un post)
+        MenuPrincipal.getINSTANCE().getServer().ajouterPaquet(paquet);
     }
 
     /**

@@ -5,8 +5,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.cbor.MappingJackson2CborHttpMessageConverter;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
+
 /**
  * Class permettant de envoyer/recevoir les informations d'un serveur
  */
@@ -24,16 +30,27 @@ public class Server {
        return responseBody;
     }
 
+    @PostMapping("/paquet")
+    public ResponseEntity<Void> ajouterPaquet(@RequestBody Paquet paquet) {
+        // code pour ajouter le paquet
+        return ResponseEntity.ok().build();
+    }
+
+
     /**
      * Envoie un paquet (avec juste le nom) au serveur
-     * @param nom nom du paquet
+     * @param paquet paquet à envoyer
      * @return l'état de la demande ("200 OK" si tout s'est bien passé)
      */
-    public String postPaquet(String nom){
+
+    @PostMapping("/paquet")
+    public String postPaquet(Paquet paquet) throws IOException {
+        MappingJackson2CborHttpMessageConverter converter = new MappingJackson2CborHttpMessageConverter();
+
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.TEXT_PLAIN);
-        HttpEntity<String> entity = new HttpEntity<>(nom, headers);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Paquet> entity = new HttpEntity<>(paquet, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(url+"paquet", entity, String.class);
         return response.getBody();
     }
