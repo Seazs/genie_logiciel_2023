@@ -18,7 +18,7 @@ public class Paquet {
     @Getter
     private ArrayList<String> categories;
     @Getter
-    private ArrayList<Carte> cartes;
+    private ArrayList<Carte> cartes= new ArrayList<Carte>();
 
 
 

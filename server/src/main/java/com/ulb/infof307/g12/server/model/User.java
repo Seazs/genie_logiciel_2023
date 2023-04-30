@@ -4,12 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 public class User {
+
     private String username;
     @Setter
     private String password;
+    @Getter
+    @Setter
+    private List<Paquet> listPaquet = new ArrayList<Paquet>();
 
     /**
      * Récupère un utilisateur à partir d'un DTO envoyé par le client sous forme de String

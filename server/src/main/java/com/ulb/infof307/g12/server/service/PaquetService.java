@@ -47,4 +47,8 @@ public class PaquetService {
     public List<Paquet> getAllPaquets() {
         return paquetDao.getAllPaquets();
     }
+
+    public void deletePaquet(UUID id){
+        paquetDao.deletePaquet(id);
+    }
 }

@@ -63,4 +63,8 @@ public class PaquetController {
         return paquetService.createPaquet(nom, categories, cartes);
     }
 
+    @DeleteMapping
+    public void deletePaquet(@RequestBody UUID id){
+        paquetService.deletePaquet(id);
+    }
 }
