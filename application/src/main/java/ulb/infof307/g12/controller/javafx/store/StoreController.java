@@ -20,7 +20,7 @@ public class StoreController extends BaseController implements StoreVueListener 
 
 
     public StoreController(Stage stage) throws IOException {
-        super(stage, EditionVueController.class.getResource("editionPaquet.fxml"), "");
+        super(stage, StoreVueController.class.getResource("menuStore.fxml"), "");
         StoreVueController controller = (StoreVueController) super.controller;
         controller.setListener(this);
 

@@ -74,5 +74,9 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
 
     }
 
+    public void uploadPaquet(Paquet paquet) {
+    	//TODO faire le upload depuis le menu principal
+    }
+
 
 }

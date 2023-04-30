@@ -33,4 +33,10 @@ module connexion {
 
     opens ulb.infof307.g12.model to javafx.base;
 
+    opens ulb.infof307.g12.controller.javafx.store to javafx.fxml;
+    exports ulb.infof307.g12.controller.javafx.store;
+
+    opens ulb.infof307.g12.view.store to javafx.fxml;
+    exports ulb.infof307.g12.view.store;
+
 }

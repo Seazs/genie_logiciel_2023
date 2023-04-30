@@ -13,6 +13,7 @@ import ulb.infof307.g12.controller.javafx.paquets.CarteEtudeController;
 import ulb.infof307.g12.controller.javafx.paquets.EditionController;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
 import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
+import ulb.infof307.g12.controller.javafx.store.StoreController;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Carte;
@@ -35,6 +36,7 @@ public class MenuPrincipal extends Application {
     private ProfilController profilController;
     private EditionController editionController;
     private CarteEtudeController carteEtudeController;
+    private StoreController storeController;
     @Setter
     private Utilisateur userPrincipale;
     @Getter
@@ -137,6 +139,20 @@ public class MenuPrincipal extends Application {
     }
 
     /**
+     * Affichage du store
+     */
+    public void openStore(){
+        try {
+            storeController = new StoreController(new Stage());
+            menuPaquetController.hide();
+            storeController.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorPopup("Impossible de charger le store !");
+        }
+    }
+
+    /**
      * Retour au menu Paquet
      */
     public void returnToMenuPaquet() {
@@ -161,11 +177,11 @@ public class MenuPrincipal extends Application {
     }
 
     /**
-     * Retour au menu de connexion
+     * Affichage de l'édition de carte
      */
-    public void returnToConnexionMenu() {
-        profilController.hide();
-        connexionController.show();
+    public void returnFromStoreToMenuPaquet() {
+        menuPaquetController.show();
+        storeController.hide();
     }
 
     /**

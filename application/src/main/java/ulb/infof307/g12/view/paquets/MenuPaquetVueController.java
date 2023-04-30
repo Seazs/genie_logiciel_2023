@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -30,6 +31,9 @@ public class MenuPaquetVueController implements Initializable {
 
     @FXML
     private TextField RechercheLabel;
+
+    @FXML
+    private Button boutonUpload;
 
     @Setter
     private MenuPaquetListener listener;
@@ -98,6 +102,10 @@ public class MenuPaquetVueController implements Initializable {
         MenuPrincipal.getINSTANCE().openProfile();
     }
 
+    public void ouvrirStore(ActionEvent event) {
+        MenuPrincipal.getINSTANCE().openStore();
+    }
+
     /**
      * Créer un nouveau paquet vide
      * @throws IOException Erreur de la création de nouveau paquet vide
@@ -161,5 +169,19 @@ public class MenuPaquetVueController implements Initializable {
             Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
             listener.CarteEtude(paquet);
         }
+    }
 
-}}
+    /**
+     * Permet de upload un paquet vers le serveur
+     * @param event
+     * @throws FileNotFoundException
+     */
+    public void uploadPaquet(ActionEvent event) throws FileNotFoundException {
+        if (listener!=null) {
+
+            Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
+            //TODO : upload paquet
+            //listener.uploadPaquet(paquet);
+        }
+    }
+}
