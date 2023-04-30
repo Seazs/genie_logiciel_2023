@@ -20,4 +20,9 @@ public interface StoreVueListener {
      * @return liste des paquets du store
      */
     List<Paquet> getStorePaquets();
+
+    /**
+     * Rafraichit la liste des paquets du store
+     */
+    void refresh();
 }

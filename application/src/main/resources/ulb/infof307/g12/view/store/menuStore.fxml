@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -8,6 +9,10 @@
     <Label fx:id="titre" alignment="CENTER" contentDisplay="TOP" layoutX="15.0" layoutY="21.0" prefHeight="54.0" prefWidth="458.0" text="Store" />
     <Button layoutX="499.0" layoutY="24.0" mnemonicParsing="false" onAction="#retourMenuPaquet" prefHeight="48.0" prefWidth="82.0" text="Retour" />
     <TextField fx:id="RechercheLabel" layoutX="14.0" layoutY="79.0" prefHeight="26.0" prefWidth="458.0" promptText="Filtre" />
-    <Button layoutX="503.0" layoutY="118.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="Refresh" />
-    <Button fx:id="boutonUpload" layoutX="506.0" layoutY="209.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="Upload" />
+    <Button layoutX="503.0" layoutY="118.0" mnemonicParsing="false" onAction="#refresh" prefHeight="26.0" prefWidth="74.0" text="Refresh" />
+    <Button fx:id="boutonUpload" layoutX="506.0" layoutY="209.0" mnemonicParsing="false" onAction="#uploadPaquet" prefHeight="26.0" prefWidth="68.0" text="Upload" />
+   <Button layoutX="503.0" layoutY="165.0" mnemonicParsing="false" onAction="#downloadPaquet" prefHeight="26.0" prefWidth="74.0" text="Download" />
+    <stylesheets>
+        <URL value="@menuStoreStyle.css" />
+    </stylesheets>
 </AnchorPane>

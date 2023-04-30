@@ -171,17 +171,4 @@ public class MenuPaquetVueController implements Initializable {
         }
     }
 
-    /**
-     * Permet de upload un paquet vers le serveur
-     * @param event
-     * @throws FileNotFoundException
-     */
-    public void uploadPaquet(ActionEvent event) throws FileNotFoundException {
-        if (listener!=null) {
-
-            Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
-            //TODO : upload paquet
-            //listener.uploadPaquet(paquet);
-        }
-    }
 }

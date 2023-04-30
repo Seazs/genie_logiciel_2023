@@ -48,7 +48,15 @@ public class StoreController extends BaseController implements StoreVueListener 
      * @param paquet ajoute un paquet dans la liste des paquets du store
      */
     public void uploadPaquet(Paquet paquet){
-
+        //TODO j verrai bien une requete http ici (un post)
     }
 
+    /**
+     * Rafraichit la liste des paquets du store
+     */
+    @Override
+    public void refresh() {
+        //TODO requete http pour vérifier les paquets mis en ligne
+        //Censée être appelée au début du switch vers store
+    }
 }

@@ -18,4 +18,15 @@ public class StoreVueController {
     public void retourMenuPaquet() {
         MenuPrincipal.getINSTANCE().returnFromStoreToMenuPaquet();
     }
+
+    public void downloadPaquet(){
+        listener.downloadPaquet(null);
+    }
+    public void uploadPaquet(){
+
+        listener.uploadPaquet(null);
+    }
+    public void refresh(){
+        listener.refresh();
+    }
 }
