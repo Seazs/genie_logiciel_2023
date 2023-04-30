@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+
 @RequestMapping("api/v1/user")
 @RestController
 public class UserController {
@@ -29,6 +32,18 @@ public class UserController {
         String result = userService.getPassword(username);
         return ResponseEntity.ok(result);
     }
+
+    /**
+     * Renvoie la liste des utilisateurs
+     * @return le status de la dernière opération
+     */
+    @GetMapping
+    public List<User> getAllUsers(){
+        //!! ATTENTION: RENVOI LA LISTE DES UTILISATEURS AVEC SES NOMS
+        // D'UTILISATEURS ET LEURS MOTS DE PASSES.
+        return userService.getAllUsers();
+    }
+
 
     /**
      * Crée un nouvel utilisateur
@@ -58,4 +73,7 @@ public class UserController {
         STATUS result = userService.updateUser(user);
         return ResponseEntity.ok(result.getMsg());
     }
+
+    // DELETE USER METHOD
+
 }

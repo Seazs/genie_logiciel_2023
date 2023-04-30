@@ -1,21 +1,20 @@
 package com.ulb.infof307.g12.server.dao;
 
+import com.ulb.infof307.g12.server.database.Database;
 import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
 import java.util.*;
 
 @Repository("users")
 public class UserDataAccessService implements UserDAO{
 
-    List<User> userList = new ArrayList<>();
+    private Database db;
 
     public UserDataAccessService() {
-        //TODO: retirer la valeur de test
-        User user = new User("admin","test");
-        createUser(user);
-        System.out.println("User: "+user.getUsername()+" Pass: "+user.getPassword());
+        this.db = Database.getInstance();
     }
 
     /**
@@ -36,11 +35,17 @@ public class UserDataAccessService implements UserDAO{
      */
     @Override
     public STATUS createUser(User user) {
-        System.out.println(user.getUsername()+" "+user.getPassword());
+        // Vérification de nom d'utilisateur unique
+        List<User> userList = db.getDb_user();
         if(userList.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))){
             return STATUS.USERNAME_DOES_ALREADY_EXIST;
         }
-        userList.add(user);
+        // Si nom d'utilisateur unique, ajouter à la db
+        try {
+            db.save();
+        } catch (IOException e) {
+            return STATUS.DB_COULD_NOT_BE_SAVED;
+        }
         return STATUS.OK;
     }
 
@@ -51,6 +56,7 @@ public class UserDataAccessService implements UserDAO{
      */
     @Override
     public String getPassword(String username) {
+        List<User> userList = db.getDb_user();
         return userList.stream()
                 .filter(user -> user.getUsername().equals(username))
                 .findFirst()
@@ -60,6 +66,9 @@ public class UserDataAccessService implements UserDAO{
 
     @Override
     public STATUS updateUser(User user) {
+        // Charger la liste courant d'utilisateur de la db
+        List<User> userList = db.getDb_user();
+        // Trouver le bon utilisateur
         Optional<User> userToUpdate = userList.stream()
                 .filter(u -> u.getUsername().equals(user.getUsername()))
                 .findFirst();
@@ -69,6 +78,19 @@ public class UserDataAccessService implements UserDAO{
         }
 
         userToUpdate.get().setPassword(user.getPassword());
+        // Sauvegarder la db
+        try {
+            db.save();
+        }catch (IOException exception){
+            return STATUS.DB_COULD_NOT_BE_SAVED;
+        }
+
         return STATUS.OK;
     }
+
+    @Override
+    public List<User> getAllUsers() {
+        return db.getDb_user();
+    }
+
 }
