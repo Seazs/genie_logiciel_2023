@@ -19,9 +19,7 @@ public class CarteEtudeVueController{
     @FXML
     private Label qrText, questionQcmLabel,answer;
     @FXML
-    private Button boutonSuivant;
-    @FXML
-    private Button boutonChange, btnValidAnswer, boutonTerminer;
+    private Button boutonChange, btnValidAnswer;
     @FXML
     private ListView<String> reponsesList;
     @FXML
@@ -168,7 +166,7 @@ public class CarteEtudeVueController{
      */
     private void showQCMBack() {
         boutonChange.setVisible(true);
-        btnValidAnswer.setVisible(true);
+        btnValidAnswer.setVisible(false);
         qrText.setVisible(true);
         questionQcmLabel.setVisible(true);
         reponseTt.setVisible(false);
@@ -181,7 +179,7 @@ public class CarteEtudeVueController{
      */
     private void showTTBack() {
         boutonChange.setVisible(true);
-        btnValidAnswer.setVisible(true);
+        btnValidAnswer.setVisible(false);
         qrText.setVisible(true);
         reponseTt.setVisible(false);
         questionQcmLabel.setVisible(false);
@@ -210,11 +208,11 @@ public class CarteEtudeVueController{
         String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
         if(reponsesList.getSelectionModel().getSelectedItem().equals(infos[4])){
             answer.setText("T'es un bg en sah");
-            listener.tresBon(indexCarte);
+            veryGood();
         }
         else{
             answer.setText("Tu pues ta grand mère");
-            listener.tresMauvais(indexCarte);
+            veryBad();
         }
     }
 
