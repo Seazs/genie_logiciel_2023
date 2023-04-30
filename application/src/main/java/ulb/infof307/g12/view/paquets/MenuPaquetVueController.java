@@ -32,9 +32,6 @@ public class MenuPaquetVueController implements Initializable {
     @FXML
     private TextField RechercheLabel;
 
-    @FXML
-    private Button boutonUpload;
-
     @Setter
     private MenuPaquetListener listener;
 
