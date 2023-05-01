@@ -126,7 +126,7 @@ public class StoreVueController implements Initializable{
     /**
      * Envoie à  storeController  le paquet sélectionné pour l’uploader
      */
-    public void uploadPaquet(){
+    public void uploadPaquet() throws IOException {
         Paquet paquet = mesPaquetListView.getSelectionModel().getSelectedItem();
         listener.uploadPaquet(paquet);
     }

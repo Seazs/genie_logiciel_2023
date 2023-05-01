@@ -48,8 +48,8 @@ public class StoreController extends BaseController implements StoreVueListener 
     /**
      * @param paquet ajoute un paquet dans la liste des paquets du store
      */
-    public void uploadPaquet(Paquet paquet){
-        MenuPrincipal.getINSTANCE().getServer().ajouterPaquet(paquet);
+    public void uploadPaquet(Paquet paquet) throws IOException {
+        MenuPrincipal.getINSTANCE().getServer().postPaquet(paquet);
     }
 
     /**

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
@@ -45,6 +46,18 @@ public class Server {
 
     @PostMapping("/paquet")
     public String postPaquet(Paquet paquet) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(paquet);
+        System.out.println(json);
+
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(json, headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(url+"paquet", entity, String.class);
+        return response.getBody();
+    }
+        /*
         MappingJackson2CborHttpMessageConverter converter = new MappingJackson2CborHttpMessageConverter();
 
         RestTemplate restTemplate = new RestTemplate();
@@ -52,8 +65,8 @@ public class Server {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Paquet> entity = new HttpEntity<>(paquet, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(url+"paquet", entity, String.class);
-        return response.getBody();
-    }
+        return response.getBody();*/
+
 
     /**
      * Envoie une requète GET au serveur pour authentifier un utilisateur.

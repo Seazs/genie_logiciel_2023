@@ -2,6 +2,7 @@ package ulb.infof307.g12.controller.listeners;
 
 import ulb.infof307.g12.model.Paquet;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface StoreVueListener {
@@ -9,7 +10,7 @@ public interface StoreVueListener {
     /**
      * @param paquet
      */
-    void uploadPaquet(Paquet paquet);
+    void uploadPaquet(Paquet paquet) throws IOException;
 
     /**
      * @param paquet
