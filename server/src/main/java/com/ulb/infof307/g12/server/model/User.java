@@ -16,7 +16,7 @@ public class User {
     private String password;
     @Getter
     @Setter
-    private List<Paquet> listPaquet = new ArrayList<Paquet>();
+    private List<Paquet> listPaquet = new ArrayList<>();
 
     /**
      * Récupère un utilisateur à partir d'un DTO envoyé par le client sous forme de String

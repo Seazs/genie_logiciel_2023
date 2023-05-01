@@ -9,14 +9,14 @@ import java.util.List;
 public interface UserDAO {
 
     /**
-     * crée un compte utilisateur sur le serveur
+     * Crée un compte utilisateur sur le serveur
      * @param username pseudo
      * @param password mot de passe
      */
     void createUser(String username, String password);
 
     /**
-     * crée un utilisateur sur le serveur
+     * Crée un utilisateur sur le serveur
      *
      * @param user l'utilisateur
      * @return

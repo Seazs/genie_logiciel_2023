@@ -19,7 +19,7 @@ public class PaquetService {
      * @param paquetDao Dao permettant de gérer les paquets (généré automatiquement par Spring)
      */
     @Autowired
-    // Auto Wired crée une instance de PaquetDao (comme ça on doit pas s'occuper de le crée nous même)
+    // Auto Wired crée une instance de PaquetDao (comme ça on ne doit pas s'occuper de le créer nous même)
     public PaquetService(@Qualifier("database") PaquetDao paquetDao) {
         this.paquetDao = paquetDao;
     }
@@ -35,7 +35,7 @@ public class PaquetService {
     /**
      * Renvoie le paquet correspondant à l'id
      * @param id id du paquet
-     * @return le paquet correspondant à l'id ou null si il n'existe pas
+     * @return le paquet correspondant à l'id ou null s'il n'existe pas
      */
     public Paquet getPaquet(UUID id){
         return paquetDao.getPaquet(id);
