@@ -2,7 +2,6 @@ package com.ulb.infof307.g12.server.dao;
 
 import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.Paquet;
-import com.ulb.infof307.g12.server.model.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.UUID;
 
 public interface PaquetDao {
 
-    void save(User user) throws IOException;
+    void save() throws IOException;
     /**
      * Crée un paquet avec l'id et le nom donné
      * @param id id du paquet
@@ -33,7 +32,7 @@ public interface PaquetDao {
     /**
      * Renvoie le paquet correspondant à l'id
      * @param id id du paquet
-     * @return le paquet correspondant à l'id ou null si il n'existe pas
+     * @return le paquet correspondant à l'id ou null s'il n'existe pas
      */
     Paquet getPaquet(UUID id);
 

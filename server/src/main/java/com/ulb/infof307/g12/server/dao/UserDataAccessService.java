@@ -13,8 +13,8 @@ public class UserDataAccessService implements UserDAO{
     public STATUS status;
     private List<User> db_user;
 
-    public UserDataAccessService() throws IOException {
-        db_user_file = new File("../server/src/main/resources/stockage","stockUser.txt");
+    public UserDataAccessService() {
+        db_user_file = new File("src/main/resources/stockage","stockUser.txt");
         try {
             db_user = this.load();
             status = STATUS.OK;
@@ -145,8 +145,12 @@ public class UserDataAccessService implements UserDAO{
 
     private void fileExists() throws IOException {
         if (!db_user_file.exists()){
-            db_user_file.getParentFile().mkdirs();
-            db_user_file.createNewFile();
+            if (! db_user_file.getParentFile().mkdirs()){
+                throw new IOException("Stockage folder could not be created.");
+            };
+            if (! db_user_file.createNewFile()){
+                throw new IOException("StockUser.txt could not be created.");
+            };
         }
     }
 

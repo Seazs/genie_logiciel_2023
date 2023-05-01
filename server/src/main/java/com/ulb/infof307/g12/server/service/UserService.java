@@ -5,10 +5,8 @@ import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.naming.NameNotFoundException;
 import java.util.List;
 
 @Service
@@ -19,7 +17,7 @@ public class UserService {
      * @param userDAO Dao permettant de gérer les utilisateurs (généré automatiquement par Spring)
      */
     @Autowired
-    // Auto Wired crée une instance de PaquetDao (comme ça on doit pas s'occuper de le créer nous même)
+    // Auto Wired crée une instance de PaquetDao (comme ça on ne doit pas s'occuper de le créer nous même)
     public UserService(@Qualifier("users") UserDAO userDAO) {
         this.userDAO = userDAO;
     }
