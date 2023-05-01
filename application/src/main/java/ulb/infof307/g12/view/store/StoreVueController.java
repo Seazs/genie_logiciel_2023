@@ -44,13 +44,23 @@ public class StoreVueController implements Initializable{
                 MenuPrincipal.getINSTANCE().getUserPaquets()
         );
         saveListPaquet.addAll(storePaquetListView.getItems());
+
         // Personnaliser l'affichage des éléments de la liste
-        updateVisuelListePaquet(mesPaquetListView);
-        updateVisuelListePaquet(storePaquetListView);
+        updateVisuelListeViewPaquet(mesPaquetListView);
+        updateVisuelListeViewPaquet(storePaquetListView);
 
         RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> {
             filtrageCategorie();
+
+
         });
+    }
+
+
+    public void updateVisuelListePaquet(ArrayList<Paquet> paquets) {
+        ObservableList<Paquet> observablePaquets = FXCollections.observableArrayList(paquets);
+        storePaquetListView.setItems(observablePaquets);
+        updateVisuelListeViewPaquet(storePaquetListView);
     }
 
 
@@ -58,7 +68,7 @@ public class StoreVueController implements Initializable{
      * Charge le fichier FXML paquet de carte en chargeant les noms et catégories de chaque paquet
      * @param paquetListView liste des paquets à afficher
      */
-    private void updateVisuelListePaquet(ListView<Paquet> paquetListView) {
+    private void updateVisuelListeViewPaquet(ListView<Paquet> paquetListView) {
         paquetListView.setCellFactory(param -> new ListCell<Paquet>() {
             @Override
             protected void updateItem(Paquet item, boolean empty) {
@@ -120,12 +130,13 @@ public class StoreVueController implements Initializable{
     public void downloadPaquet(){
         Paquet paquet = storePaquetListView.getSelectionModel().getSelectedItem();
         listener.downloadPaquet(paquet);
+        rechargerListView();
     }
 
     /**
      * Envoie à  storeController  le paquet sélectionné pour l’uploader
      */
-    public void uploadPaquet(){
+    public void uploadPaquet() throws IOException {
         Paquet paquet = mesPaquetListView.getSelectionModel().getSelectedItem();
         listener.uploadPaquet(paquet);
     }
@@ -134,9 +145,9 @@ public class StoreVueController implements Initializable{
      * Envoie l’ordre de refresh à storeController
      */
     public void refresh(){
-        listener.refresh();
-        storePaquetListView.getItems().addAll(
-                listener.getStorePaquets()
+
+        storePaquetListView.getItems().setAll(
+                listener.refresh()
         );
     }
 

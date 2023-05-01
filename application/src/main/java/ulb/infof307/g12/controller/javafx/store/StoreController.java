@@ -1,15 +1,18 @@
 package ulb.infof307.g12.controller.javafx.store;
 
 import javafx.stage.Stage;
+import org.json.JSONArray;
 import ulb.infof307.g12.controller.javafx.BaseController;
 
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.StoreVueListener;
+import ulb.infof307.g12.model.JsonParser;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.store.StoreVueController;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,16 +50,21 @@ public class StoreController extends BaseController implements StoreVueListener 
     /**
      * @param paquet ajoute un paquet dans la liste des paquets du store
      */
-    public void uploadPaquet(Paquet paquet){
-        MenuPrincipal.getINSTANCE().getServer().ajouterPaquet(paquet);
+    public void uploadPaquet(Paquet paquet) throws IOException {
+        MenuPrincipal.getINSTANCE().getServer().postPaquet(paquet);
     }
 
     /**
      * Rafraichit la liste des paquets du store
      */
     @Override
-    public void refresh() {
-        //TODO requete http pour vérifier les paquets mis en ligne
-        //Censée être appelée au début du switch vers store
+    public ArrayList<Paquet> refresh() {
+        JSONArray paquetsJson = MenuPrincipal.getINSTANCE().getServer().getPaquets();
+        JsonParser jsonParser = new JsonParser();
+        ArrayList<Paquet> paquets = jsonParser.jsonToListePaquets(paquetsJson);
+        return paquets;
+
+
+
     }
 }

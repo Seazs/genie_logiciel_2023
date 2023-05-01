@@ -1,6 +1,5 @@
 package com.ulb.infof307.g12.server.api;
 
-
 import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.JsonParser;
 import com.ulb.infof307.g12.server.model.Paquet;
@@ -55,12 +54,14 @@ public class PaquetController {
      * @param paquetEnString paquet en string
      */
     @PostMapping
-    public UUID createPaquet(@RequestBody String paquetEnString) {
+    public String createPaquet(@RequestBody String paquetEnString) {
         JSONObject paquetEnJson = new JSONObject(paquetEnString);
         String nom = paquetEnJson.getString("nom");
         ArrayList<String> categories = JsonParser.parseJsonArray(paquetEnJson.getJSONArray("categories"));
         ArrayList<Carte> cartes = JsonParser.parseJsonArrayCarte(paquetEnJson.getJSONArray("cartes"));
-        return paquetService.createPaquet(nom, categories, cartes);
+        paquetService.createPaquet(nom, categories, cartes);
+        String result = "OK" ;
+        return result ;
     }
 
     @DeleteMapping

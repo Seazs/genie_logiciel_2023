@@ -1,11 +1,12 @@
 package ulb.infof307.g12.model;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.cbor.MappingJackson2CborHttpMessageConverter;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
@@ -23,17 +24,16 @@ public class Server {
      * Envoie une requète GET au serveur et renvoie les données
      * @return les données du serveur
      */
-    public String getPaquets(){
+    public JSONArray getPaquets(){
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(url+"paquet", String.class);
-        return response.getBody();
+        String responseBody = response.getBody();
+        System.out.println(responseBody);
+        JSONArray jsonArrayListPaquet = new JSONArray(responseBody);
+       return jsonArrayListPaquet;
     }
 
-    @PostMapping("/paquet")
-    public ResponseEntity<Void> ajouterPaquet(@RequestBody Paquet paquet) {
-        // code pour ajouter le paquet
-        return ResponseEntity.ok().build();
-    }
+
 
 
     /**
@@ -44,15 +44,18 @@ public class Server {
 
     @PostMapping("/paquet")
     public String postPaquet(Paquet paquet) throws IOException {
-        MappingJackson2CborHttpMessageConverter converter = new MappingJackson2CborHttpMessageConverter();
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(paquet);
+        System.out.println(json);
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Paquet> entity = new HttpEntity<>(paquet, headers);
+        HttpEntity<String> entity = new HttpEntity<>(json, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(url+"paquet", entity, String.class);
         return response.getBody();
     }
+
 
     /**
      * Envoie une requète GET au serveur pour authentifier un utilisateur.

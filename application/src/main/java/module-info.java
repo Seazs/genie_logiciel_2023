@@ -6,6 +6,8 @@ module connexion {
     requires static lombok;
     requires spring.web;
     requires freetts;
+    requires com.fasterxml.jackson.databind;
+    requires json;
 
     opens ulb.infof307.g12.controller.javafx.connexion to javafx.fxml;
     exports ulb.infof307.g12.controller.javafx.connexion;
@@ -32,7 +34,7 @@ module connexion {
 
     opens ulb.infof307.g12.controller.javafx.store to javafx.fxml;
     exports ulb.infof307.g12.controller.javafx.store;
-
+    opens ulb.infof307.g12.model to javafx.base, com.fasterxml.jackson.databind;
     opens ulb.infof307.g12.view.store to javafx.fxml;
     exports ulb.infof307.g12.view.store;
 
