@@ -59,12 +59,20 @@ public class EditionVueController{
 
         questionCol.setOnEditCommit(event -> {
             Carte carte = event.getRowValue();
-            carte.editRecto(event.getNewValue());
+            try {
+                carte.editRecto(event.getNewValue());
+            } catch (IllegalArgumentException e) {
+                listener.error(e.getMessage());
+            }
         });
 
         reponseCol.setOnEditCommit(event -> {
             Carte carte = event.getRowValue();
-            carte.editVerso(event.getNewValue());
+            try {
+                carte.editVerso(event.getNewValue());
+            } catch (IllegalArgumentException e) {
+                listener.error(e.getMessage());
+            }
         });
         setChoicebox();
         reloadTable();

@@ -53,4 +53,10 @@ public interface EditionVueListener {
      * @return true si les champs sont valides
      */
     boolean checkQcm(String question, String answer1, String answer2, String answer3, String correctAnswer);
+
+
+    /**
+     * @param message message d'erreur
+     */
+    void error(String message);
 }

@@ -23,7 +23,7 @@ public class ProfilVueController  {
      * Ce qui s'exécute lorsqu'on clique sur le bouton de retour au menu principal
      * @param event l'événement qui a déclenché l'action
      */
-    public void retourMenuPaquet(ActionEvent event){
+    public void returnMenuPaquet(ActionEvent event){
         MenuPrincipal.getINSTANCE().returnToMenuPaquet();
     }
 

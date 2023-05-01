@@ -26,8 +26,7 @@ public class Server {
     public String getPaquets(){
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(url+"paquet", String.class);
-        String responseBody = response.getBody();
-       return responseBody;
+        return response.getBody();
     }
 
     @PostMapping("/paquet")

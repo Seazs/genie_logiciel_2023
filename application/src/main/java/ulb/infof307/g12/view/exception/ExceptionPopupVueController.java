@@ -13,7 +13,7 @@ public class ExceptionPopupVueController {
 
     /**
      * Ajout du texte sur une erreur
-     * @param text
+     * @param text texte
      */
     public void setErrorMsg(String text){
         errorMsg.setText(text);

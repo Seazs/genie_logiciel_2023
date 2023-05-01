@@ -7,12 +7,12 @@ import java.util.List;
 public interface StoreVueListener {
 
     /**
-     * @param paquet
+     * @param paquet paquet
      */
     void uploadPaquet(Paquet paquet);
 
     /**
-     * @param paquet
+     * @param paquet paquet
      */
     void downloadPaquet(Paquet paquet);
 

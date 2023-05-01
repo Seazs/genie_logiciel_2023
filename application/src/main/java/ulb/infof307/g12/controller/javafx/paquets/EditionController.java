@@ -148,4 +148,13 @@ public class EditionController extends BaseController implements EditionVueListe
         }
         return true;
     }
+
+    /**
+     * @param message message d'erreur à afficher
+     */
+    @Override
+    public void error(String message){
+        MenuPrincipal.getINSTANCE().showErrorPopup(message);
+    }
+
 }

@@ -27,7 +27,7 @@ public class Utilisateur {
      * @param mdp mot de passe
      */
     public Utilisateur(String pseudo, String mdp) throws IllegalArgumentException {
-        if (estValide(pseudo) && estValide(mdp))
+        if (isValid(pseudo) && isValid(mdp))
         {
             this.pseudo = pseudo;
             this.mdp = mdp;
@@ -40,11 +40,11 @@ public class Utilisateur {
 
     /**
      * Change le mot de passe de l'utilisateur
-     * @param mdp
-     * @throws IllegalArgumentException
+     * @param mdp nouveau mot de passe
+     * @throws IllegalArgumentException si le mot de passe n'est pas valide
      */
     public void setMdp(String mdp) throws IllegalArgumentException{
-        if (estValide(mdp))
+        if (isValid(mdp))
             this.mdp = mdp;
         else
             throw new IllegalArgumentException("Le mot de passe contient des caractères interdits.");
@@ -54,7 +54,7 @@ public class Utilisateur {
 
     /**
      * Ajoute le paquet à la liste des paquets
-     * @param paquet
+     * @param paquet paquet
      */
     public void addPaquet(Paquet paquet) {
         listPaquet.add(paquet);
@@ -62,7 +62,7 @@ public class Utilisateur {
 
     /**
      * Enlève le paquet de la liste de paquets
-     * @param nom
+     * @param nom nom du paquet
      */
     public void removePaquet(String nom) {
         listPaquet.removeIf(paquet -> Objects.equals(paquet.getNom(), nom));
@@ -70,10 +70,10 @@ public class Utilisateur {
 
 
     /** Vérifie que le string est valide
-     * @param string
+     * @param string string
      * @return True s'il est valide
      */
-    private boolean estValide(String string) {
+    private boolean isValid(String string) {
         return (!string.contains("#") &&
                 !string.equals("") &&
                 !string.contains(" "));

@@ -6,20 +6,20 @@ import java.io.IOException;
 
 public interface MenuPaquetListener {
     /**
-     * @return
-     * @throws IOException
+     * @return Paquet
+     * @throws IOException exception
      */
     Paquet creerPaquet() throws IOException;
 
     /**
      * Editer le paquet
-     * @param paquet
+     * @param paquet paquet
      */
     void editerPaquet(Paquet paquet) ;
 
     /**
      * Etude des cartes
-     * @param paquet
+     * @param paquet paquet
      */
     void CarteEtude(Paquet paquet);
 

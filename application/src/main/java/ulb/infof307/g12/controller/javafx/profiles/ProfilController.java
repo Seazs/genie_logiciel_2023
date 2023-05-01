@@ -19,9 +19,9 @@ public class ProfilController extends BaseController implements ProfilVueListene
 
     /**
      * Controller du profil
-     * @param stage
-     * @param user
-     * @throws IOException
+     * @param stage stage
+     * @param user utilisateur
+     * @throws IOException exceptiony
      */
     public ProfilController(Stage stage, Utilisateur user) throws IOException {
         super(stage,ProfilVueController.class.getResource("profil.fxml"),"");
@@ -36,7 +36,7 @@ public class ProfilController extends BaseController implements ProfilVueListene
     /**
      * Changement de mot de passe de l'utilisateur
      * @param password nouveau mot de passe
-     * @return
+     * @return le résultat
      */
     @Override
     public String changePassword(Optional<String> password) {

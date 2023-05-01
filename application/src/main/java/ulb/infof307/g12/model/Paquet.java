@@ -45,8 +45,8 @@ public class Paquet {
 
     /**
      * Fonction qui ajoute une carte au paquet
-     * @param carte
-     * @throws IllegalArgumentException
+     * @param carte carte
+     * @throws IllegalArgumentException si la carte existe déjà
      */
     public void addCard(Carte carte) throws IllegalArgumentException{
         for(Carte car: this.cartes){
@@ -59,8 +59,8 @@ public class Paquet {
 
     /**
      * Supprime une carte du paquet --> pas encore implémenté dans le code (test à rajouter)
-     * @param carte
-     * @throws IllegalArgumentException
+     * @param carte carte
+     * @throws IllegalArgumentException si la carte n'existe pas
      */
     public void supprimerCarte(Carte carte) throws IllegalArgumentException{
         if(!(cartes.contains(carte))) {
@@ -71,7 +71,7 @@ public class Paquet {
 
     /**
      * Ajoute une catégorie au paquet
-     * @param categorie
+     * @param categorie catégorie
      */
     public void addCategory(String categorie){
         if (categorie.contains("#")){
@@ -80,15 +80,6 @@ public class Paquet {
         if(!this.categories.contains(categorie)){
             this.categories.add(categorie);
         }
-    }
-
-    /**
-     * Fonction qui supprime la catégorie de la liste des catégories (si elle existe)
-     * @param categorie
-     */
-    public void supprimerCategorie(String categorie){
-        this.categories.remove(categorie);
-
     }
 
 }
