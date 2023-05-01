@@ -23,8 +23,8 @@ public class Utilisateur {
     /**
      * Constructeur de la classe utilisateur
      *
-     * @param pseudo
-     * @param mdp
+     * @param pseudo pseudo de l'utilisateur
+     * @param mdp mot de passe
      */
     public Utilisateur(String pseudo, String mdp) throws IllegalArgumentException {
         if (estValide(pseudo) && estValide(mdp))

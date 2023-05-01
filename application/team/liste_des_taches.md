@@ -143,63 +143,77 @@ Tâche 2 : Gestion des exceptions – 1 points
 
 ## Histoire 8 - 4 points
 
-Tâche 1 : Terminer l'implémentation des cartes de type(QCM et texte a trou) - 4 points
+Tâche 1 : Implémenter l'héritage - 1 points
 
-- Ismail et Alexandre A.
-- Description : Lier toutes les différentes parties afin de l'histoire de pouvoir créer, modifier et jouer tout type de carte. Adaptation du code en même temps.
+- Ismail
+- Description : Création d'héritage pour les différents types de cartes. Lier toutes les différentes parties afin de l'histoire de pouvoir créer, modifier et jouer tout type de carte. Adaptation du code en même temps.
+
+Tâche 2: Edition des différents types de cartes (Front-End) - 1 points
+- Raphaël
+- Description: Ajouter des cartes au paquet depuis l'interface
+
+Tâche 3: Test d'édition des différents types de cartes - 1 points
+- Nico
+- Description: Edition des types de cartes et résolution de bugs a l'aide de controller partiels.
+
+
+Tâche 4: Jouer avec les différents types de cartes (Front-End) - 1 points
+-  Raphaël
+- Description: Jouer avec les différents types de cartes et affichage correct
+
 
 ## Histoire 10 - 10 points
 
 Tâche 1 : Création du serveur / protocole de communication - 4 points
 
-- Raphaël et Wassim
+- Wassim
 - Description : Creér un serveur et gérer la connexion au serveur(pas à l'application) et recevoir/envoyer des infos au serveur.
 
 Tâche 2 : Login / register / envoi de paquets - 3 points 
 
-- Lina et Nico
+- Nicolas
 - Description : Envoie du nom et du mdp par le client et check de la validité par le serveur. Envoie des paquets de l'utilisateurs à l'application.
 
 Tâche 3 : Gérer la database du serveur - 2 points
 
-- Brenno et Raph
+- Ismail
 - Description : Création des fichiers nécessaire au stockage des données de l'utilisateur.
 
 Tâche 4 : Implémentation de l'option en ligne ou hors ligne - 1 points
 
-- Wassim et Nico
+- Wassim
 - Description: Création d'un choix au menu de connexion qui détermine si l'applis est en mode en ligne ou hors ligne.
 
 # Histoire 11 - 10 points
 
 Tâche 1 : Gestion du stockage des paquets dans le store - 2 points
 
-- Brenno et Ismail
+- Brenno
 - Description : Création des fichiers nécéssaire au stockage des paquets contenu dans le store
 
 Tâche 2 : Implémentation de l'affichage du store - 2 points
 
-- Wassim et Romain
+- Wassim
 - Description : Créer l'affichage qui récupere tous les paquets se trouvant en ligne avec le moyen les télécharger (Frontend)
 
 Tâche 3 : Implémentation de l'affichage de upload - 2 points
 
-- Romain et Alexandre A.
+- Romain
 - Description : Créer l'affichage qui permet de upload un fichier sur le store
 
 Tâche 4 : Créer le protocole de communaction store et client - 4 points
 
-- Alexandre B. et Philippe
+- Alexandre B.
 - Description : Créer le protocole permettant d'envoyer un paquet sur le store ainsi que de recevoir la liste de tous les paquets du store. 
 
 ## Histoire 14 - 4 points 
 
 Tâche 1 : Création de l'interface audio pour chaque type de carte (Frontend) - 1 points
 
-- Lina et Romain
+- Lina
 - Description : Créer l'interface nécessaire pour la lecture audio.(Frontend)
 
 Tâche 2 : Implémentation de la lecture audio (Back end) - 3 points
 
-- Philippe et Alexandre B.
+- Alexandre B.
 - Description : Implémenter la lecture des cartes avec la manière dont chaque cartes sera lue.

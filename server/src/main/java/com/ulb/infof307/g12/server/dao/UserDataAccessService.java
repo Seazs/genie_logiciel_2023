@@ -4,18 +4,23 @@ import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
 import org.springframework.stereotype.Repository;
 
+import java.io.*;
 import java.util.*;
 
 @Repository("users")
 public class UserDataAccessService implements UserDAO{
+    private final File db_user_file;
+    public STATUS status;
+    private List<User> db_user;
 
-    List<User> userList = new ArrayList<>();
-
-    public UserDataAccessService() {
-        //TODO: retirer la valeur de test
-        User user = new User("admin","test");
-        createUser(user);
-        System.out.println("User: "+user.getUsername()+" Pass: "+user.getPassword());
+    public UserDataAccessService() throws IOException {
+        db_user_file = new File("../server/src/main/resources/stockage","stockUser.txt");
+        try {
+            db_user = this.load();
+            status = STATUS.OK;
+        }catch (IOException exception){
+            status = STATUS.DB_COULD_NOT_BE_LOADED;
+        }
     }
 
     /**
@@ -36,11 +41,17 @@ public class UserDataAccessService implements UserDAO{
      */
     @Override
     public STATUS createUser(User user) {
-        System.out.println(user.getUsername()+" "+user.getPassword());
-        if(userList.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))){
+        // Vérification de nom d'utilisateur unique
+        if(db_user.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))){
             return STATUS.USERNAME_DOES_ALREADY_EXIST;
         }
-        userList.add(user);
+        db_user.add(user);
+        // Si nom d'utilisateur unique, ajouter à la db
+        try {
+            this.save();
+        } catch (IOException e) {
+            return STATUS.DB_COULD_NOT_BE_SAVED;
+        }
         return STATUS.OK;
     }
 
@@ -51,7 +62,7 @@ public class UserDataAccessService implements UserDAO{
      */
     @Override
     public String getPassword(String username) {
-        return userList.stream()
+        return db_user.stream()
                 .filter(user -> user.getUsername().equals(username))
                 .findFirst()
                 .map(User::getPassword)
@@ -60,7 +71,8 @@ public class UserDataAccessService implements UserDAO{
 
     @Override
     public STATUS updateUser(User user) {
-        Optional<User> userToUpdate = userList.stream()
+        // Trouver le bon utilisateur
+        Optional<User> userToUpdate = db_user.stream()
                 .filter(u -> u.getUsername().equals(user.getUsername()))
                 .findFirst();
 
@@ -68,7 +80,74 @@ public class UserDataAccessService implements UserDAO{
             return STATUS.USERNAME_DOES_NOT_EXIST;
         }
 
+        // Modifier mot de passe
         userToUpdate.get().setPassword(user.getPassword());
+
+        // Sauvegarder la db
+        try {
+            this.save();
+        }catch (IOException exception){
+            return STATUS.DB_COULD_NOT_BE_SAVED;
+        }
+
         return STATUS.OK;
     }
+
+    @Override
+    public List<User> getAllUsers() {
+        return db_user;
+    }
+
+    /**
+     * Sauvegarde la liste des utilisateurs dans un fichier .txt
+     * @throws IOException
+     */
+    public void save() throws IOException {
+        fileExists();
+
+        FileWriter writer = new  FileWriter(db_user_file);
+        BufferedWriter out = new BufferedWriter(writer);
+
+        for(User utilisateur : db_user) {
+            out.write(utilisateur.getUsername() + "#" + utilisateur.getPassword());
+            out.newLine();
+        }
+        out.close();
+    }
+
+    /**
+     * Charge les utilisateurs à partir d'un fichier
+     * @throws FileNotFoundException
+     */
+    public List<User> load() throws IOException {
+        ArrayList<User> new_db_user = new ArrayList<>();
+        fileExists();
+        try {
+            Scanner myReader = new Scanner(db_user_file);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+
+                if (!data.isBlank()) {
+                    String[] listdata = data.split("#");
+                    if (listdata.length >= 2) {
+                        new_db_user.add(new User(listdata[0].strip(), listdata[1].strip()));
+                    } else {
+                        System.out.println("Erreur : la ligne ne contient pas les informations attendues.");
+                    }
+                }
+            }
+            myReader.close();
+        }catch (IOException exception){
+            throw new IOException("Erreur dans la lecture du fichier.");
+        }
+        return new_db_user;
+    }
+
+    private void fileExists() throws IOException {
+        if (!db_user_file.exists()){
+            db_user_file.getParentFile().mkdirs();
+            db_user_file.createNewFile();
+        }
+    }
+
 }

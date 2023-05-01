@@ -7,6 +7,7 @@ import org.junit.jupiter.api.io.TempDir;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Carte;
+import ulb.infof307.g12.model.CarteQcm;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
 
@@ -50,15 +51,17 @@ class GestionnairePaquetTest {
     public void testSauvegardePaquet() throws IOException{
         Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
         Paquet paquet1 = new Paquet("Maths","BA1");
-        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non", "");
-        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui", "");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
+        CarteQcm carte3 = new CarteQcm(3, "redox§rep1§rep2§rep3", "Non");
         paquet1.ajouterCarte(carte1);
         paquet1.ajouterCarte(carte2);
+        paquet1.ajouterCarte(carte3);
         Paquet paquet2 = new Paquet("Chimie","BA1");
-        Carte carte3 = new Carte(3, "redox", "Non", "");
-        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui", "");
-        paquet2.ajouterCarte(carte3);
+        Carte carte4 = new Carte(3, "redox", "Non");
+        Carte carte5 = new Carte(4, "structure quantique de l'atome", "Oui");
         paquet2.ajouterCarte(carte4);
+        paquet2.ajouterCarte(carte5);
         utilisateur1.addPaquet(paquet1);
         utilisateur1.addPaquet(paquet2);
         GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
@@ -66,7 +69,7 @@ class GestionnairePaquetTest {
         GestionnairePaquet gestPaquet = new GestionnairePaquet();
         gestPaquet.save(utilisateur1);
         //Test d'assertion
-        File f = new File("./stockage/"+utilisateur1.getPseudo()+"/"+"Maths");
+        File f = new File("./src/main/resources/stockage/"+utilisateur1.getPseudo()+"/"+"Maths");
         assertTrue(f.exists());
 
     }
@@ -75,13 +78,13 @@ class GestionnairePaquetTest {
     public void testremove() throws IOException{
         Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
         Paquet paquet1 = new Paquet("Maths","BA1");
-        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non", "");
-        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui", "");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
         paquet1.ajouterCarte(carte1);
         paquet1.ajouterCarte(carte2);
         Paquet paquet2 = new Paquet("Chimie","BA1");
-        Carte carte3 = new Carte(3, "redox", "Non", "");
-        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui", "");
+        Carte carte3 = new Carte(3, "redox", "Non");
+        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui");
         paquet2.ajouterCarte(carte3);
         paquet2.ajouterCarte(carte4);
         utilisateur1.addPaquet(paquet1);
@@ -92,7 +95,7 @@ class GestionnairePaquetTest {
         gestPaquet.save(utilisateur1);
         //Test de suppression
         gestPaquet.remove(utilisateur1,paquet1);
-        File f = new File("./stockage/"+utilisateur1.getPseudo()+"/"+paquet1.getNom());
+        File f = new File("./src/main/resources/stockage/"+utilisateur1.getPseudo()+"/"+paquet1.getNom());
         assertFalse(f.exists());
     }
 
@@ -100,13 +103,13 @@ class GestionnairePaquetTest {
     public void testLoadPaquet() throws IOException {
         Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
         Paquet paquet1 = new Paquet("Maths","BA1");
-        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non", "");
-        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui", "");
+        Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
+        Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
         paquet1.ajouterCarte(carte1);
         paquet1.ajouterCarte(carte2);
         Paquet paquet2 = new Paquet("Chimie","BA1");
-        Carte carte3 = new Carte(3, "redox", "Non", "");
-        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui", "");
+        Carte carte3 = new Carte(3, "redox", "Non");
+        Carte carte4 = new Carte(4, "structure quantique de l'atome", "Oui");
         paquet2.ajouterCarte(carte3);
         paquet2.ajouterCarte(carte4);
         utilisateur1.addPaquet(paquet1);

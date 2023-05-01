@@ -15,12 +15,12 @@ public abstract class BaseController {
 
     /**
      * Controller de base
-     * @param stage
-     * @param resource
-     * @param title
-     * @throws IOException
+     * @param stage stage
+     * @param resource ressource
+     * @param title titre
+     * @throws IOException exception
      */
-    public BaseController(Stage stage,URL resource,String title) throws IOException {
+    public BaseController(Stage stage, URL resource, String title) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(resource);
 
@@ -32,7 +32,6 @@ public abstract class BaseController {
         controller = fxmlLoader.getController();
 
         this.stage = stage;
-
     }
 
     /**

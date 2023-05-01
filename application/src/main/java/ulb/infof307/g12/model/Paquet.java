@@ -19,9 +19,9 @@ public class Paquet {
 
     /**
      * Crée un paquet dont le nom doit être unique.
-     * @param nom
-     * @param categorie
-     * @throws IllegalArgumentException
+     * @param nom nom du paquet
+     * @param categorie catégorie du paquet
+     * @throws IllegalArgumentException si le paquet n'a pas de catérorie ou de nom
      */
     public Paquet(String nom, String... categorie) throws IllegalArgumentException{
         if(nom == null || nom.equals("") || categorie == null)
@@ -32,7 +32,7 @@ public class Paquet {
     }
 
     /**
-     * @param objects
+     * @param objects objets
      * @return True si l'objet est le meme paquet
      */
     @Override

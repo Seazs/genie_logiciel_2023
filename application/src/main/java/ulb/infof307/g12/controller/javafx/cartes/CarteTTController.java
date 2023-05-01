@@ -2,7 +2,7 @@ package ulb.infof307.g12.controller.javafx.cartes;
 
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
-import ulb.infof307.g12.model.Carte;
+import ulb.infof307.g12.model.CarteTt;
 import ulb.infof307.g12.view.cartes.CarteTTVueController;
 
 import java.io.IOException;
@@ -17,10 +17,11 @@ public class CarteTTController extends BaseController {
      * @param card carte
      * @throws IOException exceptions
      */
-    public CarteTTController(Stage stage, String title, Carte card) throws IOException {
+    public CarteTTController(Stage stage, String title, CarteTt card) throws IOException {
         super(stage, CarteTTVueController.class.getResource("CarteTT.fxml"), title);
         if (!Objects.equals(card.getType(), "tt")) throw new IllegalArgumentException();
         CarteTTVueController controller = (CarteTTVueController) super.controller;
-        controller.showCarte(card);
+        controller.showCarte(card.getBegin(),card.getEnd(),card.getAnswer());
     }
+
 }

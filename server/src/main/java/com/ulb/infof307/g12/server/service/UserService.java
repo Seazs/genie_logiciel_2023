@@ -5,7 +5,11 @@ import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import javax.naming.NameNotFoundException;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -45,4 +49,9 @@ public class UserService {
     public STATUS updateUser(User user){
         return userDAO.updateUser(user);
     }
+
+    public List<User> getAllUsers() {
+        return userDAO.getAllUsers();
+    }
+
 }

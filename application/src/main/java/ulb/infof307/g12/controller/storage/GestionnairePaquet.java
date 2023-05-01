@@ -1,9 +1,7 @@
 package ulb.infof307.g12.controller.storage;
 
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.model.Carte;
-import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Utilisateur;
+import ulb.infof307.g12.model.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -16,13 +14,13 @@ public class GestionnairePaquet {
 
     /**
      * Sauvegarde un paquet de cartes sous forme de fichier dans le dossier de l'utilisateur.
-     * @param user
-     * @throws IOException
+     * @param user utilisateur
+     * @throws IOException exception
      */
     public void save(Utilisateur user) throws IOException {
         List<Paquet> listPaquet = user.getListPaquet();
         for (Paquet paquet : listPaquet){
-            File paquetdatabase = new File("./stockage/"+user.getPseudo(),paquet.getNom()); // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
+            File paquetdatabase = new File("./src/main/resources/stockage/"+user.getPseudo(),paquet.getNom()); // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
             FileWriter writer = new  FileWriter(paquetdatabase);
             BufferedWriter out = new BufferedWriter(writer);
 
@@ -59,7 +57,7 @@ public class GestionnairePaquet {
     public List<Paquet> load(Utilisateur user) {
 
         try {
-            File userfolder = new File("./stockage/"+user.getPseudo());
+            File userfolder = new File("./src/main/resources/stockage/"+user.getPseudo());
             File[] listOfFilePaquet = userfolder.listFiles(); //Enumère les fichiers dans le dossier de l'utilisateur
             List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
 
@@ -91,13 +89,21 @@ public class GestionnairePaquet {
         String line;
         while((line = reader.readLine())!=null) {
             String[] listdata = line.split("#");
-
-            Carte bufferCarte = new Carte(i, "recto", "verso", "");
-            bufferCarte.setType(listdata[0].strip());
-            bufferCarte.setRecto(listdata[1].strip());
-            bufferCarte.setVerso(listdata[2].strip()) ;
-            bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
-            newPaquet.ajouterCarte(bufferCarte);
+            if (listdata[0].equals("QCM")){ //Si la carte est un QCM
+                CarteQcm bufferCarte = new CarteQcm(i, listdata[1],  listdata[2]);
+                bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
+                newPaquet.ajouterCarte(bufferCarte);
+            }
+            else if(listdata[0].equals("Simple")){
+                Carte bufferCarte = new Carte(i, listdata[1], listdata[2]);
+                bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
+                newPaquet.ajouterCarte(bufferCarte);
+            }
+            else if(listdata[0].equals("TT")){
+                CarteTt bufferCarte = new CarteTt(i, listdata[1], listdata[2]);
+                bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
+                newPaquet.ajouterCarte(bufferCarte);
+            }
             i++;}
     }
 
@@ -107,7 +113,7 @@ public class GestionnairePaquet {
      * @param paquet
      */
     public void remove(Utilisateur user, Paquet paquet) {
-        File f = new File("./stockage/"+user.getPseudo()+"/"+paquet.getNom());
+        File f = new File("./src/main/resources/stockage/"+user.getPseudo()+"/"+paquet.getNom());
         try{
             if(f.exists()){
                 f.delete();

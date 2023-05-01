@@ -16,10 +16,7 @@ import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
 import ulb.infof307.g12.controller.javafx.store.StoreController;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
-import ulb.infof307.g12.model.Carte;
-import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Server;
-import ulb.infof307.g12.model.Utilisateur;
+import ulb.infof307.g12.model.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +47,7 @@ public class MenuPrincipal extends Application {
     @Setter
     private boolean isOnline;
 
+
     /**
      * Démarrage de l'application
      * @param stage stage
@@ -66,7 +64,7 @@ public class MenuPrincipal extends Application {
      * @param args arguments
      */
     public static void main(String[] args) {
-        File stockage = new File("./stockage");
+        File stockage = new File("./src/main/resources/stockage");
         if (!stockage.exists()){
             stockage.mkdir();
         }
@@ -193,27 +191,25 @@ public class MenuPrincipal extends Application {
      * Affichage des cartes de type QCM
      * @param card carte
      */
-    public void showCarteQCM(Carte card) {
+    public void showCarteQCM(CarteQcm card) {
         try {
             carteQCMController = new CarteQCMController(new Stage(),"Title",card);
             menuPaquetController.hide();
             carteQCMController.show();
         } catch (IOException e) {
-            e.printStackTrace();
             showErrorPopup("Impossible de charger la carte QCM !");
         }
-
     }
 
     /**
      * Affichage des cartes de type texte à trou
      * @param card cartes
      */
-    public void showCarteTT(Carte card) {
+    public void showCarteTT(CarteTt card) {
         try{
-        carteTTController = new CarteTTController(new Stage(),"",card);
-        menuPaquetController.hide();
-        carteTTController.show();
+            carteTTController = new CarteTTController(new Stage(),"",card);
+            menuPaquetController.hide();
+            carteTTController.show();
         } catch (IOException e) {
             e.printStackTrace();
             showErrorPopup("Impossible de charger la carte Texte à Trou !");
