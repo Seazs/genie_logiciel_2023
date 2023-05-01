@@ -2,7 +2,6 @@ package com.ulb.infof307.g12.server.dao;
 
 import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
-import lombok.Getter;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
@@ -14,9 +13,14 @@ public class UserDataAccessService implements UserDAO{
     public STATUS status;
     private List<User> db_user;
 
-    public UserDataAccessService() throws FileNotFoundException, IOException {
-        db_user_file = new File("./stockage","stockUser.txt");
-        db_user = this.load();
+    public UserDataAccessService() throws IOException {
+        db_user_file = new File("../server/src/main/resources/stockage","stockUser.txt");
+        try {
+            db_user = this.load();
+            status = STATUS.OK;
+        }catch (IOException exception){
+            status = STATUS.DB_COULD_NOT_BE_LOADED;
+        }
     }
 
     /**
@@ -76,7 +80,9 @@ public class UserDataAccessService implements UserDAO{
             return STATUS.USERNAME_DOES_NOT_EXIST;
         }
 
+        // Modifier mot de passe
         userToUpdate.get().setPassword(user.getPassword());
+
         // Sauvegarder la db
         try {
             this.save();
@@ -97,10 +103,7 @@ public class UserDataAccessService implements UserDAO{
      * @throws IOException
      */
     public void save() throws IOException {
-        if (!db_user_file.exists()) {
-            db_user_file.getParentFile().mkdirs();
-            db_user_file.createNewFile();
-        }
+        fileExists();
 
         FileWriter writer = new  FileWriter(db_user_file);
         BufferedWriter out = new BufferedWriter(writer);
@@ -116,11 +119,9 @@ public class UserDataAccessService implements UserDAO{
      * Charge les utilisateurs à partir d'un fichier
      * @throws FileNotFoundException
      */
-    public List<User> load() throws IOException, FileNotFoundException {
+    public List<User> load() throws IOException {
         ArrayList<User> new_db_user = new ArrayList<>();
-        if (!db_user_file.exists()){
-            throw new FileNotFoundException("Le fichier n'existe pas");
-        }
+        fileExists();
         try {
             Scanner myReader = new Scanner(db_user_file);
             while (myReader.hasNextLine()) {
@@ -140,6 +141,13 @@ public class UserDataAccessService implements UserDAO{
             throw new IOException("Erreur dans la lecture du fichier.");
         }
         return new_db_user;
+    }
+
+    private void fileExists() throws IOException {
+        if (!db_user_file.exists()){
+            db_user_file.getParentFile().mkdirs();
+            db_user_file.createNewFile();
+        }
     }
 
 }

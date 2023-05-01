@@ -176,7 +176,7 @@ class GestionnaireUtilisateurTest {
         gestuser.register(user1.getPseudo(), user1.getMdp());
         gestuser.removeUser(user1);
         //Test
-        File f = new File("./stockage/"+user1.getPseudo());
+        File f = new File("./src/main/resources/stockage/"+user1.getPseudo());
         assertFalse(f.exists());
         assertFalse(gestuser.getListeUtilisateur().contains(user1));
     }

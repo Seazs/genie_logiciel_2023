@@ -31,7 +31,7 @@ public class GestionnaireUtilisateur {
      * Autre constructeur du gestionnaire utilisateur
      */
     public GestionnaireUtilisateur() {
-        userdatabase = new File("./stockage","stockUser.txt");
+        userdatabase = new File("./src/main/resources/stockage","stockUser.txt");
         try {
             if (!userdatabase.createNewFile()){
                 load();
@@ -161,7 +161,7 @@ public class GestionnaireUtilisateur {
         status = STATUS.OK;
         System.out.println("NEW USER REGISTERED");
         listeUtilisateur.add(new_user);
-        File f = new File("./stockage",username);
+        File f = new File("./src/main/resources/stockage",username);
         f.mkdir();
         this.save();
         return true;
@@ -249,7 +249,7 @@ public class GestionnaireUtilisateur {
      * @param user
      */
     public void removeUser(Utilisateur user) {
-        File f = new File("./stockage/" + user.getPseudo());
+        File f = new File("./src/main/resources/stockage/" + user.getPseudo());
         try {
             if (f.exists()) {
                 int index=0;

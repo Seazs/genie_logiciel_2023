@@ -3,7 +3,7 @@ package com.ulb.infof307.g12.server.model;
 import lombok.Getter;
 
 public enum STATUS {
-    OK(""),
+    OK("OK"),
     USERNAME_DOES_NOT_EXIST("L'utilisateur n'existe pas !"),
     USERNAME_DOES_ALREADY_EXIST("Le pseudo existe déjà!"),
     USERNAME_IS_NOT_VALID("Le pseudo contient des caractères interdits."),

@@ -66,7 +66,7 @@ class GestionnairePaquetTest {
         GestionnairePaquet gestPaquet = new GestionnairePaquet();
         gestPaquet.save(utilisateur1);
         //Test d'assertion
-        File f = new File("./stockage/"+utilisateur1.getPseudo()+"/"+"Maths");
+        File f = new File("./src/main/resources/stockage/"+utilisateur1.getPseudo()+"/"+"Maths");
         assertTrue(f.exists());
 
     }
@@ -92,7 +92,7 @@ class GestionnairePaquetTest {
         gestPaquet.save(utilisateur1);
         //Test de suppression
         gestPaquet.remove(utilisateur1,paquet1);
-        File f = new File("./stockage/"+utilisateur1.getPseudo()+"/"+paquet1.getNom());
+        File f = new File("./src/main/resources/stockage/"+utilisateur1.getPseudo()+"/"+paquet1.getNom());
         assertFalse(f.exists());
     }
 

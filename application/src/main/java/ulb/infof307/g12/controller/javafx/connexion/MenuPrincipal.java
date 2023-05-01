@@ -62,7 +62,7 @@ public class MenuPrincipal extends Application {
      * @param args arguments
      */
     public static void main(String[] args) {
-        File stockage = new File("./stockage");
+        File stockage = new File("./src/main/resources/stockage");
         if (!stockage.exists()){
             stockage.mkdir();
         }

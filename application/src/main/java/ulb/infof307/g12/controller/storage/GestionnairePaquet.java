@@ -22,7 +22,7 @@ public class GestionnairePaquet {
     public void save(Utilisateur user) throws IOException {
         List<Paquet> listPaquet = user.getListPaquet();
         for (Paquet paquet : listPaquet){
-            File paquetdatabase = new File("./stockage/"+user.getPseudo(),paquet.getNom()); // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
+            File paquetdatabase = new File("./src/main/resources/stockage/"+user.getPseudo(),paquet.getNom()); // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
             FileWriter writer = new  FileWriter(paquetdatabase);
             BufferedWriter out = new BufferedWriter(writer);
 
@@ -59,7 +59,7 @@ public class GestionnairePaquet {
     public List<Paquet> load(Utilisateur user) {
 
         try {
-            File userfolder = new File("./stockage/"+user.getPseudo());
+            File userfolder = new File("./src/main/resources/stockage/"+user.getPseudo());
             File[] listOfFilePaquet = userfolder.listFiles(); //Enumère les fichiers dans le dossier de l'utilisateur
             List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
 
@@ -107,7 +107,7 @@ public class GestionnairePaquet {
      * @param paquet
      */
     public void remove(Utilisateur user, Paquet paquet) {
-        File f = new File("./stockage/"+user.getPseudo()+"/"+paquet.getNom());
+        File f = new File("./src/main/resources/stockage/"+user.getPseudo()+"/"+paquet.getNom());
         try{
             if(f.exists()){
                 f.delete();
