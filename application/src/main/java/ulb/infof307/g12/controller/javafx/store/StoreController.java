@@ -5,12 +5,14 @@ import ulb.infof307.g12.controller.javafx.BaseController;
 
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.StoreVueListener;
+import ulb.infof307.g12.model.JsonParser;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.paquets.EditionVueController;
 import ulb.infof307.g12.view.store.StoreVueController;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,7 +59,7 @@ public class StoreController extends BaseController implements StoreVueListener 
      */
     @Override
     public void refresh() {
-        //TODO requete http pour vérifier les paquets mis en ligne
-        //Censée être appelée au début du switch vers store
+        String paquetsJson = MenuPrincipal.getINSTANCE().getServer().getPaquets();
+
     }
 }

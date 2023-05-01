@@ -94,6 +94,11 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/freetts-1.2.2.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160810</version>
+        </dependency>
     </dependencies>
 
     <build>

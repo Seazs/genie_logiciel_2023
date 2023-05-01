@@ -28,6 +28,8 @@ public class Server {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(url+"paquet", String.class);
         String responseBody = response.getBody();
+        System.out.println(responseBody);
+
        return responseBody;
     }
 
@@ -57,15 +59,6 @@ public class Server {
         ResponseEntity<String> response = restTemplate.postForEntity(url+"paquet", entity, String.class);
         return response.getBody();
     }
-        /*
-        MappingJackson2CborHttpMessageConverter converter = new MappingJackson2CborHttpMessageConverter();
-
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Paquet> entity = new HttpEntity<>(paquet, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(url+"paquet", entity, String.class);
-        return response.getBody();*/
 
 
     /**
