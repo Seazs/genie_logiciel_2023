@@ -31,4 +31,8 @@ public class User {
         this.username = args[0];
         this.password = args[1];
     }
+    public User(String username, String password) throws IllegalArgumentException{
+        this.username = username;
+        this.password = password;
+    }
 }
