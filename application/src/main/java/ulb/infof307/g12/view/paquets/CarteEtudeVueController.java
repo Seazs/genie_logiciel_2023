@@ -31,8 +31,6 @@ public class CarteEtudeVueController{
     @FXML
     private ListView<String> reponsesList;
     @FXML
-    private Button boutonChange;
-    @FXML
     private TextField reponseTt;
     private Button boutonEcouter;
     private int indexCarte = 0;
@@ -337,10 +335,10 @@ public class CarteEtudeVueController{
     }
     public void boutonParlerClick(ActionEvent actionEvent) {
         if (cote== 0){
-            this.listener.parlerTexte(cartesEtude.get(indexCarte).getRecto());
+            this.listener.parlerTexte(listener.getCartesEtude().get(indexCarte).getRecto());
         }
         else {
-            this.listener.parlerTexte(cartesEtude.get(indexCarte).getVerso());
+            this.listener.parlerTexte(listener.getCartesEtude().get(indexCarte).getVerso());
         }
     }
 }
