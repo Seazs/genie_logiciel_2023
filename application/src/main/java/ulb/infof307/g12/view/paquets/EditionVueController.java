@@ -4,14 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.EditionVueListener;
@@ -20,12 +18,9 @@ import ulb.infof307.g12.model.Carte;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Optional;
 
 public class EditionVueController{
 
-    @FXML
-    private AnchorPane editionqr;
     @FXML
     private TableColumn<Carte, String> reponseCol;
     @FXML
@@ -144,13 +139,13 @@ public class EditionVueController{
      * Rajouter une carte au paquet
      */
     @FXML
-    void ajouterCarte(ActionEvent event) {
+    void addCard(ActionEvent event) {
         if (Objects.equals(typechoix.getValue(), "Simple")) {
-            addCarteQr();
+            addCardQR();
         } else if (Objects.equals(typechoix.getValue(), "QCM")) {
-            addCarteQcm();
+            addCardQCM();
         } else if (Objects.equals(typechoix.getValue(), "Texte à trous")) {
-            addCarteTt();
+            addCardTT();
         }
 
     }
@@ -158,53 +153,57 @@ public class EditionVueController{
     /**
      * Ajoute une carte Texte à trou dans le paquet
      */
-    private void addCarteTt() {
+    private void addCardTT() {
         // Prendre les informations
         String debut = questionTextField.getText();
         String fin = reponseTextField.getText();
         String verso = reponsettTextField.getText();
-        String recto = debut + "§" + fin;
-        // Envoyer au listener
-        listener.ajouterCarteTT(recto, verso);
-        // Nettoyer les entrées
-        questionTextField.clear();
-        reponseTextField.clear();
-        reponsettTextField.clear();
-        // Recharger la table*/
-        reloadTable();
+        if (listener.checkTt(debut, fin, verso)){
+            String recto = debut + "§" + fin;
+            // Envoyer au listener
+            listener.addCardTT(recto, verso);
+            // Nettoyer les entrées
+            questionTextField.clear();
+            reponseTextField.clear();
+            reponsettTextField.clear();
+            // Recharger la table*/
+            reloadTable();
+        }
     }
 
     /**
      * Ajoute une carte qcm dans le paquet
      */
-    private void addCarteQcm() {
+    private void addCardQCM() {
         // Prendre les informations
         String question = questionTextField.getText();
         String choice1 = rep1.getText();
         String choice2 = rep2.getText();
         String choice3 = rep3.getText();
-        String recto = question + "§" + choice1 + "§" + choice2 + "§" + choice3;
         String verso = reponseTextField.getText();
-        // Envoyer au listener
-        listener.ajouterCarteQCM(recto, verso);
-        // Nettoyer les entrées
-        questionTextField.clear();
-        reponseTextField.clear();
-        rep1.clear();
-        rep2.clear();
-        rep3.clear();
-        // Recharger la table*/
-        reloadTable();
+        if (listener.checkQcm(question, choice1, choice2, choice3, verso)){
+            String recto = question + "§" + choice1 + "§" + choice2 + "§" + choice3;
+            // Envoyer au listener
+            listener.addCardQCM(recto, verso);
+            // Nettoyer les entrées
+            questionTextField.clear();
+            reponseTextField.clear();
+            rep1.clear();
+            rep2.clear();
+            rep3.clear();
+            // Recharger la table*/
+            reloadTable();
+        }
     }
 
 
     /**
      * Ajout d'une carte question réponse dans le paquet
      */
-    private void addCarteQr() {
+    private void addCardQR() {
         String recto = questionTextField.getText();
         String verso = reponseTextField.getText();
-        listener.ajouterCarte(recto, verso);
+        listener.addCard(recto, verso);
         questionTextField.clear();
         reponseTextField.clear();
         reloadTable();
@@ -231,7 +230,7 @@ public class EditionVueController{
         String nouveauNom = nomPaquetTextField.getText();
         String nouvelleCategorie = categoriePaquetTextField.getText();
         // Envoyer au listener
-        listener.enregistrerPaquet(nouveauNom, nouvelleCategorie);
+        listener.savePaquet(nouveauNom, nouvelleCategorie);
         // Revenir sur le menu principal
         MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();
     }

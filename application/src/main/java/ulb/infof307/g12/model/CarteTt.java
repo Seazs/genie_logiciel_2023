@@ -28,6 +28,10 @@ public class CarteTt extends Carte{
         this.end = listinfos[1];
         this.answer = this.getVerso();
     }
+
+    /**
+     * @return les informations de la carte
+     */
     @Override
     public String[] getCarteInfo(){
         String[] info = new String[3];

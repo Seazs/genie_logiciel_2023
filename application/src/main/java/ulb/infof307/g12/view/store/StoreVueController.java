@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.controller.javafx.store.StoreController;
 import ulb.infof307.g12.controller.listeners.StoreVueListener;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
@@ -57,7 +56,7 @@ public class StoreVueController implements Initializable{
 
     /**
      * Charge le fichier FXML paquet de carte en chargeant les noms et catégories de chaque paquet
-     * @param paquetListView
+     * @param paquetListView liste des paquets à afficher
      */
     private void updateVisuelListePaquet(ListView<Paquet> paquetListView) {
         paquetListView.setCellFactory(param -> new ListCell<Paquet>() {

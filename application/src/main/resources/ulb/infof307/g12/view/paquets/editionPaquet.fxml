@@ -21,7 +21,7 @@
          </columnResizePolicy>
       </TableView>
       <Button fx:id="retourBouton" layoutX="50.0" layoutY="33.0" mnemonicParsing="false" onAction="#annulerEdition" prefHeight="63.0" prefWidth="80.0" text="Retour" />
-       <Button fx:id="ajouterCarte" layoutX="478.0" layoutY="306.0" mnemonicParsing="false" onAction="#ajouterCarte" text="Ajouter Carte" />
+       <Button fx:id="ajouterCarte" layoutX="478.0" layoutY="306.0" mnemonicParsing="false" onAction="#addCard" text="Ajouter Carte" />
       <ChoiceBox fx:id="typechoix" layoutX="55.0" layoutY="306.0" prefWidth="150.0" />
        <TextField fx:id="questionTextField" layoutX="50.0" layoutY="339.0" minHeight="25.0" minWidth="226.0" prefHeight="25.0" prefWidth="226.0" promptText="Question" />
        <TextField fx:id="reponseTextField" layoutX="325.0" layoutY="339.0" minHeight="25.0" minWidth="236.0" prefHeight="25.0" prefWidth="236.0" promptText="Réponse" />

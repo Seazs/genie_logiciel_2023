@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -17,7 +16,6 @@ import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -83,7 +81,6 @@ public class MenuPaquetVueController implements Initializable {
                         // Définir la vue FXML comme élément de la cellule
                         setGraphic(cellLayout);
                     } catch (IOException e) {
-                        e.printStackTrace();
                         MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de charger les textures du paquet de carte");
                     }
                 }
@@ -118,10 +115,8 @@ public class MenuPaquetVueController implements Initializable {
      * Ouvrir le menu d'édition de paquet
      */
     public void ouvrirEdition(ActionEvent event) {
-        // Obtenir le paquet selectionné pour modifier
-        Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
-        // Envoyer demande de modification au listener
-        listener.editerPaquet(paquet);
+        // Obtenir le paquet selectionné pour modifier et Envoyer demande de modification au listener
+        listener.editerPaquet(paquetListView.getSelectionModel().getSelectedItem());
         // Après la modification, recharger la vue pour tenir compte des modifications
         rechargerListView();
     }
@@ -151,10 +146,8 @@ public class MenuPaquetVueController implements Initializable {
                     .anyMatch(s -> s.toLowerCase().contains(recherche.toLowerCase()));
             if(result && ! paquetListView.getItems().contains(paquet))
                 paquetListView.getItems().add(paquet);
-
         });
     }
-
 
     /**
      * Permet de changer vers une view "session d'étude"
@@ -167,5 +160,4 @@ public class MenuPaquetVueController implements Initializable {
             listener.CarteEtude(paquet);
         }
     }
-
 }

@@ -5,9 +5,6 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.BaseController;
-import ulb.infof307.g12.controller.javafx.cartes.CarteQCMController;
-import ulb.infof307.g12.controller.javafx.cartes.CarteReponseController;
-import ulb.infof307.g12.controller.javafx.cartes.CarteTTController;
 import ulb.infof307.g12.controller.javafx.exception.ExceptionPopupController;
 import ulb.infof307.g12.controller.javafx.paquets.CarteEtudeController;
 import ulb.infof307.g12.controller.javafx.paquets.EditionController;
@@ -20,6 +17,7 @@ import ulb.infof307.g12.model.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -36,12 +34,7 @@ public class MenuPrincipal extends Application {
     private StoreController storeController;
     @Setter
     private Utilisateur userPrincipale;
-    @Getter
-    private List<Paquet> userPaquets;
-    private CarteQCMController carteQCMController;
-    private CarteTTController carteTTController;
     private ExceptionPopupController exceptionPopupController;
-    private CarteReponseController carteReponseController;
     @Getter
     private final Server server = new Server();
     @Setter
@@ -79,7 +72,6 @@ public class MenuPrincipal extends Application {
     public void showMenuPaquet(Utilisateur user, ConnexionMenuController parent) {
         try {
             this.userPrincipale = user;
-            userPaquets = user.getListPaquet();
             menuPaquetController = new MenuPaquetController(user,new Stage());
             parent.hide();
             menuPaquetController.show();
@@ -100,7 +92,6 @@ public class MenuPrincipal extends Application {
             connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
             connexionController.show();
         } catch (IOException e) {
-            e.printStackTrace();
             showErrorPopup("Un problème est survenu lors du chargement du menu de connexion.");
         }
 
@@ -118,7 +109,6 @@ public class MenuPrincipal extends Application {
             carteEtudeController = new CarteEtudeController(stage,paquet);
             carteEtudeController.show();
         }catch (IOException e){
-            e.printStackTrace();
             showErrorPopup("Impossible de lancer une session d'étude !");
         }
     }
@@ -133,7 +123,6 @@ public class MenuPrincipal extends Application {
             menuPaquetController.hide();
             profilController.show();
         } catch (IOException e) {
-            e.printStackTrace();
             showErrorPopup("Impossible de charger le profil !");
         }
     }
@@ -155,103 +144,44 @@ public class MenuPrincipal extends Application {
 
     }
 
+
+    /**
+     * Passe d'une ancienne vue à une nouvelle vue
+     * @param oldView ancienne vue
+     * @param newView nouvelle vue
+     */
+    public void changeView(BaseController oldView, BaseController newView){
+        oldView.hide();
+        newView.show();
+    }
     /**
      * Retour au menu Paquet
      */
     public void returnToMenuPaquet() {
-        profilController.hide();
-        menuPaquetController.show();
+        changeView(profilController,menuPaquetController);
     }
 
     /**
      * Retour au menu Paquet depuis l'édition de ce dernier
      */
     public void returnFromEditionToMenuPaquet() {
-        menuPaquetController.show();
-        editionController.hide();
+        changeView(editionController,menuPaquetController);
     }
 
     /**
      * Retour à l'étude de cartes depuis le menu du Paquet
      */
     public void returnFromCarteEtudeToMenuPaquet() {
-        menuPaquetController.show();
-        carteEtudeController.hide();
+        changeView(carteEtudeController,menuPaquetController);
     }
 
     /**
      * Affichage de l'édition de carte
      */
     public void returnFromStoreToMenuPaquet() {
-        menuPaquetController.show();
-        storeController.hide();
+        changeView(storeController,menuPaquetController);
     }
 
-    /**
-     * Affichage des cartes de type QCM
-     * @param card carte
-     */
-    public void showCarteQCM(CarteQcm card) {
-        try {
-            carteQCMController = new CarteQCMController(new Stage(),"Title",card);
-            menuPaquetController.hide();
-            carteQCMController.show();
-        } catch (IOException e) {
-            showErrorPopup("Impossible de charger la carte QCM !");
-        }
-    }
-
-    /**
-     * Affichage des cartes de type texte à trou
-     * @param card cartes
-     */
-    public void showCarteTT(CarteTt card) {
-        try{
-            carteTTController = new CarteTTController(new Stage(),"",card);
-            menuPaquetController.hide();
-            carteTTController.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showErrorPopup("Impossible de charger la carte Texte à Trou !");
-        }
-    }
-
-
-    /**
-     * Affichage de la réponse
-     * @param userReponse réponse de l'utilisateur
-     * @param rightAnswer bonne réponse
-     * @param controller controller
-     */
-    private void showResponse(String userReponse, String rightAnswer, BaseController controller) {
-        try {
-            controller.hide();
-            carteReponseController = new CarteReponseController(new Stage(),"title",userReponse,rightAnswer);
-            carteReponseController.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showErrorPopup("Impossible d'afficher la réponse !");
-        }
-
-    }
-
-    /**
-     * Affichage de la réponse des cartes QCM
-     * @param userReponse réponse de l'utilisateur
-     * @param rightAnswer bonne réponse
-     */
-    public void showQCMResponse(String userReponse, String rightAnswer){
-        showResponse(userReponse,rightAnswer,carteQCMController);
-    }
-
-    /**
-     * Affichage de la réponse des cartes textes à trous
-     * @param userReponse réponse de l'utilisateur
-     * @param rightAnswer bonne réponse
-     */
-    public void showTTResponse(String userReponse, String rightAnswer){
-        showResponse(userReponse,rightAnswer,carteTTController);
-    }
 
 
     /**
@@ -261,28 +191,30 @@ public class MenuPrincipal extends Application {
     public void showMenuEdition(Paquet paquet) {
         try{
             editionController = new EditionController(new Stage(),paquet);
-            menuPaquetController.hide();
-            editionController.show();
+            changeView(menuPaquetController,editionController);
         } catch (IOException e) {
-            e.printStackTrace();
             showErrorPopup("Impossible de charger le menu d'édition !");
+        } catch (IllegalArgumentException e){
+            showErrorPopup("Veuillez sélectionner un paquet !");
         }
 
     }
 
     /**
+     * Fonction qui ouvre une fenêtre avec un pop up d'erreur
      * @param error erreur String
      */
     public void showErrorPopup(String error){
-        if(exceptionPopupController == null) {
-            try {
-                exceptionPopupController = new ExceptionPopupController(new Stage());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            exceptionPopupController = new ExceptionPopupController(new Stage());
+            exceptionPopupController.createError(error);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        exceptionPopupController.createError(error);
     }
 
+    public List<Paquet> getUserPaquets() {
+        return Collections.unmodifiableList(userPrincipale.getListPaquet());
+    }
 
 }

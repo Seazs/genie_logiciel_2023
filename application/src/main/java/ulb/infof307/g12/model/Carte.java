@@ -4,8 +4,6 @@ package ulb.infof307.g12.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 
 public class
 Carte {
@@ -33,14 +31,18 @@ Carte {
      * @param id id
      * @param recto recto
      * @param verso verso
+     * @throws IllegalArgumentException si le recto ou le verso est vide ou comporte le caractère #
      */
     public Carte(int id, String recto, String verso){
 
         if (recto == null || recto.equals(""))
             throw new IllegalArgumentException("La carte doit posséder un recto");
-
+        else if (recto.contains("#"))
+            throw new IllegalArgumentException("Le recto ne peut pas avoir le caractère \"#\"");
         if (verso == null || verso.equals(""))
             throw new IllegalArgumentException("La carte doit posséder un verso");
+        else if (verso.contains("#"))
+            throw new IllegalArgumentException("Le verso ne peut pas avoir le caractère \"#\"");
         this.recto = recto;
         this.verso = verso;
         this.id = id;
@@ -50,10 +52,13 @@ Carte {
     /**
      * Fonction qui édite la variable "recto" de la classe carte
      * @param new_recto nouveau recto
+     * @throws IllegalArgumentException si le recto est vide ou comporte le caractère #
      */
     public void editRecto(String new_recto){
         if (new_recto == null || new_recto.equals(""))
             throw new IllegalArgumentException("La carte doit posséder un recto");
+        else if (new_recto.contains("#"))
+            throw new IllegalArgumentException("Le recto ne peut pas avoir le caractère \"#\"");
         recto = new_recto;
     }
 
@@ -61,38 +66,25 @@ Carte {
     /**
      * Fonction qui édite la variable "verso" de la classe carte
      * @param new_verso nouveau verso
+     * @throws IllegalArgumentException si le verso est vide ou comporte le caractère #
      */
     public void editVerso(String new_verso){
         if (new_verso == null || new_verso.equals(""))
             throw new IllegalArgumentException("La carte doit posséder un verso");
+        else if (new_verso.contains("#"))
+            throw new IllegalArgumentException("Le recto ne peut pas avoir le caractère \"#\"");
         verso = new_verso;
     }
 
     /**
-     * Sauvegarde dans recto et verso le texte à trou et sa réponse pour une carte TT
-     * @param begin begin of the sentence
-     * @param end end of the sentence
-     * @param gap solution
-     */
-    public void setTTInfo(String begin, String end, String gap){
-        if (this.getType().equals("tt")){
-            this.recto = begin + "§" + end;
-            this.verso = gap;
-        }
-        else{
-            throw new IllegalArgumentException("La carte doit être de type TT");
-        }
-    }
-
-    /**
      * Fonction pour set la connaissance. Prends en entrée un int entre 0 et 5.
-     * @param connaissance
+     * @param knowledge connaissance de la carte
+     * @throws IllegalArgumentException si l'argument n'est pas entre 0 et 5
      */
-    public void setConnaissance(int connaissance){
-        if (connaissance > 5 || connaissance < 0)
+    public void setConnaissance(int knowledge){
+        if (knowledge > 5 || knowledge < 0)
             throw new IllegalArgumentException("L’argument connaissance dois être un int entre 0 et 5");
-
-        this.connaissance = connaissance;
+        this.connaissance = knowledge;
     }
 
     /**

@@ -2,7 +2,6 @@ package ulb.infof307.g12.controller.javafx.exception;
 
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
-import ulb.infof307.g12.view.cartes.CarteReponseVueController;
 import ulb.infof307.g12.view.exception.ExceptionPopupVueController;
 
 import java.io.IOException;

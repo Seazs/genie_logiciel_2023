@@ -20,7 +20,7 @@ public class ConnexionVueController {
 
     /**
      * Ce qui s'exécute lorsqu'on clique sur le bouton de connexion
-     * @param event
+     * @param event évènement
      */
     @FXML
     protected void onConnectButtonClick(ActionEvent event) {
@@ -33,7 +33,7 @@ public class ConnexionVueController {
 
     /**
      * Ce qui s'exécute lorsqu'on clique sur le bouton de registration
-     * @param actionEvent
+     * @param actionEvent evenement
      */
     @FXML
     public void onRegisterButtonClick(ActionEvent actionEvent) {
@@ -44,6 +44,10 @@ public class ConnexionVueController {
         messageLabel.setText(result);
     }
 
+    /**
+     * Switch l'application en mode en ligne ou hors ligne
+     * @param actionEvent evenement
+     */
     @FXML
     public void switchOnlineMode(ActionEvent actionEvent) {
         String text = (onlineToggle.isSelected()) ?"hors ligne" : "en ligne" ;

@@ -2,16 +2,13 @@ package ulb.infof307.g12.view.profiles;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.ProfilVueListener;
 
-import java.net.URL;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 public class ProfilVueController  {
 

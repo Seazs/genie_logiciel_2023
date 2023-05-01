@@ -10,7 +10,7 @@ public interface EditionVueListener {
      * @param nom nom du paquet
      * @param categorie categorie du paquet
      */
-    void enregistrerPaquet(String nom, String categorie);
+    void savePaquet(String nom, String categorie);
     ArrayList<Carte> loadCartes();
 
     /**
@@ -18,20 +18,39 @@ public interface EditionVueListener {
      * @param recto recto de la carte
      * @param verso verso de la carte
      */
-    void ajouterCarte(String recto, String verso);
+    void addCard(String recto, String verso);
 
     /**
      * Ajout de cartes
      * @param recto recto de la carte
      * @param verso verso de la carte
      */
-    void ajouterCarteQCM(String recto, String verso);
+    void addCardQCM(String recto, String verso);
 
     /**
      * Ajout de cartes
      * @param recto recto de la carte
      * @param verso verso de la carte
      */
-    void ajouterCarteTT(String recto, String verso);
+    void addCardTT(String recto, String verso);
 
+
+    /**
+     * @param begin begin
+     * @param end end
+     * @param gap gap
+     * @return true si les champs sont valides
+     */
+    boolean checkTt(String begin, String end, String gap);
+
+
+    /**
+     * @param question question
+     * @param answer1 answer1
+     * @param answer2 answer2
+     * @param answer3 answer3
+     * @param correctAnswer correctAnswer
+     * @return true si les champs sont valides
+     */
+    boolean checkQcm(String question, String answer1, String answer2, String answer3, String correctAnswer);
 }

@@ -1,8 +1,6 @@
 package ulb.infof307.g12.controller.javafx.connexion;
 
-import javafx.scene.control.Menu;
 import javafx.stage.Stage;
-import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
@@ -44,7 +42,6 @@ public class ConnexionMenuController extends BaseController implements UserCrede
         MenuPrincipal.getINSTANCE().setOnline(isOnline);
         return isOnline ? onlineRegister(username,password) : offlineRegister(username,password);
     }
-
 
     /**
      * création d'un utilisateur en local

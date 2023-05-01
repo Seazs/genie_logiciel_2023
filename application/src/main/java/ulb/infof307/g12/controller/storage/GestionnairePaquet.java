@@ -92,17 +92,17 @@ public class GestionnairePaquet {
             if (listdata[0].equals("QCM")){ //Si la carte est un QCM
                 CarteQcm bufferCarte = new CarteQcm(i, listdata[1],  listdata[2]);
                 bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
-                newPaquet.ajouterCarte(bufferCarte);
+                newPaquet.addCard(bufferCarte);
             }
             else if(listdata[0].equals("Simple")){
                 Carte bufferCarte = new Carte(i, listdata[1], listdata[2]);
                 bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
-                newPaquet.ajouterCarte(bufferCarte);
+                newPaquet.addCard(bufferCarte);
             }
             else if(listdata[0].equals("TT")){
                 CarteTt bufferCarte = new CarteTt(i, listdata[1], listdata[2]);
                 bufferCarte.setConnaissance(parseInt(listdata[3].strip()));
-                newPaquet.ajouterCarte(bufferCarte);
+                newPaquet.addCard(bufferCarte);
             }
             i++;}
     }

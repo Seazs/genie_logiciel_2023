@@ -28,9 +28,6 @@ module connexion {
     exports ulb.infof307.g12.controller.javafx.paquets;
     opens ulb.infof307.g12.controller.javafx.paquets to javafx.fxml;
 
-    opens ulb.infof307.g12.view.cartes;
-    exports ulb.infof307.g12.view.cartes to javafx.fxml;
-
     opens ulb.infof307.g12.model to javafx.base;
 
     opens ulb.infof307.g12.controller.javafx.store to javafx.fxml;

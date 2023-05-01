@@ -48,7 +48,7 @@ public class Paquet {
      * @param carte
      * @throws IllegalArgumentException
      */
-    public void ajouterCarte(Carte carte) throws IllegalArgumentException{
+    public void addCard(Carte carte) throws IllegalArgumentException{
         for(Carte car: this.cartes){
             if(car.getId()==carte.getId()) {
                 throw new IllegalArgumentException("La carte existe déjà");

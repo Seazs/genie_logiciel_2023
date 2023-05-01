@@ -12,8 +12,10 @@ public class PaquetDeCartesVueController {
     @FXML
     private Label categorieLabel;
 
+
+
     /**
-     * applique le nom et les catégories aux labels associés
+     * Applique le nom et les catégories aux labels associés
      * @param paquetDeCartes paquet de cartes
      */
     public void setPaquetDeCartes(Paquet paquetDeCartes) {

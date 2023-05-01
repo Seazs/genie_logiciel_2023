@@ -1,7 +1,5 @@
 package ulb.infof307.g12.controller.javafx.profiles;
 
-import javafx.event.ActionEvent;
-import javafx.scene.Node;
 import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;

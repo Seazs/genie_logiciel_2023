@@ -40,7 +40,7 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
         for(int i=0;i<cartesEtude.size();i++){
             cartesEtudeScore.add(0);
         }
-        controller.chargerCarteEtudeVue();
+        controller.loadViewStudyCard();
     }
 
     /**

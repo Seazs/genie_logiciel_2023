@@ -26,12 +26,16 @@ public class EditionController extends BaseController implements EditionVueListe
      * @param paquet paquet
      * @throws IOException exception
      */
-    public EditionController(Stage stage, Paquet paquet) throws IOException {
+    public EditionController(Stage stage, Paquet paquet) throws IOException, IllegalArgumentException {
         super(stage, EditionVueController.class.getResource("editionPaquet.fxml"), "");
+        if (paquet == null) {
+            throw new IllegalArgumentException("Le paquet ne peut pas être null");
+        }
         this.paquet = paquet;
         EditionVueController controller = (EditionVueController) super.controller;
         controller.setListener(this);
         controller.chargerEditionVue(paquet.getNom());
+
     }
 
     /**
@@ -40,7 +44,7 @@ public class EditionController extends BaseController implements EditionVueListe
      * @param categorie Catégorie à être rajoutée
      */
     @Override
-    public void enregistrerPaquet(String nom, String categorie){
+    public void savePaquet(String nom, String categorie){
         try {
             // Enregistrer le nom et ajouter la nouvelle categorie
             paquet.setNom(nom);
@@ -48,7 +52,6 @@ public class EditionController extends BaseController implements EditionVueListe
             GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
             gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
         }catch (IOException e){
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de sauvegarder le paquet !");
         }
     }
@@ -64,13 +67,14 @@ public class EditionController extends BaseController implements EditionVueListe
     /**
      * Créer une nouvelle carte simple et l'ajoute au paquet qui est modifié
      */
-    public void ajouterCarte(String recto, String verso) {
+    @Override
+    public void addCard(String recto, String verso) {
         int id = paquet.getCartes().size() + 1 ;
         try {
             Carte carte = new Carte(id, recto, verso) ;
-            paquet.ajouterCarte(carte);
+            paquet.addCard(carte);
         }catch (IllegalArgumentException e){
-            MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posseder un recto et un verso !");
+            MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posséder un recto et un verso!");
         }
     }
 
@@ -79,13 +83,13 @@ public class EditionController extends BaseController implements EditionVueListe
      * @param recto recto
      * @param verso verso
      */
-    public void ajouterCarteQCM(String recto, String verso) {
+    public void addCardQCM(String recto, String verso) {
         int id = paquet.getCartes().size() + 1 ;
         try {
             CarteQcm carte = new CarteQcm(id, recto, verso) ;
-            paquet.ajouterCarte(carte);
+            paquet.addCard(carte);
         }catch (IllegalArgumentException e){
-            MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posseder un recto et un verso !");
+            MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posséder un recto et un verso !");
         }
     }
 
@@ -94,14 +98,51 @@ public class EditionController extends BaseController implements EditionVueListe
      * @param recto recto
      * @param verso verso
      */
-    public void ajouterCarteTT(String recto, String verso) {
+    public void addCardTT(String recto, String verso) {
         int id = paquet.getCartes().size() + 1 ;
         try {
             CarteTt carte = new CarteTt(id, recto, verso) ;
-            paquet.ajouterCarte(carte);
+            paquet.addCard(carte);
         }catch (IllegalArgumentException e){
-            MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posseder un recto et un verso !");
+            MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posséder un recto et un verso !");
         }
     }
 
+    /**
+     * @param begin begin
+     * @param end end
+     * @param gap gap
+     * @return true if the fields are correct (no # or §)
+     */
+    @Override
+    public boolean checkTt(String begin, String end, String gap){
+        if (begin.contains("§") || end.contains("§") || gap.contains("§")){
+            MenuPrincipal.getINSTANCE().showErrorPopup("Les champs ne peuvent pas contenir le caractère § !");
+            return false;
+        } else if (begin.contains("#") || end.contains("#") || gap.contains("#")) {
+            MenuPrincipal.getINSTANCE().showErrorPopup("Les champs ne peuvent pas contenir le caractère # !");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param question      question
+     * @param answer1       answer1
+     * @param answer2       answer2
+     * @param answer3       answer3
+     * @param correctAnswer correctAnswer
+     * @return true if the fields are correct (no # or §)
+     */
+    @Override
+    public boolean checkQcm(String question, String answer1, String answer2, String answer3, String correctAnswer){
+        if (question.contains("§") || answer1.contains("§") || answer2.contains("§") || answer3.contains("§") || correctAnswer.contains("§")){
+            MenuPrincipal.getINSTANCE().showErrorPopup("Les champs ne peuvent pas contenir le caractère § !");
+            return false;
+        } else if (question.contains("#") || answer1.contains("#") || answer2.contains("#") || answer3.contains("#") || correctAnswer.contains("#")) {
+            MenuPrincipal.getINSTANCE().showErrorPopup("Les champs ne peuvent pas contenir le caractère # !");
+            return false;
+        }
+        return true;
+    }
 }
