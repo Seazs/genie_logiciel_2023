@@ -140,3 +140,5 @@ replay_pid*
 /.idea/
 /stockage/
 **/target/
+/server/.idea/
+/application/.idea/
