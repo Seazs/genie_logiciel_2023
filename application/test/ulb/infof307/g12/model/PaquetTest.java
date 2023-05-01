@@ -61,12 +61,5 @@ class PaquetTest {
 
     }
 
-    @Test
-    public void testSupprimerCategorie(){
-        Paquet paquet = new Paquet("Maths","BA1", "BA2");
-        paquet.supprimerCategorie("BA2");
-        Paquet paquet2 = new Paquet("Maths", "BA1") ;
-        Assertions.assertEquals(paquet,paquet2) ;
-    }
 
 }

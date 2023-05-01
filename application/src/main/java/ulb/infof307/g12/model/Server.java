@@ -3,10 +3,7 @@ package ulb.infof307.g12.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
@@ -88,12 +85,15 @@ public class Server {
         headers.setContentType(MediaType.TEXT_PLAIN);
 
         HttpEntity<String> entity = new HttpEntity<>(username+"#"+password, headers);
-        try{
-            ResponseEntity<String> response = restTemplate.postForEntity(url+"user/register", entity, String.class);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(url+"user/register", entity, String.class);
+        if (response.getStatusCode()== HttpStatusCode.valueOf(200)){
             return response.getBody();
-        }catch (HttpClientErrorException e){
-            throw new IllegalArgumentException("Server not responding");
         }
+        else{
+            throw new IllegalArgumentException("Server error");
+        }
+
     }
 
     /**

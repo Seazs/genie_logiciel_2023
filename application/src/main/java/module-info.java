@@ -30,11 +30,11 @@ module connexion {
     exports ulb.infof307.g12.controller.javafx.paquets;
     opens ulb.infof307.g12.controller.javafx.paquets to javafx.fxml;
 
-    opens ulb.infof307.g12.model to javafx.base;
+    opens ulb.infof307.g12.model to javafx.base,com.fasterxml.jackson.databind;
 
     opens ulb.infof307.g12.controller.javafx.store to javafx.fxml;
     exports ulb.infof307.g12.controller.javafx.store;
-    opens ulb.infof307.g12.model to javafx.base, com.fasterxml.jackson.databind;
+
     opens ulb.infof307.g12.view.store to javafx.fxml;
     exports ulb.infof307.g12.view.store;
 

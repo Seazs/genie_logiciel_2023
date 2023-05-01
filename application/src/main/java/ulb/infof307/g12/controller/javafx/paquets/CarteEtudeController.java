@@ -50,10 +50,6 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
     public ArrayList<Carte> getCartesEtude(){
         return cartesEtude;
     }
-    @Override
-    public ArrayList<Integer> getCartesEtudeScore(){
-        return cartesEtudeScore;
-    }
 
     /**
      * @param index  index

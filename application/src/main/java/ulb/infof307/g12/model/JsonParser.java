@@ -30,7 +30,7 @@ public class JsonParser {
 
     private static void AddCategoriesList(JSONObject paquet, Paquet paquetToAdd, JSONArray categories) {
         for (int j = 0; j < paquet.getJSONArray("categories").length() ; j++) {
-            paquetToAdd.ajouterCategorie(categories.get(j).toString());}
+            paquetToAdd.addCategory(categories.get(j).toString());}
     }
 
     private static void AddCardsList(Paquet paquetToAdd, JSONArray cartes) {
@@ -43,19 +43,19 @@ public class JsonParser {
                     String recto = carte.getString("recto");
                     String verso = carte.getString("verso");
                     CarteQcm carteToAdd = new CarteQcm(k, recto, verso);
-                    paquetToAdd.ajouterCarte(carteToAdd);
+                    paquetToAdd.addCard(carteToAdd);
                 }
                 case "Simple" -> {
                     String recto = carte.getString("recto");
                     String verso = carte.getString("verso");
                     Carte carteToAdd = new Carte(k, recto, verso);
-                    paquetToAdd.ajouterCarte(carteToAdd);
+                    paquetToAdd.addCard(carteToAdd);
                 }
                 case "TT" -> {
                     String recto = carte.getString("recto");
                     String verso = carte.getString("verso");
                     CarteTt carteToAdd = new CarteTt(k, recto, verso);
-                    paquetToAdd.ajouterCarte(carteToAdd);
+                    paquetToAdd.addCard(carteToAdd);
                 }
             }
         }

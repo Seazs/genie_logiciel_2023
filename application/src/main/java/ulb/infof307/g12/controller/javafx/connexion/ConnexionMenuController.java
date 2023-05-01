@@ -126,6 +126,7 @@ public class ConnexionMenuController extends BaseController implements UserCrede
             }
             return result.getMsg();
         }catch (Exception e){
+            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de se connecter au serveur !");
             return "Server Not Found";
         }
