@@ -162,7 +162,7 @@ public class GestionnaireUtilisateur {
         System.out.println("NEW USER REGISTERED");
         listeUtilisateur.add(new_user);
         File f = new File("./src/main/resources/stockage",username);
-        f.mkdir();
+        f.mkdirs();
         this.save();
         return true;
     }
