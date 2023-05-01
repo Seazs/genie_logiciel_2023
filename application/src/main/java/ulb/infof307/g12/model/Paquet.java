@@ -73,7 +73,7 @@ public class Paquet {
      * Ajoute une catégorie au paquet
      * @param categorie
      */
-    public void ajouterCategorie(String categorie){
+    public void addCategory(String categorie){
         if(!this.categories.contains(categorie)){
             this.categories.add(categorie);
         }

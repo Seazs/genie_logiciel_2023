@@ -86,8 +86,12 @@ public class Server {
         headers.setContentType(MediaType.TEXT_PLAIN);
 
         HttpEntity<String> entity = new HttpEntity<>(username+"#"+password, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(url+"user/register", entity, String.class);
-        return response.getBody();
+        try{
+            ResponseEntity<String> response = restTemplate.postForEntity(url+"user/register", entity, String.class);
+            return response.getBody();
+        }catch (HttpClientErrorException e){
+            throw new IllegalArgumentException("Server not responding");
+        }
     }
 
     /**

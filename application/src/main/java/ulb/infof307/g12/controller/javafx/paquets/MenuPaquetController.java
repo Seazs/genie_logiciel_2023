@@ -19,8 +19,8 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
 
     /**
      * Controller du menuPaquet
-     * @param user
-     * @param stage
+     * @param user utilisateur
+     * @param stage fenetre
      * @throws IOException
      */
     public MenuPaquetController(Utilisateur user,Stage stage) throws IOException {
@@ -40,6 +40,14 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         Paquet nouveauPaquet = new Paquet("Nouveau Paquet") ;
         user.addPaquet(nouveauPaquet);
         return nouveauPaquet;
+    }
+
+    /**
+     * @param paquet Paquet à supprimer
+     */
+    @Override
+    public void supprimerPaquet(Paquet paquet) {
+        user.removePaquet(paquet.getNom());
     }
 
     /**

@@ -48,7 +48,7 @@ public class EditionController extends BaseController implements EditionVueListe
         try {
             // Enregistrer le nom et ajouter la nouvelle categorie
             paquet.setNom(nom);
-            paquet.ajouterCategorie(categorie);
+            paquet.addCategory(categorie);
             GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
             gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
         }catch (IOException e){

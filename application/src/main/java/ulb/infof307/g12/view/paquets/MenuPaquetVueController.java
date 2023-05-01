@@ -112,6 +112,17 @@ public class MenuPaquetVueController implements Initializable {
     }
 
     /**
+     * Supprimer un paquet
+     */
+    public void deletePaquet(){
+        Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
+        if (paquet != null) {
+            listener.supprimerPaquet(paquet);
+            paquetListView.getItems().remove(paquet);
+        }
+    }
+
+    /**
      * Ouvrir le menu d'édition de paquet
      */
     public void ouvrirEdition(ActionEvent event) {

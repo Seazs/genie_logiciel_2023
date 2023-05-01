@@ -119,12 +119,18 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      * @return le statut
      */
     private String onlineLogin(String username, String password){
-
-        STATUS result = MenuPrincipal.getINSTANCE().getServer().getLogin(username,password);
-        if (Objects.equals(result.getMsg(), "")) {
-            offlineLogin(username, password);
+        try{
+            STATUS result = MenuPrincipal.getINSTANCE().getServer().getLogin(username,password);
+            if (Objects.equals(result.getMsg(), "")) {
+                offlineLogin(username, password);
+            }
+            return result.getMsg();
+        }catch (Exception e){
+            MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de se connecter au serveur !");
+            return "Server Not Found";
         }
-        return result.getMsg();
+
+
     }
 
 }

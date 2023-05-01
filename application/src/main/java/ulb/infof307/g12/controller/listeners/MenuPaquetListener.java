@@ -22,4 +22,9 @@ public interface MenuPaquetListener {
      * @param paquet
      */
     void CarteEtude(Paquet paquet);
+
+    /**
+     * @param paquet Paquet à supprimer
+     */
+    void supprimerPaquet(Paquet paquet);
 }

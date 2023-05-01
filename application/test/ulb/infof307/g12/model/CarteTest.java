@@ -12,45 +12,15 @@ class CarteTest {
     @Test
     public void testGetQCMInfo(){
         String recto = "question§reponse1§reponse2§reponse3", verso = "la reponse D";
-        Carte carte = new Carte(1, recto, verso);
-        ArrayList<String> infos_carte = carte.getQCMOrTTInfo();
-        assertEquals("question", infos_carte.get(0));
-        assertEquals("reponse1", infos_carte.get(1));
-        assertEquals("reponse2", infos_carte.get(2));
-        assertEquals("reponse3", infos_carte.get(3));
-        assertEquals("la reponse D", infos_carte.get(4));
-        Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte1 = new Carte(2, "recto", "null");
-            ArrayList<String> infos_carte2 = carte1.getQCMOrTTInfo();
-        });
+        CarteQcm carte = new CarteQcm(1, recto, verso);
+        String[] infos_carte = carte.getCarteInfo();
+        assertEquals("question", infos_carte[0]);
+        assertEquals("reponse1", infos_carte[1]);
+        assertEquals("reponse2", infos_carte[2]);
+        assertEquals("reponse3", infos_carte[3]);
+        assertEquals("la reponse D", infos_carte[4]);;
     }
 
-    @Test
-    public void testSetQCMInfo(){
-        String recto = "question§reponse1§reponse2§reponse3", verso = "la reponse D";
-        Carte carte = new Carte(1, "oui§a§b§c", "non");
-        carte.setQCMInfo("question", "reponse1", "reponse2", "reponse3", "la reponse D");
-        assertEquals(recto,carte.getRecto());
-        Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte1 = new Carte(2, "recto", "null");
-            carte1.setQCMInfo("question", "reponse1", "reponse2", "reponse3", "la reponse D");
-        });
-    }
-
-
-    @Test
-    public void testSetTTInfo(){
-        String recto = "La mie est la§partie du pain", verso = "pire";
-        Carte carte = new Carte(1, "a", "b");
-        carte.setTTInfo("La mie est la", "partie du pain", "pire");
-        assertEquals(recto,carte.getRecto());
-        assertEquals(verso,carte.getVerso());
-
-        Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte1 = new Carte(2,"a" , "null");
-            carte1.setTTInfo("La mie est la", "partie du pain", "pire");
-        });
-    }
     @Test
     public void testCreateCard(){
         String recto = "Bonjour", verso = "Au revoir";

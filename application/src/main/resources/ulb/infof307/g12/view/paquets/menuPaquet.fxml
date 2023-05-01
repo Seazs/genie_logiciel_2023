@@ -13,6 +13,7 @@
     <Button fx:id="boutonJouer" layoutX="495.0" layoutY="337.0" mnemonicParsing="false" onAction="#sessionEtude" prefHeight="48.0" prefWidth="82.0" text="Jouer" textFill="#cd8b41" />
     <Button fx:id="boutonModifier" layoutX="503.0" layoutY="163.0" mnemonicParsing="false" onAction="#ouvrirEdition" prefHeight="26.0" prefWidth="74.0" text="Modifier" />
    <Button fx:id="boutonStore" layoutX="506.0" layoutY="252.0" mnemonicParsing="false" onAction="#ouvrirStore" prefHeight="26.0" prefWidth="68.0" text="Store" />
+   <Button fx:id="btnDelete" layoutX="504.0" layoutY="200.0" mnemonicParsing="false" onAction="#deletePaquet" text="Supprimer" />
     <stylesheets>
         <URL value="@menuPaquetStyle.css" />
     </stylesheets>
