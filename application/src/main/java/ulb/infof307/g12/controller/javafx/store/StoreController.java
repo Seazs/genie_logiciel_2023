@@ -1,13 +1,13 @@
 package ulb.infof307.g12.controller.javafx.store;
 
 import javafx.stage.Stage;
+import org.json.JSONArray;
 import ulb.infof307.g12.controller.javafx.BaseController;
 
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.StoreVueListener;
 import ulb.infof307.g12.model.JsonParser;
 import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.view.paquets.EditionVueController;
 import ulb.infof307.g12.view.store.StoreVueController;
 
 
@@ -58,8 +58,13 @@ public class StoreController extends BaseController implements StoreVueListener 
      * Rafraichit la liste des paquets du store
      */
     @Override
-    public void refresh() {
-        String paquetsJson = MenuPrincipal.getINSTANCE().getServer().getPaquets();
+    public ArrayList<Paquet> refresh() {
+        JSONArray paquetsJson = MenuPrincipal.getINSTANCE().getServer().getPaquets();
+        JsonParser jsonParser = new JsonParser();
+        ArrayList<Paquet> paquets = jsonParser.jsonToListePaquets(paquetsJson);
+        return paquets;
+
+
 
     }
 }

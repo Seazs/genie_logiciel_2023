@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.controller.javafx.store.StoreController;
 import ulb.infof307.g12.controller.listeners.StoreVueListener;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
@@ -45,13 +44,23 @@ public class StoreVueController implements Initializable{
                 MenuPrincipal.getINSTANCE().getUserPaquets()
         );
         saveListPaquet.addAll(storePaquetListView.getItems());
+
         // Personnaliser l'affichage des éléments de la liste
-        updateVisuelListePaquet(mesPaquetListView);
-        updateVisuelListePaquet(storePaquetListView);
+        updateVisuelListeViewPaquet(mesPaquetListView);
+        updateVisuelListeViewPaquet(storePaquetListView);
 
         RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> {
             filtrageCategorie();
+
+
         });
+    }
+
+
+    public void updateVisuelListePaquet(ArrayList<Paquet> paquets) {
+        ObservableList<Paquet> observablePaquets = FXCollections.observableArrayList(paquets);
+        storePaquetListView.setItems(observablePaquets);
+        updateVisuelListeViewPaquet(storePaquetListView);
     }
 
 
@@ -59,7 +68,7 @@ public class StoreVueController implements Initializable{
      * Charge le fichier FXML paquet de carte en chargeant les noms et catégories de chaque paquet
      * @param paquetListView
      */
-    private void updateVisuelListePaquet(ListView<Paquet> paquetListView) {
+    private void updateVisuelListeViewPaquet(ListView<Paquet> paquetListView) {
         paquetListView.setCellFactory(param -> new ListCell<Paquet>() {
             @Override
             protected void updateItem(Paquet item, boolean empty) {
@@ -121,6 +130,7 @@ public class StoreVueController implements Initializable{
     public void downloadPaquet(){
         Paquet paquet = storePaquetListView.getSelectionModel().getSelectedItem();
         listener.downloadPaquet(paquet);
+        rechargerListView();
     }
 
     /**
@@ -135,9 +145,9 @@ public class StoreVueController implements Initializable{
      * Envoie l’ordre de refresh à storeController
      */
     public void refresh(){
-        listener.refresh();
-        storePaquetListView.getItems().addAll(
-                listener.getStorePaquets()
+
+        storePaquetListView.getItems().setAll(
+                listener.refresh()
         );
     }
 

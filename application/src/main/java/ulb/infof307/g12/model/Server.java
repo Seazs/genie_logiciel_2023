@@ -1,16 +1,16 @@
 package ulb.infof307.g12.model;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.cbor.MappingJackson2CborHttpMessageConverter;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
@@ -24,20 +24,16 @@ public class Server {
      * Envoie une requète GET au serveur et renvoie les données
      * @return les données du serveur
      */
-    public String getPaquets(){
+    public JSONArray getPaquets(){
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(url+"paquet", String.class);
         String responseBody = response.getBody();
         System.out.println(responseBody);
-
-       return responseBody;
+        JSONArray jsonArrayListPaquet = new JSONArray(responseBody);
+       return jsonArrayListPaquet;
     }
 
-    @PostMapping("/paquet")
-    public ResponseEntity<Void> ajouterPaquet(@RequestBody Paquet paquet) {
-        // code pour ajouter le paquet
-        return ResponseEntity.ok().build();
-    }
+
 
 
     /**
