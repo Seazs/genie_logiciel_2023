@@ -2,6 +2,7 @@ package ulb.infof307.g12.controller.javafx.connexion;
 
 import javafx.scene.control.Menu;
 import javafx.stage.Stage;
+import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
@@ -12,6 +13,7 @@ import ulb.infof307.g12.view.connexion.ConnexionVueController;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
 public class ConnexionMenuController extends BaseController implements UserCredentialsListener {
 
@@ -39,6 +41,7 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      */
     @Override
     public String onRegister(String username, String password,boolean isOnline) {
+        MenuPrincipal.getINSTANCE().setOnline(isOnline);
         return isOnline ? onlineRegister(username,password) : offlineRegister(username,password);
     }
 
@@ -66,7 +69,9 @@ public class ConnexionMenuController extends BaseController implements UserCrede
     }
 
     private String onlineRegister(String username, String password){
-        return MenuPrincipal.getINSTANCE().getServer().createUser(username,password);
+        String result = MenuPrincipal.getINSTANCE().getServer().createUser(username,password);
+        offlineRegister(username, password);
+        return result;
     }
 
     /**
@@ -78,6 +83,7 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      */
     @Override
     public String onLogin(String username, String password, boolean isOnline) {
+        MenuPrincipal.getINSTANCE().setOnline(isOnline);
         return (isOnline) ? onlineLogin(username,password) : offlineLogin(username,password);
     }
 
@@ -116,8 +122,11 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      * @return le statut
      */
     private String onlineLogin(String username, String password){
+
         STATUS result = MenuPrincipal.getINSTANCE().getServer().getLogin(username,password);
-        // TODO: utilisateur connecté en ligne (changement de vue)
+        if (Objects.equals(result.getMsg(), "")) {
+            offlineLogin(username, password);
+        }
         return result.getMsg();
     }
 

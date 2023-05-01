@@ -47,6 +47,8 @@ public class MenuPrincipal extends Application {
     private CarteReponseController carteReponseController;
     @Getter
     private final Server server = new Server();
+    @Setter
+    private boolean isOnline;
 
     /**
      * Démarrage de l'application
@@ -55,7 +57,7 @@ public class MenuPrincipal extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
+        this.connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
         exceptionPopupController = new ExceptionPopupController(new Stage());
         connexionController.show();
     }
@@ -142,14 +144,17 @@ public class MenuPrincipal extends Application {
      * Affichage du store
      */
     public void openStore(){
-        try {
-            storeController = new StoreController(new Stage());
-            menuPaquetController.hide();
-            storeController.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showErrorPopup("Impossible de charger le store !");
+        if (isOnline) {
+            try {
+                storeController = new StoreController(new Stage());
+                menuPaquetController.hide();
+                storeController.show();
+            } catch (IOException e) {
+                showErrorPopup("Impossible de charger le store !");
+            }
         }
+        else showErrorPopup("Vous n’êtes pas connecté au serveur !");
+
     }
 
     /**
