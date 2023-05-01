@@ -57,7 +57,7 @@ public class ConnexionMenuController extends BaseController implements UserCrede
 
         try {
             if (gestionnaireUtilisateur.register(username, password)) { // Si l'enregistrement s'est bien passé
-                result = "Register: " + username + " = " + password;
+                result = username + " registered with success.";
             } else {
                 result = gestionnaireUtilisateur.getStatusMsg();
             }
@@ -98,7 +98,7 @@ public class ConnexionMenuController extends BaseController implements UserCrede
         String result = "";
         try {
             if (gestionnaireUtilisateur.connect(username, password)) { // Si la connexion s'est bien passée
-                result = "Connecting: " + username + " = " + password;
+                result = "Connecting: " + username;
 
                 Utilisateur connectedUser = new Utilisateur(username,password);
                 GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
