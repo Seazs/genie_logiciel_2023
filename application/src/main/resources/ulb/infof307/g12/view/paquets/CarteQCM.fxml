@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="232.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.cartes.CarteQCMVueController">
+   <children>
+      <TextFlow fx:id="questionText" prefHeight="80.0" prefWidth="361.0" />
+      <ListView fx:id="reponsesList" layoutX="14.0" layoutY="80.0" prefHeight="100.0" prefWidth="300.0" />
+      <Button layoutX="127.0" layoutY="180.0" mnemonicParsing="false" onAction="#onClick" text="Valider" />
+   </children>
+</AnchorPane>

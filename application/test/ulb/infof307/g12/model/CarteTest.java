@@ -12,7 +12,7 @@ class CarteTest {
     @Test
     public void testGetQCMInfo(){
         String recto = "question§reponse1§reponse2§reponse3", verso = "la reponse D";
-        Carte carte = new Carte(1, recto, verso, "qcm");
+        Carte carte = new Carte(1, recto, verso);
         ArrayList<String> infos_carte = carte.getQCMOrTTInfo();
         assertEquals("question", infos_carte.get(0));
         assertEquals("reponse1", infos_carte.get(1));
@@ -20,7 +20,7 @@ class CarteTest {
         assertEquals("reponse3", infos_carte.get(3));
         assertEquals("la reponse D", infos_carte.get(4));
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte1 = new Carte(2, "recto", "null", "rv");
+            Carte carte1 = new Carte(2, "recto", "null");
             ArrayList<String> infos_carte2 = carte1.getQCMOrTTInfo();
         });
     }
@@ -28,11 +28,11 @@ class CarteTest {
     @Test
     public void testSetQCMInfo(){
         String recto = "question§reponse1§reponse2§reponse3", verso = "la reponse D";
-        Carte carte = new Carte(1, "oui§a§b§c", "non", "qcm");
+        Carte carte = new Carte(1, "oui§a§b§c", "non");
         carte.setQCMInfo("question", "reponse1", "reponse2", "reponse3", "la reponse D");
         assertEquals(recto,carte.getRecto());
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte1 = new Carte(2, "recto", "null", "tt");
+            Carte carte1 = new Carte(2, "recto", "null");
             carte1.setQCMInfo("question", "reponse1", "reponse2", "reponse3", "la reponse D");
         });
     }
@@ -41,13 +41,13 @@ class CarteTest {
     @Test
     public void testSetTTInfo(){
         String recto = "La mie est la§partie du pain", verso = "pire";
-        Carte carte = new Carte(1, "a", "b", "tt");
+        Carte carte = new Carte(1, "a", "b");
         carte.setTTInfo("La mie est la", "partie du pain", "pire");
         assertEquals(recto,carte.getRecto());
         assertEquals(verso,carte.getVerso());
 
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte1 = new Carte(2,"a" , "null", "rv");
+            Carte carte1 = new Carte(2,"a" , "null");
             carte1.setTTInfo("La mie est la", "partie du pain", "pire");
         });
     }
@@ -56,30 +56,30 @@ class CarteTest {
         String recto = "Bonjour", verso = "Au revoir";
 
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte = new Carte(1, "", verso, "");
+            Carte carte = new Carte(1, "", verso);
         });
 
         Assertions.assertDoesNotThrow(() -> {
-            Carte carte = new Carte(1,  recto, verso, "");
+            Carte carte = new Carte(1,  recto, verso);
         });
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte = new Carte(2, recto, "", "");
-        });
-
-        Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte = new Carte(2, recto, null, "");
+            Carte carte = new Carte(2, recto, "");
         });
 
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte = new Carte(2, recto, null, "");
+            Carte carte = new Carte(2, recto, null);
+        });
+
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            Carte carte = new Carte(2, recto, null);
         });
 
         Assertions.assertDoesNotThrow(() -> {
-            Carte carte = new Carte(2,  recto, verso, "");
+            Carte carte = new Carte(2,  recto, verso);
         });
 
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            Carte carte = new Carte(2, recto, null, "akjda");
+            Carte carte = new Carte(2, recto, null);
         });
     }
 
@@ -87,7 +87,7 @@ class CarteTest {
     public void testEditebien() {
         String new_recto = "oloY";
         String new_verso = "tulaS";
-        Carte carte = new Carte(1, "Yolo", "Salut", "");
+        Carte carte = new Carte(1, "Yolo", "Salut");
         carte.editRecto(new_recto);
         carte.editVerso(new_verso);
         assertEquals(new_recto, carte.getRecto());
@@ -102,7 +102,7 @@ class CarteTest {
         String recto_null = null;
         String verso_null= null;
 
-        Carte carte1 = new Carte(1, recto, verso, "");
+        Carte carte1 = new Carte(1, recto, verso);
 
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             carte1.editRecto(recto_vide);
@@ -124,7 +124,7 @@ class CarteTest {
 
     @Test
     public void testSetConnaissence(){
-        Carte carte = new Carte(1, "recto", "verso", "");
+        Carte carte = new Carte(1, "recto", "verso");
         carte.setConnaissance(2);
         assertEquals(2, carte.getConnaissance());
         Assertions.assertThrows(IllegalArgumentException.class,() -> {

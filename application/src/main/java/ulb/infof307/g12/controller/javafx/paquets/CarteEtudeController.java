@@ -9,7 +9,6 @@ import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.textToSpeech.textToSpeechController;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Utilisateur;
 import ulb.infof307.g12.view.paquets.CarteEtudeVueController;
 
 
@@ -41,7 +40,7 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
         for(int i=0;i<cartesEtude.size();i++){
             cartesEtudeScore.add(0);
         }
-        controller.chargerCarteEtudeVue(cartesEtude);
+        controller.chargerCarteEtudeVue();
     }
 
     /**

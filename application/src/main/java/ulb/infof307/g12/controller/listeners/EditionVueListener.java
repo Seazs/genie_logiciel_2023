@@ -7,16 +7,31 @@ import java.util.ArrayList;
 public interface EditionVueListener {
     /**
      * Enregistrement du paquet
-     * @param nom
-     * @param categorie
+     * @param nom nom du paquet
+     * @param categorie categorie du paquet
      */
     void enregistrerPaquet(String nom, String categorie);
     ArrayList<Carte> loadCartes();
 
     /**
-     * Ajout de cartes
-     * @param recto
-     * @param verso
+     * Ajout de cartes de type Qr
+     * @param recto recto de la carte
+     * @param verso verso de la carte
      */
     void ajouterCarte(String recto, String verso);
+
+    /**
+     * Ajout de cartes
+     * @param recto recto de la carte
+     * @param verso verso de la carte
+     */
+    void ajouterCarteQCM(String recto, String verso);
+
+    /**
+     * Ajout de cartes
+     * @param recto recto de la carte
+     * @param verso verso de la carte
+     */
+    void ajouterCarteTT(String recto, String verso);
+
 }

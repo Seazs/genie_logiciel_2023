@@ -11,27 +11,27 @@ public interface CarteEtudeListener {
     public ArrayList<Integer> getCartesEtudeScore();
 
     /**
-     * @param index
+     * @param index index
      */
     public void tresMauvais(int index);
 
     /**
-     * @param index
+     * @param index index
      */
     public void mauvais(int index);
 
     /**
-     * @param index
+     * @param index index
      */
     public void moyen(int index);
 
     /**
-     * @param index
+     * @param index index
      */
     public void bon(int index);
 
     /**
-     * @param index
+     * @param index index
      */
     public void tresBon(int index);
 
