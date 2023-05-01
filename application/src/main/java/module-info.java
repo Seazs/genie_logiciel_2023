@@ -37,5 +37,6 @@ module connexion {
 
     opens ulb.infof307.g12.view.store to javafx.fxml;
     exports ulb.infof307.g12.view.store;
+    opens ulb.infof307.g12.controller.JsonParser to com.fasterxml.jackson.databind, javafx.base;
 
 }

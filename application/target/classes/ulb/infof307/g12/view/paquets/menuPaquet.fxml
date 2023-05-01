@@ -3,7 +3,6 @@
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.MenuPaquetVueController">
     <ListView fx:id="paquetListView" editable="true" layoutX="14.0" layoutY="118.0" prefHeight="267.0" prefWidth="457.0" />
@@ -14,6 +13,7 @@
     <Button fx:id="boutonJouer" layoutX="495.0" layoutY="337.0" mnemonicParsing="false" onAction="#sessionEtude" prefHeight="48.0" prefWidth="82.0" text="Jouer" textFill="#cd8b41" />
     <Button fx:id="boutonModifier" layoutX="503.0" layoutY="163.0" mnemonicParsing="false" onAction="#ouvrirEdition" prefHeight="26.0" prefWidth="74.0" text="Modifier" />
    <Button fx:id="boutonStore" layoutX="506.0" layoutY="252.0" mnemonicParsing="false" onAction="#ouvrirStore" prefHeight="26.0" prefWidth="68.0" text="Store" />
+   <Button fx:id="btnDelete" layoutX="504.0" layoutY="200.0" mnemonicParsing="false" onAction="#deletePaquet" text="Supprimer" />
     <stylesheets>
         <URL value="@menuPaquetStyle.css" />
     </stylesheets>

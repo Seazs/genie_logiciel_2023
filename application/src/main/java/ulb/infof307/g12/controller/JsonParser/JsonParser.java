@@ -1,7 +1,11 @@
-package ulb.infof307.g12.model;
+package ulb.infof307.g12.controller.JsonParser;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import ulb.infof307.g12.model.Carte;
+import ulb.infof307.g12.model.CarteQcm;
+import ulb.infof307.g12.model.CarteTt;
+import ulb.infof307.g12.model.Paquet;
 
 import java.util.ArrayList;
 
