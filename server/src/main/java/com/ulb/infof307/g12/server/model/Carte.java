@@ -11,6 +11,4 @@ public class Carte {
     @Getter
     @Setter
     private String recto, verso, type;
-    @Getter
-    public int connaissance = 0;
 }

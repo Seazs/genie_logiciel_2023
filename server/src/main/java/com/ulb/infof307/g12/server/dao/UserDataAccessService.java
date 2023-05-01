@@ -2,6 +2,7 @@ package com.ulb.infof307.g12.server.dao;
 
 import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
@@ -14,7 +15,7 @@ public class UserDataAccessService implements UserDAO{
     private List<User> db_user;
 
     public UserDataAccessService() throws IOException {
-        db_user_file = new File("../server/src/main/resources/stockage","stockUser.txt");
+        db_user_file = new File("src/main/resources/stockage","stockUser.txt");
         try {
             db_user = this.load();
             status = STATUS.OK;

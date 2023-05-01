@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface PaquetDao {
 
-    void save(User user) throws IOException;
+    void save() throws IOException;
     /**
      * Crée un paquet avec l'id et le nom donné
      * @param id id du paquet
