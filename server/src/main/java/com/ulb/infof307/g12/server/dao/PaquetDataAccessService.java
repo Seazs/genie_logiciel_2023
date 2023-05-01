@@ -42,7 +42,6 @@ public class PaquetDataAccessService implements PaquetDao{
             Carte carte = paquet.getCartes().get(i);
             out.newLine();
             out.write(carte.getType()+ "#"+ carte.getRecto() + "#" + carte.getVerso());
-            out.write("#" + carte.getConnaissance());
         }
 
     }

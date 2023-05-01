@@ -4,12 +4,12 @@
 
 @font-face{
     font-family: 'Legrand' ;
-    src: url('src/main/resources/ulb/infof307/g12/view/Legrand.ttf')
+    src: url('./../../fonts/Legrand.ttf') ;
 }
 
 
 #titre{
-    -fx-font-family: "Legrand" ;
+    -fx-font-family: 'Legrand' ;
     -fx-font-size: 45px;
 }
 
