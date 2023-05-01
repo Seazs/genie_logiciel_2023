@@ -36,7 +36,7 @@ public class UserDataAccessService implements UserDAO{
 
     /**
      * @param user l'utilisateur
-     * @return
+     * @return le status de la création
      * @see UserDAO#createUser(User)
      */
     @Override
@@ -100,7 +100,7 @@ public class UserDataAccessService implements UserDAO{
 
     /**
      * Sauvegarde la liste des utilisateurs dans un fichier .txt
-     * @throws IOException
+     * @throws IOException si le fichier n'existe pas
      */
     public void save() throws IOException {
         fileExists();
@@ -117,7 +117,7 @@ public class UserDataAccessService implements UserDAO{
 
     /**
      * Charge les utilisateurs à partir d'un fichier
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException si le fichier n'existe pas
      */
     public List<User> load() throws IOException {
         ArrayList<User> new_db_user = new ArrayList<>();
@@ -143,6 +143,10 @@ public class UserDataAccessService implements UserDAO{
         return new_db_user;
     }
 
+    /**
+     * Fonction qui vérifie si le fichier existe
+     * @throws IOException si le fichier n'existe pas
+     */
     private void fileExists() throws IOException {
         if (!db_user_file.exists()){
             if (! db_user_file.getParentFile().mkdirs()){

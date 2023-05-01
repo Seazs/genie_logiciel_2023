@@ -35,7 +35,7 @@ public class UserService {
      * Enregistre un utilisateur dans le serveur
      *
      * @param user l'utilisateur
-     * @return
+     * @return le status de la création
      */
     public STATUS createUser(User user){
         return userDAO.createUser(user);

@@ -38,8 +38,8 @@ public class Paquet {
 
     /**
      * Fonction qui ajoute une carte au paquet
-     * @param carte
-     * @throws IllegalArgumentException
+     * @param carte carte à ajouter
+     * @throws IllegalArgumentException si la carte existe déjà
      */
     public void ajouterCarte(Carte carte) throws IllegalArgumentException{
         for(Carte car: this.cartes){

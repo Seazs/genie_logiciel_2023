@@ -19,7 +19,7 @@ public interface UserDAO {
      * Crée un utilisateur sur le serveur
      *
      * @param user l'utilisateur
-     * @return
+     * @return le status de la création
      */
     STATUS createUser(User user);
 
