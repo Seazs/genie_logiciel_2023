@@ -231,8 +231,6 @@ public class EditionVueController{
         String nouvelleCategorie = categoriePaquetTextField.getText();
         // Envoyer au listener
         listener.savePaquet(nouveauNom, nouvelleCategorie);
-        // Revenir sur le menu principal
-        MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();
     }
 
     /**

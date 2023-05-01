@@ -51,8 +51,11 @@ public class EditionController extends BaseController implements EditionVueListe
             paquet.addCategory(categorie);
             GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
             gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
+            MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();// Revenir sur le menu principal
         }catch (IOException e){
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de sauvegarder le paquet !");
+        }catch (IllegalArgumentException e){
+            MenuPrincipal.getINSTANCE().showErrorPopup("La catégorie ne peut pas contenir # !");
         }
     }
 

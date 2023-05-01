@@ -74,6 +74,9 @@ public class Paquet {
      * @param categorie
      */
     public void addCategory(String categorie){
+        if (categorie.contains("#")){
+            throw new IllegalArgumentException("Le nom de la catégorie ne peut pas contenir le caractère #");
+        }
         if(!this.categories.contains(categorie)){
             this.categories.add(categorie);
         }
