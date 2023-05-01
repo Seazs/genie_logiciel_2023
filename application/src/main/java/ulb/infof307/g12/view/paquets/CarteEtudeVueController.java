@@ -32,6 +32,7 @@ public class CarteEtudeVueController{
     private ListView<String> reponsesList;
     @FXML
     private TextField reponseTt;
+    @FXML
     private Button boutonEcouter;
     private int indexCarte = 0;
     private int cote = 0; // 0 = recto, 1 = verso
