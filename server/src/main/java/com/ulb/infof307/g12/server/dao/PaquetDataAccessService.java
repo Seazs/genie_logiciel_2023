@@ -164,7 +164,11 @@ public class PaquetDataAccessService implements PaquetDao {
      * @return String[] des catégories
      */
     private String[] loadCategories(String line) {
-        return line.split("#");
+        try {return line.split("#");
+        } catch (NullPointerException e) {
+            return new String[0];
+        }
+
     }
 
 
