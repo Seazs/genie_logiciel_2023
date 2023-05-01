@@ -34,7 +34,7 @@ public class PaquetController {
     /**
      * Renvoie le paquet correspondant à l'id
      * @param id l'id du paquet
-     * @return le paquet correspondant à l'id ou null si il n'existe pas
+     * @return le paquet correspondant à l'id ou null s'il n'existe pas
      */
     @GetMapping("{id}")
     public Paquet getPaquet(@PathVariable UUID id){

@@ -18,12 +18,14 @@ public class PaquetDataAccessService implements PaquetDao {
     private List<Paquet> db_paquets = new ArrayList<>();
     private File db_paquet_folder;
 
-    public PaquetDataAccessService() throws IOException {
+    public PaquetDataAccessService(){
         try {
             db_paquet_folder = new File("src/main/resources/stockage/paquet");
             if (! db_paquet_folder.exists()){
                 // Création du dossier paquet
-                db_paquet_folder.mkdirs();
+                if (!db_paquet_folder.mkdirs()){
+                    throw new IOException("Paquet folder could not create.");
+                };
             }else{
                 if (db_paquet_folder.listFiles() != null) {
                     // Dossier paquet existe déjà et n'est pas vide
@@ -47,7 +49,9 @@ public class PaquetDataAccessService implements PaquetDao {
         for (Paquet paquet : db_paquets) {
             // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
             File db_paquet_file = new File(db_paquet_folder, paquet.getNom());
-            db_paquet_file.createNewFile();
+            if (! db_paquet_file.createNewFile()){
+                throw new IOException("Paquet file could not be created.");
+            };
             FileWriter writer = new FileWriter(db_paquet_file);
             BufferedWriter out = new BufferedWriter(writer);
             // Écrire le nom du paquet
