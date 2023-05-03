@@ -217,3 +217,105 @@ Tâche 2 : Implémentation de la lecture audio (Back end) - 3 points
 
 - Alexandre B.
 - Description : Implémenter la lecture des cartes avec la manière dont chaque cartes sera lue.
+
+# Itération 4 - 28 points
+
+## Histoire 26 (Refactoring) - 8 points 
+
+Tâche 1 : Changer le format stockage de notre structure vers JSON
+
+-
+- Description : Modifier les fonctions de sauvegarde et chargement pour écrire/lire le fichier txt avec/en un JSON et pas la structure que nous avons déterminé auparavant. 
+
+Tâche 2 : Implémenter une fonction qui transforme un JSON en Objet Java de façon plus efficace
+
+-
+- Description : Pouvoir instancier des objets sur base d'un fichier JSON. (Voir s'il y a des fonctions/librairies toutes faites).
+
+Tâche 3 : Correction MVC
+
+-
+- Description : S'assurer que l'architecture soit bien respectée.
+
+Tâche 4 : Gestion des erreurs/exceptions
+
+-
+- Description : S'assurer que toutes les exceptions sont traitées.
+
+Tâches 5 : Tests unitaires 
+
+-
+- Description : Créer des tests pour les modèles
+
+
+## Histoire 25 (Fin serveur/store) - 6 points
+
+Tâche 1 : Finaliser l'implémentation Upload et Download
+
+- 
+- Description : S'assurer qu'on peut upload et download de paquet
+
+
+Tâche 2 : Finaliser l'affichage store
+
+- 
+- Description : S'assurer que la liste des paquets se mette à jour automatiquement.
+
+
+Tâche 3 : Finaliser gestion d'erreur du serveur
+
+- 
+- Description : S'assurer que toutes les exceptions sont traitées
+
+
+Tâche 4 : Vérification de la bonne communication du serveur et client
+
+- 
+- Description : Vérifier le bon deroulement de chaque requête -> chercher des bugs à ce niveau.
+
+
+Tâche 5 : Synchronisation de la database locale avec celle du serveur
+
+- 
+- Description : 
+
+Tâche 6 : Supprimer un de ses paquets du store
+
+- 
+- Description : L'utilisateur doit pouvoir supprimer ses paquets du store. Vérifier qu'un paquet appartient bien à l'utilisateur avant de le supprimer.
+ 
+
+## Histoire 17 (HTML Latex) - 8 points
+
+Tâche 1 : Implémenter l'interprétation de HTML dans une carte
+
+- 
+- Description : L'utilisateur doit pouvoir écrire du HTML sur carte et au moment de l'étude, le contenu HTML doit être rendu correctment.
+
+Tâche 2 : Implémenter l'interprétation de Latex dans une carte
+
+-
+- Description : L'utilisateur doit pouvoir écrire du Latex sur carte et au moment de l'étude, le contenu Latex doit être rendu correctment.
+
+Tâche 3 : Adapter le menu d'édition pour tenir compter la visualisation de HTML et Latex.
+
+-
+- Description : Rendre possible la création des cartes contenant du HTML et du Latex
+
+Tâche 4 : Adapter le stockage JSON pour sauvegarder le code HTML et Latex.
+
+-
+- Description : Rendre possible la sauvegarde des cartes contenant du HTML et du Latex.
+
+
+## Histoire 15 (Import/Export) - 6 points
+
+Tâche 1 : Importation de paquet de cartes
+
+- 
+- Description : Implémenter un bouton import qui prend un fichier .txt dans le bon format.
+
+Tâche 2 : Exportation de paquet de cartes
+
+- 
+- Description : Implémenter un bouton export qui copie un fichier .txt existante dans le dossier choisi par l'utilisateur.
