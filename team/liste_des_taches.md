@@ -239,7 +239,7 @@ Tâche 3 : Correction MVC
 
 Tâche 4 : Gestion des erreurs/exceptions
 
-- Ismail (Alex B.)
+- Alex B. (Ismail)
 - Description : S'assurer que toutes les exceptions sont traitées.
 
 Tâches 5 : Tests unitaires 
@@ -264,7 +264,7 @@ Tâche 2 : Finaliser l'affichage store
 
 Tâche 3 : Finaliser gestion d'erreur du serveur
 
-- Romain (Ismail)
+- Ismail (Romain)
 - Description : S'assurer que toutes les exceptions sont traitées
 
 
@@ -281,7 +281,7 @@ Tâche 5 : Synchronisation de la database locale avec celle du serveur
 
 Tâche 6 : Supprimer un de ses paquets du store
 
-- Alex (Lina) 
+- Alex A. (Lina) 
 - Description : L'utilisateur doit pouvoir supprimer ses paquets du store. Vérifier qu'un paquet appartient bien à l'utilisateur avant de le supprimer.
  
 
