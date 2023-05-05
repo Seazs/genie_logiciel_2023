@@ -1,5 +1,6 @@
 package ulb.infof307.g12.view.paquets;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,27 +13,27 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.controller.listeners.EditionVueListener;
-import ulb.infof307.g12.model.Carte;
+import ulb.infof307.g12.view.dto.CardDTO;
+import ulb.infof307.g12.view.listeners.EditionVueListener;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class EditionVueController{
 
     @FXML
-    private TableColumn<Carte, String> reponseCol;
+    private TableColumn<CardDTO, String> reponseCol;
+    @FXML
+    private TableColumn<CardDTO, String> questionCol;
     @FXML
     private TextField categoriePaquetTextField;
     @FXML
     private TextField nomPaquetTextField;
     @FXML
-    private TableColumn<Carte, String> questionCol;
-    @FXML
     private TextField rep1, rep2, rep3, reponsettTextField, questionTextField, reponseTextField;
     @FXML
-    private TableView<Carte> tableQR;
+    private TableView<CardDTO> tableQR;
     @FXML
     private ChoiceBox<String> typechoix;
     @Setter
@@ -48,8 +49,8 @@ public class EditionVueController{
         categoriePaquetTextField.setPromptText("Catégorie");
         nomPaquetTextField.setText(name);
 
-        questionCol.setCellValueFactory(new PropertyValueFactory<Carte, String>("recto"));
-        reponseCol.setCellValueFactory(new PropertyValueFactory<Carte, String>("verso"));
+        questionCol.setCellValueFactory(data->new SimpleStringProperty(data.getValue().question()));
+        reponseCol.setCellValueFactory(data->new SimpleStringProperty(data.getValue().reponse()));
 
         questionCol.setEditable(true);
         reponseCol.setEditable(true);
@@ -58,21 +59,13 @@ public class EditionVueController{
         reponseCol.setCellFactory(TextFieldTableCell.forTableColumn());
 
         questionCol.setOnEditCommit(event -> {
-            Carte carte = event.getRowValue();
-            try {
-                carte.editRecto(event.getNewValue());
-            } catch (IllegalArgumentException e) {
-                listener.error(e.getMessage());
-            }
+            String newQuestion = event.getRowValue().question();
+            listener.editQuestion(newQuestion);
         });
 
         reponseCol.setOnEditCommit(event -> {
-            Carte carte = event.getRowValue();
-            try {
-                carte.editVerso(event.getNewValue());
-            } catch (IllegalArgumentException e) {
-                listener.error(e.getMessage());
-            }
+            String newReponse = event.getRowValue().reponse();
+            listener.editReponse(newReponse);
         });
         setChoicebox();
         reloadTable();
@@ -222,11 +215,11 @@ public class EditionVueController{
      */
     void reloadTable() {
         // Création et initialisation d'un observableArrayList nécessaire pour l'usage du tableau
-        ObservableList<Carte> data = FXCollections.<Carte>observableArrayList();
-        ArrayList<Carte> cartes = listener.loadCartes();
-        data.addAll(cartes);
+        ObservableList<CardDTO> observed = FXCollections.observableArrayList();
+        List<CardDTO> data = listener.getData();
+        observed.addAll(data);
         // Injecter l'observableArrayList dans la table
-        tableQR.setItems(data);
+        tableQR.setItems(observed);
     }
 
     /**

@@ -2,7 +2,7 @@ package ulb.infof307.g12.controller.javafx.connexion;
 
 import javafx.stage.Stage;
 import ulb.infof307.g12.controller.javafx.BaseController;
-import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
+import ulb.infof307.g12.view.listeners.UserCredentialsListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.STATUS;

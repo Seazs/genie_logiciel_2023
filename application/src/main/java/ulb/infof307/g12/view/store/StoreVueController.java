@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.controller.listeners.StoreVueListener;
+import ulb.infof307.g12.view.listeners.StoreVueListener;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
 import ulb.infof307.g12.view.paquets.PaquetDeCartesVueController;

@@ -1,4 +1,4 @@
-package ulb.infof307.g12.controller.listeners;
+package ulb.infof307.g12.view.listeners;
 
 import ulb.infof307.g12.model.Paquet;
 

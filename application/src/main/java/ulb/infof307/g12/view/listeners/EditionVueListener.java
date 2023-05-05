@@ -1,8 +1,10 @@
-package ulb.infof307.g12.controller.listeners;
+package ulb.infof307.g12.view.listeners;
 
 import ulb.infof307.g12.model.Carte;
+import ulb.infof307.g12.view.dto.CardDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface EditionVueListener {
     /**
@@ -59,4 +61,21 @@ public interface EditionVueListener {
      * @param message message d'erreur
      */
     void error(String message);
+
+    /**
+     * @return Liste de question/reponses
+     */
+    List<CardDTO> getData();
+
+    /**
+     * Change la question d'une carte dans le paquet
+     * @param newQuestion
+     */
+    void editQuestion(String newQuestion);
+
+    /**
+     * Change la reponse d'une carte dans le paquet
+     * @param newReponse
+     */
+    void editReponse(String newReponse);
 }

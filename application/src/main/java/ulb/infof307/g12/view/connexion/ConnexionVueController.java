@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import lombok.Setter;
-import ulb.infof307.g12.controller.listeners.UserCredentialsListener;
+import ulb.infof307.g12.view.listeners.UserCredentialsListener;
 
 public class ConnexionVueController {
     @FXML

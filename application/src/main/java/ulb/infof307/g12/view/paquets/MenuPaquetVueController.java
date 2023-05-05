@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
+import ulb.infof307.g12.view.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
 
 import java.io.IOException;

@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
+import ulb.infof307.g12.view.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Utilisateur;
 import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
