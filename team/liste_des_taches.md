@@ -224,27 +224,27 @@ Tâche 2 : Implémentation de la lecture audio (Back end) - 3 points
 
 Tâche 1 : Changer le format stockage de notre structure vers JSON
 
--
-- Description : Modifier les fonctions de sauvegarde et chargement pour écrire/lire le fichier txt avec/en un JSON et pas la structure que nous avons déterminé auparavant. 
+- Brenno (Alex A.)
+- Description : Modifier les fonctions de sauvegarde et chargement pour écrire/lire le fichier txt avec/en un JSON et pas la structure que nous avons déterminé auparavant. Changer PARTOUT dans le code. 
 
 Tâche 2 : Implémenter une fonction qui transforme un JSON en Objet Java de façon plus efficace
 
--
+- Romain (Brenno)
 - Description : Pouvoir instancier des objets sur base d'un fichier JSON. (Voir s'il y a des fonctions/librairies toutes faites).
 
 Tâche 3 : Correction MVC
 
--
+- Nico (Alex A.)
 - Description : S'assurer que l'architecture soit bien respectée.
 
 Tâche 4 : Gestion des erreurs/exceptions
 
--
+- Ismail (Alex B.)
 - Description : S'assurer que toutes les exceptions sont traitées.
 
 Tâches 5 : Tests unitaires 
 
--
+- Wassim (Nico)
 - Description : Créer des tests pour les modèles
 
 
@@ -252,36 +252,36 @@ Tâches 5 : Tests unitaires
 
 Tâche 1 : Finaliser l'implémentation Upload et Download
 
-- 
-- Description : S'assurer qu'on peut upload et download de paquet
+- Nico (Brenno)
+- Description : S'assurer qu'on peut upload et download de paquet, faire attention aux doublons. Ajouter UUID au paquet ? Changer le modèle du coup.
 
 
 Tâche 2 : Finaliser l'affichage store
 
-- 
-- Description : S'assurer que la liste des paquets se mette à jour automatiquement.
+- Romain (Nico)
+- Description : S'assurer que la liste des paquets se mette à jour automatiquement (Refresh auto)
 
 
 Tâche 3 : Finaliser gestion d'erreur du serveur
 
-- 
+- Romain (Ismail)
 - Description : S'assurer que toutes les exceptions sont traitées
 
 
 Tâche 4 : Vérification de la bonne communication du serveur et client
 
-- 
+- Brenno (Alex B.)
 - Description : Vérifier le bon deroulement de chaque requête -> chercher des bugs à ce niveau.
 
 
 Tâche 5 : Synchronisation de la database locale avec celle du serveur
 
-- 
-- Description : 
+- Wassim (Brenno)
+- Description : Faire en sorte d'avoir les mêmes données en local et sur le serveur.
 
 Tâche 6 : Supprimer un de ses paquets du store
 
-- 
+- Alex (Lina) 
 - Description : L'utilisateur doit pouvoir supprimer ses paquets du store. Vérifier qu'un paquet appartient bien à l'utilisateur avant de le supprimer.
  
 
@@ -289,33 +289,28 @@ Tâche 6 : Supprimer un de ses paquets du store
 
 Tâche 1 : Implémenter l'interprétation de HTML dans une carte
 
-- 
+- Raph (Philippe)
 - Description : L'utilisateur doit pouvoir écrire du HTML sur carte et au moment de l'étude, le contenu HTML doit être rendu correctment.
 
 Tâche 2 : Implémenter l'interprétation de Latex dans une carte
 
--
+- Philippe (Raph)
 - Description : L'utilisateur doit pouvoir écrire du Latex sur carte et au moment de l'étude, le contenu Latex doit être rendu correctment.
 
 Tâche 3 : Adapter le menu d'édition pour tenir compter la visualisation de HTML et Latex.
 
--
-- Description : Rendre possible la création des cartes contenant du HTML et du Latex
-
-Tâche 4 : Adapter le stockage JSON pour sauvegarder le code HTML et Latex.
-
--
-- Description : Rendre possible la sauvegarde des cartes contenant du HTML et du Latex.
+- Lina (Ismail)
+- Description : Rendre possible la création des cartes contenant du HTML et du Latex. Ajout d'un bouton qui ouvre un popup ou remplir les text input en bas par exemple
 
 
 ## Histoire 15 (Import/Export) - 6 points
 
 Tâche 1 : Importation de paquet de cartes
 
-- 
-- Description : Implémenter un bouton import qui prend un fichier .txt dans le bon format.
+- Philippe (Raph)
+- Description : Implémenter un bouton import qui prend un fichier .json dans le bon format.
 
 Tâche 2 : Exportation de paquet de cartes
 
-- 
-- Description : Implémenter un bouton export qui copie un fichier .txt existante dans le dossier choisi par l'utilisateur.
+- Philippe (Raph)
+- Description : Implémenter un bouton export qui copie un fichier .json existante dans le dossier choisi par l'utilisateur.
