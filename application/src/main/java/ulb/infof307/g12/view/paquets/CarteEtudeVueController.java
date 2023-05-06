@@ -55,6 +55,7 @@ public class CarteEtudeVueController{
             case "Simple" -> showQR();
             case "QCM" -> showQCMFront();
             case "TT" -> showTTFront();
+            case "Spec" -> showSpec();
         }
         answer.setText("");
         reponseTt.clear();
@@ -71,6 +72,18 @@ public class CarteEtudeVueController{
             case "TT" -> changeSideTT();
             case "Spec" -> changeSideSpec();
         }
+    }
+
+    /**
+     * Affiche une carte spéciale
+     */
+    public void showSpec(){
+        String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
+        String lang = infos[3];
+        if (lang.equals("html")) showHTML(infos[1]);
+        else if (lang.equals("latex")) showLatex(infos[1]);
+        btnChange.setText("Recto");
+        side = 0;
     }
 
 
