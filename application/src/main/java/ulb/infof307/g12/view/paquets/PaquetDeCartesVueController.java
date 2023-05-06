@@ -2,9 +2,9 @@ package ulb.infof307.g12.view.paquets;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import ulb.infof307.g12.model.Paquet;
+import ulb.infof307.g12.view.dto.PaquetDTO;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PaquetDeCartesVueController {
     @FXML
@@ -16,19 +16,21 @@ public class PaquetDeCartesVueController {
 
     /**
      * Applique le nom et les catégories aux labels associés
-     * @param paquetDeCartes paquet de cartes
+     * @param paquet le paquet de cartes
      */
-    public void setPaquetDeCartes(Paquet paquetDeCartes) {
-        nomLabel.setText(paquetDeCartes.getNom());
+    public void setPaquetDeCartes(PaquetDTO paquet) {
+        nomLabel.setText(paquet.nom());
+        List<String> categories = paquet.categories();
+
         StringBuilder textCategories = new StringBuilder();
-        ArrayList<String> categories = paquetDeCartes.getCategories();
         for(int i = 0; i<categories.size(); i++){
-            if (i != categories.size()-1) {
-                textCategories.append(categories.get(i)).append(", ");
-            }else{
-                textCategories.append(categories.get(i));
-            }
+
+            textCategories.append(categories.get(i));
+
+            if (i != categories.size()-1)
+                textCategories.append(", ");
         }
+
         categorieLabel.setText(textCategories.toString());
     }
 }

@@ -49,9 +49,9 @@ public class PaquetDataAccessService implements PaquetDao {
         for (Paquet paquet : db_paquets) {
             // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
             File db_paquet_file = new File(db_paquet_folder, paquet.getNom());
-            if (! db_paquet_file.createNewFile()){
-                throw new IOException("Paquet file could not be created.");
-            };
+            //Crée le fichier s'il n'existe pas
+            db_paquet_file.createNewFile();
+
             FileWriter writer = new FileWriter(db_paquet_file);
             BufferedWriter out = new BufferedWriter(writer);
             // Écrire le nom du paquet

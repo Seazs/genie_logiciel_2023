@@ -1,9 +1,10 @@
 package ulb.infof307.g12.view.listeners;
 
 import ulb.infof307.g12.model.Paquet;
+import ulb.infof307.g12.view.dto.PaquetDTO;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public interface StoreVueListener {
@@ -11,20 +12,20 @@ public interface StoreVueListener {
     /**
      * @param paquet paquet
      */
-    void uploadPaquet(Paquet paquet) throws IOException;
+    void uploadPaquet(PaquetDTO paquet) throws IOException;
 
     /**
      * @param paquet paquet
      */
-    void downloadPaquet(Paquet paquet);
+    void downloadPaquet(PaquetDTO paquet);
 
     /**
      * @return liste des paquets du store
      */
-    List<Paquet> getStorePaquets();
+    Collection<PaquetDTO> getStorePaquets();
 
-    /**
-     * Rafraichit la liste des paquets du store
-     */
-    ArrayList<Paquet> refresh();
+    Collection<PaquetDTO> filterPaquet(String recherche);
+
+    Collection<PaquetDTO> getUserPaquets();
+
 }

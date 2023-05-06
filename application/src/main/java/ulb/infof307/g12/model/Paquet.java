@@ -2,6 +2,8 @@ package ulb.infof307.g12.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import ulb.infof307.g12.view.dto.CardDTO;
+import ulb.infof307.g12.view.dto.PaquetDTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,6 +82,14 @@ public class Paquet {
         if(!this.categories.contains(categorie)){
             this.categories.add(categorie);
         }
+    }
+
+    /**
+     * transforme le paquet en DTO
+     * @return une version DTO du paquet
+     */
+    public PaquetDTO getDTO() {
+        return new PaquetDTO(this.nom, this.categories);
     }
 
 }

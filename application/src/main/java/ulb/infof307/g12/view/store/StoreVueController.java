@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
+import ulb.infof307.g12.view.dto.PaquetDTO;
 import ulb.infof307.g12.view.listeners.StoreVueListener;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
@@ -29,21 +30,15 @@ public class StoreVueController implements Initializable{
     @Setter
     private StoreVueListener listener;
 
-    List<Paquet> saveListPaquet = new ArrayList<>();
     @FXML
-    private ListView<Paquet> storePaquetListView;
+    private ListView<PaquetDTO> storePaquetListView;
     @FXML
-    private ListView<Paquet> mesPaquetListView;
+    private ListView<PaquetDTO> mesPaquetListView;
     @FXML
     private TextField RechercheLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Ajouter les paquets de cartes à la liste
-        mesPaquetListView.getItems().addAll(
-                MenuPrincipal.getINSTANCE().getUserPaquets()
-        );
-        saveListPaquet.addAll(storePaquetListView.getItems());
 
         // Personnaliser l'affichage des éléments de la liste
         updateVisuelListeViewPaquet(mesPaquetListView);
@@ -57,8 +52,8 @@ public class StoreVueController implements Initializable{
     }
 
 
-    public void updateVisuelListePaquet(ArrayList<Paquet> paquets) {
-        ObservableList<Paquet> observablePaquets = FXCollections.observableArrayList(paquets);
+    public void updateVisuelListePaquet(ArrayList<PaquetDTO> paquets) {
+        ObservableList<PaquetDTO> observablePaquets = FXCollections.observableArrayList(paquets);
         storePaquetListView.setItems(observablePaquets);
         updateVisuelListeViewPaquet(storePaquetListView);
     }
@@ -68,10 +63,10 @@ public class StoreVueController implements Initializable{
      * Charge le fichier FXML paquet de carte en chargeant les noms et catégories de chaque paquet
      * @param paquetListView liste des paquets à afficher
      */
-    private void updateVisuelListeViewPaquet(ListView<Paquet> paquetListView) {
-        paquetListView.setCellFactory(param -> new ListCell<Paquet>() {
+    private void updateVisuelListeViewPaquet(ListView<PaquetDTO> paquetListView) {
+        paquetListView.setCellFactory(param -> new ListCell<>() {
             @Override
-            protected void updateItem(Paquet item, boolean empty) {
+            protected void updateItem(PaquetDTO item, boolean empty) {
                 super.updateItem(item, empty);
 
                 if (empty || item == null) {
@@ -106,15 +101,9 @@ public class StoreVueController implements Initializable{
     public void filtrageCategorie() {
         String recherche = RechercheLabel.getText().toLowerCase();
         storePaquetListView.getItems().clear();
-        saveListPaquet.forEach(
-                paquet -> {
-                    boolean result = paquet.getCategories()
-                            .stream()
-                            .anyMatch(s -> s.toLowerCase().contains(recherche.toLowerCase()));
-                    if(result && ! storePaquetListView.getItems().contains(paquet))
-                        storePaquetListView.getItems().add(paquet);
-
-                });
+        storePaquetListView.getItems().addAll(
+                listener.filterPaquet(recherche)
+        );
     }
 
     /**
@@ -128,7 +117,7 @@ public class StoreVueController implements Initializable{
      * Envoie à  storeController  le paquet sélectionné pour le telecharger
      */
     public void downloadPaquet(){
-        Paquet paquet = storePaquetListView.getSelectionModel().getSelectedItem();
+        PaquetDTO paquet = storePaquetListView.getSelectionModel().getSelectedItem();
         listener.downloadPaquet(paquet);
         rechargerListView();
     }
@@ -137,7 +126,7 @@ public class StoreVueController implements Initializable{
      * Envoie à  storeController  le paquet sélectionné pour l’uploader
      */
     public void uploadPaquet() throws IOException {
-        Paquet paquet = mesPaquetListView.getSelectionModel().getSelectedItem();
+        PaquetDTO paquet = mesPaquetListView.getSelectionModel().getSelectedItem();
         listener.uploadPaquet(paquet);
     }
 
@@ -147,7 +136,7 @@ public class StoreVueController implements Initializable{
     public void refresh(){
 
         storePaquetListView.getItems().setAll(
-                listener.refresh()
+                listener.getStorePaquets()
         );
     }
 
@@ -156,8 +145,8 @@ public class StoreVueController implements Initializable{
      */
     public void rechargerListView(){
         // Créer et initialiser un observableArrayList nécessaire pour l'utilisation d'un ListView
-        ObservableList<Paquet> data = FXCollections.observableArrayList();
-        data.addAll(MenuPrincipal.getINSTANCE().getUserPaquets()) ;
+        ObservableList<PaquetDTO> data = FXCollections.observableArrayList();
+        data.addAll(listener.getUserPaquets()) ;
         // Injecter les données de l'observableArrayList dans la ListView
         mesPaquetListView.setItems(data) ;
 
