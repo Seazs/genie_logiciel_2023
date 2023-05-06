@@ -3,6 +3,7 @@ package ulb.infof307.g12.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import ulb.infof307.g12.view.dto.CardDTO;
 
 
 public class
@@ -97,6 +98,10 @@ Carte {
         info[1] = this.recto;
         info[2] = this.verso;
         return info;
+    }
+
+    public CardDTO getDTO() {
+        return new CardDTO(this.recto, this.verso);
     }
 
 }

@@ -1,5 +1,6 @@
 package ulb.infof307.g12.controller.storage;
 
+import ulb.infof307.g12.Main;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.STATUS;
 import ulb.infof307.g12.model.Utilisateur;
@@ -161,7 +162,7 @@ public class GestionnaireUtilisateur {
         status = STATUS.OK;
         System.out.println("NEW USER REGISTERED");
         listeUtilisateur.add(new_user);
-        File f = new File("./src/main/resources/stockage",username);
+        File f = new File(Main.getFolderPath(),username);
         f.mkdirs();
         this.save();
         return true;

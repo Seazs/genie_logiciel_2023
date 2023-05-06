@@ -1,5 +1,6 @@
 package ulb.infof307.g12.controller.storage;
 
+import ulb.infof307.g12.Main;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.*;
 
@@ -11,7 +12,6 @@ import static java.lang.Integer.parseInt;
 
 public class GestionnairePaquet {
 
-
     /**
      * Sauvegarde un paquet de cartes sous forme de fichier dans le dossier de l'utilisateur.
      * @param user utilisateur
@@ -20,7 +20,7 @@ public class GestionnairePaquet {
     public void save(Utilisateur user) throws IOException {
         List<Paquet> listPaquet = user.getListPaquet();
         for (Paquet paquet : listPaquet){
-            File paquetdatabase = new File("./src/main/resources/stockage/"+user.getPseudo(),paquet.getNom()); // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
+            File paquetdatabase = new File(Main.getFolderPath()+user.getPseudo(),paquet.getNom()); // On crée un fichier avec le nom du paquet dans le dossier de l'utilisateur
             FileWriter writer = new  FileWriter(paquetdatabase);
             BufferedWriter out = new BufferedWriter(writer);
 
@@ -57,7 +57,7 @@ public class GestionnairePaquet {
     public List<Paquet> load(Utilisateur user) {
 
         try {
-            File userfolder = new File("./src/main/resources/stockage/"+user.getPseudo());
+            File userfolder = new File(Main.getFolderPath()+user.getPseudo());
             File[] listOfFilePaquet = userfolder.listFiles(); //Enumère les fichiers dans le dossier de l'utilisateur
             List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
 

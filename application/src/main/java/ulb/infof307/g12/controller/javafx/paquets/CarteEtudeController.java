@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.controller.listeners.CarteEtudeListener;
+import ulb.infof307.g12.view.listeners.CarteEtudeListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.textToSpeech.textToSpeechController;
 import ulb.infof307.g12.model.Carte;

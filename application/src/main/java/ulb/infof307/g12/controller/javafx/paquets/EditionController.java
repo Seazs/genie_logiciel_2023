@@ -4,7 +4,8 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.controller.listeners.EditionVueListener;
+import ulb.infof307.g12.view.dto.CardDTO;
+import ulb.infof307.g12.view.listeners.EditionVueListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.model.Carte;
 import ulb.infof307.g12.model.CarteQcm;
@@ -13,12 +14,14 @@ import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.paquets.EditionVueController;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class EditionController extends BaseController implements EditionVueListener {
 
     @Getter
     private final Paquet paquet;
+
 
     /**y
      * Controller de l'édition
@@ -35,7 +38,6 @@ public class EditionController extends BaseController implements EditionVueListe
         EditionVueController controller = (EditionVueController) super.controller;
         controller.setListener(this);
         controller.chargerEditionVue(paquet.getNom());
-
     }
 
     /**
@@ -157,4 +159,33 @@ public class EditionController extends BaseController implements EditionVueListe
         MenuPrincipal.getINSTANCE().showErrorPopup(message);
     }
 
+    @Override
+    public List<CardDTO> getData() {
+       return paquet.getCartes().stream().map(Carte::getDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public void editQuestion(String newQuestion) {
+        try{
+            paquet.getCartes().stream()
+                    .filter(carte -> carte.getRecto().equals(newQuestion))
+                    .findFirst()
+                    .ifPresent(carte -> carte.editRecto(newQuestion));
+
+        }catch (IllegalArgumentException e){
+            error(e.getMessage());
+        }
+    }
+
+    @Override
+    public void editReponse(String newReponse) {
+        try {
+            paquet.getCartes().stream()
+                    .filter(carte -> carte.getVerso().equals(newReponse))
+                    .findFirst()
+                    .ifPresent(carte -> carte.editVerso(newReponse));
+        }catch (IllegalArgumentException e){
+            error(e.getMessage());
+        }
+    }
 }

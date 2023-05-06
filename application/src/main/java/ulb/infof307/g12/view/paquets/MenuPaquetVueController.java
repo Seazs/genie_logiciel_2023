@@ -13,19 +13,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.controller.listeners.MenuPaquetListener;
-import ulb.infof307.g12.model.Paquet;
+import ulb.infof307.g12.view.dto.PaquetDTO;
+import ulb.infof307.g12.view.listeners.MenuPaquetListener;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class MenuPaquetVueController implements Initializable {
     @FXML
-    private ListView<Paquet> paquetListView;
-    List<Paquet> saveListPaquet = new ArrayList<>();
+    private ListView<PaquetDTO> paquetListView;
+
 
     @FXML
     private TextField RechercheLabel;
@@ -40,11 +38,6 @@ public class MenuPaquetVueController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Ajouter les paquets de cartes à la liste
-        paquetListView.getItems().addAll(
-                MenuPrincipal.getINSTANCE().getUserPaquets()
-        );
-        saveListPaquet.addAll(paquetListView.getItems());
         // Personnaliser l'affichage des éléments de la liste
         updateVisuelListePaquet();
 
@@ -58,9 +51,9 @@ public class MenuPaquetVueController implements Initializable {
      * Charge le fichier FXML paquet de carte en chargeant les noms et catégories de chaque paquet
      */
     private void updateVisuelListePaquet() {
-        paquetListView.setCellFactory(param -> new ListCell<Paquet>() {
+        paquetListView.setCellFactory(param -> new ListCell<>() {
             @Override
-            protected void updateItem(Paquet item, boolean empty) {
+            protected void updateItem(PaquetDTO item, boolean empty) {
                 super.updateItem(item, empty);
 
                 if (empty || item == null) {
@@ -106,7 +99,7 @@ public class MenuPaquetVueController implements Initializable {
      */
     public void creerPaquet() throws IOException {
         // Envoyer au listener
-        Paquet nouveauPaquet = listener.creerPaquet() ;
+        PaquetDTO nouveauPaquet = listener.creerPaquet() ;
         // Ajouter le nouveau paquet provenant du listener à la vue
         paquetListView.getItems().addAll(nouveauPaquet);
     }
@@ -115,7 +108,7 @@ public class MenuPaquetVueController implements Initializable {
      * Supprimer un paquet
      */
     public void deletePaquet(){
-        Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
+        PaquetDTO paquet = paquetListView.getSelectionModel().getSelectedItem();
         if (paquet != null) {
             listener.supprimerPaquet(paquet);
             paquetListView.getItems().remove(paquet);
@@ -137,8 +130,8 @@ public class MenuPaquetVueController implements Initializable {
      */
     public void rechargerListView(){
         // Créer et initialiser un observableArrayList nécessaire pour l'utilisation d'un ListView
-        ObservableList<Paquet> data = FXCollections.observableArrayList();
-        data.addAll(MenuPrincipal.getINSTANCE().getUserPaquets()) ;
+        ObservableList<PaquetDTO> data = FXCollections.observableArrayList();
+        data.addAll(listener.getPaquetDTOList()) ;
         // Injecter les données de l'observableArrayList dans la ListView
         paquetListView.setItems(data) ;
 
@@ -150,14 +143,7 @@ public class MenuPaquetVueController implements Initializable {
     public void filtrageCategorie() {
         String recherche = RechercheLabel.getText().toLowerCase();
         paquetListView.getItems().clear();
-        saveListPaquet.forEach(
-                paquet -> {
-            boolean result = paquet.getCategories()
-                    .stream()
-                    .anyMatch(s -> s.toLowerCase().contains(recherche.toLowerCase()));
-            if(result && ! paquetListView.getItems().contains(paquet))
-                paquetListView.getItems().add(paquet);
-        });
+        listener.filterPaquet(recherche);
     }
 
     /**
@@ -167,7 +153,7 @@ public class MenuPaquetVueController implements Initializable {
     @FXML
     public void sessionEtude(ActionEvent event){
         if (listener!=null) {
-            Paquet paquet = paquetListView.getSelectionModel().getSelectedItem();
+            PaquetDTO paquet = paquetListView.getSelectionModel().getSelectedItem();
             listener.CarteEtude(paquet);
         }
     }

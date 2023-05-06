@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.web.WebView;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
+import ulb.infof307.g12.view.listeners.CarteEtudeListener;
+
 import ulb.infof307.g12.controller.listeners.CarteEtudeListener;
 import org.scilab.forge.jlatexmath.TeXFormula;
 import javafx.scene.image.ImageView;
@@ -18,7 +20,6 @@ import javafx.embed.swing.SwingFXUtils;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CarteEtudeVueController{
-
     @Setter
     private CarteEtudeListener listener;
     @FXML
