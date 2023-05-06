@@ -11,6 +11,9 @@ module application {
     requires javafx.web;
     requires org.apache.commons.lang3;
     requires org.apache.commons.io;
+    requires jlatexmath;
+    requires java.desktop;
+    requires javafx.swing;
 
     opens ulb.infof307.g12.controller.javafx.connexion to javafx.fxml;
     exports ulb.infof307.g12.controller.javafx.connexion;

@@ -10,12 +10,15 @@ import javafx.scene.web.WebView;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.CarteEtudeListener;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
-
+import org.scilab.forge.jlatexmath.TeXFormula;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import java.awt.image.BufferedImage;
+import javafx.embed.swing.SwingFXUtils;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CarteEtudeVueController{
+
     @Setter
     private CarteEtudeListener listener;
     @FXML
@@ -28,6 +31,8 @@ public class CarteEtudeVueController{
     private TextField reponseTt;
     @FXML
     private WebView htmlView;
+    @FXML
+    private ImageView LatexView;
     private int indexCarte = 0;
     private int side = 0; // 0 = recto, 1 = verso
 
@@ -157,6 +162,7 @@ public class CarteEtudeVueController{
         qrText.setVisible(true);
         questionQcmLabel.setVisible(false);
         htmlView.setVisible(false);
+        LatexView.setVisible(false);
         btnChange.setText("Verso");
         reponseTt.setVisible(false);
         reponsesList.setVisible(false);
@@ -173,6 +179,7 @@ public class CarteEtudeVueController{
         btnValidAnswer.setVisible(false);
         qrText.setVisible(false);
         htmlView.setVisible(true);
+        LatexView.setVisible(false);
         htmlView.getEngine().loadContent(content);
         questionQcmLabel.setVisible(false);
         btnChange.setText("Verso");
@@ -189,11 +196,17 @@ public class CarteEtudeVueController{
         btnValidAnswer.setVisible(false);
         qrText.setVisible(false);
         htmlView.setVisible(false);
-        // TO DO
+
+        TeXFormula formula = new TeXFormula(content);
+        BufferedImage bufferedImage = (BufferedImage) formula.createBufferedImage(TeXFormula.SERIF, 20, java.awt.Color.BLACK, null);
+        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+
+        LatexView.setImage(image);
         questionQcmLabel.setVisible(false);
         btnChange.setText("Verso");
         reponseTt.setVisible(false);
         reponsesList.setVisible(false);
+        LatexView.setVisible(true);
     }
 
     /**
@@ -205,6 +218,7 @@ public class CarteEtudeVueController{
         qrText.setVisible(false);
         questionQcmLabel.setVisible(true);
         htmlView.setVisible(false);
+        LatexView.setVisible(false);
         btnChange.setText("Réponse");
         reponsesList.setVisible(true);
         reponseTt.setVisible(false);
@@ -224,6 +238,7 @@ public class CarteEtudeVueController{
         questionQcmLabel.setVisible(false);
         btnChange.setText("Verso");
         htmlView.setVisible(false);
+        LatexView.setVisible(false);
         reponsesList.setVisible(false);
         reponseTt.setVisible(true);
         String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
@@ -238,6 +253,7 @@ public class CarteEtudeVueController{
         qrText.setVisible(true);
         questionQcmLabel.setVisible(true);
         htmlView.setVisible(false);
+        LatexView.setVisible(false);
         reponseTt.setVisible(false);
         btnChange.setText("Question");
         reponsesList.setVisible(false);
@@ -251,6 +267,7 @@ public class CarteEtudeVueController{
         btnValidAnswer.setVisible(false);
         qrText.setVisible(true);
         htmlView.setVisible(false);
+        LatexView.setVisible(false);
         reponseTt.setVisible(false);
         questionQcmLabel.setVisible(false);
         btnChange.setText("Question");

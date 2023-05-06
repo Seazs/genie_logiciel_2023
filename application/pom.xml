@@ -72,6 +72,13 @@
             <artifactId>jlatexmath</artifactId>
             <version>1.0.7</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>16</version>
+        </dependency>
+
         <!-- FreeTTS -->
         <dependency>
             <groupId>com.sun.speech</groupId>
