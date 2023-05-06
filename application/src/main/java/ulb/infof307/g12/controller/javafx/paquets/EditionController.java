@@ -4,13 +4,10 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
+import ulb.infof307.g12.model.*;
 import ulb.infof307.g12.view.dto.CardDTO;
 import ulb.infof307.g12.view.listeners.EditionVueListener;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
-import ulb.infof307.g12.model.Carte;
-import ulb.infof307.g12.model.CarteQcm;
-import ulb.infof307.g12.model.CarteTt;
-import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.paquets.EditionVueController;
 
 import java.io.IOException;
@@ -107,6 +104,21 @@ public class EditionController extends BaseController implements EditionVueListe
         int id = paquet.getCartes().size() + 1 ;
         try {
             CarteTt carte = new CarteTt(id, recto, verso) ;
+            paquet.addCard(carte);
+        }catch (IllegalArgumentException e){
+            MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posséder un recto et un verso !");
+        }
+    }
+    /**
+     * Créer une nouvelle carte Speciale et l'ajoute au paquet qui est modifié
+     * @param recto recto
+     * @param verso verso
+     * @param lang langue de la carte
+     */
+    public void addCardSpecial(String recto, String verso,String lang) {
+        int id = paquet.getCartes().size() + 1 ;
+        try {
+            CarteSpec carte = new CarteSpec(id, recto, verso,lang) ;
             paquet.addCard(carte);
         }catch (IllegalArgumentException e){
             MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posséder un recto et un verso !");

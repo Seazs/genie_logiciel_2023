@@ -68,8 +68,7 @@ public class CarteEtudeVueController{
         String type = listener.getCartesEtude().get(indexCarte).getType();
         switch (type) {
             case "Simple" -> changeSideSimple();
-            case "QCM" -> changeSideQCM();
-            case "TT" -> changeSideTT();
+            case "QCM", "TT" -> changeSideTTorQcm();
             case "Spec" -> changeSideSpec();
         }
     }
@@ -94,59 +93,37 @@ public class CarteEtudeVueController{
         String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
         String lang = infos[3];
         if (side == 0){
-            if (lang.equals("html")) showHTML(infos[2]);
-            else if (lang.equals("latex")) showLatex(infos[2]);
+            if (lang.equals("html")) showHTML(infos[1]);
+            else if (lang.equals("latex")) showLatex(infos[1]);
             btnChange.setText("Verso");
             side = 1;
         }
         else{
-            if (lang.equals("html")) showHTML(infos[1]);
+            if (lang.equals("html")) showHTML(infos[2]);
             else if (lang.equals("latex")) showLatex(infos[2]);
             btnChange.setText("Recto");
             side = 0;
         }
     }
     /**
-     * Change le côté de la carte Texte à trou
+     * Change le côté de la carte Texte à trou et QCM
      */
-    private void changeSideTT() {
-        String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
+    private void changeSideTTorQcm() {
+
         if (side == 0){
-            showTTFront();
-            qrText.setText(infos[0]+"___"+infos[1]);
-            btnChange.setText("Réponse");
-            reponseTt.clear();
+            switch (listener.getCartesEtude().get(indexCarte).getType()) {
+                case "QCM" -> showQCMBack();
+                case "TT" -> showTTBack();
+            }
             side = 1;
         }
         else{
-            showTTBack();
-            qrText.setText(infos[2]); // affiche la bonne réponse
-            btnChange.setText("Question");
+            switch (listener.getCartesEtude().get(indexCarte).getType()) {
+                case "QCM" -> showQCMFront();
+                case "TT" -> showTTFront();
+            }
             side = 0;
         }
-    }
-
-    /**
-     * Change le côté de la carte QCM
-     */
-    private void changeSideQCM() {
-        String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
-        if (side == 0){
-            showQCMFront();
-            questionQcmLabel.setText(infos[0]);
-            reponsesList.getItems().clear();
-            reponsesList.getItems().addAll(infos[1], infos[2], infos[3]);
-            btnChange.setText("Réponse");
-            side = 1;
-        }
-        else{
-            showQCMBack();
-            qrText.setText(infos[4]); // affiche la bonne réponse
-            btnChange.setText("Question");
-            side = 0;
-        }
-
-
     }
 
     /**
@@ -211,7 +188,7 @@ public class CarteEtudeVueController{
         htmlView.setVisible(false);
 
         TeXFormula formula = new TeXFormula(content);
-        BufferedImage bufferedImage = (BufferedImage) formula.createBufferedImage(TeXFormula.SERIF, 20, java.awt.Color.BLACK, null);
+        BufferedImage bufferedImage = (BufferedImage) formula.createBufferedImage(TeXFormula.SERIF, 30, java.awt.Color.BLACK, null);
         Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 
         LatexView.setImage(image);
@@ -304,16 +281,22 @@ public class CarteEtudeVueController{
     /**
      * Fonction qui verifie si la réponse est bonne pour les cartes Qcm
      */
-    public void verfyAnswerQcm(){
+    public void verfyAnswerQcm() throws NullPointerException{
         String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
-        if(reponsesList.getSelectionModel().getSelectedItem().equals(infos[4])){
-            answer.setText("T'es un bg en sah");
-            veryGood();
+        try{
+            if(reponsesList.getSelectionModel().getSelectedItem().equals(infos[4])){
+                answer.setText("T'es un bg en sah");
+                veryGood();
+            }
+            else{
+                answer.setText("Tu pues ta grand mère");
+                veryBad();
+            }
         }
-        else{
-            answer.setText("Tu pues ta grand mère");
-            veryBad();
+        catch (NullPointerException e){
+            MenuPrincipal.getINSTANCE().showErrorPopup("Il faut sélectionner une solution !");
         }
+
     }
 
     /**
@@ -326,7 +309,7 @@ public class CarteEtudeVueController{
             listener.tresBon(indexCarte);
         }
         else{
-            answer.setText("Tu pues ta grand mère");
+            answer.setText("Tu pues ta grand mère !");
             listener.tresMauvais(indexCarte);
         }
     }
@@ -338,6 +321,7 @@ public class CarteEtudeVueController{
         indexCarte++;
         indexCarte = indexRandom();
         showGoodTypeCard(listener.getCartesEtude().get(indexCarte).getType());
+        side=0;
     }
 
     /**
@@ -347,6 +331,7 @@ public class CarteEtudeVueController{
         if (indexCarte >= 0){
             indexCarte=indexRandom();
             showGoodTypeCard(listener.getCartesEtude().get(indexCarte).getType());
+            side=0;
         }
 
     }
@@ -430,11 +415,19 @@ public class CarteEtudeVueController{
      * @param actionEvent  evenement
      */
     public void btnReadText(ActionEvent actionEvent) {
+        String info[]=listener.getCartesEtude().get(indexCarte).getCarteInfo();
         if (side == 0){
-            this.listener.parlerTexte(listener.getCartesEtude().get(indexCarte).getRecto());
+            switch (listener.getCartesEtude().get(indexCarte).getType()) {
+                case "Simple" -> listener.parlerTexte(info[1]);
+                case "QCM" -> listener.parlerTexte(info[0]+info[1]+info[2]+info[3]);
+                case "TT" -> listener.parlerTexte(info[0]+info[1]);
+            }
         }
         else {
-            this.listener.parlerTexte(listener.getCartesEtude().get(indexCarte).getVerso());
+            switch (listener.getCartesEtude().get(indexCarte).getType()) {
+                case "Simple", "TT" -> listener.parlerTexte(info[2]);
+                case "QCM" -> listener.parlerTexte(info[4]);
+            }
         }
     }
 }

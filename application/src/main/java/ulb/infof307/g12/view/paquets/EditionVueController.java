@@ -3,19 +3,22 @@ package ulb.infof307.g12.view.paquets;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.web.WebView;
 import lombok.Setter;
+import org.scilab.forge.jlatexmath.TeXFormula;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.view.dto.CardDTO;
 import ulb.infof307.g12.view.listeners.EditionVueListener;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -36,6 +39,8 @@ public class EditionVueController{
     private TableView<CardDTO> tableQR;
     @FXML
     private ChoiceBox<String> typechoix;
+    @FXML
+    private TextArea SpecialquestionField,SpecialreponseField;
     @Setter
     private EditionVueListener listener;
 
@@ -81,6 +86,7 @@ public class EditionVueController{
             case "QCM" -> showQcm();
             case "Simple" -> showQR();
             case "Texte à trous" -> showTt();
+            case "Latex","HTML"-> showSpecial();
             default -> {
             }
         }
@@ -90,6 +96,7 @@ public class EditionVueController{
      * Fonction qui affiche les éléments pour l'édition d'une carte QCM
      */
     void showQcm(){
+        tableQR.setVisible(true);
         rep1.setVisible(true);
         rep2.setVisible(true);
         rep3.setVisible(true);
@@ -98,12 +105,15 @@ public class EditionVueController{
         reponsettTextField.setVisible(false);
         questionTextField.promptTextProperty().setValue("Question");
         reponseTextField.promptTextProperty().setValue("Réponse");
+        SpecialquestionField.setVisible(false);
+        SpecialreponseField.setVisible(false);
     }
 
     /**
      * Fonction qui affiche les éléments pour l'édition d'une carte QR
      */
     void showQR(){
+        tableQR.setVisible(true);
         rep1.setVisible(false);
         rep2.setVisible(false);
         rep3.setVisible(false);
@@ -112,12 +122,15 @@ public class EditionVueController{
         reponseTextField.promptTextProperty().setValue("Réponse");
         questionTextField.setVisible(true);
         reponsettTextField.setVisible(false);
+        SpecialquestionField.setVisible(false);
+        SpecialreponseField.setVisible(false);
     }
 
     /**
      * Fonction qui affiche les éléments pour l'édition d'une carte Texte à trous
      */
     void showTt(){
+        tableQR.setVisible(true);
         rep1.setVisible(false);
         rep2.setVisible(false);
         rep3.setVisible(false);
@@ -126,6 +139,24 @@ public class EditionVueController{
         questionTextField.setVisible(true);
         questionTextField.promptTextProperty().setValue("Début de phrase");
         reponsettTextField.setVisible(true);
+        SpecialquestionField.setVisible(false);
+        SpecialreponseField.setVisible(false);
+    }
+    /**
+     * Fonction qui affiche les éléments pour l'édition d'une carte Special
+     */
+    void showSpecial(){
+        rep1.setVisible(false);
+        rep2.setVisible(false);
+        rep3.setVisible(false);
+        reponseTextField.setVisible(false);
+        questionTextField.setVisible(false);
+        reponsettTextField.setVisible(false);
+        tableQR.setVisible(false);
+        SpecialquestionField.setVisible(true);
+        SpecialreponseField.setVisible(true);
+        SpecialquestionField.clear();
+        SpecialreponseField.clear();
     }
 
     /**
@@ -148,7 +179,12 @@ public class EditionVueController{
         } else if (Objects.equals(typechoix.getValue(), "Texte à trous")) {
             addCardTT();
         }
-
+        else if (Objects.equals(typechoix.getValue(), "Latex")) {
+            addCardSpecial("latex");
+        }
+        else if (Objects.equals(typechoix.getValue(), "HTML")) {
+            addCardSpecial("html");
+        }
     }
 
     /**
@@ -209,6 +245,17 @@ public class EditionVueController{
         reponseTextField.clear();
         reloadTable();
     }
+    /**
+     * Ajout d'une carte question réponse dans le paquet
+     */
+    private void addCardSpecial(String lang) {
+        String recto = SpecialquestionField.getText();
+        String verso = SpecialreponseField.getText();
+        listener.addCardSpecial(recto, verso,lang);
+        questionTextField.clear();
+        reponseTextField.clear();
+        reloadTable();
+    }
 
     /**
      * Recharger la table de cartes du parquet
@@ -238,7 +285,7 @@ public class EditionVueController{
      * Mets les options possibles dans la choicebox
      */
     void setChoicebox() {
-        typechoix.getItems().addAll("Simple", "QCM", "Texte à trous");
+        typechoix.getItems().addAll("Simple", "QCM", "Texte à trous","Latex","HTML");
         typechoix.setValue("Simple");
         typechoix.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             // Appel de la fonction switchtype avec la nouvelle valeur sélectionnée en paramètre

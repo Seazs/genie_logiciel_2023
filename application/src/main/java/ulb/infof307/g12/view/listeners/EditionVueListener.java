@@ -38,6 +38,15 @@ public interface EditionVueListener {
 
 
     /**
+     * Ajout de cartes
+     * @param recto recto de la carte
+     * @param verso verso de la carte
+     * @param lang langue de la carte
+     */
+    void addCardSpecial(String recto, String verso,String lang);
+
+
+    /**
      * @param begin begin
      * @param end end
      * @param gap gap
