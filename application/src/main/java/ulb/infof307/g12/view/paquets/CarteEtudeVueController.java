@@ -6,10 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.web.WebView;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.CarteEtudeListener;
 
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CarteEtudeVueController{
@@ -23,6 +25,8 @@ public class CarteEtudeVueController{
     private ListView<String> reponsesList;
     @FXML
     private TextField reponseTt;
+    @FXML
+    private WebView htmlView;
     private int indexCarte = 0;
     private int side = 0; // 0 = recto, 1 = verso
 
@@ -59,9 +63,30 @@ public class CarteEtudeVueController{
             case "Simple" -> changeSideSimple();
             case "QCM" -> changeSideQCM();
             case "TT" -> changeSideTT();
+            case "Spec" -> changeSideSpec();
         }
     }
 
+
+    /**
+     * Change le côté de la carte Spéciale
+     */
+    private void changeSideSpec(){
+        String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
+        String lang = infos[3];
+        if (side == 0){
+            if (lang.equals("html")) showHTML(infos[2]);
+            else if (lang.equals("latex")) showLatex(infos[2]);
+            btnChange.setText("Verso");
+            side = 1;
+        }
+        else{
+            if (lang.equals("html")) showHTML(infos[1]);
+            else if (lang.equals("latex")) showLatex(infos[2]);
+            btnChange.setText("Recto");
+            side = 0;
+        }
+    }
     /**
      * Change le côté de la carte Texte à trou
      */
@@ -130,12 +155,46 @@ public class CarteEtudeVueController{
         btnValidAnswer.setVisible(false);
         qrText.setVisible(true);
         questionQcmLabel.setVisible(false);
+        htmlView.setVisible(false);
         btnChange.setText("Verso");
         reponseTt.setVisible(false);
         reponsesList.setVisible(false);
         qrText.setText(listener.getCartesEtude().get(indexCarte).getRecto());
     }
 
+
+    /**
+     * Show the HTML face of the card
+     * @param content verso of the card
+     */
+    private void showHTML(String content) {
+        btnChange.setVisible(true);
+        btnValidAnswer.setVisible(false);
+        qrText.setVisible(false);
+        htmlView.setVisible(true);
+        htmlView.getEngine().loadContent(content);
+        questionQcmLabel.setVisible(false);
+        btnChange.setText("Verso");
+        reponseTt.setVisible(false);
+        reponsesList.setVisible(false);
+    }
+
+    /**
+     * Show the Latex face of the card
+     * @param content verso of the card
+     */
+    private void showLatex(String content){
+        btnChange.setVisible(true);
+        btnValidAnswer.setVisible(false);
+        qrText.setVisible(false);
+        htmlView.setVisible(false);
+        // AJOUTER UN ELEMENT JAVAFX POUR AFFICHER LE Latex
+
+        questionQcmLabel.setVisible(false);
+        btnChange.setText("Verso");
+        reponseTt.setVisible(false);
+        reponsesList.setVisible(false);
+    }
 
     /**
      * Fonction qui affiche les éléments d'étude de carte de type QCM
@@ -145,6 +204,7 @@ public class CarteEtudeVueController{
         btnValidAnswer.setVisible(true);
         qrText.setVisible(false);
         questionQcmLabel.setVisible(true);
+        htmlView.setVisible(false);
         btnChange.setText("Réponse");
         reponsesList.setVisible(true);
         reponseTt.setVisible(false);
@@ -163,6 +223,7 @@ public class CarteEtudeVueController{
         qrText.setVisible(true);
         questionQcmLabel.setVisible(false);
         btnChange.setText("Verso");
+        htmlView.setVisible(false);
         reponsesList.setVisible(false);
         reponseTt.setVisible(true);
         String[] infos = listener.getCartesEtude().get(indexCarte).getCarteInfo();
@@ -176,6 +237,7 @@ public class CarteEtudeVueController{
         btnValidAnswer.setVisible(false);
         qrText.setVisible(true);
         questionQcmLabel.setVisible(true);
+        htmlView.setVisible(false);
         reponseTt.setVisible(false);
         btnChange.setText("Question");
         reponsesList.setVisible(false);
@@ -188,6 +250,7 @@ public class CarteEtudeVueController{
         btnChange.setVisible(true);
         btnValidAnswer.setVisible(false);
         qrText.setVisible(true);
+        htmlView.setVisible(false);
         reponseTt.setVisible(false);
         questionQcmLabel.setVisible(false);
         btnChange.setText("Question");

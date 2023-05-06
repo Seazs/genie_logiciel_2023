@@ -8,6 +8,7 @@ module application {
     requires freetts;
     requires com.fasterxml.jackson.databind;
     requires json;
+    requires javafx.web;
 
     opens ulb.infof307.g12.controller.javafx.connexion to javafx.fxml;
     exports ulb.infof307.g12.controller.javafx.connexion;

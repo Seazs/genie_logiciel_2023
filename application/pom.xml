@@ -50,6 +50,12 @@
             <version>0.4.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>16</version>
+        </dependency>
+
         <!-- FreeTTS -->
         <dependency>
             <groupId>com.sun.speech</groupId>
