@@ -10,8 +10,9 @@ import javafx.scene.web.WebView;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.listeners.CarteEtudeListener;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
-import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CarteEtudeVueController{
@@ -188,8 +189,7 @@ public class CarteEtudeVueController{
         btnValidAnswer.setVisible(false);
         qrText.setVisible(false);
         htmlView.setVisible(false);
-        // AJOUTER UN ELEMENT JAVAFX POUR AFFICHER LE Latex
-
+        // TO DO
         questionQcmLabel.setVisible(false);
         btnChange.setText("Verso");
         reponseTt.setVisible(false);

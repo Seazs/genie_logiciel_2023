@@ -9,6 +9,8 @@ module application {
     requires com.fasterxml.jackson.databind;
     requires json;
     requires javafx.web;
+    requires org.apache.commons.lang3;
+    requires org.apache.commons.io;
 
     opens ulb.infof307.g12.controller.javafx.connexion to javafx.fxml;
     exports ulb.infof307.g12.controller.javafx.connexion;
