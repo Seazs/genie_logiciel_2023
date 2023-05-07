@@ -39,11 +39,16 @@ public class ProfilVueController  {
         dialog.setTitle("Change password");
         dialog.setHeaderText("Enter your new password:");
         Optional<String> newPassword = dialog.showAndWait();
+        try {
+            String result = listener.changePassword(newPassword);
+            mdpLabel.setText("Mot de passe: " + newPassword.get());
+            messageLabelProfil.setText(result);
+        }catch (RuntimeException e){
+            MenuPrincipal.getINSTANCE().showErrorPopup("veuillez entrer un mot de passe");
+        }
 
-        String result = listener.changePassword(newPassword);
-        mdpLabel.setText("Mot de passe: " + newPassword.get());
 
-        messageLabelProfil.setText(result);
+
 
     }
 

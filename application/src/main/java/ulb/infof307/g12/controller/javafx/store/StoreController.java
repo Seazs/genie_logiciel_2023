@@ -58,12 +58,13 @@ public class StoreController extends BaseController implements StoreVueListener 
      * @param paquet ajoute un paquet dans la liste des paquets du store
      */
     public void uploadPaquet(PaquetDTO paquet) throws IOException {
-        Optional<Paquet> paquetOptional = paquet.getPaquet();
-        if(paquetOptional.isEmpty()) {
-            //TODO: Erreur
-            return;
+        try {
+            Optional<Paquet> paquetOptional = paquet.getPaquet();
+            MenuPrincipal.getINSTANCE().getServer().postPaquet(paquetOptional.get());
+        }catch (NullPointerException e){
+            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur, veuillez selectionner un paquet à uploader");
         }
-        MenuPrincipal.getINSTANCE().getServer().postPaquet(paquetOptional.get());
+
     }
 
     /**

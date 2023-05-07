@@ -123,7 +123,7 @@ public class GestionnairePaquet {
      * @param paquet
      */
     public void remove(Utilisateur user, Paquet paquet) {
-        File f = new File("./src/main/resources/stockage/"+user.getPseudo()+"/"+paquet.getNom());
+        File f = new File(Main.getFolderPath()+user.getPseudo()+"/"+paquet.getNom());
         try{
             if(f.exists()){
                 f.delete();
@@ -159,6 +159,8 @@ public class GestionnairePaquet {
             paquet.getCategories().get(i);
             save = save + paquet.getCategories().get(i)+ "#";
         }
+        if (save == "")
+            save = "#";
         return save;
     }
 }

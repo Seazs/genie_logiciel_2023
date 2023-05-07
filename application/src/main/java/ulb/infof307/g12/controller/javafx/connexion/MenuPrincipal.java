@@ -165,6 +165,7 @@ public class MenuPrincipal extends Application {
      * Retour au menu Paquet depuis l'édition de ce dernier
      */
     public void returnFromEditionToMenuPaquet() {
+
         changeView(editionController,menuPaquetController);
     }
 

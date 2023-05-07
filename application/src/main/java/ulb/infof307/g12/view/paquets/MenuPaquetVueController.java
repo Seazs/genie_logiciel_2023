@@ -112,6 +112,8 @@ public class MenuPaquetVueController implements Initializable {
         if (paquet != null) {
             listener.supprimerPaquet(paquet);
             paquetListView.getItems().remove(paquet);
+        }else {
+            MenuPrincipal.getINSTANCE().showErrorPopup("Veuillez sélectionner un paquet");
         }
     }
 
@@ -157,4 +159,5 @@ public class MenuPaquetVueController implements Initializable {
             listener.CarteEtude(paquet);
         }
     }
+
 }

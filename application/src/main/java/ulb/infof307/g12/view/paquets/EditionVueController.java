@@ -181,9 +181,13 @@ public class EditionVueController{
         }
         else if (Objects.equals(typechoix.getValue(), "Latex")) {
             addCardSpecial("latex");
+            typechoix.setValue("Simple");
+            showQR();
         }
         else if (Objects.equals(typechoix.getValue(), "HTML")) {
             addCardSpecial("html");
+            typechoix.setValue("Simple");
+            showQR();
         }
     }
 

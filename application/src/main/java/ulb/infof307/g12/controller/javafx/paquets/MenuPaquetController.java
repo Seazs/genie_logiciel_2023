@@ -4,6 +4,8 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
+import ulb.infof307.g12.controller.storage.GestionnairePaquet;
+import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 import ulb.infof307.g12.view.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
@@ -22,6 +24,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     @Getter
     private final Utilisateur user;
 
+    private final GestionnairePaquet gestionnairePaquet = new GestionnairePaquet();
     private List<Paquet> saveListPaquet;
 
     /**
@@ -58,12 +61,13 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     @Override
     public void supprimerPaquet(PaquetDTO paquetDTO) {
         Optional<Paquet> paquet = paquetDTO.getPaquet();
+        GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
         if(paquet.isEmpty()) {
-            //TODO: Erreur
+            MenuPrincipal.getINSTANCE().showErrorPopup("Veuillez sélectionner un paquet à supprimer");
             return;
         }
-
         user.removePaquet(paquet.get().getNom());
+        gestionnairePaquet.remove(MenuPrincipal.getINSTANCE().getUserPrincipale(), paquet.get());
     }
 
     /**
@@ -111,22 +115,26 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     @Override
     public void CarteEtude(PaquetDTO paquetDTO) {
         MenuPrincipal instance = MenuPrincipal.getINSTANCE();
-        Optional<Paquet> paquet = paquetDTO.getPaquet();
-        if (paquet.isEmpty()) {
-            //Attention, le showErrorPopup ne fontionne pas, à corriger pour être plus propre.
-            instance.showErrorPopup("Vous devez sélectionner un paquet à jouer !");
-            throw new NullPointerException("Vous devez sélectionner un paquet à jouer !");
+
+        try {
+            Optional<Paquet> paquet = paquetDTO.getPaquet();
+            Paquet paquetInstance = paquet.get();
+            if (paquetInstance.cartes.size() == 0){
+                //Attention, le showErrorPopup ne fontionne pas, à corriger pour être plus propre.
+                instance.showErrorPopup("Vous devez creer des cartes avant de pouvoir les étudier !");
+
+            }else{
+                instance.showCarteEtude(this,paquetInstance);
+            }
+        }catch (NullPointerException e){
+            instance.showErrorPopup("Vous devez sélectionner un paquet à étudier !");
         }
 
-        Paquet paquetInstance = paquet.get();
 
-        if (paquetInstance.cartes.size() == 0){
-            //Attention, le showErrorPopup ne fontionne pas, à corriger pour être plus propre.
-            instance.showErrorPopup("Vous devez creer des cartes avant de pouvoir les étudier !");
-            throw new IllegalArgumentException("Vous devez creer des cartes avant de pouvoir les étudier !");
-        }
 
-        instance.showCarteEtude(this,paquetInstance);
+
+
+
 
     }
 
