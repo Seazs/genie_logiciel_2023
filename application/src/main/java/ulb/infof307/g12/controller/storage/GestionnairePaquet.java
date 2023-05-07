@@ -1,18 +1,33 @@
 package ulb.infof307.g12.controller.storage;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ulb.infof307.g12.Main;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.model.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import ulb.infof307.g12.model.Paquet;
+import ulb.infof307.g12.model.Utilisateur;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
-
 public class GestionnairePaquet {
+    private final String folderStockagePath;
 
+    /**
+     * Constructeur du gestionnaire de paquet
+     */
+    public GestionnairePaquet() {
+        folderStockagePath = Main.getFolderPath();
+    }
+
+    /**
+     * Destiné aux tests
+     * @param folderPath chemin du dossier de stockage
+     */
+    public GestionnairePaquet(String folderPath) {
+        folderStockagePath = folderPath+"/";
+    }
     /**
      * Sauvegarde un paquet de cartes sous forme de fichier Json dans le dossier de l'utilisateur.
      * @param user utilisateur
@@ -23,7 +38,7 @@ public class GestionnairePaquet {
         for (Paquet paquet : listPaquet){
             ObjectMapper objectMapper = new ObjectMapper();
             try {
-                objectMapper.writeValue(new File(Main.getFolderPath()+user.getPseudo(),paquet.getNom()+".json"), paquet);
+                objectMapper.writeValue(new File(folderStockagePath+user.getPseudo(),paquet.getNom()+".json"), paquet);
             } catch (IOException e) {
                 MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la sauvegarde du paquet "+paquet.getNom());
             }
@@ -32,13 +47,13 @@ public class GestionnairePaquet {
     }
 
     /**
-     * Charge la liste des paquets correspondant à l'utilisateur en mémoire
-     * @param user
-     * @return
+     * Charge la liste des paquets correspondant à l'utilisateur en mémoire.
+     * @param user utilisateur dont on veut les paquets
+     * @return liste des paquets de l'utilisateur
      */
     public List<Paquet> load(Utilisateur user) {
 
-        File userfolder = new File(Main.getFolderPath()+user.getPseudo());
+        File userfolder = new File(folderStockagePath+user.getPseudo());
         File[] listOfFilePaquet = userfolder.listFiles(); //Enumère les fichiers dans le dossier de l'utilisateur
         List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
 
@@ -63,7 +78,7 @@ public class GestionnairePaquet {
      * @param paquet
      */
     public void remove(Utilisateur user, Paquet paquet) {
-        File f = new File(Main.getFolderPath()+user.getPseudo()+"/"+paquet.getNom());
+        File f = new File(folderStockagePath+user.getPseudo()+"/"+paquet.getNom());
         try{
             if(f.exists()){
                 f.delete();

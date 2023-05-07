@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import ulb.infof307.g12.Main;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Carte;
@@ -26,23 +27,37 @@ class GestionnairePaquetTest {
                 - fichier <paquet1>
                 - fichier <paquet2>
          */
-    @TempDir
     private static File dossierTemporaire;
+    private static File fichierUtilisateur;
 
     @BeforeAll
     public static void creeDossierTemporaire(){
-        try {
-            dossierTemporaire = Files.createTempDirectory("Paquets").toFile();
-            System.out.println(dossierTemporaire.getPath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        dossierTemporaire = new File("./stockageTest");
+        dossierTemporaire.mkdir();
+        fichierUtilisateur = new File(dossierTemporaire, "stockUser.txt");
     }
-
     @AfterAll
     public static void supprimeDossierTemporaire(){
-        dossierTemporaire.delete();
+        deleteFolder(dossierTemporaire);
     }
+
+    /**
+     * Supprime de manière récurssive un dossier et son contenu
+     * @param folder folder to delete
+     */
+    private static void deleteFolder(File folder) {
+            File[] files = folder.listFiles();
+            if(files!=null) {
+                for (File f: files) {
+                    if(f.isDirectory()) {
+                        deleteFolder(f);
+                    } else {
+                        f.delete();
+                    }
+                }
+            }
+            folder.delete();
+        }
 
     @Test
     public void testSauvegardePaquet() throws IOException{
@@ -61,12 +76,12 @@ class GestionnairePaquetTest {
         paquet2.addCard(carte5);
         utilisateur1.addPaquet(paquet1);
         utilisateur1.addPaquet(paquet2);
-        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
+        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur(fichierUtilisateur);
         gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
-        GestionnairePaquet gestPaquet = new GestionnairePaquet();
+        GestionnairePaquet gestPaquet = new GestionnairePaquet(dossierTemporaire.getPath());
         gestPaquet.save(utilisateur1);
         //Test d'assertion
-        File f = new File("./src/main/resources/stockage/"+utilisateur1.getPseudo()+"/"+"Maths");
+        File f = new File(dossierTemporaire.getPath()+utilisateur1.getPseudo()+"/Maths.json");
         assertTrue(f.exists());
 
     }
@@ -92,7 +107,7 @@ class GestionnairePaquetTest {
         gestPaquet.save(utilisateur1);
         //Test de suppression
         gestPaquet.remove(utilisateur1,paquet1);
-        File f = new File("./src/main/resources/stockage/"+utilisateur1.getPseudo()+"/"+paquet1.getNom());
+        File f = new File("src/main/resources/stockage/"+utilisateur1.getPseudo()+"/"+paquet1.getNom());
         assertFalse(f.exists());
     }
 

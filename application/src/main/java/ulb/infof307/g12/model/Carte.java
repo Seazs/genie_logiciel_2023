@@ -9,12 +9,12 @@ import ulb.infof307.g12.view.dto.CardDTO;
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
         property = "type"
-)
+) //permet de faire la distinction entre les différents types de cartes lors de la désérialisation
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CarteQcm.class, name = "QCM"),
         @JsonSubTypes.Type(value = CarteSpec.class, name = "Spec"),
         @JsonSubTypes.Type(value = CarteTt.class, name = "TT"),
-})
+}) //Montre la structure des classes filles et comment les reconnaitre
 public class
 Carte {
     /**
@@ -33,10 +33,12 @@ Carte {
     @Setter
     @JsonProperty("recto")
     protected String recto;
+
     @Getter
     @Setter
     @JsonProperty("verso")
     protected String verso;
+
     @Getter
     @JsonProperty("type")
     protected String type;
@@ -67,6 +69,14 @@ Carte {
         this.type="Carte";
     }
 
+    /**
+     * Constructeur pour la deserialisation
+     * @param connaissance connaissance
+     * @param id id de la carte
+     * @param recto recto
+     * @param verso verso
+     * @param type type de la carte (voir héritage)
+     */
     @JsonCreator
     public Carte(@JsonProperty("connaissance") int connaissance, @JsonProperty("id") int id, @JsonProperty("recto") String recto, @JsonProperty("verso") String verso, @JsonProperty("type") String type){
         this.connaissance = connaissance;

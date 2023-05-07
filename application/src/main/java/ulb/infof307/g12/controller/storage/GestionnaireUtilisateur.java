@@ -19,12 +19,11 @@ public class GestionnaireUtilisateur {
 
     /**
      * Constructeur de GestionnaireUtilisateur, en paramètre, c'est le fichier dont on doit charger les utilisateurs
-     * @param fichier
+     * @param fichier fichier contenant les utilisateurs
      * @throws FileNotFoundException
      */
     public GestionnaireUtilisateur(File fichier) throws FileNotFoundException {
         userdatabase = fichier;
-        load();
         status = STATUS.OK;
     }
 
@@ -143,8 +142,8 @@ public class GestionnaireUtilisateur {
 
     /**
      * Permet de créer un nouveau compte d'utilisateur
-     * @param username
-     * @param password
+     * @param username pseudo de l'utilisateur
+     * @param password mot de passe de l'utilisateur
      * @return
      * @throws IOException
      */
@@ -170,8 +169,8 @@ public class GestionnaireUtilisateur {
 
     /**
      * Vérifie si le pseudo et le mot de passe sont valides
-     * @param pseudo
-     * @param mdp
+     * @param pseudo pseudo de l'utilisateur
+     * @param mdp mot de passe de l'utilisateur
      * @return
      */
     private boolean estUtilisateurValide(String pseudo, String mdp) {
@@ -190,7 +189,7 @@ public class GestionnaireUtilisateur {
 
     /**
      * Vérifie que le string est valide ou non
-     * @param string
+     * @param string string à vérifier
      * @return True si valide
      */
     private boolean estStringValide(String string){
@@ -201,7 +200,7 @@ public class GestionnaireUtilisateur {
 
     /**
      * Trouver le nom d'utilisateur dans la liste des utilisateurs
-     * @param nomUtilisateur
+     * @param nomUtilisateur nom de l'utilisateur
      * @return l'utilisateur ou null s'il n'est pas trouvé
      */
     public Utilisateur trouverUtilisateur(String nomUtilisateur) {
@@ -250,7 +249,7 @@ public class GestionnaireUtilisateur {
      * @param user
      */
     public void removeUser(Utilisateur user) {
-        File f = new File("./src/main/resources/stockage/" + user.getPseudo());
+        File f = new File(Main.getFolderPath() + user.getPseudo());
         try {
             if (f.exists()) {
                 int index=0;

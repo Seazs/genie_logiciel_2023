@@ -31,6 +31,7 @@ public class CarteSpec extends Carte{
         this.language = lang;
         this.type="Spec";
     }
+
     @JsonCreator
     public CarteSpec(@JsonProperty("id") int id,@JsonProperty("recto") String recto,@JsonProperty("verso") String verso,@JsonProperty("language") String lang,@JsonProperty("connaissance") int connaissance) {
         super(id, recto, verso);

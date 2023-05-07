@@ -43,7 +43,7 @@ public class Paquet {
     }
 
     /**
-     * Crée un paquet avec jackson
+     * Constructeur d'un paquet avec jackson
      * @param nom nom du paquet
      * @param categories catégories du paquet
      * @param cartes cartes du paquet

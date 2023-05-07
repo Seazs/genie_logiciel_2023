@@ -13,12 +13,15 @@ public class CarteQcm extends Carte {
     @Getter
     @JsonProperty("question")
     private String question;
+
     @Getter
     @JsonProperty("answer")
     private String answer = this.getVerso();
+
     @Getter
     @JsonProperty("propositions")
     private String[] propositions;
+
     public CarteQcm(int id, String recto, String verso) {
         super(id, recto, verso);
         this.type="QCM";
