@@ -7,7 +7,9 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 
 import java.io.IOException;
 
@@ -70,6 +72,9 @@ public class Server {
                 return STATUS.WRONG_PASSWORD;
         }catch (HttpClientErrorException | NullPointerException e){
             return STATUS.USERNAME_DOES_NOT_EXIST;
+        }catch (ResourceAccessException e){
+            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la connexion au serveur");
+            return STATUS.SERVER_ERROR;
         }
     }
 
@@ -85,14 +90,23 @@ public class Server {
         headers.setContentType(MediaType.TEXT_PLAIN);
 
         HttpEntity<String> entity = new HttpEntity<>(username+"#"+password, headers);
+        try {
+            ResponseEntity<String> response = restTemplate.postForEntity(url+"user/register", entity, String.class);
+            if (response.getStatusCode()== HttpStatusCode.valueOf(200)){
+                return response.getBody();
+            }
+            else{
+                MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la création de l'utilisateur");
+                return "error";
 
-        ResponseEntity<String> response = restTemplate.postForEntity(url+"user/register", entity, String.class);
-        if (response.getStatusCode()== HttpStatusCode.valueOf(200)){
-            return response.getBody();
+            }
+
+        }catch (HttpClientErrorException | ResourceAccessException e){
+            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la création de l'utilisateur");
+            return "Erreur lors de la création de l'utilisateur";
         }
-        else{
-            throw new IllegalArgumentException("Server error");
-        }
+
+
 
     }
 

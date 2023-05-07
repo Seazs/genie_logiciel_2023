@@ -96,11 +96,12 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      */
     @Override
     public void editerPaquet(PaquetDTO paquetDTO) {
-        Optional<Paquet> paquet = paquetDTO.getPaquet();
-        if(paquet.isEmpty()) {
-            // TODO: Erreur
+        try {
+            Optional<Paquet> paquet = paquetDTO.getPaquet();
+            MenuPrincipal.getINSTANCE().showMenuEdition(paquet.get());
+        }catch (NullPointerException e){
+            MenuPrincipal.getINSTANCE().showErrorPopup("Vous devez sélectionner un paquet à éditer !");
         }
-        MenuPrincipal.getINSTANCE().showMenuEdition(paquet.get());
     }
 
     /**

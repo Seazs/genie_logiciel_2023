@@ -23,7 +23,7 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      * @param gestionnaireUtilisateur gestionnaire d'utilisateur
      * @throws IOException exception
      */
-    public ConnexionMenuController(Stage stage,GestionnaireUtilisateur gestionnaireUtilisateur) throws IOException {
+    public ConnexionMenuController(Stage stage,GestionnaireUtilisateur gestionnaireUtilisateur) throws IOException{
         super(stage, ConnexionVueController.class.getResource("connexion-menu-view.fxml"),"Application Title");
         this.gestionnaireUtilisateur = gestionnaireUtilisateur;
 
