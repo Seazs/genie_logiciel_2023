@@ -50,6 +50,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     public PaquetDTO creerPaquet() {
         // Créer le paquet et l'ajouter à la liste de paquet de l'utilisateur
         Paquet nouveauPaquet = new Paquet("Nouveau Paquet") ;
+        //editerPaquet(nouveauPaquet.getDTO());
         user.addPaquet(nouveauPaquet);
         return nouveauPaquet.getDTO();
     }

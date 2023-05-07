@@ -45,7 +45,9 @@ public class CarteSpec extends Carte{
         String[] info = new String[4];
         info[0] = this.type;
         info[1] = this.recto;
+        info[1] = info[1].replaceAll("\n", "\\n");
         info[2] = this.verso;
+        info[2] = info[2].replaceAll("\n", "\\n");
         info[3] = this.language;
         return info;
     }

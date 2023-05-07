@@ -43,9 +43,14 @@ public class GestionnairePaquet {
         for(int i = 0; i < paquet.cartes.size() ; i++){ //Ecriture de toutes les cartes dans le fichier
             Carte carte = paquet.cartes.get(i);
             out.newLine();
-            out.write(carte.getType()+ "#"+ carte.getRecto() + "#" + carte.getVerso());
-            if(carte.getType()=="Spec"){
+            if (carte.getType()!= "Spec") {
+                out.write(carte.getType() + "#" + carte.getRecto() + "#" + carte.getVerso());
+            }
+            else if(carte.getType()=="Spec"){
                 CarteSpec cartespec=(CarteSpec)carte;
+                //String[] tab = cartespec.getCarteInfo();
+                out.write(cartespec.getCarteInfo()[0] + "#" + cartespec.getCarteInfo()[1] + "#" + cartespec.getCarteInfo()[2]);
+
                 out.write("#" + cartespec.getLanguage());
             }
             out.write("#" + carte.getConnaissance());
@@ -109,6 +114,8 @@ public class GestionnairePaquet {
                 newPaquet.addCard(bufferCarte);
             }
             else if(listdata[0].equals("Spec")){
+                listdata[1].replaceAll("\\n", "\n");
+                listdata[2].replaceAll("\\n", "\n");
                 CarteSpec bufferCarte = new CarteSpec(i, listdata[1], listdata[2],listdata[3]);
                 bufferCarte.setConnaissance(parseInt(listdata[4].strip()));
                 newPaquet.addCard(bufferCarte);
