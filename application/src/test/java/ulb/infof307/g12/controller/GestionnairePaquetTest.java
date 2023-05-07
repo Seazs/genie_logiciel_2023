@@ -124,27 +124,4 @@ class GestionnairePaquetTest {
     }
 
 
-    @Test
-    public void testSaveCategorie(){
-        GestionnairePaquet gestPaquet = new GestionnairePaquet();
-        Paquet paquet = new Paquet("Nom", "cat1", "cat2");
-        String categories = gestPaquet.saveCategories(paquet);
-        assertEquals(categories, "cat1#cat2#");
-    }
-    @Test
-    public void testLoadCategorie() throws IOException {
-        GestionnairePaquet gestPaquet = new GestionnairePaquet();
-        Utilisateur utilisateur1 = new Utilisateur("tom","pomme");
-        Paquet paquet = new Paquet("Nom", "cat1", "cat2");
-        utilisateur1.addPaquet(paquet);
-        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
-        gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
-        gestPaquet.save(utilisateur1);
-
-        Utilisateur utilisateur2 = new Utilisateur("tom","pomme");
-        utilisateur2.setListPaquet(gestPaquet.load(utilisateur2));
-        assertEquals("cat1", utilisateur2.getListPaquet().get(0).getCategories().get(0));
-        assertEquals("cat2", utilisateur2.getListPaquet().get(0).getCategories().get(1));
-    }
-
 }

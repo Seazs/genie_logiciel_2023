@@ -32,7 +32,7 @@ public class GestionnaireUtilisateur {
      * Autre constructeur du gestionnaire utilisateur
      */
     public GestionnaireUtilisateur() {
-        userdatabase = new File("./src/main/resources/stockage","stockUser.txt");
+        userdatabase = new File(Main.getFolderPath(),"stockUser.txt");
         try {
             if (!userdatabase.createNewFile()){
                 load();

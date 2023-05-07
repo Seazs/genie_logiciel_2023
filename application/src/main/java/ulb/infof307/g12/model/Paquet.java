@@ -1,5 +1,8 @@
 package ulb.infof307.g12.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import ulb.infof307.g12.view.dto.CardDTO;
@@ -12,11 +15,17 @@ public class Paquet {
 
     @Setter
     @Getter
+    @JsonProperty("nom")
     private String nom;
 
     @Getter
+    @Setter
+    @JsonProperty("categories")
     private final ArrayList<String> categories = new ArrayList<String>();
+
     @Getter
+    @Setter
+    @JsonProperty("cartes")
     public ArrayList<Carte> cartes = new ArrayList<Carte>();
 
     /**
@@ -31,6 +40,23 @@ public class Paquet {
 
         this.nom = nom;
         this.categories.addAll(Arrays.asList(categorie));
+    }
+
+    /**
+     * Crée un paquet avec jackson
+     * @param nom nom du paquet
+     * @param categories catégories du paquet
+     * @param cartes cartes du paquet
+     * @throws IllegalArgumentException
+     */
+    @JsonCreator
+    public Paquet(@JsonProperty("nom") String nom, @JsonProperty("categories") ArrayList<String> categories,@JsonProperty("cartes") ArrayList<Carte> cartes) throws IllegalArgumentException{
+        if(nom == null || nom.equals("") || categories == null)
+            throw new IllegalArgumentException("Le paquet doit posséder un nom ou une catégorie");
+
+        this.nom = nom;
+        this.categories.addAll(categories);
+        this.cartes.addAll(cartes);
     }
 
     /**
@@ -88,6 +114,7 @@ public class Paquet {
      * transforme le paquet en DTO
      * @return une version DTO du paquet
      */
+    @JsonIgnore
     public PaquetDTO getDTO() {
         return new PaquetDTO(this.nom, this.categories);
     }

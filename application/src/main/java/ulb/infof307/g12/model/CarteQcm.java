@@ -1,5 +1,8 @@
 package ulb.infof307.g12.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 public class CarteQcm extends Carte {
@@ -8,10 +11,13 @@ public class CarteQcm extends Carte {
      * Constructeur de la carte QCM
      */
     @Getter
+    @JsonProperty("question")
     private String question;
     @Getter
+    @JsonProperty("answer")
     private String answer = this.getVerso();
     @Getter
+    @JsonProperty("propositions")
     private String[] propositions;
     public CarteQcm(int id, String recto, String verso) {
         super(id, recto, verso);
@@ -19,6 +25,16 @@ public class CarteQcm extends Carte {
         editRecto(recto);
         this.verso = verso;
         getQCMInfo();
+    }
+    @JsonCreator
+    public CarteQcm(@JsonProperty("id") int id,@JsonProperty("recto") String recto, @JsonProperty("verso") String verso, @JsonProperty("propositions") String[] propositions) {
+        super(id, recto, verso);
+        this.type="QCM";
+        editRecto(recto);
+        this.verso = verso;
+        this.propositions = propositions;
+        this.question = recto;
+        this.answer = verso;
     }
 
     /**
@@ -38,6 +54,7 @@ public class CarteQcm extends Carte {
      * @return les informations de la carte
      */
     @Override
+    @JsonIgnore
     public String[] getCarteInfo(){
         String[] info = new String[5];
         info[0] = this.question;

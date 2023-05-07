@@ -1,11 +1,15 @@
 package ulb.infof307.g12.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 public class CarteSpec extends Carte{
 
     @Getter@Setter
+    @JsonProperty("language")
     private String language;
 
     /**
@@ -27,6 +31,14 @@ public class CarteSpec extends Carte{
         this.language = lang;
         this.type="Spec";
     }
+    @JsonCreator
+    public CarteSpec(@JsonProperty("id") int id,@JsonProperty("recto") String recto,@JsonProperty("verso") String verso,@JsonProperty("language") String lang,@JsonProperty("connaissance") int connaissance) {
+        super(id, recto, verso);
+        if (lang == null) throw new IllegalArgumentException("La langue ne peut pas être nulle");
+        if (!checkLanguage(lang)) throw new IllegalArgumentException("La langue n'est pas valide");
+        this.language = lang;
+        this.type="Spec";
+    }
 
 
     /**
@@ -41,6 +53,7 @@ public class CarteSpec extends Carte{
      * @see Carte#getCarteInfo()
      */
     @Override
+    @JsonIgnore
     public String[] getCarteInfo(){
         String[] info = new String[4];
         info[0] = this.type;

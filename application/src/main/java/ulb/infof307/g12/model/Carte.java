@@ -1,11 +1,20 @@
 package ulb.infof307.g12.model;
 
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import ulb.infof307.g12.view.dto.CardDTO;
-
-
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = CarteQcm.class, name = "QCM"),
+        @JsonSubTypes.Type(value = CarteSpec.class, name = "Spec"),
+        @JsonSubTypes.Type(value = CarteTt.class, name = "TT"),
+})
 public class
 Carte {
     /**
@@ -13,15 +22,23 @@ Carte {
      * Si la connaissance est à 0, c’est que la carte n’a pas encore été vue/étudiée.
      */
     @Getter
+    @JsonProperty("connaissance")
     public int connaissance = 0;
 
     @Getter
+    @JsonProperty("id")
     protected int id;
 
     @Getter
     @Setter
-    protected String recto, verso;
+    @JsonProperty("recto")
+    protected String recto;
     @Getter
+    @Setter
+    @JsonProperty("verso")
+    protected String verso;
+    @Getter
+    @JsonProperty("type")
     protected String type;
 
     /**
@@ -47,7 +64,16 @@ Carte {
         this.recto = recto;
         this.verso = verso;
         this.id = id;
-        this.type="Simple";
+        this.type="Carte";
+    }
+
+    @JsonCreator
+    public Carte(@JsonProperty("connaissance") int connaissance, @JsonProperty("id") int id, @JsonProperty("recto") String recto, @JsonProperty("verso") String verso, @JsonProperty("type") String type){
+        this.connaissance = connaissance;
+        this.id = id;
+        this.recto = recto;
+        this.verso = verso;
+        this.type = type;
     }
 
     /**
@@ -92,6 +118,7 @@ Carte {
      * Fonction qui retourne les infos de la carte
      * @return les infos de la cartes
      */
+    @JsonIgnore
     public String[] getCarteInfo(){
         String[] info = new String[3];
         info[0] = this.type;
@@ -100,6 +127,10 @@ Carte {
         return info;
     }
 
+    /**
+     * @return un objet DTO
+     */
+    @JsonIgnore
     public CardDTO getDTO() {
         return new CardDTO(this.recto, this.verso);
     }
