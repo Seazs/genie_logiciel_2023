@@ -100,8 +100,10 @@ public class MenuPaquetVueController implements Initializable {
     public void creerPaquet() throws IOException {
         // Envoyer au listener
         PaquetDTO nouveauPaquet = listener.creerPaquet() ;
+        listener.editerPaquet(nouveauPaquet);
+        rechargerListView();
         // Ajouter le nouveau paquet provenant du listener à la vue
-        paquetListView.getItems().addAll(nouveauPaquet);
+        //paquetListView.getItems().addAll(nouveauPaquet);
     }
 
     /**

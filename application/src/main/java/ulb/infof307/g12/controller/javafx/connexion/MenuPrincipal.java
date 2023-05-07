@@ -167,6 +167,7 @@ public class MenuPrincipal extends Application {
     public void returnFromEditionToMenuPaquet() {
 
         changeView(editionController,menuPaquetController);
+        menuPaquetController.updatePaquets();
     }
 
     /**

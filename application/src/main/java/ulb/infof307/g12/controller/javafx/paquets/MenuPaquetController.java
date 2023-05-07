@@ -5,7 +5,6 @@ import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
-import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 import ulb.infof307.g12.view.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
@@ -14,7 +13,6 @@ import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +22,6 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     @Getter
     private final Utilisateur user;
 
-    private final GestionnairePaquet gestionnairePaquet = new GestionnairePaquet();
     private List<Paquet> saveListPaquet;
 
     /**
@@ -140,4 +137,9 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     }
 
 
+    public void updatePaquets() {
+        saveListPaquet = MenuPrincipal.getINSTANCE().getUserPaquets();
+        MenuPaquetVueController controller = (MenuPaquetVueController) super.controller;
+        controller.rechargerListView();
+    }
 }
