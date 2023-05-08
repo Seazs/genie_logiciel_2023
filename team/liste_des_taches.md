@@ -222,20 +222,20 @@ Tâche 2 : Implémentation de la lecture audio (Back end) - 3 points
 
 ## Histoire 26 (Refactoring) - 8 points 
 
-Tâche 1 : Changer le format stockage de notre structure vers JSON
+Tâche 1 : Changer le format stockage de notre structure locale vers JSON
 
 - Brenno (Alex A.)
-- Description : Modifier les fonctions de sauvegarde et chargement pour écrire/lire le fichier txt avec/en un JSON et pas la structure que nous avons déterminé auparavant. Changer PARTOUT dans le code. 
+- Description : Modifier les fonctions de sauvegarde et chargement des paquets en JSON en local. 
 
-Tâche 2 : Implémenter une fonction qui transforme un JSON en Objet Java de façon plus efficace
+Tâche 2 : Changer le format stockage de notre structure server vers JSON
 
 - Romain (Brenno)
-- Description : Pouvoir instancier des objets sur base d'un fichier JSON. (Voir s'il y a des fonctions/librairies toutes faites).
+- Description : Modifier les fonctions du server pour gérer des JSON.
 
 Tâche 3 : Correction MVC
 
 - Nico (Alex A.)
-- Description : S'assurer que l'architecture soit bien respectée.
+- Description : S'assurer que l'architecture soit bien respectée. Enlever les modèles de la view.
 
 Tâche 4 : Gestion des erreurs/exceptions
 
@@ -245,7 +245,7 @@ Tâche 4 : Gestion des erreurs/exceptions
 Tâches 5 : Tests unitaires 
 
 - Wassim (Nico)
-- Description : Créer des tests pour les modèles
+- Description : Créer des tests pour les modèles (attention au dossier application/application)
 
 
 ## Histoire 25 (Fin serveur/store) - 6 points
@@ -277,7 +277,7 @@ Tâche 4 : Vérification de la bonne communication du serveur et client
 Tâche 5 : Synchronisation de la database locale avec celle du serveur
 
 - Wassim (Brenno)
-- Description : Faire en sorte d'avoir les mêmes données en local et sur le serveur.
+- Description : Faire en sorte d'avoir les mêmes données en local et sur le serveur. (ajout uuid dans modèle local et dto)
 
 Tâche 6 : Supprimer un de ses paquets du store
 
