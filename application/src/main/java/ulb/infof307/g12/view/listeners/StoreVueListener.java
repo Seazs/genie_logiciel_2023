@@ -28,4 +28,6 @@ public interface StoreVueListener {
 
     Collection<PaquetDTO> getUserPaquets();
 
+    void deletePaquetStore(PaquetDTO paquet);
+
 }

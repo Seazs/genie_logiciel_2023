@@ -54,6 +54,15 @@ public class StoreController extends BaseController implements StoreVueListener 
                 .toList();
     }
 
+    @Override
+    public void deletePaquetStore(PaquetDTO paquet) {
+        //
+        //if (paquet.getUuid() in MenuPrincipal.getINSTANCE().getUser().getPaquets()){ //Rechercher parmi tt les uuid
+        //  MenuPrincipal.getINSTANCE().getServer().deletePaquet(paquet.getUuid());
+        //}
+
+    }
+
     /**
      * @param paquet ajoute un paquet dans la liste des paquets du store
      */
@@ -86,4 +95,6 @@ public class StoreController extends BaseController implements StoreVueListener 
                 .map(Paquet::getDTO)
                 .toList();
     }
+
+
 }

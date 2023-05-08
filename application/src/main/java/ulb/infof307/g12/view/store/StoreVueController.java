@@ -151,4 +151,13 @@ public class StoreVueController implements Initializable{
         mesPaquetListView.setItems(data) ;
 
     }
+
+    /**
+     * Supprime un paquet du store
+     */
+    public void deletePaquet(){
+        PaquetDTO paquet = storePaquetListView.getSelectionModel().getSelectedItem();
+        listener.deletePaquetStore(paquet);
+        rechargerListView();
+    }
 }

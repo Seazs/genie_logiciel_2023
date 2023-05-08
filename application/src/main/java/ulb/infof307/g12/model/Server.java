@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * Class permettant de envoyer/recevoir les informations d'un serveur
@@ -53,6 +54,11 @@ public class Server {
         HttpEntity<String> entity = new HttpEntity<>(json, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(url+"paquet", entity, String.class);
         return response.getBody();
+    }
+
+    public String deletePaquet(UUID id){
+        //TODO envoyer la requete de suppresion au serveur
+        return null;
     }
 
 
