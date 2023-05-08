@@ -120,6 +120,7 @@ public class StoreVueController implements Initializable{
         PaquetDTO paquet = storePaquetListView.getSelectionModel().getSelectedItem();
         listener.downloadPaquet(paquet);
         rechargerListView();
+        refresh();
     }
 
     /**
@@ -128,12 +129,13 @@ public class StoreVueController implements Initializable{
     public void uploadPaquet() throws IOException {
         PaquetDTO paquet = mesPaquetListView.getSelectionModel().getSelectedItem();
         listener.uploadPaquet(paquet);
+        refresh();
     }
 
     /**
      * Envoie l’ordre de refresh à storeController
      */
-    public void refresh(){
+    private void refresh(){
 
         storePaquetListView.getItems().setAll(
                 listener.getStorePaquets()
