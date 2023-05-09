@@ -7,13 +7,13 @@ import lombok.Setter;
 import ulb.infof307.g12.view.dto.CardDTO;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type"
+        include = JsonTypeInfo.As.PROPERTY
 ) //permet de faire la distinction entre les différents types de cartes lors de la désérialisation
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CarteQcm.class, name = "QCM"),
         @JsonSubTypes.Type(value = CarteSpec.class, name = "Spec"),
         @JsonSubTypes.Type(value = CarteTt.class, name = "TT"),
+        //@JsonSubTypes.Type(value = Carte.class, name = "Carte"),
 }) //Montre la structure des classes filles et comment les reconnaitre
 public class
 Carte {
