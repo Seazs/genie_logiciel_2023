@@ -45,8 +45,6 @@ public class Server {
     public String postPaquet(Paquet paquet) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(paquet);
-        System.out.println(json);
-
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

@@ -39,16 +39,14 @@ public class StoreVueController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         // Personnaliser l'affichage des éléments de la liste
         updateVisuelListeViewPaquet(mesPaquetListView);
         updateVisuelListeViewPaquet(storePaquetListView);
 
         RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> {
             filtrageCategorie();
-
-
         });
+
     }
 
 

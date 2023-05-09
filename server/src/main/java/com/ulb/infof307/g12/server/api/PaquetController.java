@@ -1,7 +1,6 @@
 package com.ulb.infof307.g12.server.api;
 
 import com.ulb.infof307.g12.server.model.Carte;
-import com.ulb.infof307.g12.server.model.JsonParser;
 import com.ulb.infof307.g12.server.model.Paquet;
 import com.ulb.infof307.g12.server.service.PaquetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,11 +54,8 @@ public class PaquetController {
      */
     @PostMapping
     public String createPaquet(@RequestBody String paquetEnString) {
-        JSONObject paquetEnJson = new JSONObject(paquetEnString);
-        String nom = paquetEnJson.getString("nom");
-        ArrayList<String> categories = JsonParser.parseJsonArray(paquetEnJson.getJSONArray("categories"));
-        ArrayList<Carte> cartes = JsonParser.parseJsonArrayCarte(paquetEnJson.getJSONArray("cartes"));
-        paquetService.createPaquet(nom, categories, cartes);
+
+        paquetService.createPaquet(paquetEnString);
         String result = "OK" ;
         return result ;
     }

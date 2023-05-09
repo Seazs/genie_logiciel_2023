@@ -2,6 +2,7 @@ package ulb.infof307.g12.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,9 @@ import ulb.infof307.g12.view.dto.PaquetDTO;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+    @JsonIgnoreProperties(
+            ignoreUnknown = true
+    )
 public class Paquet {
 
     @Setter

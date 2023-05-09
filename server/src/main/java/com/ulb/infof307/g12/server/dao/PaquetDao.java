@@ -14,18 +14,18 @@ public interface PaquetDao {
     /**
      * Crée un paquet avec l'id et le nom donné
      * @param id id du paquet
-     * @param nom nom du paquet
+     * @param paquetString nom du paquet
      */
-    void createPaquet(UUID id , String nom, ArrayList<String> categories, ArrayList<Carte> cartes);
+    void createPaquet(UUID id , String paquetString);
 
     /**
      * Crée un paquet avec le nom donné et un id généré aléatoirement
      * (Utilisé sans id donné)
-     * @param nom nom du paquet
+     * @param paquetString nom du paquet
      */
-    default UUID createPaquet(String nom, ArrayList<String> categories, ArrayList<Carte> cartes) {
+    default UUID createPaquet(String paquetString) {
         UUID id = UUID.randomUUID();
-        createPaquet(id, nom, categories, cartes);
+        createPaquet(id, paquetString);
         return id;
     }
 

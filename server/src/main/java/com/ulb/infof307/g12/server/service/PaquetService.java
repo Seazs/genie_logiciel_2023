@@ -28,8 +28,8 @@ public class PaquetService {
      * Crée un paquet avec le nom donné
      * @param nom nom du paquet
      */
-    public void createPaquet(String nom, ArrayList<String> categories, ArrayList<Carte> cartes){
-        paquetDao.createPaquet(nom, categories, cartes) ;
+    public void createPaquet(String paquetString){
+        paquetDao.createPaquet(paquetString) ;
     }
 
     /**

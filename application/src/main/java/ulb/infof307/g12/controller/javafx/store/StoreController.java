@@ -1,8 +1,9 @@
 package ulb.infof307.g12.controller.javafx.store;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.stage.Stage;
 import org.json.JSONArray;
-import ulb.infof307.g12.controller.JsonParser.JsonParser;
+import org.json.JSONObject;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.Paquet;
@@ -46,8 +47,20 @@ public class StoreController extends BaseController implements StoreVueListener 
     @Override
     public Collection<PaquetDTO> getStorePaquets() {
         JSONArray paquetsJson = MenuPrincipal.getINSTANCE().getServer().getPaquets();
-        JsonParser jsonParser = new JsonParser();
-        saveListPaquet = jsonParser.jsonToListePaquets(paquetsJson);
+        ObjectMapper objectMapper = new ObjectMapper();
+        for (int i = 0; i< paquetsJson.length();i++) {
+            try {
+                JSONObject paquet = paquetsJson.getJSONObject(i);
+                System.out.println(paquet.toString());
+                Paquet newPaquet = objectMapper.readValue(paquet.toString(), Paquet.class);
+                System.out.println("Successfully read JSON file and created object");
+                saveListPaquet.add(newPaquet);
+            } catch (IOException e) {
+                MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors du chargement du paquet");
+                e.printStackTrace();
+            }
+        }
+
 
         return saveListPaquet.stream()
                 .map(Paquet::getDTO)
