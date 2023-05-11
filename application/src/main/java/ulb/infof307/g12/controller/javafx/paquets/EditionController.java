@@ -121,7 +121,7 @@ public class EditionController extends BaseController implements EditionVueListe
             CarteSpec carte = new CarteSpec(id, recto, verso,lang) ;
             paquet.addCard(carte);
         }catch (IllegalArgumentException e){
-            MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posséder un recto et un verso !");
+            MenuPrincipal.getINSTANCE().showErrorPopup(e.getMessage());
         }
     }
 

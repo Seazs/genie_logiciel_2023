@@ -27,6 +27,9 @@ class CarteSpecTest {
         assertThrows(IllegalArgumentException.class, () -> {
             CarteSpec carteSpec = new CarteSpec(1, "recto", "null", null);
         });
+        assertThrows(IllegalArgumentException.class, () -> {
+            CarteSpec carteSpec = new CarteSpec(1, "\\begin{dad", "null", "latex");
+        });
 
     }
 }
