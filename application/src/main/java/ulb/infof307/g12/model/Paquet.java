@@ -28,7 +28,7 @@ public class Paquet {
     private UUID id;
 
     @Getter
-    @Setter
+    @Setter //On laisse setter mm si c'est final pour jackson (sauvegarde json)
     @JsonProperty("categories")
     private final ArrayList<String> categories = new ArrayList<String>();
 

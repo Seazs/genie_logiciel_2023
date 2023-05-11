@@ -42,7 +42,7 @@ public class StoreController extends BaseController implements StoreVueListener 
     public void downloadPaquet(PaquetDTO paquetDTO) {
         Optional<Paquet> paquetOptional = paquetDTO.getPaquet(saveListPaquet);
         MenuPrincipal singleton = MenuPrincipal.getINSTANCE();
-        Utilisateur currentUser = singleton.getUserPrincipale();
+        Utilisateur currentUser = singleton.getPrincipalUser();
         paquetOptional.ifPresent(paquet -> {
             try {
                 boolean result = currentUser.addPaquet(paquet);
