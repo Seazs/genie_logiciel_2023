@@ -33,7 +33,7 @@ public class MenuPrincipal extends Application {
     private CarteEtudeController carteEtudeController;
     private StoreController storeController;
     @Setter
-    private Utilisateur userPrincipale;
+    private Utilisateur principalUser;
     private ExceptionPopupController exceptionPopupController;
     @Getter
     private final Server server = new Server();
@@ -71,7 +71,7 @@ public class MenuPrincipal extends Application {
      */
     public void showMenuPaquet(Utilisateur user, ConnexionMenuController parent) {
         try {
-            this.userPrincipale = user;
+            this.principalUser = user;
             menuPaquetController = new MenuPaquetController(user,new Stage());
             parent.hide();
             menuPaquetController.show();
@@ -119,7 +119,7 @@ public class MenuPrincipal extends Application {
     public void openProfile(){
         profilController = null;
         try {
-            profilController = new ProfilController(new Stage(),userPrincipale);
+            profilController = new ProfilController(new Stage(), principalUser);
             menuPaquetController.hide();
             profilController.show();
         } catch (IOException e) {
@@ -216,7 +216,7 @@ public class MenuPrincipal extends Application {
     }
 
     public List<Paquet> getUserPaquets() {
-        return Collections.unmodifiableList(userPrincipale.getListPaquet());
+        return Collections.unmodifiableList(principalUser.getListPaquet());
     }
 
 }
