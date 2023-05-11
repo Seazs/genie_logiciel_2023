@@ -1,5 +1,6 @@
 package com.ulb.infof307.g12.server.dao;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.Paquet;
@@ -22,15 +23,15 @@ class PaquetDataAccessServiceTest {
     private static Paquet paquet;
     @BeforeAll
     public static void creeDossierTemporaire() throws IOException {
-        dossierTemporaire = new File("./stockageTest");
-        dossierTemporaire.mkdir();
-        dossierTemporairePaquet = new File("./stockageTest/paquet");
-        dossierTemporaire.mkdir();
+        dossierTemporaire = new File("./stockage");
+        dossierTemporaire.mkdirs();
+        dossierTemporairePaquet = new File("./stockage/paquet");
+        dossierTemporaire.mkdirs();
         UUID id = UUID.randomUUID();
         ArrayList<String> categories = new ArrayList<>();
         categories.add("test");
         ArrayList<Carte> cartes = new ArrayList<>();
-        cartes.add(new Carte(1, "test", "test", "test"));
+        cartes.add(new Carte(1, "test", "test", "QCM"));
         paquet = new Paquet(id, "nomtest", categories, cartes);
     }
     @AfterAll
@@ -53,17 +54,27 @@ class PaquetDataAccessServiceTest {
     }
 
     @Test
-    void createDuplicatePaquet() {
+    void createDuplicatePaquet() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
         PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
-        paquetDataAccessService.createPaquet(paquet.toString());
-        assertEquals(STATUS.DUPLICATE,paquetDataAccessService.createPaquet(paquet.toString()));
+        paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
+        assertEquals(STATUS.DUPLICATE,paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet)));
     }
 
     @Test
-    void getPaquet() {
+    void getPaquet() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
+        paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
+        assertEquals(paquet,paquetDataAccessService.getPaquet(paquet.getId()));
     }
 
     @Test
-    void deletePaquet() {
+    void deletePaquet() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
+        paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
+        paquetDataAccessService.deletePaquet(paquet.getId());
+        assertEquals(null,paquetDataAccessService.getPaquet(paquet.getId()));
     }
 }

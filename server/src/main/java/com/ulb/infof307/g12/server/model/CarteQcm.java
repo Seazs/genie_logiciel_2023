@@ -24,6 +24,7 @@ public class CarteQcm extends Carte {
     @JsonCreator
     public CarteQcm(@JsonProperty("id") int id,@JsonProperty("recto") String recto, @JsonProperty("verso") String verso, @JsonProperty("propositions") String[] propositions) {
         super(id, recto, verso,"QCM");
+        validate(verso);
         editRecto(recto);
         this.verso = verso;
         this.propositions = propositions;

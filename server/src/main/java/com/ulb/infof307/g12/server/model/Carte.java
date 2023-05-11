@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY
@@ -55,6 +57,9 @@ public class Carte {
          */
         @JsonCreator
         public Carte( @JsonProperty("id") int id, @JsonProperty("recto") String recto, @JsonProperty("verso") String verso, @JsonProperty("type") String type){
+                validate(recto);
+                validate(verso);
+                validateType(type);
                 this.id = id;
                 this.recto = recto;
                 this.verso = verso;
@@ -62,15 +67,31 @@ public class Carte {
         }
 
         /**
+         * Tester la validité du type de carte
+         * @param type type de la carte
+         */
+        protected void validateType(String type) {
+                if (!Objects.equals(type, "QCM") && !Objects.equals(type, "TT") && !Objects.equals(type, "Spec"))
+                        throw new IllegalArgumentException("Le type de carte n'est pas valide");
+        }
+
+        /**
          * Fonction qui édite la variable "recto" de la classe carte
          * @param new_recto nouveau recto
          * @throws IllegalArgumentException si le recto est vide ou comporte le caractère #
          */
-        public void editRecto(String new_recto){
-                if (new_recto == null || new_recto.equals(""))
-                        throw new IllegalArgumentException("La carte doit posséder un recto");
-                else if (new_recto.contains("#"))
-                        throw new IllegalArgumentException("Le recto ne peut pas avoir le caractère \"#\"");
+        public void editRecto(String new_recto) throws IllegalArgumentException{
+                validate(new_recto);
                 recto = new_recto;
+        }
+
+        /**
+         * Fonction qui s'assure que le mot est valide
+         * @param word mot à valider
+         * @throws IllegalArgumentException
+         */
+        protected void validate(String word) throws IllegalArgumentException{
+                if(word == null || word.equals("") || word.contains("#"))
+                        throw new IllegalArgumentException("Le verso n'est pas valide");
         }
 }
