@@ -118,7 +118,7 @@ public class MenuPaquetVueController implements Initializable {
             listener.supprimerPaquet(paquet);
             paquetListView.getItems().remove(paquet);
         }else {
-            MenuPrincipal.getINSTANCE().showErrorPopup("Veuillez sélectionner un paquet");
+            MenuPrincipal.getINSTANCE().showErrorPopup("Veuillez sélectionner un paquet"); // TO DO
         }
     }
 
@@ -170,21 +170,27 @@ public class MenuPaquetVueController implements Initializable {
      * @param actionEvent event
      */
     public void importPaquet(ActionEvent actionEvent) {
-        System.out.println("Import paquet");
-        System.setProperty("apple.awt.fileDialogForDirectories", "true");
         FileDialog fileDialog = new FileDialog((JFrame) null, "Select a File to import", FileDialog.LOAD);
-
-        System.setProperty("apple.awt.fileDialogForDirectories", "false");
         // show the file dialog
         fileDialog.setVisible(true);
         // get the selected file
         File[] files = fileDialog.getFiles();
-        System.out.println(files.length);
         if (files.length == 1) {
             listener.importPaquet(files[0]);
             rechargerListView();}
     }
 
+    /**
+     * Lorsque l'utilisateur clique sur le bouton "exporter paquet", une fenêtre s'ouvre pour sélectionner un fichier
+     * @param actionEvent event
+     */
     public void exportPaquet(ActionEvent actionEvent) {
+        FileDialog fileDialog = new FileDialog((JFrame) null, "Select a File to import", FileDialog.SAVE);
+        // show the file dialog
+        fileDialog.setVisible(true);
+        PaquetDTO paquet = paquetListView.getSelectionModel().getSelectedItem();
+        if (paquet != null) {
+            listener.exportPaquet(paquet, fileDialog.getDirectory() + fileDialog.getFile());
+        }
     }
 }

@@ -35,9 +35,17 @@ public interface MenuPaquetListener {
     Collection<PaquetDTO> getPaquetDTOList();
 
     /**
-     * Importer un paquet avec une menu de sélection
+     * Importer un paquet avec un menu de sélection
      * @param file fichier
      *
      */
     void importPaquet(File file);
+
+
+    /**
+     * Exporter un paquet avec un menu de sélection
+     * @param paquet Paquet à exporter
+     * @param path chemin où le dossier sera exporté
+     */
+    void exportPaquet(PaquetDTO paquet, String path);
 }

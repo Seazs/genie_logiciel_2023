@@ -94,17 +94,33 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
                 .toList();
     }
 
+    /**
+     * @see MenuPaquetListener#importPaquet(File)
+     */
     @Override
     public void importPaquet(File file) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             Paquet newPaquet = objectMapper.readValue(file, Paquet.class);
-            System.out.println("Paquet créé");
             MenuPrincipal.getINSTANCE().getPrincipalUser().addPaquet(newPaquet);
             MenuPrincipal.getINSTANCE().getGestionnairePaquet().save(MenuPrincipal.getINSTANCE().getPrincipalUser());
-            System.out.println("Importation du paquet " + file.getName() + "réussie !");
+            System.out.println("Importation du paquet " + file.getName() + " réussie !");
         } catch (IOException e) {
-            MenuPrincipal.getINSTANCE().showErrorPopup("OUI UNE ERREUR MIAM MIAM");
+            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de l'importation du paquet");
+        }
+    }
+
+    /**
+     * @see MenuPaquetListener#exportPaquet(PaquetDTO, String)
+     */
+    @Override
+    public void exportPaquet(PaquetDTO paquet, String path) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            objectMapper.writeValue(new File(path+ ".json"), paquet.getPaquet().get());
+            System.out.println("Exportation du paquet " + paquet.nom() + " réussie !");
+        } catch (IOException e) {
+            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de l'exportation du paquet");
         }
     }
 
