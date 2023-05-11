@@ -57,7 +57,7 @@ public class CarteTt extends Carte{
      * recto = begin§end
      * verso = reponse
      */
-    public void getTTInfo(){
+    private void getTTInfo(){
         String[] listinfos = this.getRecto().split("§");
         this.begin = listinfos[0];
         this.end = listinfos[1];

@@ -13,6 +13,7 @@ public class CarteSpec extends Carte{
     @JsonProperty("language")
     private String language;
 
+
     /**
      * Crée une carte dont ni le verso ni le recto ne peuvent être vides.
      * La carte se stocke dans le fichier de la façon suivante:
@@ -49,6 +50,7 @@ public class CarteSpec extends Carte{
         if (!checkLanguage(lang)) throw new IllegalArgumentException("La langue n'est pas valide");
         this.language = lang;
         this.type="Spec";
+        this.connaissance = connaissance;
     }
 
 

@@ -23,7 +23,7 @@ Carte {
      */
     @Getter
     @JsonProperty("connaissance")
-    public int connaissance = 0;
+    protected int connaissance = 0;
 
     @Getter
     @JsonProperty("id")

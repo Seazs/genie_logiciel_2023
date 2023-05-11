@@ -17,6 +17,18 @@ class CarteSpecTest {
     }
 
     @Test
+    void testgetCarteInfo2() {
+        CarteSpec carteSpec = new CarteSpec(1, "recto", "verso", "html", 5);
+        String[] info = carteSpec.getCarteInfo();
+        assertEquals("Spec", info[0]);
+        assertEquals("recto", info[1]);
+        assertEquals("verso", info[2]);
+        assertEquals("html", info[3]);
+        assertEquals(5, carteSpec.getConnaissance());
+    }
+
+
+    @Test
     void testCheckLanguage(){
         assertThrows(IllegalArgumentException.class, () -> {
             CarteSpec carteSpec = new CarteSpec(1, "recto", "verso", "falselanguage");
@@ -30,6 +42,5 @@ class CarteSpecTest {
         assertThrows(IllegalArgumentException.class, () -> {
             CarteSpec carteSpec = new CarteSpec(1, "\\begin{dad", "null", "latex");
         });
-
     }
 }

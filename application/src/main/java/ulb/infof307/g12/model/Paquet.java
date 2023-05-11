@@ -11,6 +11,7 @@ import ulb.infof307.g12.view.dto.PaquetDTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 @JsonIgnoreProperties(
@@ -59,7 +60,7 @@ public class Paquet {
      * @throws IllegalArgumentException
      */
     @JsonCreator
-    public Paquet(@JsonProperty("id") UUID id, @JsonProperty("nom") String nom, @JsonProperty("categories") ArrayList<String> categories,@JsonProperty("cartes") ArrayList<Carte> cartes) throws IllegalArgumentException{
+    public Paquet(@JsonProperty("id") UUID id, @JsonProperty("nom") String nom, @JsonProperty("categories") List<String> categories, @JsonProperty("cartes") List<Carte> cartes) throws IllegalArgumentException{
         if(nom == null || nom.equals("") || categories == null)
             throw new IllegalArgumentException("Le paquet doit posséder un nom ou une catégorie");
         this.id = id;

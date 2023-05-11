@@ -2,10 +2,16 @@ package ulb.infof307.g12.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import ulb.infof307.g12.view.dto.PaquetDTO;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 class PaquetTest {
-
-
 
     @Test
     public void testCreationPaquet(){
@@ -21,13 +27,48 @@ class PaquetTest {
         Assertions.assertThrows(IllegalArgumentException.class,()  -> {
             Paquet paquet = new Paquet(nom,null);
         });
+
     }
 
     @Test
-    public void testMemePaquet(){
+    public void testCreationPaquet2(){
+        //nom, catégorie, cartes, utilisateur
+
+        String nom = "Maths";
+        List<String> categorie = new ArrayList<>();
+        categorie.add("BA-1");
+        List<Carte> cartes = new ArrayList<>();
+        cartes.add(new Carte(1,"r1","v1"));
+        UUID id = UUID.randomUUID();
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            Paquet paquet = new Paquet(id,"",categorie,cartes);
+        });
+
+        Assertions.assertThrows(IllegalArgumentException.class,()  -> {
+            Paquet paquet = new Paquet(id,null,categorie,cartes);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class,()  -> {
+            Paquet paquet = new Paquet(id,nom,null,cartes);
+        });
+
+    }
+
+    public static List<Arguments> creatPaquetComparaison(){
         Paquet paquet = new Paquet("Maths","BA-1");
         Paquet paquet2 = new Paquet("Maths","BA-1");
-        Assertions.assertEquals(true,paquet.equals(paquet2));
+        Paquet paquet3 = new Paquet("test","BA-1");
+        String paquet4 = "test";
+        List<Arguments> arguments = new ArrayList<>();
+        arguments.add(Arguments.of(paquet,paquet2,true));
+        arguments.add(Arguments.of(paquet,paquet3,false));
+        arguments.add(Arguments.of(paquet,paquet4,false));
+        return arguments;
+    }
+
+    @ParameterizedTest
+    @MethodSource("creatPaquetComparaison")
+    public void testMemePaquet(Paquet paquet, Object paquet2, boolean expected){
+        Assertions.assertEquals(expected,paquet.equals(paquet2));
     }
 
     @Test
@@ -39,18 +80,41 @@ class PaquetTest {
         paquet.addCard(carte1);
         Assertions.assertEquals(carte, paquet.cartes.get(0));
         Assertions.assertEquals(carte1, paquet.cartes.get(1));
-
     }
 
     @Test
-    public void testSupprimerCarte(){
+    public void testAjoutMemeCarte(){
+        Paquet paquet = new Paquet("Maths","BA-1");
+        Carte carte = new Carte(1, "r1", "v1");
+        paquet.addCard(carte);
+        Assertions.assertThrows(IllegalArgumentException.class,()  -> {
+            paquet.addCard(carte);
+        });
+    }
+    public static List<Arguments> creatPaquet(){
         Paquet paquet = new Paquet("Maths","BA-1");
         Carte carte = new Carte(1, "r1", "v1");
         Carte carte1 = new Carte(4, "r2", "v2");
         paquet.addCard(carte);
         paquet.addCard(carte1);
-        paquet.supprimerCarte(carte);
-        Assertions.assertEquals(1, paquet.cartes.size());
+        List<Arguments> arguments = new ArrayList<>();
+        arguments.add(Arguments.of(paquet,carte));
+        arguments.add(Arguments.of(paquet,carte1));
+        arguments.add(Arguments.of(paquet,new Carte(5, "r3", "v3")));
+        return arguments;
+    }
+    @ParameterizedTest
+    @MethodSource("creatPaquet")
+    public void testSupprimeCarte(Paquet paquet,Carte carte){
+        if (!paquet.cartes.contains(carte)){
+            Assertions.assertThrows(IllegalArgumentException.class,()  -> {
+                paquet.supprimerCarte(carte);
+            });
+        }
+        else {
+            paquet.supprimerCarte(carte);
+            Assertions.assertEquals(false,paquet.cartes.contains(carte));
+        }
     }
     @Test
     public void testAjouterCategorie(){
@@ -58,7 +122,21 @@ class PaquetTest {
         paquet.addCategory("BA2");
         Paquet paquet2 = new Paquet("Maths", "BA1", "BA2") ;
         Assertions.assertEquals(paquet,paquet2) ;
+        Assertions.assertThrows(IllegalArgumentException.class,()  -> {
+            paquet.addCategory("#");
+        });
+    }
 
+    @Test
+    public void DTOTest(){
+        UUID id = UUID.randomUUID();
+        List<String> categories = new ArrayList<>();
+        categories.add("BA-1");
+        List<Carte> cartes = new ArrayList<>();
+        cartes.add(new Carte(1,"r1","v1"));
+        Paquet paquet = new Paquet(id,"nom",categories,cartes);
+        PaquetDTO paquetDTO = new PaquetDTO(id.toString(),"nom",categories);
+        Assertions.assertEquals(paquetDTO,paquet.getDTO());
     }
 
 

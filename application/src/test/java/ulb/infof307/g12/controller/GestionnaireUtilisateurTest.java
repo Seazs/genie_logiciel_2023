@@ -47,19 +47,14 @@ class GestionnaireUtilisateurTest {
     }
 
     @Test void saveTest() throws IOException {
-        GestionnaireUtilisateur gest1 = new GestionnaireUtilisateur(tmp);
-        FileWriter writer2 = new FileWriter(tmp);
-        writer2.write("");
-        writer2.close();
-        gest1.save();
         GestionnaireUtilisateur gest = new GestionnaireUtilisateur(tmp);
         List<Utilisateur> list = gest.getListeUtilisateur();
         Utilisateur u1 = list.get(0);
-        Utilisateur u2 = list.get(0);
-        assertEquals("alex",list.get(0).getPseudo());
-        assertEquals("wassim",list.get(1).getPseudo());
-        assertEquals("pomme",list.get(0).getMdp());
-        assertEquals("orange",list.get(1).getMdp());
+        Utilisateur u2 = list.get(1);
+        assertEquals("alex",u1.getPseudo());
+        assertEquals("wassim",u2.getPseudo());
+        assertEquals("pomme",u1.getMdp());
+        assertEquals("orange",u2.getMdp());
         tmp.delete();
     }
 

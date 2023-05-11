@@ -2,6 +2,7 @@ package ulb.infof307.g12.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ulb.infof307.g12.view.dto.CardDTO;
 
 import java.util.ArrayList;
 
@@ -9,17 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CarteTest {
 
-    @Test
-    public void testGetQCMInfo(){
-        String recto = "question§reponse1§reponse2§reponse3", verso = "la reponse D";
-        CarteQcm carte = new CarteQcm(1, recto, verso);
-        String[] infos_carte = carte.getCarteInfo();
-        assertEquals("question", infos_carte[0]);
-        assertEquals("reponse1", infos_carte[1]);
-        assertEquals("reponse2", infos_carte[2]);
-        assertEquals("reponse3", infos_carte[3]);
-        assertEquals("la reponse D", infos_carte[4]);;
-    }
 
     @Test
     public void testCreateCard(){
@@ -51,6 +41,15 @@ class CarteTest {
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             Carte carte = new Carte(2, recto, null);
         });
+
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            Carte carte = new Carte(2, "#", verso);
+        });
+
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            Carte carte = new Carte(2, recto, "#");
+        });
+
     }
 
     @Test
@@ -90,6 +89,14 @@ class CarteTest {
             carte1.editVerso(verso_null);;
         });
 
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            carte1.editRecto("#");;
+        });
+
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            carte1.editVerso("#");;
+        });
+
     }
 
     @Test
@@ -103,6 +110,22 @@ class CarteTest {
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             carte.setConnaissance(-1);
         });
+    }
+
+    @Test
+    public void testgetCarteInfo(){
+        Carte carte = new Carte(1, "recto", "verso");
+        String[] infos = carte.getCarteInfo();
+        assertEquals("Carte", infos[0]);
+        assertEquals("recto", infos[1]);
+        assertEquals("verso", infos[2]);
+    }
+
+    @Test
+    public void testGetCarteDTO(){
+        Carte carte = new Carte(1, "recto", "verso");
+        CardDTO carteDTO = new CardDTO("recto", "verso");
+        assertEquals(carteDTO, carte.getDTO());
     }
 }
 

@@ -1,6 +1,7 @@
 package ulb.infof307.g12.controller.storage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import ulb.infof307.g12.Main;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.Paquet;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestionnairePaquet {
+    @Getter
     private final String folderStockagePath;
 
     /**
@@ -49,7 +51,11 @@ public class GestionnairePaquet {
     public void savePaquet(Utilisateur user, Paquet paquet) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            objectMapper.writeValue(new File(folderStockagePath+ user.getPseudo(), paquet.getId()+".json"), paquet);
+            File f = new File(folderStockagePath+ user.getPseudo(), paquet.getId()+".json");
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+            System.out.println(f.getPath());
+            objectMapper.writeValue(f, paquet);
         } catch (IOException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la sauvegarde du paquet "+ paquet.getNom());
         }
