@@ -94,7 +94,7 @@ public class CarteEtudeController extends BaseController implements CarteEtudeLi
     public void saveCartes(){
         try {
             GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
-            gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
+            gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getPrincipalUser());
         } catch (IOException e) {
             e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de sauvegarder le paquet !");

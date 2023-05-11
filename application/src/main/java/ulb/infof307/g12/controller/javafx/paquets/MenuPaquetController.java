@@ -1,5 +1,6 @@
 package ulb.infof307.g12.controller.javafx.paquets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
@@ -29,7 +30,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      * Controller du menuPaquet
      * @param user utilisateur
      * @param stage fenetre
-     * @throws IOException
+     * @throws IOException exception
      */
     public MenuPaquetController(Utilisateur user,Stage stage) throws IOException {
         super(stage,MenuPaquetVueController.class.getResource("menuPaquet.fxml"),"");
@@ -66,7 +67,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
             return;
         }
         user.removePaquet(paquet.get().getNom());
-        gestionnairePaquet.remove(MenuPrincipal.getINSTANCE().getUserPrincipale(), paquet.get());
+        gestionnairePaquet.remove(MenuPrincipal.getINSTANCE().getPrincipalUser(), paquet.get());
     }
 
     /**
@@ -95,7 +96,16 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
 
     @Override
     public void importPaquet(File file) {
-        //TODO réfléchir
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            Paquet newPaquet = objectMapper.readValue(file, Paquet.class);
+            System.out.println("Paquet créé");
+            MenuPrincipal.getINSTANCE().getPrincipalUser().addPaquet(newPaquet);
+            MenuPrincipal.getINSTANCE().getGestionnairePaquet().save(MenuPrincipal.getINSTANCE().getPrincipalUser());
+            System.out.println("Importation du paquet " + file.getName() + "réussie !");
+        } catch (IOException e) {
+            MenuPrincipal.getINSTANCE().showErrorPopup("OUI UNE ERREUR MIAM MIAM");
+        }
     }
 
     /**

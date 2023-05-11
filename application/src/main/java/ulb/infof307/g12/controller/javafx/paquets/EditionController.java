@@ -49,7 +49,7 @@ public class EditionController extends BaseController implements EditionVueListe
             paquet.setNom(nom);
             paquet.addCategory(categorie);
             GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
-            gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
+            gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getPrincipalUser());
             MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();// Revenir sur le menu principal
         }catch (IOException e){
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de sauvegarder le paquet !");
