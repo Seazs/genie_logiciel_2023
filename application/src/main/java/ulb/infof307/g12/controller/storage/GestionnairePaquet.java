@@ -36,12 +36,22 @@ public class GestionnairePaquet {
     public void save(Utilisateur user) throws IOException {
         List<Paquet> listPaquet = user.getListPaquet();
         for (Paquet paquet : listPaquet){
-            ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                objectMapper.writeValue(new File(folderStockagePath+user.getPseudo(),paquet.getId()+".json"), paquet);
-            } catch (IOException e) {
-                MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la sauvegarde du paquet "+paquet.getNom());
-            }
+            savePaquet(user, paquet);
+        }
+        System.out.println("Successfully saved user paquets as JSON file!");
+    }
+
+    /**
+     * Sauvegarde un paquet de cartes sous forme de fichier Json dans le dossier de l'utilisateur.
+     * @param user utilisateur
+     * @param paquet paquet à sauvegarder
+     */
+    public void savePaquet(Utilisateur user, Paquet paquet) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            objectMapper.writeValue(new File(folderStockagePath+ user.getPseudo(), paquet.getId()+".json"), paquet);
+        } catch (IOException e) {
+            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la sauvegarde du paquet "+ paquet.getNom());
         }
         System.out.println("Successfully saved user paquets as JSON file!");
     }
@@ -59,23 +69,32 @@ public class GestionnairePaquet {
 
         assert listOfFilePaquet != null; //Si le dossier est vide, on renvoie une liste vide
         for (File file : listOfFilePaquet) { //Pour chaque fichier dans le dossier de l'utilisateur
-            ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                Paquet newPaquet = objectMapper.readValue(file, Paquet.class);
-                System.out.println("Successfully read JSON file and created object");
-                loadedListOfPaquet.add(newPaquet);
-            } catch (IOException e) {
-                MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors du chargement du paquet");
-            }
+            loadPaquet(loadedListOfPaquet, file);
         }
         return loadedListOfPaquet;
+    }
+
+    /**
+     * Charge un paquet en mémoire
+     * @param loadedListOfPaquet liste des paquets chargés
+     * @param file fichier à charger
+     */
+    public void loadPaquet(List<Paquet> loadedListOfPaquet, File file) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            Paquet newPaquet = objectMapper.readValue(file, Paquet.class);
+            System.out.println("Successfully read JSON file and created object");
+            loadedListOfPaquet.add(newPaquet);
+        } catch (IOException e) {
+            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors du chargement du paquet");
+        }
     }
 
 
     /**
      * Supprime le fichier associé au paquet voulu et supprime le paquet de la mémoire
-     * @param user
-     * @param paquet
+     * @param user utilisateur
+     * @param paquet paquet à supprimer
      */
     public void remove(Utilisateur user, Paquet paquet) {
         File f = new File(folderStockagePath+user.getPseudo(),paquet.getId()+".json");

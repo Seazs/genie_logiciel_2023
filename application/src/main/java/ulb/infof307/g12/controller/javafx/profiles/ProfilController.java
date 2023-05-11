@@ -49,7 +49,7 @@ public class ProfilController extends BaseController implements ProfilVueListene
             GestionnaireUtilisateur gestionnaire = MenuPrincipal.getINSTANCE().getGestionnaireUtilisateur();
             try {
                 gestionnaire.modifierMotDePasse(username,newPassword,oldPassword);
-                MenuPrincipal.getINSTANCE().getUserPrincipale().setMdp(newPassword);
+                MenuPrincipal.getINSTANCE().getPrincipalUser().setMdp(newPassword);
                 result = gestionnaire.getStatusMsg();
             } catch (IOException e) {
                 result = "Une erreur s'est produite. Veuillez réessayer.";

@@ -1,5 +1,6 @@
 package ulb.infof307.g12.controller.javafx.paquets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
@@ -12,6 +13,7 @@ import ulb.infof307.g12.model.Utilisateur;
 import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -28,7 +30,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      * Controller du menuPaquet
      * @param user utilisateur
      * @param stage fenetre
-     * @throws IOException
+     * @throws IOException exception
      */
     public MenuPaquetController(Utilisateur user,Stage stage) throws IOException {
         super(stage,MenuPaquetVueController.class.getResource("menuPaquet.fxml"),"");
@@ -90,6 +92,36 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         return saveListPaquet.stream()
                 .map(Paquet::getDTO)
                 .toList();
+    }
+
+    /**
+     * @see MenuPaquetListener#importPaquet(File)
+     */
+    @Override
+    public void importPaquet(File file) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            Paquet newPaquet = objectMapper.readValue(file, Paquet.class);
+            MenuPrincipal.getINSTANCE().getPrincipalUser().addPaquet(newPaquet);
+            MenuPrincipal.getINSTANCE().getGestionnairePaquet().save(MenuPrincipal.getINSTANCE().getPrincipalUser());
+            System.out.println("Importation du paquet " + file.getName() + " réussie !");
+        } catch (IOException e) {
+            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de l'importation du paquet");
+        }
+    }
+
+    /**
+     * @see MenuPaquetListener#exportPaquet(PaquetDTO, String)
+     */
+    @Override
+    public void exportPaquet(PaquetDTO paquet, String path) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            objectMapper.writeValue(new File(path+ ".json"), paquet.getPaquet().get());
+            System.out.println("Exportation du paquet " + paquet.nom() + " réussie !");
+        } catch (IOException e) {
+            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de l'exportation du paquet");
+        }
     }
 
     /**
