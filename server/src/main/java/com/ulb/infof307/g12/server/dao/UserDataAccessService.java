@@ -148,14 +148,9 @@ public class UserDataAccessService implements UserDAO{
      * @throws IOException si le fichier n'existe pas
      */
     private void fileExists() throws IOException {
-        if (!db_user_file.exists()){
-            if (! db_user_file.getParentFile().mkdirs()){
-                throw new IOException("Stockage folder could not be created.");
-            };
-            if (! db_user_file.createNewFile()){
-                throw new IOException("StockUser.txt could not be created.");
-            };
-        }
+        db_user_file.getParentFile().mkdirs();
+        db_user_file.createNewFile();
+
     }
 
 }

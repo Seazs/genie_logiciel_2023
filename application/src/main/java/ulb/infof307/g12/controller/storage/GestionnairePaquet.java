@@ -38,7 +38,7 @@ public class GestionnairePaquet {
         for (Paquet paquet : listPaquet){
             ObjectMapper objectMapper = new ObjectMapper();
             try {
-                objectMapper.writeValue(new File(folderStockagePath+user.getPseudo(),paquet.getNom()+".json"), paquet);
+                objectMapper.writeValue(new File(folderStockagePath+user.getPseudo(),paquet.getId()+".json"), paquet);
             } catch (IOException e) {
                 MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la sauvegarde du paquet "+paquet.getNom());
             }
@@ -78,7 +78,7 @@ public class GestionnairePaquet {
      * @param paquet
      */
     public void remove(Utilisateur user, Paquet paquet) {
-        File f = new File(folderStockagePath+user.getPseudo(),paquet.getNom()+".json");
+        File f = new File(folderStockagePath+user.getPseudo(),paquet.getId()+".json");
         try{
             if(f.delete())
                 user.removePaquet(paquet.getId());
