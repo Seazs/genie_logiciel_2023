@@ -47,7 +47,9 @@ public class PaquetDataAccessService implements PaquetDao {
         for (Paquet paquet : db_paquets) {
             ObjectMapper objectMapper = new ObjectMapper();
             try {
-                objectMapper.writeValue(new File(db_paquet_folder,paquet.getId()+".json"), paquet);
+                File f = new File(db_paquet_folder,paquet.getId()+".json");
+                f.createNewFile();
+                objectMapper.writeValue(f, paquet);
             } catch (IOException e) {
                 status = STATUS.DB_COULD_NOT_BE_SAVED;
                 System.out.println("ERROR DB: " + status.getMsg());

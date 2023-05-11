@@ -45,4 +45,11 @@ public class Paquet {
         }
         cartes.add(carte);
     }
+    @Override
+    public boolean equals(Object objects) {
+        if(!(objects instanceof Paquet obj)) {
+            return false;
+        }
+        return (this.getNom().equals(obj.getNom()) && this.getCategories().equals(obj.categories) && this.getId().equals(obj.getId()));
+    }
 }
