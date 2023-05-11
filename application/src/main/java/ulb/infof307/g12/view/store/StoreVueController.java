@@ -50,13 +50,6 @@ public class StoreVueController implements Initializable{
     }
 
 
-    public void updateVisuelListePaquet(ArrayList<PaquetDTO> paquets) {
-        ObservableList<PaquetDTO> observablePaquets = FXCollections.observableArrayList(paquets);
-        storePaquetListView.setItems(observablePaquets);
-        updateVisuelListeViewPaquet(storePaquetListView);
-    }
-
-
     /**
      * Charge le fichier FXML paquet de carte en chargeant les noms et catégories de chaque paquet
      * @param paquetListView liste des paquets à afficher
@@ -118,7 +111,6 @@ public class StoreVueController implements Initializable{
         PaquetDTO paquet = storePaquetListView.getSelectionModel().getSelectedItem();
         listener.downloadPaquet(paquet);
         rechargerListView();
-        refresh();
     }
 
     /**
@@ -149,6 +141,6 @@ public class StoreVueController implements Initializable{
         data.addAll(listener.getUserPaquets()) ;
         // Injecter les données de l'observableArrayList dans la ListView
         mesPaquetListView.setItems(data) ;
-
+        refresh();
     }
 }

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Controller for the store view
@@ -64,16 +65,16 @@ public class StoreController extends BaseController implements StoreVueListener 
     public Collection<PaquetDTO> getStorePaquets() {
         JSONArray paquetsJson = MenuPrincipal.getINSTANCE().getServer().getPaquets();
         ObjectMapper objectMapper = new ObjectMapper();
+
+        saveListPaquet.clear();
+
         for (int i = 0; i < paquetsJson.length(); i++) {
             try {
                 JSONObject paquet = paquetsJson.getJSONObject(i);
-                System.out.println(paquet.toString());
                 Paquet newPaquet = objectMapper.readValue(paquet.toString(), Paquet.class);
-                System.out.println("Successfully read JSON file and created object");
                 saveListPaquet.add(newPaquet);
             } catch (IOException e) {
                 MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors du chargement du paquet");
-                e.printStackTrace();
             }
         }
 
@@ -128,5 +129,13 @@ public class StoreController extends BaseController implements StoreVueListener 
         return MenuPrincipal.getINSTANCE().getUserPaquets().stream()
                 .map(Paquet::getDTO)
                 .toList();
+    }
+
+    @Override
+    public void show(){
+        super.show();
+        StoreVueController vue = (StoreVueController) super.controller;
+        getStorePaquets();
+        vue.rechargerListView();
     }
 }
