@@ -10,7 +10,8 @@ public enum STATUS {
     PASSWORD_IS_NOT_VALID("Le mot de passe contient des caractères interdits."),
     WRONG_PASSWORD("Le mot de passe est incorrect !"),
     FILE_NOT_LOADED("Le fichier n'existe pas !"),
-    SERVER_ERROR("Erreur lors de la connexion au serveur")
+    SERVER_ERROR("Erreur lors de la connexion au serveur"),
+    DUPLICATE("Le paquet est déjà sur le store !")
     ;
 
     @Getter

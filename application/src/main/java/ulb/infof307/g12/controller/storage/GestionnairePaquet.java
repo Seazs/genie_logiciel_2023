@@ -78,14 +78,11 @@ public class GestionnairePaquet {
      * @param paquet
      */
     public void remove(Utilisateur user, Paquet paquet) {
-        File f = new File(folderStockagePath+user.getPseudo()+"/"+paquet.getNom());
+        File f = new File(folderStockagePath+user.getPseudo(),paquet.getNom()+".json");
         try{
-            if(f.exists()){
-                f.delete();
-                user.removePaquet(paquet.getNom());
-            }
+            if(f.delete())
+                user.removePaquet(paquet.getId());
         } catch (Exception e) {
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de retirer le paquet "+paquet.getNom()+" rattaché à l'utilisateur "+user.getPseudo()+" !");
         }
 

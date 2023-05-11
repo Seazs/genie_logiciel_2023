@@ -2,6 +2,7 @@ package com.ulb.infof307.g12.server.api;
 
 import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.Paquet;
+import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.service.PaquetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -54,10 +55,9 @@ public class PaquetController {
      */
     @PostMapping
     public String createPaquet(@RequestBody String paquetEnString) {
-
-        paquetService.createPaquet(paquetEnString);
-        String result = "OK" ;
-        return result ;
+        STATUS result = paquetService.createPaquet(paquetEnString);
+        System.out.println(result.toString());
+        return result.toString();
     }
 
     @DeleteMapping

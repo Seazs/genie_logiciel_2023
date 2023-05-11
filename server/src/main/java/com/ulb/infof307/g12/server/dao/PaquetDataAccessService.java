@@ -1,16 +1,13 @@
 package com.ulb.infof307.g12.server.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.Paquet;
 import com.ulb.infof307.g12.server.model.STATUS;
 import org.springframework.stereotype.Repository;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 
 @Repository("database")
@@ -84,18 +81,23 @@ public class PaquetDataAccessService implements PaquetDao {
     }
 
     /**
-     * @see PaquetDao#createPaquet(UUID, String)
+     * @see PaquetDao#createPaquet(String)
      */
     @Override
-    public void createPaquet(UUID id, String paquetString) {
+    public STATUS createPaquet(String paquetString) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             Paquet newPaquet = objectMapper.readValue(paquetString, Paquet.class);
             System.out.println("Successfully read JSON file and created object");
-            db_paquets.add(newPaquet);
+            if(db_paquets.stream().anyMatch(paquet -> paquet.getId().equals(newPaquet.getId()))) {
+                status = STATUS.DUPLICATE;
+                return status;
+            }
+                db_paquets.add(newPaquet);
         } catch (IOException e) {
             status = STATUS.FILE_NOT_LOADED;
             System.out.println("ERROR DB: " + status.getMsg());
+            return status;
         }
         try {
             this.save();
@@ -103,10 +105,11 @@ public class PaquetDataAccessService implements PaquetDao {
         } catch (IOException exception) {
             status = STATUS.DB_COULD_NOT_BE_SAVED;
             System.out.println("ERROR DB: " + status.getMsg());
-            exception.printStackTrace();
+            return status;
 
         }
         status = STATUS.OK;
+        return status;
     }
 
 
@@ -124,7 +127,7 @@ public class PaquetDataAccessService implements PaquetDao {
      */
     @Override
     public List<Paquet> getAllPaquets() {
-        return db_paquets;
+        return Collections.unmodifiableList(db_paquets);
     }
 
     @Override

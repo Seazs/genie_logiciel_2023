@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.Paquet;
+import ulb.infof307.g12.model.STATUS;
+import ulb.infof307.g12.model.Utilisateur;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 import ulb.infof307.g12.view.listeners.StoreVueListener;
 import ulb.infof307.g12.view.store.StoreVueController;
@@ -19,7 +21,6 @@ import java.util.Optional;
 
 /**
  * Controller for the store view
- *
  */
 public class StoreController extends BaseController implements StoreVueListener {
 
@@ -34,11 +35,26 @@ public class StoreController extends BaseController implements StoreVueListener 
 
 
     /**
-     * @param paquet télécharger le paquet et l'ajoute a sa collection
+     * @param paquetDTO télécharger le paquet et l'ajoute a sa collection
      */
     @Override
-    public void downloadPaquet(PaquetDTO paquet) {
+    public void downloadPaquet(PaquetDTO paquetDTO) {
+        Optional<Paquet> paquetOptional = paquetDTO.getPaquet(saveListPaquet);
+        MenuPrincipal singleton = MenuPrincipal.getINSTANCE();
+        Utilisateur currentUser = singleton.getUserPrincipale();
+        paquetOptional.ifPresent(paquet -> {
+            try {
+                boolean result = currentUser.addPaquet(paquet);
 
+                if(result)
+                    singleton.showErrorPopup("Vous possédez déjà ce paquet !");
+                else
+                    singleton.getGestionnairePaquet().save(currentUser);
+
+            } catch (IOException e) {
+                singleton.showErrorPopup("Erreur lors du téléchargement du paquet !");
+            }
+        });
     }
 
     /**
@@ -48,7 +64,7 @@ public class StoreController extends BaseController implements StoreVueListener 
     public Collection<PaquetDTO> getStorePaquets() {
         JSONArray paquetsJson = MenuPrincipal.getINSTANCE().getServer().getPaquets();
         ObjectMapper objectMapper = new ObjectMapper();
-        for (int i = 0; i< paquetsJson.length();i++) {
+        for (int i = 0; i < paquetsJson.length(); i++) {
             try {
                 JSONObject paquet = paquetsJson.getJSONObject(i);
                 System.out.println(paquet.toString());
@@ -71,17 +87,31 @@ public class StoreController extends BaseController implements StoreVueListener 
      * @param paquet ajoute un paquet dans la liste des paquets du store
      */
     public void uploadPaquet(PaquetDTO paquet) throws IOException {
-        try {
-            Optional<Paquet> paquetOptional = paquet.getPaquet();
-            MenuPrincipal.getINSTANCE().getServer().postPaquet(paquetOptional.get());
-        }catch (NullPointerException e){
+        if (paquet == null) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur, veuillez selectionner un paquet à uploader");
+            return;
         }
+
+
+        Optional<Paquet> paquetOptional = paquet.getPaquet();
+
+        if (paquetOptional.isEmpty()) {
+            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur, veuillez selectionner un paquet à uploader");
+            return;
+        }
+
+        STATUS status = MenuPrincipal.getINSTANCE().getServer().postPaquet(paquetOptional.get());
+
+        System.out.println(status.getMsg());
+
+        if (!STATUS.OK.equals(status))
+            MenuPrincipal.getINSTANCE().showErrorPopup(status.getMsg());
 
     }
 
     /**
      * filtre les paquets selon leurs catégories
+     *
      * @param recherche filtre à appliquer sur les catégories de chaque paquet
      * @return la liste des paquets filtrés par catégorie
      */

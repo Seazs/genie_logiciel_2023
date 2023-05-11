@@ -64,8 +64,8 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
             MenuPrincipal.getINSTANCE().showErrorPopup("Veuillez sélectionner un paquet à supprimer");
             return;
         }
-        user.removePaquet(paquet.get().getNom());
-        gestionnairePaquet.remove(MenuPrincipal.getINSTANCE().getUserPrincipale(), paquet.get());
+        user.removePaquet(paquet.get().getId());
+        gestionnairePaquet.remove(user, paquet.get());
     }
 
     /**
@@ -88,7 +88,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     @Override
     public Collection<PaquetDTO> getPaquetDTOList() {
         return saveListPaquet.stream()
-                .map(paquet -> new PaquetDTO(paquet.getNom(), paquet.getCategories()))
+                .map(Paquet::getDTO)
                 .toList();
     }
 
@@ -111,7 +111,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      * @param paquetDTO Paquet choisit par l'utilisateur à être étudié
      */
     @Override
-    public void CarteEtude(PaquetDTO paquetDTO) {
+    public void carteEtude(PaquetDTO paquetDTO) {
         MenuPrincipal instance = MenuPrincipal.getINSTANCE();
 
         try {
@@ -128,12 +128,12 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
             instance.showErrorPopup("Vous devez sélectionner un paquet à étudier !");
         }
 
+    }
 
-
-
-
-
-
+    @Override
+    public void show(){
+        super.show();
+        updatePaquets();
     }
 
 

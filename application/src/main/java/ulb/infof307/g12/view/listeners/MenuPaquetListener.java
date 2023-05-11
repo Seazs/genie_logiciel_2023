@@ -1,6 +1,5 @@
 package ulb.infof307.g12.view.listeners;
 
-import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 
 import java.io.IOException;
@@ -23,7 +22,7 @@ public interface MenuPaquetListener {
      * Etude des cartes
      * @param paquet paquet
      */
-    void CarteEtude(PaquetDTO paquet);
+    void carteEtude(PaquetDTO paquet);
 
     /**
      * @param paquet Paquet à supprimer

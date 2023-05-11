@@ -5,11 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
+import ulb.infof307.g12.view.dto.PaquetDTO;
 
 import java.io.IOException;
 
@@ -32,9 +32,6 @@ public class Server {
        return jsonArrayListPaquet;
     }
 
-
-
-
     /**
      * Envoie un paquet (avec juste le nom) au serveur
      * @param paquet paquet à envoyer
@@ -42,7 +39,7 @@ public class Server {
      */
 
     @PostMapping("/paquet")
-    public String postPaquet(Paquet paquet) throws IOException {
+    public STATUS postPaquet(Paquet paquet) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(paquet);
         RestTemplate restTemplate = new RestTemplate();
@@ -50,7 +47,8 @@ public class Server {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(json, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(url+"paquet", entity, String.class);
-        return response.getBody();
+        String result = response.getBody();
+        return STATUS.valueOf(result);
     }
 
 

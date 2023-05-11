@@ -2,6 +2,7 @@ package com.ulb.infof307.g12.server.dao;
 
 import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.Paquet;
+import com.ulb.infof307.g12.server.model.STATUS;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,21 +14,9 @@ public interface PaquetDao {
     void save() throws IOException;
     /**
      * Crée un paquet avec l'id et le nom donné
-     * @param id id du paquet
      * @param paquetString nom du paquet
      */
-    void createPaquet(UUID id , String paquetString);
-
-    /**
-     * Crée un paquet avec le nom donné et un id généré aléatoirement
-     * (Utilisé sans id donné)
-     * @param paquetString nom du paquet
-     */
-    default UUID createPaquet(String paquetString) {
-        UUID id = UUID.randomUUID();
-        createPaquet(id, paquetString);
-        return id;
-    }
+    STATUS createPaquet(String paquetString);
 
     /**
      * Renvoie le paquet correspondant à l'id

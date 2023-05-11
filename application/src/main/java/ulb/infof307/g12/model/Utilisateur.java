@@ -8,6 +8,7 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Utilisateur {
 
@@ -56,16 +57,22 @@ public class Utilisateur {
      * Ajoute le paquet à la liste des paquets
      * @param paquet paquet
      */
-    public void addPaquet(Paquet paquet) {
-        listPaquet.add(paquet);
+    public boolean addPaquet(Paquet paquet) {
+        boolean result = listPaquet.stream().anyMatch(paquet1 -> paquet1.getId().equals(paquet.getId()));
+
+        if(!result)
+            listPaquet.add(paquet);
+
+        return result;
+
     }
 
     /**
      * Enlève le paquet de la liste de paquets
-     * @param nom nom du paquet
+     * @param id l'id du paquet
      */
-    public void removePaquet(String nom) {
-        listPaquet.removeIf(paquet -> Objects.equals(paquet.getNom(), nom));
+    public void removePaquet(UUID id) {
+        listPaquet.removeIf(paquet -> Objects.equals(paquet.getId(), id));
     }
 
 

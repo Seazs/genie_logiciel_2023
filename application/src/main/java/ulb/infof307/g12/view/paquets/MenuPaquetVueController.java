@@ -158,7 +158,7 @@ public class MenuPaquetVueController implements Initializable {
     public void sessionEtude(ActionEvent event){
         if (listener!=null) {
             PaquetDTO paquet = paquetListView.getSelectionModel().getSelectedItem();
-            listener.CarteEtude(paquet);
+            listener.carteEtude(paquet);
         }
     }
 

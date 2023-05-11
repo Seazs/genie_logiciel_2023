@@ -2,14 +2,11 @@ package com.ulb.infof307.g12.server.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
-@AllArgsConstructor
 public class Paquet {
 
 
@@ -26,10 +23,10 @@ public class Paquet {
     private ArrayList<Carte> cartes= new ArrayList<>();
 
     @JsonCreator
-    public Paquet(@JsonProperty("nom") String nom, @JsonProperty("categories") ArrayList<String> categories,@JsonProperty("cartes") ArrayList<Carte> cartes) throws IllegalArgumentException{
+    public Paquet(@JsonProperty("id") UUID id,@JsonProperty("nom") String nom, @JsonProperty("categories") ArrayList<String> categories,@JsonProperty("cartes") ArrayList<Carte> cartes) throws IllegalArgumentException{
         if(nom == null || nom.equals("") || categories == null)
             throw new IllegalArgumentException("Le paquet doit posséder un nom ou une catégorie");
-
+        this.id = id;
         this.nom = nom;
         this.categories.addAll(categories);
         this.cartes.addAll(cartes);
