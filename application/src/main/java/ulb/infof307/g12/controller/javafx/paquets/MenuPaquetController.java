@@ -12,6 +12,7 @@ import ulb.infof307.g12.model.Utilisateur;
 import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -92,6 +93,11 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
                 .toList();
     }
 
+    @Override
+    public void importPaquet(File file) {
+        //TODO réfléchir
+    }
+
     /**
      * Lancer le menu d'édition avec le paquet choisit par l'utilisateur
      * @param paquetDTO Paquet choisit par l'utilisateur à être modifié
@@ -127,13 +133,6 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         }catch (NullPointerException e){
             instance.showErrorPopup("Vous devez sélectionner un paquet à étudier !");
         }
-
-
-
-
-
-
-
     }
 
 
@@ -142,4 +141,6 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         MenuPaquetVueController controller = (MenuPaquetVueController) super.controller;
         controller.rechargerListView();
     }
+
+
 }

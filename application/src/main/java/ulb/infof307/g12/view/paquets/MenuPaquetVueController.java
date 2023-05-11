@@ -15,6 +15,9 @@ import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 import ulb.infof307.g12.view.listeners.MenuPaquetListener;
+import javax.swing.*;
+import java.awt.* ;
+import java.io.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -162,4 +165,26 @@ public class MenuPaquetVueController implements Initializable {
         }
     }
 
+    /**
+     * Lorsque l'utilisateur clique sur le bouton "importer paquet", une fenêtre s'ouvre pour sélectionner un fichier
+     * @param actionEvent event
+     */
+    public void importPaquet(ActionEvent actionEvent) {
+        System.out.println("Import paquet");
+        System.setProperty("apple.awt.fileDialogForDirectories", "true");
+        FileDialog fileDialog = new FileDialog((JFrame) null, "Select a File to import", FileDialog.LOAD);
+
+        System.setProperty("apple.awt.fileDialogForDirectories", "false");
+        // show the file dialog
+        fileDialog.setVisible(true);
+        // get the selected file
+        File[] files = fileDialog.getFiles();
+        System.out.println(files.length);
+        if (files.length == 1) {
+            listener.importPaquet(files[0]);
+            rechargerListView();}
+    }
+
+    public void exportPaquet(ActionEvent actionEvent) {
+    }
 }
