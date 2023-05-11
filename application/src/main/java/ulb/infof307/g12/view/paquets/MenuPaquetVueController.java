@@ -173,6 +173,7 @@ public class MenuPaquetVueController implements Initializable {
         FileDialog fileDialog = new FileDialog((JFrame) null, "Select a File to import", FileDialog.LOAD);
         // show the file dialog
         fileDialog.setVisible(true);
+        fileDialog.setFilenameFilter((dir, name) -> name.endsWith(".json"));
         // get the selected file
         File[] files = fileDialog.getFiles();
         if (files.length == 1) {
