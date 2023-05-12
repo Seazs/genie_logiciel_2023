@@ -133,6 +133,8 @@ public class UserDataAccessService implements UserDAO{
                         new_db_user.add(new User(listdata[0].strip(), listdata[1].strip()));
                     } else {
                         System.out.println("Erreur : la ligne ne contient pas les informations attendues.");
+                        throw new IOException("Erreur dans la lecture du fichier.");
+                        // TODO : Créer une exception et changer le test pour qu'il prend cette exception
                     }
                 }
             }
@@ -148,14 +150,9 @@ public class UserDataAccessService implements UserDAO{
      * @throws IOException si le fichier n'existe pas
      */
     private void fileExists() throws IOException {
-        if (!db_user_file.exists()){
-            if (! db_user_file.getParentFile().mkdirs()){
-                throw new IOException("Stockage folder could not be created.");
-            };
-            if (! db_user_file.createNewFile()){
-                throw new IOException("StockUser.txt could not be created.");
-            };
-        }
+        db_user_file.getParentFile().mkdirs();
+        db_user_file.createNewFile();
+
     }
 
 }

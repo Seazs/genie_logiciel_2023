@@ -52,7 +52,7 @@ public class CarteEtudeVueController{
      */
     private void showGoodTypeCard(String type){
         switch (type) {
-            case "Simple" -> showQR();
+            case "Carte" -> showQR();
             case "QCM" -> showQCMFront();
             case "TT" -> showTTFront();
             case "Spec" -> showSpec();
@@ -67,7 +67,7 @@ public class CarteEtudeVueController{
     public void changeSide(){
         String type = listener.getCartesEtude().get(indexCarte).getType();
         switch (type) {
-            case "Simple" -> changeSideSimple();
+            case "Carte" -> changeSideSimple();
             case "QCM", "TT" -> changeSideTTorQcm();
             case "Spec" -> changeSideSpec();
         }
@@ -418,14 +418,14 @@ public class CarteEtudeVueController{
         String info[]=listener.getCartesEtude().get(indexCarte).getCarteInfo();
         if (side == 0){
             switch (listener.getCartesEtude().get(indexCarte).getType()) {
-                case "Simple" -> listener.parlerTexte(info[1]);
+                case "Carte" -> listener.parlerTexte(info[1]);
                 case "QCM" -> listener.parlerTexte(info[0]+info[1]+info[2]+info[3]);
                 case "TT" -> listener.parlerTexte(info[0]+info[1]);
             }
         }
         else {
             switch (listener.getCartesEtude().get(indexCarte).getType()) {
-                case "Simple", "TT" -> listener.parlerTexte(info[2]);
+                case "Carte", "TT" -> listener.parlerTexte(info[2]);
                 case "QCM" -> listener.parlerTexte(info[4]);
             }
         }

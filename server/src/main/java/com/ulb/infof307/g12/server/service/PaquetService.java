@@ -3,6 +3,7 @@ package com.ulb.infof307.g12.server.service;
 import com.ulb.infof307.g12.server.dao.PaquetDao;
 import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.Paquet;
+import com.ulb.infof307.g12.server.model.STATUS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -26,10 +27,10 @@ public class PaquetService {
 
     /**
      * Crée un paquet avec le nom donné
-     * @param nom nom du paquet
+     * @param paquetString nom du paquet
      */
-    public void createPaquet(String nom, ArrayList<String> categories, ArrayList<Carte> cartes){
-        paquetDao.createPaquet(nom, categories, cartes) ;
+    public STATUS createPaquet(String paquetString){
+        return paquetDao.createPaquet(paquetString) ;
     }
 
     /**

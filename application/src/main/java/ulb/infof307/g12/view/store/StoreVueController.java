@@ -39,23 +39,14 @@ public class StoreVueController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         // Personnaliser l'affichage des éléments de la liste
         updateVisuelListeViewPaquet(mesPaquetListView);
         updateVisuelListeViewPaquet(storePaquetListView);
 
         RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> {
             filtrageCategorie();
-
-
         });
-    }
 
-
-    public void updateVisuelListePaquet(ArrayList<PaquetDTO> paquets) {
-        ObservableList<PaquetDTO> observablePaquets = FXCollections.observableArrayList(paquets);
-        storePaquetListView.setItems(observablePaquets);
-        updateVisuelListeViewPaquet(storePaquetListView);
     }
 
 
@@ -128,12 +119,13 @@ public class StoreVueController implements Initializable{
     public void uploadPaquet() throws IOException {
         PaquetDTO paquet = mesPaquetListView.getSelectionModel().getSelectedItem();
         listener.uploadPaquet(paquet);
+        refresh();
     }
 
     /**
      * Envoie l’ordre de refresh à storeController
      */
-    public void refresh(){
+    private void refresh(){
 
         storePaquetListView.getItems().setAll(
                 listener.getStorePaquets()
@@ -149,7 +141,7 @@ public class StoreVueController implements Initializable{
         data.addAll(listener.getUserPaquets()) ;
         // Injecter les données de l'observableArrayList dans la ListView
         mesPaquetListView.setItems(data) ;
-
+        refresh();
     }
 
     /**

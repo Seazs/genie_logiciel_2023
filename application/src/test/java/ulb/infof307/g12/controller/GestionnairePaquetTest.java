@@ -31,10 +31,11 @@ class GestionnairePaquetTest {
     private static File fichierUtilisateur;
 
     @BeforeAll
-    public static void creeDossierTemporaire(){
+    public static void creeDossierTemporaire() throws IOException {
         dossierTemporaire = new File("./stockageTest");
         dossierTemporaire.mkdir();
         fichierUtilisateur = new File(dossierTemporaire, "stockUser.txt");
+        fichierUtilisateur.createNewFile();
     }
     @AfterAll
     public static void supprimeDossierTemporaire(){
@@ -61,7 +62,7 @@ class GestionnairePaquetTest {
 
     @Test
     public void testSauvegardePaquet() throws IOException{
-        Utilisateur utilisateur1 = new Utilisateur("alex","pomme");
+        Utilisateur utilisateur1 = new Utilisateur("testUtilisateur","test");
         Paquet paquet1 = new Paquet("Maths","BA1");
         Carte carte1 = new Carte(1, "divergence = rotationnel ?", "Non");
         Carte carte2 = new Carte(2, "Anne delandsheer ?", "Oui");
@@ -78,12 +79,15 @@ class GestionnairePaquetTest {
         utilisateur1.addPaquet(paquet2);
         GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur(fichierUtilisateur);
         gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
-        GestionnairePaquet gestPaquet = new GestionnairePaquet(dossierTemporaire.getPath());
+        GestionnairePaquet gestPaquet = new GestionnairePaquet();
         gestPaquet.save(utilisateur1);
         //Test d'assertion
-        File f = new File(dossierTemporaire.getPath()+utilisateur1.getPseudo()+"/Maths.json");
+        File f = new File(Main.getFolderPath()+"testUtilisateur/"+paquet1.getId()+".json");
+        File f2 = new File(Main.getFolderPath()+"testUtilisateur/"+paquet2.getId()+".json");
         assertTrue(f.exists());
-
+        assertTrue(f2.exists());
+        f.delete();
+        f2.delete();
     }
 
     @Test

@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.scilab.forge.jlatexmath.TeXFormula;
 
 public class CarteSpec extends Carte{
 
     @Getter@Setter
     @JsonProperty("language")
     private String language;
+
 
     /**
      * Crée une carte dont ni le verso ni le recto ne peuvent être vides.
@@ -28,6 +30,15 @@ public class CarteSpec extends Carte{
         super(id, recto, verso);
         if (lang == null) throw new IllegalArgumentException("La langue ne peut pas être nulle");
         if (!checkLanguage(lang)) throw new IllegalArgumentException("La langue n'est pas valide");
+        if (lang.equals("latex")) {
+            try {
+                TeXFormula f2 = new TeXFormula(recto);
+                TeXFormula f1 = new TeXFormula(verso);
+
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Il y a une erreur dans le LaTeX");
+            }
+        }
         this.language = lang;
         this.type="Spec";
     }
@@ -39,6 +50,7 @@ public class CarteSpec extends Carte{
         if (!checkLanguage(lang)) throw new IllegalArgumentException("La langue n'est pas valide");
         this.language = lang;
         this.type="Spec";
+        this.connaissance = connaissance;
     }
 
 

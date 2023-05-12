@@ -49,7 +49,7 @@ public class EditionController extends BaseController implements EditionVueListe
             paquet.setNom(nom);
             paquet.addCategory(categorie);
             GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
-            gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getUserPrincipale());
+            gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getPrincipalUser());
             MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();// Revenir sur le menu principal
         }catch (IOException e){
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de sauvegarder le paquet !");
@@ -121,7 +121,7 @@ public class EditionController extends BaseController implements EditionVueListe
             CarteSpec carte = new CarteSpec(id, recto, verso,lang) ;
             paquet.addCard(carte);
         }catch (IllegalArgumentException e){
-            MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posséder un recto et un verso !");
+            MenuPrincipal.getINSTANCE().showErrorPopup(e.getMessage());
         }
     }
 

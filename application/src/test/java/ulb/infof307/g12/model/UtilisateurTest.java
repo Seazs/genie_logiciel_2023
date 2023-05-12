@@ -39,7 +39,7 @@ class UtilisateurTest {
         Utilisateur pers1 = new Utilisateur("alex", "pomme");
         Paquet paquet1 = new Paquet("Maths", "BA-1");
         pers1.addPaquet(paquet1);
-        pers1.removePaquet("Maths");
+        pers1.removePaquet(paquet1.getId());
         assertEquals(0, pers1.getListPaquet().size());
     }
 

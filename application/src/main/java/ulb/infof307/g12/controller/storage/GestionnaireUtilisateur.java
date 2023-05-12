@@ -24,6 +24,7 @@ public class GestionnaireUtilisateur {
      */
     public GestionnaireUtilisateur(File fichier) throws FileNotFoundException {
         userdatabase = fichier;
+        load();
         status = STATUS.OK;
     }
 

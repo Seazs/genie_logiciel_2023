@@ -1,39 +1,35 @@
 package com.ulb.infof307.g12.server.model;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
-@AllArgsConstructor
 public class Paquet {
 
 
     @Getter
-
     private UUID id;
     @Getter
+    @JsonProperty("nom")
     private String nom;
     @Getter
+    @JsonProperty("categories")
     private ArrayList<String> categories = new ArrayList<>();
     @Getter
+    @JsonProperty("cartes")
     private ArrayList<Carte> cartes= new ArrayList<>();
 
-
-    /**
-     * Crée un paquet dont le nom doit être unique.
-     * @param nom nom du paquet
-     * @param categorie catégorie du paquet
-     * @throws IllegalArgumentException si le paquet n'a pas de catérorie ou de nom
-     */
-    public Paquet(String nom, String... categorie) throws IllegalArgumentException{
-        if(nom == null || nom.equals("") || categorie == null)
+    @JsonCreator
+    public Paquet(@JsonProperty("id") UUID id,@JsonProperty("nom") String nom, @JsonProperty("categories") ArrayList<String> categories,@JsonProperty("cartes") ArrayList<Carte> cartes) throws IllegalArgumentException{
+        if(nom == null || nom.equals("") || categories == null)
             throw new IllegalArgumentException("Le paquet doit posséder un nom ou une catégorie");
-
+        this.id = id;
         this.nom = nom;
-        this.categories.addAll(Arrays.asList(categorie));
+        this.categories.addAll(categories);
+        this.cartes.addAll(cartes);
     }
 
     /**
@@ -48,5 +44,12 @@ public class Paquet {
             }
         }
         cartes.add(carte);
+    }
+    @Override
+    public boolean equals(Object objects) {
+        if(!(objects instanceof Paquet obj)) {
+            return false;
+        }
+        return (this.getNom().equals(obj.getNom()) && this.getCategories().equals(obj.categories) && this.getId().equals(obj.getId()));
     }
 }

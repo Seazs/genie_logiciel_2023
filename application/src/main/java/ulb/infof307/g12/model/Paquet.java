@@ -2,6 +2,7 @@ package ulb.infof307.g12.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,12 @@ import ulb.infof307.g12.view.dto.PaquetDTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
+@JsonIgnoreProperties(
+            ignoreUnknown = true
+    )
 public class Paquet {
 
     @Setter
@@ -19,7 +25,11 @@ public class Paquet {
     private String nom;
 
     @Getter
-    @Setter
+    @JsonProperty("id")
+    private UUID id;
+
+    @Getter
+    @Setter //On laisse setter mm si c'est final pour jackson (sauvegarde json)
     @JsonProperty("categories")
     private final ArrayList<String> categories = new ArrayList<String>();
 
@@ -37,7 +47,7 @@ public class Paquet {
     public Paquet(String nom, String... categorie) throws IllegalArgumentException{
         if(nom == null || nom.equals("") || categorie == null)
             throw new IllegalArgumentException("Le paquet doit posséder un nom ou une catégorie");
-
+        this.id = UUID.randomUUID();
         this.nom = nom;
         this.categories.addAll(Arrays.asList(categorie));
     }
@@ -50,10 +60,10 @@ public class Paquet {
      * @throws IllegalArgumentException
      */
     @JsonCreator
-    public Paquet(@JsonProperty("nom") String nom, @JsonProperty("categories") ArrayList<String> categories,@JsonProperty("cartes") ArrayList<Carte> cartes) throws IllegalArgumentException{
+    public Paquet(@JsonProperty("id") UUID id, @JsonProperty("nom") String nom, @JsonProperty("categories") List<String> categories, @JsonProperty("cartes") List<Carte> cartes) throws IllegalArgumentException{
         if(nom == null || nom.equals("") || categories == null)
             throw new IllegalArgumentException("Le paquet doit posséder un nom ou une catégorie");
-
+        this.id = id;
         this.nom = nom;
         this.categories.addAll(categories);
         this.cartes.addAll(cartes);
@@ -116,7 +126,7 @@ public class Paquet {
      */
     @JsonIgnore
     public PaquetDTO getDTO() {
-        return new PaquetDTO(this.nom, this.categories);
+        return new PaquetDTO(this.id.toString(),this.nom, this.categories);
     }
 
 }
