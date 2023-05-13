@@ -4,6 +4,8 @@ package ulb.infof307.g12.model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.springframework.http.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
@@ -52,9 +54,14 @@ public class Server {
         return STATUS.valueOf(result);
     }
 
-    public String deletePaquet(UUID id){
-        //TODO envoyer la requete de suppresion au serveur
-        return null;
+    /**
+     * Envoie une requète DELETE au serveur pour supprimer un paquet
+     * @param id l'id du paquet à supprimer
+     */
+    @DeleteMapping("/paquet/{id}")
+    public void deletePaquet(@PathVariable UUID id){
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(url + "paquet/" + id);
     }
 
 

@@ -86,4 +86,17 @@ public class Utilisateur {
                 !string.contains(" "));
     }
 
+    /**
+     * Vérifie que le paquet appartient à l'utilisateur
+     *
+     * @param paquet paquet
+     */
+    public void belongToUser(Paquet paquet) {
+        if(listPaquet.stream().anyMatch(paquet1 -> paquet1.getId().equals(paquet.getId()))){
+        }
+        else{
+            throw new IllegalArgumentException("Le paquet n'appartient pas à l'utilisateur");
+        }
+    }
+
 }

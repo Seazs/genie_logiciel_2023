@@ -14,10 +14,7 @@ import ulb.infof307.g12.view.listeners.StoreVueListener;
 import ulb.infof307.g12.view.store.StoreVueController;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -129,6 +126,22 @@ public class StoreController extends BaseController implements StoreVueListener 
         return MenuPrincipal.getINSTANCE().getUserPaquets().stream()
                 .map(Paquet::getDTO)
                 .toList();
+    }
+
+    /**
+     * Supprime un paquet du store
+     * @param paquetDto paquet à supprimer
+     */
+    @Override
+    public void deletePaquetStore(PaquetDTO paquetDto) {
+        MenuPrincipal singleton = MenuPrincipal.getINSTANCE();
+        Utilisateur currentUser = singleton.getPrincipalUser();
+        try {
+            currentUser.belongToUser(paquetDto.getPaquet().get());//On vérifie que le paquet appartient bien à l'utilisateur
+            MenuPrincipal.getINSTANCE().getServer().deletePaquet(UUID.fromString(paquetDto.uuid()));//Supprimer le paquet du store
+        } catch (IllegalArgumentException e) {
+            singleton.showErrorPopup("Vous ne possédez pas ce paquet !");
+        }
     }
 
     @Override
