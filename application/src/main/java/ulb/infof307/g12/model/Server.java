@@ -58,7 +58,7 @@ public class Server {
      * Envoie une requète DELETE au serveur pour supprimer un paquet
      * @param id l'id du paquet à supprimer
      */
-    @DeleteMapping("/paquet/{id}")
+    @DeleteMapping("/paquet")
     public void deletePaquet(@PathVariable UUID id){
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(url + "paquet/" + id);

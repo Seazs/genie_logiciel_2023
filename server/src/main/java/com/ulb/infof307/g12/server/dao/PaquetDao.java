@@ -30,5 +30,5 @@ public interface PaquetDao {
      */
     List<Paquet> getAllPaquets();
 
-    void deletePaquet(UUID id);
+    STATUS deletePaquet(UUID id);
 }

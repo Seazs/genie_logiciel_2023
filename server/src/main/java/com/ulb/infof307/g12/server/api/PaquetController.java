@@ -60,9 +60,14 @@ public class PaquetController {
         return result.toString();
     }
 
-    @DeleteMapping
-    public void deletePaquet(@RequestBody UUID id){
-        paquetService.deletePaquet(id);
+    /**
+     * Supprime le paquet correspondant à l'id
+     * @param id id du paquet a supprimer
+     */
+    @DeleteMapping("{id}")
+    public String deletePaquet(@PathVariable UUID id){
+        STATUS result = paquetService.deletePaquet(id);
+        return result.toString();
     }
 
 

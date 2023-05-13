@@ -49,7 +49,12 @@ public class PaquetService {
         return paquetDao.getAllPaquets();
     }
 
-    public void deletePaquet(UUID id){
-        paquetDao.deletePaquet(id);
+    /**
+     * Supprime le paquet correspondant à l'id
+     * @param id id du paquet à supprimer
+     * @return
+     */
+    public STATUS deletePaquet(UUID id){
+        return paquetDao.deletePaquet(id);
     }
 }

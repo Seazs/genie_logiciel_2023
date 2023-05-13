@@ -133,8 +133,9 @@ public class PaquetDataAccessService implements PaquetDao {
     }
 
     @Override
-    public void deletePaquet(UUID id) {
+    public STATUS deletePaquet(UUID id) {
         db_paquets.removeIf(paquet -> paquet.getId().equals(id));
+        return STATUS.OK;
     }
 
 }

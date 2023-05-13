@@ -139,7 +139,7 @@ public class StoreController extends BaseController implements StoreVueListener 
         try {
             currentUser.belongToUser(paquetDto.getPaquet().get());//On vérifie que le paquet appartient bien à l'utilisateur
             MenuPrincipal.getINSTANCE().getServer().deletePaquet(UUID.fromString(paquetDto.uuid()));//Supprimer le paquet du store
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | NoSuchElementException e) {
             singleton.showErrorPopup("Vous ne possédez pas ce paquet !");
         }
     }
