@@ -73,5 +73,11 @@ public class UserController {
         STATUS result = userService.updateUser(user);
         return ResponseEntity.ok(result.getMsg());
     }
+    @DeleteMapping("delete/{username}")
+    public ResponseEntity<String> deleteUser(@PathVariable String username){
+        STATUS result = userService.deleteUser(username);
+        return ResponseEntity.ok(result.getMsg());
+
+    }
 
 }

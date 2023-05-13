@@ -154,5 +154,18 @@ public class UserDataAccessService implements UserDAO{
         db_user_file.createNewFile();
 
     }
+    public STATUS deleteUser(String username){
+        try {
+            db_user.removeIf(user -> user.getUsername().equals(username));
+        }catch (Exception exception){
+            return STATUS.USER_COULD_NOT_BE_DELETED;
+        }
+        try {
+            this.save();
+            return STATUS.OK;
+        }catch (IOException exception){
+            return STATUS.DB_COULD_NOT_BE_SAVED;
+        }
+    }
 
 }

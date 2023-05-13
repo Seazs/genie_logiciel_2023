@@ -67,8 +67,13 @@ public class ConnexionMenuController extends BaseController implements UserCrede
 
     private String onlineRegister(String username, String password){
         String result = MenuPrincipal.getINSTANCE().getServer().createUser(username,password);
+        if (STATUS.valueOf(result).equals(STATUS.SERVER_CREATION_ERROR)){
+            MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de créer l'utilisateur sur le serveur !");
+        }else if (STATUS.valueOf(result).equals(STATUS.SERVER_CONNEXION_ERROR)){
+            MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de se connecter au serveur !");
+        }
         offlineRegister(username, password);
-        return result;
+        return STATUS.valueOf(result).getMsg();
     }
 
     /**
@@ -123,6 +128,9 @@ public class ConnexionMenuController extends BaseController implements UserCrede
             STATUS result = MenuPrincipal.getINSTANCE().getServer().getLogin(username,password);
             if (Objects.equals(result.getMsg(), "")) {
                 offlineLogin(username, password);
+            }
+            if (result == STATUS.SERVER_CONNEXION_ERROR){
+                return "Erreur lors de la connexion au serveur";
             }
             return result.getMsg();
         }catch (Exception e){

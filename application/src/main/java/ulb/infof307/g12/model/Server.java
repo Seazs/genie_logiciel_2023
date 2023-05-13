@@ -11,7 +11,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.view.dto.PaquetDTO;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -82,8 +81,7 @@ public class Server {
         }catch (HttpClientErrorException | NullPointerException e){
             return STATUS.USERNAME_DOES_NOT_EXIST;
         }catch (ResourceAccessException e){
-            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la connexion au serveur");
-            return STATUS.SERVER_ERROR;
+            return STATUS.SERVER_CONNEXION_ERROR;
         }
     }
 
@@ -105,14 +103,11 @@ public class Server {
                 return response.getBody();
             }
             else{
-                MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la création de l'utilisateur");
-                return "error";
-
+                return STATUS.SERVER_CREATION_ERROR.toString();
             }
 
         }catch (HttpClientErrorException | ResourceAccessException e){
-            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la création de l'utilisateur");
-            return "Erreur lors de la création de l'utilisateur";
+            return STATUS.SERVER_CONNEXION_ERROR.toString();
         }
 
 

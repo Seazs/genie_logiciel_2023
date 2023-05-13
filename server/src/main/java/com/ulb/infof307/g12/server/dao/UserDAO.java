@@ -40,4 +40,6 @@ public interface UserDAO {
     List<User> getAllUsers();
 
     void save() throws IOException;
+
+    STATUS deleteUser(String username);
 }
