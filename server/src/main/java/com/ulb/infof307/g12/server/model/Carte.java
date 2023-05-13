@@ -71,7 +71,7 @@ public class Carte {
          * @param type type de la carte
          */
         protected void validateType(String type) {
-                if (!Objects.equals(type, "QCM") && !Objects.equals(type, "TT") && !Objects.equals(type, "Spec"))
+                if (!Objects.equals(type, "QCM") && !Objects.equals(type, "TT") && !Objects.equals(type, "Spec") && !Objects.equals(type, "Carte"))
                         throw new IllegalArgumentException("Le type de carte n'est pas valide");
         }
 
