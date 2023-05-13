@@ -124,6 +124,11 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         }
     }
 
+    @Override
+    public void sync() {
+        MenuPrincipal.getINSTANCE().showSyncMenu();
+    }
+
     /**
      * Lancer le menu d'édition avec le paquet choisit par l'utilisateur
      * @param paquetDTO Paquet choisit par l'utilisateur à être modifié

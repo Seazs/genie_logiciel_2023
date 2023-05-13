@@ -56,8 +56,21 @@ public class PaquetController {
     @PostMapping
     public String createPaquet(@RequestBody String paquetEnString) {
         STATUS result = paquetService.createPaquet(paquetEnString);
+        return result.toString();
+    }
+    @PostMapping("/sync")
+    public String syncPaquet(@RequestBody String infoString) {
+        STATUS result = paquetService.syncPaquets(infoString);
         System.out.println(result.toString());
         return result.toString();
+    }
+
+    @GetMapping("/sync/{username}")
+    public String giveUserPaquets(@PathVariable String username) {
+        String info = paquetService.getUserPaquet(username);
+        JSONObject json = new JSONObject();
+        json.put("paquets", info);
+        return json.toString();
     }
 
     @DeleteMapping

@@ -1,11 +1,9 @@
 package com.ulb.infof307.g12.server.dao;
 
-import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.Paquet;
 import com.ulb.infof307.g12.server.model.STATUS;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,4 +29,13 @@ public interface PaquetDao {
     List<Paquet> getAllPaquets();
 
     void deletePaquet(UUID id);
+
+    STATUS syncPaquets(String paquetsEnString);
+
+    /**
+     * Renvoie les paquets de l'utilisateur sous forme de string
+     * @param username nom de l'utilisateur
+     * @return
+     */
+    String getUserPaquet(String username);
 }

@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.BaseController;
+import ulb.infof307.g12.controller.javafx.synchronisation.SyncController;
 import ulb.infof307.g12.controller.javafx.exception.ExceptionPopupController;
 import ulb.infof307.g12.controller.javafx.paquets.CarteEtudeController;
 import ulb.infof307.g12.controller.javafx.paquets.EditionController;
@@ -35,6 +36,8 @@ public class MenuPrincipal extends Application {
     @Setter
     private Utilisateur principalUser;
     private ExceptionPopupController exceptionPopupController;
+
+    private SyncController syncController;
     @Getter
     private final Server server = new Server();
     @Setter
@@ -219,4 +222,18 @@ public class MenuPrincipal extends Application {
         return Collections.unmodifiableList(principalUser.getListPaquet());
     }
 
+    public void showSyncMenu() {
+        if (isOnline) {
+            try {
+                syncController = new SyncController(new Stage());
+                syncController.show();
+            } catch (IOException e) {
+                showErrorPopup("Impossible de charger le menu de synchronisation !");
+            }
+        }
+        else showErrorPopup("Vous n’êtes pas connecté au serveur !");
+    }
+    public void setUserPaquets(List<Paquet> paquets) {
+        principalUser.setListPaquet(paquets);
+    }
 }
