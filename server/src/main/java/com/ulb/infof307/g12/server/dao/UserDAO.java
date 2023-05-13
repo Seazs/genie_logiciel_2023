@@ -31,13 +31,21 @@ public interface UserDAO {
     String getPassword(String username);
 
     /**
-     * Met à jour un utilisateur
-     * @param user l'utilisateur
+     * Met à jour les infos d'un utilisateur
+     * @param user le dit utilisateur
      */
     STATUS updateUser(User user);
 
 
+    /**
+     * Retourne la liste des utilisateurs
+     * @return La liste des utilisateurs
+     */
     List<User> getAllUsers();
 
+    /**
+     * Sauvegarde la liste des utilisateurs dans un fichier .txt
+     * @throws IOException si le fichier n'existe pas
+     */
     void save() throws IOException;
 }

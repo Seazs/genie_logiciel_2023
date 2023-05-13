@@ -30,5 +30,9 @@ public interface PaquetDao {
      */
     List<Paquet> getAllPaquets();
 
+    /**Supprime la paquet
+     * @param id id du paquet à supprimer
+     * @return le status ok si aucun problème n'a été à signaler
+     */
     STATUS deletePaquet(UUID id);
 }

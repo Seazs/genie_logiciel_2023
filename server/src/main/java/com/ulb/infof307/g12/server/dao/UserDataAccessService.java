@@ -13,6 +13,9 @@ public class UserDataAccessService implements UserDAO{
     public STATUS status;
     private List<User> db_user;
 
+    /**Constructeur
+     *
+     */
     public UserDataAccessService() {
         db_user_file = new File("server/src/main/resources/stockage","stockUser.txt");
         try {
@@ -68,6 +71,9 @@ public class UserDataAccessService implements UserDAO{
                 .map(User::getPassword)
                 .orElse(null);
     }
+    /**
+     * @see UserDAO#updateUser(User)
+     */
 
     @Override
     public STATUS updateUser(User user) {
@@ -93,14 +99,16 @@ public class UserDataAccessService implements UserDAO{
         return STATUS.OK;
     }
 
+    /**
+     * @see UserDAO#getAllUsers()
+     */
     @Override
     public List<User> getAllUsers() {
         return db_user;
     }
 
     /**
-     * Sauvegarde la liste des utilisateurs dans un fichier .txt
-     * @throws IOException si le fichier n'existe pas
+     * @see UserDAO#save()
      */
     public void save() throws IOException {
         fileExists();
@@ -134,7 +142,6 @@ public class UserDataAccessService implements UserDAO{
                     } else {
                         System.out.println("Erreur : la ligne ne contient pas les informations attendues.");
                         throw new IOException("Erreur dans la lecture du fichier.");
-                        // TODO : Créer une exception et changer le test pour qu'il prend cette exception
                     }
                 }
             }

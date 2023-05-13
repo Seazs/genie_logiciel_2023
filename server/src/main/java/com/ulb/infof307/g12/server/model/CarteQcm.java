@@ -11,7 +11,7 @@ public class CarteQcm extends Carte {
      */
     @Getter
     @JsonProperty("question")
-    private String question;
+    private final String question;
 
     @Getter
     @JsonProperty("answer")
@@ -19,8 +19,14 @@ public class CarteQcm extends Carte {
 
     @Getter
     @JsonProperty("propositions")
-    private String[] propositions;
+    private final String[] propositions;
 
+    /** Constructeur pour la désérialisation avec jackson
+     * @param id id de la carte qcm
+     * @param recto recto
+     * @param verso verso
+     * @param propositions propositions
+     */
     @JsonCreator
     public CarteQcm(@JsonProperty("id") int id,@JsonProperty("recto") String recto, @JsonProperty("verso") String verso, @JsonProperty("propositions") String[] propositions) {
         super(id, recto, verso,"QCM");

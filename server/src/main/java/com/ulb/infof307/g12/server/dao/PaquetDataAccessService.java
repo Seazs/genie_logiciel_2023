@@ -16,6 +16,9 @@ public class PaquetDataAccessService implements PaquetDao {
     private List<Paquet> db_paquets = new ArrayList<>();
     private File db_paquet_folder;
 
+    /**Cosntructeur
+     * Charge en mémoire les paquets de l'utilisateur
+     */
     public PaquetDataAccessService(){
         try {
             db_paquet_folder = new File("server/src/main/resources/stockage/paquet");
@@ -39,7 +42,7 @@ public class PaquetDataAccessService implements PaquetDao {
 
 
     /**
-     * Sauvegarder l'état actuel de la base de données dans un fichier .txt
+     * Sauvegarder l'état actuel de la base de données dans un fichier .json
      * @throws IOException Erreur d'écriture dans le fichier
      */
     @Override
@@ -132,6 +135,9 @@ public class PaquetDataAccessService implements PaquetDao {
         return Collections.unmodifiableList(db_paquets);
     }
 
+    /**
+     * @see PaquetDao#deletePaquet(UUID)
+     */
     @Override
     public STATUS deletePaquet(UUID id) {
         db_paquets.removeIf(paquet -> paquet.getId().equals(id));

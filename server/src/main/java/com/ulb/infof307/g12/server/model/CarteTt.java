@@ -7,15 +7,15 @@ import lombok.Getter;
 public class CarteTt extends Carte{
     @Getter
     @JsonProperty("begin")
-    private String begin;
+    private final String begin;
 
     @Getter
     @JsonProperty("end")
-    private String end;
+    private final String end;
 
     @Getter
     @JsonProperty("answer")
-    private String answer;
+    private final String answer;
 
     /**
      * Constructeur pour la désérialisation avec jackson

@@ -14,10 +14,10 @@ public class UserService {
     private final UserDAO userDAO;
 
     /**
+     * Auto Wired crée une instance de PaquetDao (comme ça on ne doit pas s'occuper de le créer nous même)
      * @param userDAO Dao permettant de gérer les utilisateurs (généré automatiquement par Spring)
      */
     @Autowired
-    // Auto Wired crée une instance de PaquetDao (comme ça on ne doit pas s'occuper de le créer nous même)
     public UserService(@Qualifier("users") UserDAO userDAO) {
         this.userDAO = userDAO;
     }
@@ -48,6 +48,9 @@ public class UserService {
         return userDAO.updateUser(user);
     }
 
+    /**
+     * @see UserDAO#getAllUsers()
+     */
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
     }

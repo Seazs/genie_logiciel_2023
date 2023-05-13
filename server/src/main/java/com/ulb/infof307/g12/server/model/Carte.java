@@ -20,10 +20,6 @@ import java.util.Objects;
 }) //Montre la structure des classes filles et comment les reconnaitre
 
 public class Carte {
-        /**
-         * Connaissance est un int de 0 à 5, avec 1 qui est très mauvais et 5 très bon.
-         * Si la connaissance est à 0, c’est que la carte n’a pas encore été vue/étudiée.
-         */
         @Getter
         @JsonProperty("connaissance")
         public int connaissance = 0;
@@ -49,7 +45,7 @@ public class Carte {
         protected String type;
 
         /**
-         * Constructeur pour la deserialisation
+         * Constructeur pour la désérialisation avec jackson
          * @param id id de la carte
          * @param recto recto
          * @param verso verso
@@ -88,9 +84,9 @@ public class Carte {
         /**
          * Fonction qui s'assure que le mot est valide
          * @param word mot à valider
-         * @throws IllegalArgumentException
+         * renvoie une exception si le verso n'est pas valide
          */
-        protected void validate(String word) throws IllegalArgumentException{
+        protected void validate(String word){
                 if(word == null || word.equals("") || word.contains("#"))
                         throw new IllegalArgumentException("Le verso n'est pas valide");
         }

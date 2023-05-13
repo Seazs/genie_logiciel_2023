@@ -17,6 +17,10 @@ public class UserController {
 
     private final UserService userService;
 
+    /**
+     * Constructeur de la classe
+     * @param userService userService permettant de gérer les utilisateurs
+     */
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -39,8 +43,6 @@ public class UserController {
      */
     @GetMapping
     public List<User> getAllUsers(){
-        //!! ATTENTION: RENVOI LA LISTE DES UTILISATEURS AVEC SES NOMS
-        // D'UTILISATEURS ET LEURS MOTS DE PASSES.
         return userService.getAllUsers();
     }
 

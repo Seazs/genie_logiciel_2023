@@ -16,11 +16,10 @@ import java.util.UUID;
 public class PaquetService {
     private final PaquetDao paquetDao;
 
-    /**
+    /**Auto Wired crée une instance de PaquetDao (comme ça on ne doit pas s'occuper de le créer nous même)
      * @param paquetDao Dao permettant de gérer les paquets (généré automatiquement par Spring)
      */
     @Autowired
-    // Auto Wired crée une instance de PaquetDao (comme ça on ne doit pas s'occuper de le créer nous même)
     public PaquetService(@Qualifier("database") PaquetDao paquetDao) {
         this.paquetDao = paquetDao;
     }
@@ -43,6 +42,7 @@ public class PaquetService {
     }
 
     /**
+     * Renvoie tous les paquets d'un utilisateur
      * @return la liste de tous les paquets
      */
     public List<Paquet> getAllPaquets() {
@@ -52,7 +52,7 @@ public class PaquetService {
     /**
      * Supprime le paquet correspondant à l'id
      * @param id id du paquet à supprimer
-     * @return
+     * @return le status ok si tout c'est bien déroulé
      */
     public STATUS deletePaquet(UUID id){
         return paquetDao.deletePaquet(id);
