@@ -265,7 +265,6 @@ public class GestionnaireUtilisateur {
                 f.delete();
             }
         } catch (Exception e) {
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de supprimer l'utilisateur !");
         }
     }
