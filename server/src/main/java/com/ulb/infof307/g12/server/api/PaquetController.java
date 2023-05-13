@@ -56,7 +56,6 @@ public class PaquetController {
     @PostMapping
     public String createPaquet(@RequestBody String paquetEnString) {
         STATUS result = paquetService.createPaquet(paquetEnString);
-        System.out.println(result.toString());
         return result.toString();
     }
 

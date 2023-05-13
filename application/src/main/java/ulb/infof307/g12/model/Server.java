@@ -29,7 +29,6 @@ public class Server {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(url+"paquet", String.class);
         String responseBody = response.getBody();
-        System.out.println(responseBody);
         JSONArray jsonArrayListPaquet = new JSONArray(responseBody);
        return jsonArrayListPaquet;
     }
@@ -130,4 +129,13 @@ public class Server {
         return response.getBody();
     }
 
+    public String deleteUser(String username) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+
+        HttpEntity<String> entity = new HttpEntity<>(username, headers);
+        restTemplate.delete(url+"user/"+username);
+        return entity.getBody();
+    }
 }
