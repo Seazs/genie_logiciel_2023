@@ -20,7 +20,7 @@ public class GestionnairePaquet {
      * Constructeur du gestionnaire de paquet
      */
     public GestionnairePaquet() {
-        folderStockagePath = Main.getFolderPath();
+        folderStockagePath = Main.getStockageFolderPath();
     }
 
     /**
@@ -40,7 +40,6 @@ public class GestionnairePaquet {
         for (Paquet paquet : listPaquet){
             savePaquet(user, paquet);
         }
-        System.out.println("Successfully saved user paquets as JSON file!");
     }
 
     /**
@@ -59,7 +58,6 @@ public class GestionnairePaquet {
         } catch (IOException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la sauvegarde du paquet "+ paquet.getNom());
         }
-        System.out.println("Successfully saved user paquets as JSON file!");
     }
 
     /**
@@ -89,7 +87,6 @@ public class GestionnairePaquet {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             Paquet newPaquet = objectMapper.readValue(file, Paquet.class);
-            System.out.println("Successfully read JSON file and created object");
             loadedListOfPaquet.add(newPaquet);
         } catch (IOException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors du chargement du paquet");

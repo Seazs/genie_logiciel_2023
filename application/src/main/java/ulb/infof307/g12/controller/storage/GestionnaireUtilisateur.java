@@ -13,9 +13,10 @@ import java.util.Scanner;
 
 public class GestionnaireUtilisateur {
     private static final List<Utilisateur> listeUtilisateur = new ArrayList<>();
-    private final File userdatabase;
+    private final File userDatabase;
     public STATUS status;
     public static Utilisateur utilisateurConnected ;
+    private String stock_folder = Main.getStockageFolderPath();
 
     /**
      * Constructeur de GestionnaireUtilisateur, en paramètre, c'est le fichier dont on doit charger les utilisateurs
@@ -23,7 +24,7 @@ public class GestionnaireUtilisateur {
      * @throws FileNotFoundException
      */
     public GestionnaireUtilisateur(File fichier) throws FileNotFoundException {
-        userdatabase = fichier;
+        userDatabase = fichier;
         load();
         status = STATUS.OK;
     }
@@ -32,9 +33,9 @@ public class GestionnaireUtilisateur {
      * Autre constructeur du gestionnaire utilisateur
      */
     public GestionnaireUtilisateur() {
-        userdatabase = new File(Main.getFolderPath(),"stockUser.txt");
+        userDatabase = new File(stock_folder,"stockUser.txt");
         try {
-            if (!userdatabase.createNewFile()){
+            if (!userDatabase.createNewFile()){
                 load();
             }
             status = STATUS.OK;
@@ -48,7 +49,7 @@ public class GestionnaireUtilisateur {
      * @throws IOException
      */
     public void save() throws IOException {
-        FileWriter writer = new  FileWriter(userdatabase);
+        FileWriter writer = new  FileWriter(userDatabase);
         BufferedWriter out = new BufferedWriter(writer);
 
         for(Utilisateur utilisateur : listeUtilisateur) {
@@ -64,10 +65,10 @@ public class GestionnaireUtilisateur {
      */
     public void load() throws FileNotFoundException {
         listeUtilisateur.clear();
-        if (!userdatabase.exists()){
+        if (!userDatabase.exists()){
             throw new FileNotFoundException("Le fichier n'existe pas");
         }
-        Scanner myReader = new Scanner(userdatabase);
+        Scanner myReader = new Scanner(userDatabase);
         while (myReader.hasNextLine()){
             String data = myReader.nextLine();
 
@@ -162,7 +163,7 @@ public class GestionnaireUtilisateur {
         status = STATUS.OK;
         System.out.println("NEW USER REGISTERED");
         listeUtilisateur.add(new_user);
-        File f = new File(Main.getFolderPath(),username);
+        File f = new File(stock_folder,username);
         f.mkdirs();
         this.save();
         return true;
@@ -250,7 +251,7 @@ public class GestionnaireUtilisateur {
      * @param user
      */
     public void removeUser(Utilisateur user) {
-        File f = new File(Main.getFolderPath() + user.getPseudo());
+        File f = new File(stock_folder + user.getPseudo());
         try {
             if (f.exists()) {
                 int index=0;
