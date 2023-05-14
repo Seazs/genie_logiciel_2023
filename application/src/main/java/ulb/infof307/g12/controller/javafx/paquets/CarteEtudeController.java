@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 public class CarteEtudeController extends BaseController implements CarteEtudeListener {
 
-    private ArrayList<Carte> cartesEtude = new ArrayList<Carte>();
+    private ArrayList<Carte> cartesEtude;
 
-    private final ArrayList<Integer> cartesEtudeScore = new ArrayList<Integer>();//liste des scores des cartes
+    private final ArrayList<Integer> cartesEtudeScore = new ArrayList<>();//liste des scores des cartes
     @Getter
     private final Paquet paquet;
 

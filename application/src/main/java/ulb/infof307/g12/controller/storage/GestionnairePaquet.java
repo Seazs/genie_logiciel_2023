@@ -20,7 +20,7 @@ public class GestionnairePaquet {
      * Constructeur du gestionnaire de paquet
      */
     public GestionnairePaquet() {
-        folderStockagePath = Main.getFolderPath();
+        folderStockagePath = Main.getStockageFolderPath();
     }
 
     /**
@@ -40,7 +40,6 @@ public class GestionnairePaquet {
         for (Paquet paquet : listPaquet){
             savePaquet(user, paquet);
         }
-        System.out.println("Successfully saved user paquets as JSON file!");
     }
 
     /**
@@ -54,12 +53,10 @@ public class GestionnairePaquet {
             File f = new File(folderStockagePath+ user.getPseudo(), paquet.getId()+".json");
             f.getParentFile().mkdirs();
             f.createNewFile();
-            System.out.println(f.getPath());
             objectMapper.writeValue(f, paquet);
         } catch (IOException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la sauvegarde du paquet "+ paquet.getNom());
         }
-        System.out.println("Successfully saved user paquets as JSON file!");
     }
 
     /**
@@ -71,7 +68,7 @@ public class GestionnairePaquet {
 
         File userfolder = new File(folderStockagePath+user.getPseudo());
         File[] listOfFilePaquet = userfolder.listFiles(); //Enumère les fichiers dans le dossier de l'utilisateur
-        List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
+        List<Paquet> loadedListOfPaquet = new ArrayList<>();
 
         assert listOfFilePaquet != null; //Si le dossier est vide, on renvoie une liste vide
         for (File file : listOfFilePaquet) { //Pour chaque fichier dans le dossier de l'utilisateur
@@ -89,7 +86,6 @@ public class GestionnairePaquet {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             Paquet newPaquet = objectMapper.readValue(file, Paquet.class);
-            System.out.println("Successfully read JSON file and created object");
             loadedListOfPaquet.add(newPaquet);
         } catch (IOException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors du chargement du paquet");

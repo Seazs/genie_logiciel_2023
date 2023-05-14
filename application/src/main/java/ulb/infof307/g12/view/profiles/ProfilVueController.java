@@ -3,6 +3,7 @@ package ulb.infof307.g12.view.profiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextInputDialog;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
@@ -38,16 +39,17 @@ public class ProfilVueController  {
 
         dialog.setTitle("Change password");
         dialog.setHeaderText("Enter your new password:");
+        PasswordField pwdField = new PasswordField();
+        dialog.getDialogPane().setContent(pwdField);
+
         Optional<String> newPassword = dialog.showAndWait();
         try {
             String result = listener.changePassword(newPassword);
             mdpLabel.setText("Mot de passe: " + newPassword.get());
             messageLabelProfil.setText(result);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("veuillez entrer un mot de passe");
         }
-
-
 
 
     }

@@ -3,7 +3,6 @@ package ulb.infof307.g12.controller;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 import ulb.infof307.g12.Main;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
@@ -14,7 +13,6 @@ import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -82,8 +80,8 @@ class GestionnairePaquetTest {
         GestionnairePaquet gestPaquet = new GestionnairePaquet();
         gestPaquet.save(utilisateur1);
         //Test d'assertion
-        File f = new File(Main.getFolderPath()+"testUtilisateur/"+paquet1.getId()+".json");
-        File f2 = new File(Main.getFolderPath()+"testUtilisateur/"+paquet2.getId()+".json");
+        File f = new File(Main.getStorageFolderPath() +"testUtilisateur/"+paquet1.getId()+".json");
+        File f2 = new File(Main.getStorageFolderPath() +"testUtilisateur/"+paquet2.getId()+".json");
         assertTrue(f.exists());
         assertTrue(f2.exists());
         f.delete();

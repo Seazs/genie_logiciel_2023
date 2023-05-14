@@ -13,14 +13,11 @@ import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 import ulb.infof307.g12.view.listeners.StoreVueListener;
-import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
 import ulb.infof307.g12.view.paquets.PaquetDeCartesVueController;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -43,9 +40,7 @@ public class StoreVueController implements Initializable{
         updateVisuelListeViewPaquet(mesPaquetListView);
         updateVisuelListeViewPaquet(storePaquetListView);
 
-        RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> {
-            filtrageCategorie();
-        });
+        RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> filtrageCategorie());
 
     }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane fx:id="errorPane" prefHeight="150.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.exception.ExceptionPopupVueController">
+<AnchorPane fx:id="errorPane" maxHeight="150.0" maxWidth="250.0" minHeight="150.0" minWidth="250.0" prefHeight="150.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.exception.ExceptionPopupVueController">
    <children>
-      <TextFlow fx:id="errorView" layoutX="25.0" prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER" />
+      <TextFlow fx:id="errorView" layoutX="25.0" layoutY="50.0" prefHeight="150.0" prefWidth="200.0" textAlignment="CENTER"/>
    </children>
 </AnchorPane>

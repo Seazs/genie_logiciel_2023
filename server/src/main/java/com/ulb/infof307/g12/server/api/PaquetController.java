@@ -53,6 +53,11 @@ public class PaquetController {
     @PostMapping
     public String createPaquet(@RequestBody String paquetEnString) {
         STATUS result = paquetService.createPaquet(paquetEnString);
+        return result.toString();
+    }
+    @PostMapping("/sync")
+    public String syncPaquet(@RequestBody String infoString) {
+        STATUS result = paquetService.syncPaquets(infoString);
         System.out.println(result.toString());
         return result.toString();
     }
@@ -62,10 +67,13 @@ public class PaquetController {
      * @param id id du paquet a supprimer
      */
     @DeleteMapping("{id}")
-    public String deletePaquet(@PathVariable UUID id){
+    public String deletePaquet(@PathVariable UUID id) {
         STATUS result = paquetService.deletePaquet(id);
         return result.toString();
     }
 
-
+    @GetMapping("/sync/{username}")
+    public String giveUserPaquets(@PathVariable String username) {
+        return paquetService.getUserPaquet(username);
+    }
 }

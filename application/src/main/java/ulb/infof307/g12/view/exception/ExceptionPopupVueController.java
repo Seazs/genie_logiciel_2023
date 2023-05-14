@@ -1,11 +1,13 @@
 package ulb.infof307.g12.view.exception;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 public class ExceptionPopupVueController {
-
+    @FXML
+    public AnchorPane errorPane;
     @FXML
     TextFlow errorView;
 

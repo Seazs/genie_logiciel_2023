@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.MenuPaquetVueController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.MenuPaquetVueController">
     <ListView fx:id="paquetListView" editable="true" layoutX="14.0" layoutY="118.0" prefHeight="267.0" prefWidth="457.0" />
     <Label fx:id="titre" alignment="CENTER" contentDisplay="TOP" layoutX="15.0" layoutY="21.0" prefHeight="54.0" prefWidth="458.0" text="Liste des paquets" />
     <Button layoutX="499.0" layoutY="24.0" mnemonicParsing="false" onAction="#ouvrirProfil" prefHeight="48.0" prefWidth="82.0" text="Profil" />
@@ -19,6 +16,7 @@
     <Button fx:id="btnDelete" layoutX="504.0" layoutY="200.0" mnemonicParsing="false" onAction="#deletePaquet" text="Supprimer" />
     <Button fx:id="btnImport" layoutX="98.0" layoutY="398.0" mnemonicParsing="false" onAction="#importPaquet" prefHeight="26.0" prefWidth="53.0" text="Import" />
     <Button fx:id="btnExport" layoutX="28.0" layoutY="398.0" mnemonicParsing="false" onAction="#exportPaquet" prefHeight="26.0" text="Export" />
+   <Button fx:id="syncButton" layoutX="166.0" layoutY="399.0" mnemonicParsing="false" onAction="#sync" text="Synchroniser" />
     <stylesheets>
         <URL value="@menuPaquetStyle.css" />
     </stylesheets>

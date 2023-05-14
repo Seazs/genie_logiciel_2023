@@ -55,4 +55,7 @@ public class UserService {
         return userDAO.getAllUsers();
     }
 
+    public STATUS deleteUser(String username) {
+        return userDAO.deleteUser(username);
+    }
 }

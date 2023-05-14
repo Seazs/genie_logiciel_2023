@@ -194,4 +194,10 @@ public class MenuPaquetVueController implements Initializable {
             listener.exportPaquet(paquet, fileDialog.getDirectory() + fileDialog.getFile());
         }
     }
+
+    /**
+     * Ouvre la fenêtre de synchronisation
+     * @param actionEvent event
+     */
+    public void sync(ActionEvent actionEvent) {listener.sync();}
 }

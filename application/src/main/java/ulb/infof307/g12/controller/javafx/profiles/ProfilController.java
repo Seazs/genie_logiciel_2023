@@ -4,11 +4,14 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.view.listeners.ProfilVueListener;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
+import ulb.infof307.g12.model.STATUS;
+import ulb.infof307.g12.model.Server;
 import ulb.infof307.g12.model.Utilisateur;
+import ulb.infof307.g12.view.listeners.ProfilVueListener;
 import ulb.infof307.g12.view.profiles.ProfilVueController;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -19,12 +22,13 @@ public class ProfilController extends BaseController implements ProfilVueListene
 
     /**
      * Controller du profil
+     *
      * @param stage stage
-     * @param user utilisateur
+     * @param user  utilisateur
      * @throws IOException exceptiony
      */
     public ProfilController(Stage stage, Utilisateur user) throws IOException {
-        super(stage,ProfilVueController.class.getResource("profil.fxml"),"");
+        super(stage, ProfilVueController.class.getResource("profil.fxml"), "");
         this.user = user;
 
         ProfilVueController controller = (ProfilVueController) super.controller;
@@ -35,11 +39,16 @@ public class ProfilController extends BaseController implements ProfilVueListene
 
     /**
      * Changement de mot de passe de l'utilisateur
+     *
      * @param password nouveau mot de passe
      * @return le résultat
      */
     @Override
     public String changePassword(Optional<String> password) {
+        if (!MenuPrincipal.getINSTANCE().isOnline()){
+            return STATUS.CANNOT_CHANGE_PASSWORD_OFFLINE.getMsg();
+        }
+
         String username = user.getPseudo(),
                 oldPassword = user.getMdp(),
                 result = "";
@@ -47,8 +56,13 @@ public class ProfilController extends BaseController implements ProfilVueListene
         if (password.isPresent()) {
             String newPassword = password.get();
             GestionnaireUtilisateur gestionnaire = MenuPrincipal.getINSTANCE().getGestionnaireUtilisateur();
+            Server server = MenuPrincipal.getINSTANCE().getServer();
             try {
-                gestionnaire.modifierMotDePasse(username,newPassword,oldPassword);
+                String response = server.changeUserPassword(username, newPassword);
+                if (!STATUS.valueOf(response).equals(STATUS.OK)){
+                    return STATUS.SERVER_CANNOT_CHANGE_PASSWORD.getMsg();
+                }
+                gestionnaire.modifierMotDePasse(username, newPassword, oldPassword);
                 MenuPrincipal.getINSTANCE().getPrincipalUser().setMdp(newPassword);
                 result = gestionnaire.getStatusMsg();
             } catch (IOException e) {
@@ -56,6 +70,8 @@ public class ProfilController extends BaseController implements ProfilVueListene
             }
 
         }
+
+
         return result;
     }
 
@@ -63,7 +79,7 @@ public class ProfilController extends BaseController implements ProfilVueListene
      * Déconnexion de l'utilisateur
      */
     @Override
-    public void deconnexion(){
+    public void deconnexion() {
         MenuPrincipal instance = MenuPrincipal.getINSTANCE();
         instance.getGestionnaireUtilisateur().disconnect();
         instance.showConnexionMenu(this);

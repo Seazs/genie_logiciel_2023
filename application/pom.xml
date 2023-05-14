@@ -87,6 +87,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/freetts-1.2.2.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>ulb.infof307.g12</groupId>
+            <artifactId>server</artifactId>
+            <version>3.0-RELEASE</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

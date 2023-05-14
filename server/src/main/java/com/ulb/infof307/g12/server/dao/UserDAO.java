@@ -48,4 +48,6 @@ public interface UserDAO {
      * @throws IOException si le fichier n'existe pas
      */
     void save() throws IOException;
+
+    STATUS deleteUser(String username);
 }

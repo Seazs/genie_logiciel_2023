@@ -47,4 +47,11 @@ module application {
     opens ulb.infof307.g12.view.dto to com.fasterxml.jackson.databind;
     exports ulb.infof307.g12.view.dto;
 
+    opens ulb.infof307.g12.controller.javafx.synchronisation to javafx.fxml;
+    exports ulb.infof307.g12.controller.javafx.synchronisation;
+
+    opens ulb.infof307.g12.view.synchronisation to javafx.fxml;
+    exports ulb.infof307.g12.view.synchronisation;
+
+
 }
