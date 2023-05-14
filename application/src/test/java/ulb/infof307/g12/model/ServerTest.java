@@ -82,8 +82,6 @@ class ServerTest {
             System.out.println("Erreur lors de l'envoi du paquet");
         }
     }
-
-
     @Test
     public void testGetPaquet() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -122,13 +120,5 @@ class ServerTest {
         } catch (IOException e) {
             System.out.println("Erreur lors de la suppression du dossier de stockage");
         }
-
-
-
     }
-
-
-
-
-
 }

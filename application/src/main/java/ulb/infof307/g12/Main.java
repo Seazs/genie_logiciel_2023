@@ -18,7 +18,6 @@ public class Main {
         String mainClassFolderTarget = Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         File tmp = new File(mainClassFolderTarget).getParentFile().getParentFile();
         rootPath = tmp.getPath();
-
         MenuPrincipal.main(args);
     }
 

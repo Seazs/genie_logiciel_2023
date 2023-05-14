@@ -39,9 +39,6 @@ public class ProfilVueController  {
 
         dialog.setTitle("Change password");
         dialog.setHeaderText("Enter your new password:");
-        PasswordField pwdField = new PasswordField();
-        dialog.getDialogPane().setContent(pwdField);
-
         Optional<String> newPassword = dialog.showAndWait();
         try {
             String result = listener.changePassword(newPassword);
