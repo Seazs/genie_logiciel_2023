@@ -76,7 +76,6 @@ public class MenuPrincipal extends Application {
             parent.hide();
             menuPaquetController.show();
         } catch (IOException e) {
-            e.printStackTrace();
             showErrorPopup("Impossible de charger les paquets !");
         }
     }
@@ -211,7 +210,7 @@ public class MenuPrincipal extends Application {
             exceptionPopupController = new ExceptionPopupController(new Stage());
             exceptionPopupController.createError(error);
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 

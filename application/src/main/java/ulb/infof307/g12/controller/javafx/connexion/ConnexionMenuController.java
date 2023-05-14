@@ -68,7 +68,7 @@ public class ConnexionMenuController extends BaseController implements UserCrede
     private String onlineRegister(String username, String password){
         String result = MenuPrincipal.getINSTANCE().getServer().createUser(username,password);
         if (STATUS.valueOf(result).equals(STATUS.SERVER_CREATION_ERROR)){
-            MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de créer l'utilisateur sur le serveur !");
+            MenuPrincipal.getINSTANCE().showErrorPopup("Le pseudo existe déjà!");
         }else if (STATUS.valueOf(result).equals(STATUS.SERVER_CONNEXION_ERROR)){
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de se connecter au serveur !");
         }
@@ -126,7 +126,7 @@ public class ConnexionMenuController extends BaseController implements UserCrede
     private String onlineLogin(String username, String password){
         try{
             STATUS result = MenuPrincipal.getINSTANCE().getServer().getLogin(username,password);
-            if (Objects.equals(result.getMsg(), "")) {
+            if (Objects.equals(result.getMsg(), "OK")) {
                 offlineLogin(username, password);
             }
             if (result == STATUS.SERVER_CONNEXION_ERROR){
@@ -134,7 +134,6 @@ public class ConnexionMenuController extends BaseController implements UserCrede
             }
             return result.getMsg();
         }catch (Exception e){
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de se connecter au serveur !");
             return "Server Not Found";
         }
