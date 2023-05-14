@@ -13,8 +13,8 @@ public enum STATUS {
     FILE_NOT_LOADED("Le fichier n'existe pas !"),
     DB_COULD_NOT_BE_SAVED("La base de données n'a pas pu être sauvegardée !"),
     DB_COULD_NOT_BE_LOADED("La base de données n'a pas pu être chargée !"),
-    DUPLICATE("Le paquet est déjà sur le store !")
-    ;
+    DUPLICATE("Le paquet est déjà sur le store !"),
+    COULD_NOT_SYNC("Le paquet n'a pas pu être synchronisé !");
 
     @Getter
     private String msg;

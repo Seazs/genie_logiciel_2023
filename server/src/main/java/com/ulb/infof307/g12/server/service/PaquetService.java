@@ -57,4 +57,8 @@ public class PaquetService {
     public STATUS deletePaquet(UUID id){
         return paquetDao.deletePaquet(id);
     }
+
+    public STATUS syncPaquets(String paquetsEnString) {return paquetDao.syncPaquets(paquetsEnString);}
+
+    public String getUserPaquet(String username) {return paquetDao.getUserPaquet(username);}
 }

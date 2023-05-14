@@ -48,4 +48,6 @@ public interface MenuPaquetListener {
      * @param path chemin où le dossier sera exporté
      */
     void exportPaquet(PaquetDTO paquet, String path);
+
+    void sync();
 }
