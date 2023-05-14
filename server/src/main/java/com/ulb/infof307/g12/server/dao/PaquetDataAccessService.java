@@ -147,6 +147,17 @@ public class PaquetDataAccessService implements PaquetDao {
     @Override
     public STATUS deletePaquet(UUID id) {
         db_paquetsStore.removeIf(paquet -> paquet.getId().equals(id));
+
+        // Supprimer le json correspondant du stockage store
+        File[] listOfFilePaquet = db_paquetStore_folder.listFiles();
+        //Si le dossier est vide, on renvoie une liste vide
+        assert listOfFilePaquet != null;
+        //Pour chaque fichier dans le dossier de l'utilisateur
+        for (File file : listOfFilePaquet) {
+            if (file.getName().equals(id+".json")){
+                file.delete();
+            }
+        }
         return STATUS.OK;
     }
 
