@@ -46,7 +46,6 @@ public class SyncController extends BaseController implements SyncListener {
             List<Paquet> paquets = server.getPaquetsUser(pseudo);
             MenuPrincipal.getINSTANCE().setUserPaquets(paquets);
         } catch (IOException e) {
-            e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la récupération des paquets");
         }
         MenuPrincipal.getINSTANCE().rechargerPaquets();

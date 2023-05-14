@@ -187,7 +187,6 @@ public class PaquetDataAccessService implements PaquetDao {
     @Override
     public String getUserPaquet(String username) {
         String filePath = db_paquetUser_folder + "/" + username + ".json";
-        System.out.println(filePath);
         try {
             byte[] jsonData = Files.readAllBytes(Paths.get(filePath));
             String jsonString = new String(jsonData, "UTF-8");

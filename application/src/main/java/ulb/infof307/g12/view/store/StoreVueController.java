@@ -78,7 +78,6 @@ public class StoreVueController implements Initializable{
                         // Définir la vue FXML comme élément de la cellule
                         setGraphic(cellLayout);
                     } catch (IOException e) {
-                        e.printStackTrace();
                         MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de charger les textures du paquet de carte");
                     }
                 }

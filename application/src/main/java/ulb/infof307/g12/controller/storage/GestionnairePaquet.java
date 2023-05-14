@@ -53,7 +53,6 @@ public class GestionnairePaquet {
             File f = new File(folderStockagePath+ user.getPseudo(), paquet.getId()+".json");
             f.getParentFile().mkdirs();
             f.createNewFile();
-            System.out.println(f.getPath());
             objectMapper.writeValue(f, paquet);
         } catch (IOException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la sauvegarde du paquet "+ paquet.getNom());

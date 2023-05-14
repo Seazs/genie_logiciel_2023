@@ -213,7 +213,6 @@ public class MenuPrincipal extends Application {
             exceptionPopupController = new ExceptionPopupController(new Stage());
             exceptionPopupController.createError(error);
         } catch (IOException e) {
-            //e.printStackTrace();
         }
     }
 
