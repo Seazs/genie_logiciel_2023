@@ -18,26 +18,26 @@ import java.util.*;
 public class PaquetDataAccessService implements PaquetDao {
     public STATUS status;
     private List<Paquet> db_paquetsStore = new ArrayList<>();
-    private File db_paquet_folder;
+    private File db_paquetStore_folder;
     private File db_paquetUser_folder;
 
     public PaquetDataAccessService() {
         try {
-            db_paquet_folder = new File(ServerApplication.getStockageFolderPath());
+            db_paquetStore_folder = new File(ServerApplication.getStockageFolderPath()+ "store/");
             db_paquetUser_folder = new File(ServerApplication.getStockageFolderPath() + "paquetUser/");
-            if (!db_paquet_folder.exists()) {
+            if (!db_paquetStore_folder.exists()) {
                 // Création du dossier paquet
-                if (!db_paquet_folder.mkdirs()) {
+                if (!db_paquetStore_folder.mkdirs()) {
                     throw new IOException("Paquet folder could not create.");
                 }
             } else {
-                if (db_paquet_folder.listFiles() != null) {
+                if (db_paquetStore_folder.listFiles() != null) {
                     // Dossier paquet existe déjà et n'est pas vide
                     db_paquetsStore = this.load();
                 }
             }
             if (!db_paquetUser_folder.mkdirs()) {
-                if (!db_paquet_folder.mkdirs()) {
+                if (!db_paquetStore_folder.mkdirs()) {
                     throw new IOException("Paquet folder could not create.");
                 }
             }
@@ -58,7 +58,7 @@ public class PaquetDataAccessService implements PaquetDao {
         for (Paquet paquet : db_paquetsStore) {
             ObjectMapper objectMapper = new ObjectMapper();
             try {
-                File f = new File(db_paquet_folder, paquet.getId() + ".json");
+                File f = new File(db_paquetStore_folder, paquet.getId() + ".json");
                 f.createNewFile();
                 objectMapper.writeValue(f, paquet);
             } catch (IOException e) {
@@ -76,7 +76,7 @@ public class PaquetDataAccessService implements PaquetDao {
     public List<Paquet> load() throws IOException {
         System.out.println("LOADING DB...");
         //Enumère les fichiers dans le dossier de l'utilisateur
-        File[] listOfFilePaquet = db_paquet_folder.listFiles();
+        File[] listOfFilePaquet = db_paquetStore_folder.listFiles();
         List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
 
         //Si le dossier est vide, on renvoie une liste vide
@@ -175,7 +175,8 @@ public class PaquetDataAccessService implements PaquetDao {
      */
     @Override
     public String getUserPaquet(String username) {
-        String filePath = db_paquetUser_folder + username + ".json";
+        String filePath = db_paquetUser_folder + "/" + username + ".json";
+        System.out.println(filePath);
         try {
             byte[] jsonData = Files.readAllBytes(Paths.get(filePath));
             String jsonString = new String(jsonData, "UTF-8");
