@@ -68,7 +68,7 @@ public class GestionnairePaquet {
 
         File userfolder = new File(folderStockagePath+user.getPseudo());
         File[] listOfFilePaquet = userfolder.listFiles(); //Enumère les fichiers dans le dossier de l'utilisateur
-        List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
+        List<Paquet> loadedListOfPaquet = new ArrayList<>();
 
         assert listOfFilePaquet != null; //Si le dossier est vide, on renvoie une liste vide
         for (File file : listOfFilePaquet) { //Pour chaque fichier dans le dossier de l'utilisateur

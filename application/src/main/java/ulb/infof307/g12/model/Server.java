@@ -177,8 +177,8 @@ public class Server {
         ResponseEntity<String> response = restTemplate.getForEntity(url+"paquet/sync/"+username, String.class);
         String responseBody = response.getBody();
         ObjectMapper mapper = new ObjectMapper();
-        List<Paquet> paquets = mapper.readValue(responseBody, new TypeReference<List<Paquet>>(){});
-        return paquets;
+        return mapper.readValue(responseBody, new TypeReference<>() {
+        });
     }
 
 }

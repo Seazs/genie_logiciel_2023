@@ -77,7 +77,7 @@ public class PaquetDataAccessService implements PaquetDao {
         System.out.println("LOADING DB...");
         //Enumère les fichiers dans le dossier de l'utilisateur
         File[] listOfFilePaquet = db_paquetStore_folder.listFiles();
-        List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
+        List<Paquet> loadedListOfPaquet = new ArrayList<>();
 
         //Si le dossier est vide, on renvoie une liste vide
         assert listOfFilePaquet != null;
@@ -181,7 +181,7 @@ public class PaquetDataAccessService implements PaquetDao {
 
     /**
      * @param username Nom de l'utilisateur
-     * @return
+     * @return String json contenant les paquets de l'utilisateur, sinon message d'erreur
      * @see PaquetDao#getUserPaquet(String)
      */
     @Override
