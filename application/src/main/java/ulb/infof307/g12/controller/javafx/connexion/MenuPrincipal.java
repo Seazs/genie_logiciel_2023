@@ -236,4 +236,12 @@ public class MenuPrincipal extends Application {
     public void setUserPaquets(List<Paquet> paquets) {
         principalUser.setListPaquet(paquets);
     }
+    public void rechargerPaquets() {
+        try {
+            menuPaquetController.updatePaquets();
+            gestionnairePaquet.save(principalUser);
+        } catch (IOException e) {
+            showErrorPopup("Impossible de sauvegarder les paquets !");
+        }
+    }
 }

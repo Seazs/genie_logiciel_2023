@@ -67,10 +67,7 @@ public class PaquetController {
 
     @GetMapping("/sync/{username}")
     public String giveUserPaquets(@PathVariable String username) {
-        String info = paquetService.getUserPaquet(username);
-        JSONObject json = new JSONObject();
-        json.put("paquets", info);
-        return json.toString();
+        return paquetService.getUserPaquet(username);
     }
 
     @DeleteMapping

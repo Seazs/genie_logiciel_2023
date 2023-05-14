@@ -5,7 +5,6 @@ import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.Server;
-import ulb.infof307.g12.view.connexion.ConnexionVueController;
 import ulb.infof307.g12.view.listeners.SyncListener;
 import ulb.infof307.g12.view.synchronisation.SyncVueController;
 
@@ -35,6 +34,7 @@ public class SyncController extends BaseController implements SyncListener {
         } catch (IOException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de l'envoi des paquets");
         }
+        MenuPrincipal.getINSTANCE().rechargerPaquets();
         this.hide();
     }
 
@@ -49,6 +49,7 @@ public class SyncController extends BaseController implements SyncListener {
             e.printStackTrace();
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de la récupération des paquets");
         }
+        MenuPrincipal.getINSTANCE().rechargerPaquets();
         this.hide();
     }
 }

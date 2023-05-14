@@ -1,6 +1,7 @@
 package ulb.infof307.g12.model;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.springframework.http.*;
@@ -11,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class permettant de envoyer/recevoir les informations d'un serveur
+ * Class permettant d'envoyer/recevoir les informations d'un serveur
  */
 public class Server {
     private String url = "http://localhost:8080/api/v1/";
@@ -155,9 +157,8 @@ public class Server {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(url+"paquet/sync/"+username, String.class);
         String responseBody = response.getBody();
-        String paquetsString = responseBody.substring(1, responseBody.length()-1);
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Paquet> paquets = objectMapper.readValue(paquetsString, objectMapper.getTypeFactory().constructCollectionType(List.class, Paquet.class));
+        ObjectMapper mapper = new ObjectMapper();
+        List<Paquet> paquets = mapper.readValue(responseBody, new TypeReference<List<Paquet>>(){});
         return paquets;
     }
 
