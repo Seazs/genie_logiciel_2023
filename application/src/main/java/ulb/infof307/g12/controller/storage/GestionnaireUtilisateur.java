@@ -1,14 +1,12 @@
 package ulb.infof307.g12.controller.storage;
 
 import ulb.infof307.g12.Main;
-import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.STATUS;
 import ulb.infof307.g12.model.Utilisateur;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class GestionnaireUtilisateur {
@@ -34,6 +32,19 @@ public class GestionnaireUtilisateur {
      */
     public GestionnaireUtilisateur() {
         userDatabase = new File(stock_folder,"stockUser.txt");
+        try {
+            if (!userDatabase.createNewFile()){
+                load();
+            }
+            status = STATUS.OK;
+        } catch (IOException e) {
+            status = STATUS.FILE_NOT_LOADED;
+        }
+    }
+
+    public GestionnaireUtilisateur(String stock_folder_path, File fichier){
+        stock_folder = stock_folder_path + "/";
+        userDatabase = fichier;
         try {
             if (!userDatabase.createNewFile()){
                 load();
@@ -246,29 +257,6 @@ public class GestionnaireUtilisateur {
         status = STATUS.OK;
     }
 
-    /**
-     * Supprime le dossier utilisateur
-     * @param user
-     */
-    public void removeUser(Utilisateur user) {
-        File f = new File(stock_folder + user.getPseudo());
-        try {
-            if (f.exists()) {
-                int index=0;
-                for (Utilisateur util : listeUtilisateur){
-                    if (Objects.equals(util.getPseudo(), user.getPseudo())){
-                        listeUtilisateur.remove(index);
-                        break;
-                    }
-                    index++;
-                }
-                this.save();
-                f.delete();
-            }
-        } catch (Exception e) {
-            MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de supprimer l'utilisateur !");
-        }
-    }
 
     /**
      * @return Le statut du message

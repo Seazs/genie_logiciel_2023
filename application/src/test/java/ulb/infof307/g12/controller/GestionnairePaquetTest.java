@@ -3,7 +3,6 @@ package ulb.infof307.g12.controller;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ulb.infof307.g12.Main;
 import ulb.infof307.g12.controller.storage.GestionnairePaquet;
 import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
 import ulb.infof307.g12.model.Carte;
@@ -75,13 +74,13 @@ class GestionnairePaquetTest {
         paquet2.addCard(carte5);
         utilisateur1.addPaquet(paquet1);
         utilisateur1.addPaquet(paquet2);
-        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur(fichierUtilisateur);
+        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur(dossierTemporaire.getPath(),fichierUtilisateur);
         gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
-        GestionnairePaquet gestPaquet = new GestionnairePaquet();
+        GestionnairePaquet gestPaquet = new GestionnairePaquet(dossierTemporaire.getPath());
         gestPaquet.save(utilisateur1);
         //Test d'assertion
-        File f = new File(Main.getStorageFolderPath() +"testUtilisateur/"+paquet1.getId()+".json");
-        File f2 = new File(Main.getStorageFolderPath() +"testUtilisateur/"+paquet2.getId()+".json");
+        File f = new File(dossierTemporaire+"/testUtilisateur/"+paquet1.getId()+".json");
+        File f2 = new File(dossierTemporaire+"/testUtilisateur/"+paquet2.getId()+".json");
         assertTrue(f.exists());
         assertTrue(f2.exists());
         f.delete();
@@ -103,13 +102,13 @@ class GestionnairePaquetTest {
         paquet2.addCard(carte4);
         utilisateur1.addPaquet(paquet1);
         utilisateur1.addPaquet(paquet2);
-        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
+        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur(dossierTemporaire.getPath(),fichierUtilisateur);
         gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
-        GestionnairePaquet gestPaquet = new GestionnairePaquet();
+        GestionnairePaquet gestPaquet = new GestionnairePaquet(dossierTemporaire.getPath());
         gestPaquet.save(utilisateur1);
         //Test de suppression
         gestPaquet.remove(utilisateur1,paquet1);
-        File f = new File("src/main/resources/stockage/"+utilisateur1.getPseudo()+"/"+paquet1.getNom());
+        File f = new File(dossierTemporaire.getPath()+"/"+utilisateur1.getPseudo()+"/"+paquet1.getNom());
         assertFalse(f.exists());
     }
 
@@ -128,8 +127,8 @@ class GestionnairePaquetTest {
         paquet2.addCard(carte4);
         utilisateur1.addPaquet(paquet1);
         utilisateur1.addPaquet(paquet2);
-        GestionnairePaquet gestPaquet = new GestionnairePaquet();
-        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur();
+        GestionnairePaquet gestPaquet = new GestionnairePaquet(dossierTemporaire.getPath());
+        GestionnaireUtilisateur gestuser = new GestionnaireUtilisateur(dossierTemporaire.getPath(),fichierUtilisateur);
         gestuser.register(utilisateur1.getPseudo(),utilisateur1.getMdp());
         gestPaquet.save(utilisateur1);
         //Création de l'utilisateur 2 qui va charger l'utilisateur 1
