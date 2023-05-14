@@ -24,7 +24,7 @@ public class ConnexionMenuController extends BaseController implements UserCrede
      * @throws IOException exception
      */
     public ConnexionMenuController(Stage stage,GestionnaireUtilisateur gestionnaireUtilisateur) throws IOException{
-        super(stage, ConnexionVueController.class.getResource("connexion-menu-view.fxml"),"Application Title");
+        super(stage, ConnexionVueController.class.getResource("connexion-menu-view.fxml"),"Recto? Verso!");
         this.gestionnaireUtilisateur = gestionnaireUtilisateur;
 
         ConnexionVueController controller = (ConnexionVueController) super.controller;
