@@ -1,5 +1,6 @@
 package com.ulb.infof307.g12.server.dao;
 
+import com.ulb.infof307.g12.server.ServerApplication;
 import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ public class UserDataAccessService implements UserDAO{
     private List<User> db_user;
 
     public UserDataAccessService() {
-        db_user_file = new File("server/src/main/resources/stockage","stockUser.txt");
+        db_user_file = new File(ServerApplication.getStockageFolderPath(),"stockUser.txt");
         try {
             db_user = this.load();
             status = STATUS.OK;
@@ -152,8 +153,8 @@ public class UserDataAccessService implements UserDAO{
     private void fileExists() throws IOException {
         db_user_file.getParentFile().mkdirs();
         db_user_file.createNewFile();
-
     }
+
     public STATUS deleteUser(String username){
         try {
             db_user.removeIf(user -> user.getUsername().equals(username));

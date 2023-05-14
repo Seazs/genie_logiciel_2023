@@ -2,9 +2,9 @@ package com.ulb.infof307.g12.server.dao;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ulb.infof307.g12.server.ServerApplication;
 import com.ulb.infof307.g12.server.model.Paquet;
 import com.ulb.infof307.g12.server.model.STATUS;
-import org.json.JSONObject;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
@@ -23,8 +23,8 @@ public class PaquetDataAccessService implements PaquetDao {
 
     public PaquetDataAccessService() {
         try {
-            db_paquet_folder = new File("server/src/main/resources/stockage/paquet");
-            db_paquetUser_folder = new File("server/src/main/resources/stockage/paquetUser");
+            db_paquet_folder = new File(ServerApplication.getStockageFolderPath());
+            db_paquetUser_folder = new File(ServerApplication.getStockageFolderPath() + "paquetUser/");
             if (!db_paquet_folder.exists()) {
                 // Création du dossier paquet
                 if (!db_paquet_folder.mkdirs()) {
@@ -36,7 +36,7 @@ public class PaquetDataAccessService implements PaquetDao {
                     db_paquetsStore = this.load();
                 }
             }
-            if(!db_paquetUser_folder.mkdirs()){
+            if (!db_paquetUser_folder.mkdirs()) {
                 if (!db_paquet_folder.mkdirs()) {
                     throw new IOException("Paquet folder could not create.");
                 }
@@ -46,7 +46,6 @@ public class PaquetDataAccessService implements PaquetDao {
             status = STATUS.DB_COULD_NOT_BE_LOADED;
         }
     }
-
 
 
     /**
@@ -76,15 +75,17 @@ public class PaquetDataAccessService implements PaquetDao {
      */
     public List<Paquet> load() throws IOException {
         System.out.println("LOADING DB...");
-        File[] listOfFilePaquet = db_paquet_folder.listFiles(); //Enumère les fichiers dans le dossier de l'utilisateur
+        //Enumère les fichiers dans le dossier de l'utilisateur
+        File[] listOfFilePaquet = db_paquet_folder.listFiles();
         List<Paquet> loadedListOfPaquet = new ArrayList<Paquet>();
 
-        assert listOfFilePaquet != null; //Si le dossier est vide, on renvoie une liste vide
-        for (File file : listOfFilePaquet) { //Pour chaque fichier dans le dossier de l'utilisateur
+        //Si le dossier est vide, on renvoie une liste vide
+        assert listOfFilePaquet != null;
+        //Pour chaque fichier dans le dossier de l'utilisateur
+        for (File file : listOfFilePaquet) {
             ObjectMapper objectMapper = new ObjectMapper();
             try {
                 Paquet newPaquet = objectMapper.readValue(file, Paquet.class);
-                System.out.println("Successfully read JSON file and created object");
                 loadedListOfPaquet.add(newPaquet);
             } catch (IOException e) {
                 status = STATUS.DB_COULD_NOT_BE_LOADED;
@@ -156,7 +157,7 @@ public class PaquetDataAccessService implements PaquetDao {
             JsonNode rootNode = objectMapper.readTree(infoString);
             JsonNode paquets = rootNode.get("paquets");
             String username = rootNode.get("username").asText();
-            File f = new File(db_paquetUser_folder + "/", username + ".json");
+            File f = new File(db_paquetUser_folder, username + ".json");
             f.createNewFile();
             objectMapper.writeValue(f, paquets);
         } catch (IOException e) {
@@ -168,31 +169,13 @@ public class PaquetDataAccessService implements PaquetDao {
     }
 
     /**
-     * @see PaquetDao#getUserPaquet(String)
      * @param username Nom de l'utilisateur
      * @return
+     * @see PaquetDao#getUserPaquet(String)
      */
     @Override
     public String getUserPaquet(String username) {
-        /*
-        File[] listOfFolderUser = db_paquetUser_folder.listFiles();
-        List<Paquet> paquets = new ArrayList<>();
-        assert listOfFolderUser != null;
-        for (File file : listOfFolderUser){
-            if (file.getName().equals(username + ".json")){
-                ObjectMapper objectMapper = new ObjectMapper();
-                try {
-                    paquets = objectMapper.readValue(file, new TypeReference<List<Paquet>>() {});
-                    return paquets;
-                } catch (IOException e) {
-                    return null;
-                }
-            }
-        }
-        return paquets;
-        }
-        */
-        String filePath = db_paquetUser_folder + "/" + username + ".json";
+        String filePath = db_paquetUser_folder + username + ".json";
         try {
             byte[] jsonData = Files.readAllBytes(Paths.get(filePath));
             String jsonString = new String(jsonData, "UTF-8");
