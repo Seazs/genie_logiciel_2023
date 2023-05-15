@@ -94,8 +94,8 @@ public class UserManager {
 
     /**
      * Vérifie si l'utilisateur à déjà un compte et le connecte
-     * @param username
-     * @param password
+     * @param username nom d'utilisateur
+     * @param password mot de passe de l'utilisateur
      * @return
      * @throws FileNotFoundException
      */
@@ -123,14 +123,11 @@ public class UserManager {
 
     /**
      * vérifie que l'utilisateur est déconnecté
-     * @return True si l'utilisateur est déconnecté
      */
-    public boolean disconnect(){
+    public void disconnect(){
         if (userConnected !=null){
             userConnected = null;
-            return true;
         }
-        return false;
 
     }
 
@@ -217,9 +214,9 @@ public class UserManager {
 
     /**
      * Modifie le mot de passe associé au pseudo
-     * @param username
-     * @param newPassword
-     * @param oldPassword
+     * @param username pseudo de l'utilisateur
+     * @param newPassword nouveau mot de passe
+     * @param oldPassword ancien mot de passe
      * @return
      * @throws IOException
      */
@@ -248,7 +245,7 @@ public class UserManager {
 
     /**
      * Supprime le dossier utilisateur
-     * @param user
+     * @param user utilisateur à supprimer
      */
     public void removeUser(User user) {
         File f = new File(stock_folder + user.getPseudo());

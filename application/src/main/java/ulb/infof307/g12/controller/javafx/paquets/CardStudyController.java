@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 public class CardStudyController extends BaseController implements CardStudyListener {
 
-    private ArrayList<Card> cartesEtude;
+    private ArrayList<Card> cardsStudy;
 
-    private final ArrayList<Integer> cartesEtudeScore = new ArrayList<>();//liste des scores des cartes
+    private final ArrayList<Integer> cardsStudyScore = new ArrayList<>();//liste des scores des cartes
     @Getter
     private final Paquet paquet;
 
@@ -36,9 +36,9 @@ public class CardStudyController extends BaseController implements CardStudyList
         CardStudyViewController controller = (CardStudyViewController) super.controller;
         this.paquet=paquet;
         controller.setListener(this);
-        cartesEtude = paquet.getCards();
-        for(int i=0;i<cartesEtude.size();i++){
-            cartesEtudeScore.add(0);
+        cardsStudy = paquet.getCards();
+        for(int i = 0; i< cardsStudy.size(); i++){
+            cardsStudyScore.add(0);
         }
         controller.loadViewStudyCard();
     }
@@ -48,7 +48,7 @@ public class CardStudyController extends BaseController implements CardStudyList
      */
     @Override
     public ArrayList<Card> getCardsStudy(){
-        return cartesEtude;
+        return cardsStudy;
     }
 
     /**
@@ -56,7 +56,7 @@ public class CardStudyController extends BaseController implements CardStudyList
      */
     @Override
     public void veryBad(int index){
-        cartesEtude.get(index).setKnowledge(1);
+        cardsStudy.get(index).setKnowledge(1);
     }
 
     /**
@@ -64,7 +64,7 @@ public class CardStudyController extends BaseController implements CardStudyList
      */
     @Override
     public void bad(int index){
-        cartesEtude.get(index).setKnowledge(2);
+        cardsStudy.get(index).setKnowledge(2);
     }
 
     /**
@@ -72,10 +72,10 @@ public class CardStudyController extends BaseController implements CardStudyList
      */
     @Override
     public void average(int index){
-        cartesEtude.get(index).setKnowledge(3);
+        cardsStudy.get(index).setKnowledge(3);
     }
     public void good(int index){
-        cartesEtude.get(index).setKnowledge(4);
+        cardsStudy.get(index).setKnowledge(4);
     }
 
     /**
@@ -83,7 +83,7 @@ public class CardStudyController extends BaseController implements CardStudyList
      */
     @Override
     public void veryGood(int index){
-        cartesEtude.get(index).setKnowledge(5);
+        cardsStudy.get(index).setKnowledge(5);
 
     }
 

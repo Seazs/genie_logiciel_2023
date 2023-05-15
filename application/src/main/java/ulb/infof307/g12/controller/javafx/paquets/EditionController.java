@@ -20,7 +20,7 @@ public class EditionController extends BaseController implements EditionViewList
     private final Paquet paquet;
 
 
-    /**y
+    /**
      * Controller de l'édition
      * @param stage stage
      * @param paquet paquet
