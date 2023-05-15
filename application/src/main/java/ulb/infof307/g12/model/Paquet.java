@@ -110,14 +110,25 @@ public class Paquet {
      * Ajoute une catégorie au paquet
      * @param categorie catégorie
      */
-    public void addCategory(String categorie){
+    /*public void addCategory(String categorie){
         if (categorie.contains("#")){
             throw new IllegalArgumentException("Le nom de la catégorie ne peut pas contenir le caractère #");
         }
         if(!this.categories.contains(categorie)){
             this.categories.add(categorie);
         }
+    }*/
+    public void addCategory(String categorie) {
+        if (categorie != null && !categorie.trim().isEmpty()) {
+            if (categorie.contains("#")) {
+                throw new IllegalArgumentException("Le nom de la catégorie ne peut pas contenir le caractère '#'.");
+            }
+            if (!this.categories.contains(categorie)) {
+                this.categories.add(categorie);
+            }
+        }
     }
+
 
     /**
      * Transforme le paquet en DTO
