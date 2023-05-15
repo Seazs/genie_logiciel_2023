@@ -20,30 +20,30 @@ public class Paquet {
     private ArrayList<String> categories = new ArrayList<>();
     @Getter
     @JsonProperty("cartes")
-    private ArrayList<Carte> cartes= new ArrayList<>();
+    private ArrayList<Card> cards = new ArrayList<>();
 
     @JsonCreator
-    public Paquet(@JsonProperty("id") UUID id,@JsonProperty("nom") String nom, @JsonProperty("categories") ArrayList<String> categories,@JsonProperty("cartes") ArrayList<Carte> cartes) throws IllegalArgumentException{
+    public Paquet(@JsonProperty("id") UUID id,@JsonProperty("nom") String nom, @JsonProperty("categories") ArrayList<String> categories,@JsonProperty("cartes") ArrayList<Card> cards) throws IllegalArgumentException{
         if(nom == null || nom.equals("") || categories == null)
             throw new IllegalArgumentException("Le paquet doit posséder un nom ou une catégorie");
         this.id = id;
         this.nom = nom;
         this.categories.addAll(categories);
-        this.cartes.addAll(cartes);
+        this.cards.addAll(cards);
     }
 
     /**
      * Fonction qui ajoute une carte au paquet
-     * @param carte carte à ajouter
+     * @param card carte à ajouter
      * @throws IllegalArgumentException si la carte existe déjà
      */
-    public void ajouterCarte(Carte carte) throws IllegalArgumentException{
-        for(Carte car: this.cartes){
-            if(car.getId()==carte.getId()) {
+    public void addCarte(Card card) throws IllegalArgumentException{
+        for(Card car: this.cards){
+            if(car.getId()== card.getId()) {
                 throw new IllegalArgumentException("La carte existe déjà");
             }
         }
-        cartes.add(carte);
+        cards.add(card);
     }
     @Override
     public boolean equals(Object objects) {

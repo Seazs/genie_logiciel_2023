@@ -1,18 +1,15 @@
 package com.ulb.infof307.g12.server.api;
 
-import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.Paquet;
 import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.service.PaquetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import java.util.UUID;
 
-import org.json.JSONObject;
 /**
  * Class permettant de gérer les requêtes HTTP pour les paquets
  */

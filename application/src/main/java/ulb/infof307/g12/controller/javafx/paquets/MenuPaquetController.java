@@ -5,12 +5,12 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
-import ulb.infof307.g12.controller.storage.GestionnairePaquet;
+import ulb.infof307.g12.controller.storage.PaquetManager;
+import ulb.infof307.g12.model.User;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 import ulb.infof307.g12.view.listeners.MenuPaquetListener;
 import ulb.infof307.g12.model.Paquet;
-import ulb.infof307.g12.model.Utilisateur;
-import ulb.infof307.g12.view.paquets.MenuPaquetVueController;
+import ulb.infof307.g12.view.paquets.MenuPaquetViewController;
 
 
 import java.io.File;
@@ -22,7 +22,7 @@ import java.util.Optional;
 public class MenuPaquetController extends BaseController implements MenuPaquetListener {
 
     @Getter
-    private final Utilisateur user;
+    private final User user;
 
     private List<Paquet> saveListPaquet;
 
@@ -32,13 +32,13 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      * @param stage fenetre
      * @throws IOException exception
      */
-    public MenuPaquetController(Utilisateur user,Stage stage) throws IOException {
-        super(stage,MenuPaquetVueController.class.getResource("menuPaquet.fxml"),"");
+    public MenuPaquetController(User user, Stage stage) throws IOException {
+        super(stage, MenuPaquetViewController.class.getResource("menuPaquet.fxml"),"");
         this.user = user;
-        MenuPaquetVueController controller = (MenuPaquetVueController) super.controller;
+        MenuPaquetViewController controller = (MenuPaquetViewController) super.controller;
         controller.setListener(this);
         saveListPaquet = MenuPrincipal.getINSTANCE().getUserPaquets();
-        controller.rechargerListView();
+        controller.reloadListView();
     }
 
     /**
@@ -46,7 +46,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      * @return Paquet vide avec un nom et catégorie génériques
      */
     @Override
-    public PaquetDTO creerPaquet() {
+    public PaquetDTO createPaquet() {
         // Créer le paquet et l'ajouter à la liste de paquet de l'utilisateur
         Paquet nouveauPaquet = new Paquet("Nouveau Paquet") ;
         //editerPaquet(nouveauPaquet.getDTO());
@@ -59,15 +59,15 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      * @param paquetDTO Paquet à supprimer
      */
     @Override
-    public void supprimerPaquet(PaquetDTO paquetDTO) {
+    public void deletePaquet(PaquetDTO paquetDTO) {
         Optional<Paquet> paquet = paquetDTO.getPaquet();
-        GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
+        PaquetManager paquetManager = MenuPrincipal.getINSTANCE().getPaquetManager();
         if(paquet.isEmpty()) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Veuillez sélectionner un paquet à supprimer");
             return;
         }
         user.removePaquet(paquet.get().getId());
-        gestionnairePaquet.remove(user, paquet.get());
+        paquetManager.remove(user, paquet.get());
     }
 
     /**
@@ -103,7 +103,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         try {
             Paquet newPaquet = objectMapper.readValue(file, Paquet.class);
             MenuPrincipal.getINSTANCE().getPrincipalUser().addPaquet(newPaquet);
-            MenuPrincipal.getINSTANCE().getGestionnairePaquet().save(MenuPrincipal.getINSTANCE().getPrincipalUser());
+            MenuPrincipal.getINSTANCE().getPaquetManager().save(MenuPrincipal.getINSTANCE().getPrincipalUser());
             System.out.println("Importation du paquet " + file.getName() + " réussie !");
         } catch (IOException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de l'importation du paquet");
@@ -132,7 +132,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      * @param paquetDTO Paquet choisit par l'utilisateur à être modifié
      */
     @Override
-    public void editerPaquet(PaquetDTO paquetDTO) {
+    public void editPaquet(PaquetDTO paquetDTO) {
         try {
             Optional<Paquet> paquet = paquetDTO.getPaquet();
             MenuPrincipal.getINSTANCE().showMenuEdition(paquet.get());
@@ -146,18 +146,18 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      * @param paquetDTO Paquet choisit par l'utilisateur à être étudié
      */
     @Override
-    public void carteEtude(PaquetDTO paquetDTO) {
+    public void cardStudy(PaquetDTO paquetDTO) {
         MenuPrincipal instance = MenuPrincipal.getINSTANCE();
 
         try {
             Optional<Paquet> paquet = paquetDTO.getPaquet();
             Paquet paquetInstance = paquet.get();
-            if (paquetInstance.cartes.size() == 0){
+            if (paquetInstance.cards.size() == 0){
                 //Attention, le showErrorPopup ne fontionne pas, à corriger pour être plus propre.
                 instance.showErrorPopup("Vous devez creer des cartes avant de pouvoir les étudier !");
 
             }else{
-                instance.showCarteEtude(this,paquetInstance);
+                instance.showCardStudy(this,paquetInstance);
             }
         }catch (NullPointerException e){
             instance.showErrorPopup("Vous devez sélectionner un paquet à étudier !");
@@ -174,7 +174,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
 
     public void updatePaquets() {
         saveListPaquet = MenuPrincipal.getINSTANCE().getUserPaquets();
-        MenuPaquetVueController controller = (MenuPaquetVueController) super.controller;
-        controller.rechargerListView();
+        MenuPaquetViewController controller = (MenuPaquetViewController) super.controller;
+        controller.reloadListView();
     }
 }

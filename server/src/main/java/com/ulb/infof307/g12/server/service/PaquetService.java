@@ -1,14 +1,12 @@
 package com.ulb.infof307.g12.server.service;
 
 import com.ulb.infof307.g12.server.dao.PaquetDao;
-import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.Paquet;
 import com.ulb.infof307.g12.server.model.STATUS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

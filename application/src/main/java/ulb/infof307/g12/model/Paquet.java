@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
-import ulb.infof307.g12.view.dto.CardDTO;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class Paquet {
     @Getter
     @Setter
     @JsonProperty("cartes")
-    public ArrayList<Carte> cartes = new ArrayList<Carte>();
+    public ArrayList<Card> cards = new ArrayList<Card>();
 
     /**
      * Crée un paquet dont le nom doit être unique.
@@ -56,17 +55,17 @@ public class Paquet {
      * Constructeur d'un paquet avec jackson
      * @param nom nom du paquet
      * @param categories catégories du paquet
-     * @param cartes cartes du paquet
+     * @param cards cartes du paquet
      * @throws IllegalArgumentException
      */
     @JsonCreator
-    public Paquet(@JsonProperty("id") UUID id, @JsonProperty("nom") String nom, @JsonProperty("categories") List<String> categories, @JsonProperty("cartes") List<Carte> cartes) throws IllegalArgumentException{
+    public Paquet(@JsonProperty("id") UUID id, @JsonProperty("nom") String nom, @JsonProperty("categories") List<String> categories, @JsonProperty("cartes") List<Card> cards) throws IllegalArgumentException{
         if(nom == null || nom.equals("") || categories == null)
             throw new IllegalArgumentException("Le paquet doit posséder un nom ou une catégorie");
         this.id = id;
         this.nom = nom;
         this.categories.addAll(categories);
-        this.cartes.addAll(cartes);
+        this.cards.addAll(cards);
     }
 
     /**
@@ -83,28 +82,28 @@ public class Paquet {
 
     /**
      * Fonction qui ajoute une carte au paquet
-     * @param carte carte
+     * @param card carte
      * @throws IllegalArgumentException si la carte existe déjà
      */
-    public void addCard(Carte carte) throws IllegalArgumentException{
-        for(Carte car: this.cartes){
-            if(car.getId()==carte.getId()) {
+    public void addCard(Card card) throws IllegalArgumentException{
+        for(Card car: this.cards){
+            if(car.getId()== card.getId()) {
                 throw new IllegalArgumentException("La carte existe déjà");
             }
         }
-        cartes.add(carte);
+        cards.add(card);
     }
 
     /**
      * Supprime une carte du paquet --> pas encore implémenté dans le code (test à rajouter)
-     * @param carte carte
+     * @param card carte
      * @throws IllegalArgumentException si la carte n'existe pas
      */
-    public void supprimerCarte(Carte carte) throws IllegalArgumentException{
-        if(!(cartes.contains(carte))) {
+    public void deleteCard(Card card) throws IllegalArgumentException{
+        if(!(cards.contains(card))) {
             throw new IllegalArgumentException("La carte n'existe pas");
         }
-        cartes.remove(carte);
+        cards.remove(card);
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.ulb.infof307.g12.server.model;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,21 +16,21 @@ class PaquetTest {
         String nom = "Paquet";
         ArrayList<String> categories = new ArrayList<>();
         categories.add("Catégorie");
-        ArrayList<Carte> cartes = new ArrayList<>();
-        cartes.add(new Carte(1, "Recto", "Verso", "QCM"));
-        paquet = new Paquet(id, nom, categories, cartes);
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(1, "Recto", "Verso", "QCM"));
+        paquet = new Paquet(id, nom, categories, cards);
     }
     @Test
     void ajouterCarte() {
-        Carte carte = new Carte(2, "Recto", "Verso", "QCM");
-        paquet.ajouterCarte(carte);
-        assertTrue(paquet.getCartes().contains(carte));
+        Card card = new Card(2, "Recto", "Verso", "QCM");
+        paquet.addCarte(card);
+        assertTrue(paquet.getCards().contains(card));
     }
     @Test
     void ajouterDuplicateCarte() {
-        Carte carte = new Carte(2, "Recto", "Verso", "QCM");
-        paquet.ajouterCarte(carte);
-        assertThrows(IllegalArgumentException.class, () -> paquet.ajouterCarte(carte));
+        Card card = new Card(2, "Recto", "Verso", "QCM");
+        paquet.addCarte(card);
+        assertThrows(IllegalArgumentException.class, () -> paquet.addCarte(card));
     }
     @Test
     void testEquals() {

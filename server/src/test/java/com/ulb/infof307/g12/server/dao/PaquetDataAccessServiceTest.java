@@ -2,14 +2,12 @@ package com.ulb.infof307.g12.server.dao;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ulb.infof307.g12.server.model.Carte;
+import com.ulb.infof307.g12.server.model.Card;
 import com.ulb.infof307.g12.server.model.Paquet;
 import com.ulb.infof307.g12.server.model.STATUS;
 import org.junit.jupiter.api.*;
-import org.junit.runners.Suite;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +28,9 @@ class PaquetDataAccessServiceTest {
         UUID id = UUID.randomUUID();
         ArrayList<String> categories = new ArrayList<>();
         categories.add("test");
-        ArrayList<Carte> cartes = new ArrayList<>();
-        cartes.add(new Carte(1, "test", "test", "QCM"));
-        paquet = new Paquet(id, "nomtest", categories, cartes);
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(1, "test", "test", "QCM"));
+        paquet = new Paquet(id, "nomtest", categories, cards);
     }
     @AfterAll
     public static void supprimeDossierTemporaire(){

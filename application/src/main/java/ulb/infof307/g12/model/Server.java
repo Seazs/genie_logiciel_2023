@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
-import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -151,7 +149,7 @@ public class Server {
      * @return
      * @throws IOException
      */
-    public STATUS envoiPaquetUser(List<Paquet> paquets, String username) throws IOException {
+    public STATUS sendPaquetUser(List<Paquet> paquets, String username) throws IOException {
         Map<String, Object> map = new HashMap<>();
         map.put("paquets", paquets);
         map.put("username", username);

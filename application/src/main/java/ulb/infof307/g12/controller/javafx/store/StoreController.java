@@ -8,25 +8,24 @@ import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.STATUS;
-import ulb.infof307.g12.model.Utilisateur;
+import ulb.infof307.g12.model.User;
 import ulb.infof307.g12.view.dto.PaquetDTO;
-import ulb.infof307.g12.view.listeners.StoreVueListener;
-import ulb.infof307.g12.view.store.StoreVueController;
+import ulb.infof307.g12.view.listeners.StoreViewListener;
+import ulb.infof307.g12.view.store.StoreViewController;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * Controller for the store view
  */
-public class StoreController extends BaseController implements StoreVueListener {
+public class StoreController extends BaseController implements StoreViewListener {
 
     private List<Paquet> saveListPaquet = new ArrayList<>();
 
     public StoreController(Stage stage) throws IOException {
-        super(stage, StoreVueController.class.getResource("menuStore.fxml"), "");
-        StoreVueController controller = (StoreVueController) super.controller;
+        super(stage, StoreViewController.class.getResource("menuStore.fxml"), "");
+        StoreViewController controller = (StoreViewController) super.controller;
         controller.setListener(this);
         controller.rechargerListView();
     }
@@ -39,7 +38,7 @@ public class StoreController extends BaseController implements StoreVueListener 
     public void downloadPaquet(PaquetDTO paquetDTO) {
         Optional<Paquet> paquetOptional = paquetDTO.getPaquet(saveListPaquet);
         MenuPrincipal singleton = MenuPrincipal.getINSTANCE();
-        Utilisateur currentUser = singleton.getPrincipalUser();
+        User currentUser = singleton.getPrincipalUser();
         paquetOptional.ifPresent(paquet -> {
             try {
                 boolean result = currentUser.addPaquet(paquet);
@@ -47,7 +46,7 @@ public class StoreController extends BaseController implements StoreVueListener 
                 if(result)
                     singleton.showErrorPopup("Vous possédez déjà ce paquet !");
                 else
-                    singleton.getGestionnairePaquet().save(currentUser);
+                    singleton.getPaquetManager().save(currentUser);
 
             } catch (IOException e) {
                 singleton.showErrorPopup("Erreur lors du téléchargement du paquet !");
@@ -135,7 +134,7 @@ public class StoreController extends BaseController implements StoreVueListener 
     @Override
     public void deletePaquetStore(PaquetDTO paquetDto) {
         MenuPrincipal singleton = MenuPrincipal.getINSTANCE();
-        Utilisateur currentUser = singleton.getPrincipalUser();
+        User currentUser = singleton.getPrincipalUser();
         try {
             currentUser.belongToUser(paquetDto.getPaquet().get());//On vérifie que le paquet appartient bien à l'utilisateur
             MenuPrincipal.getINSTANCE().getServer().deletePaquet(UUID.fromString(paquetDto.uuid()));//Supprimer le paquet du store
@@ -147,7 +146,7 @@ public class StoreController extends BaseController implements StoreVueListener 
     @Override
     public void show(){
         super.show();
-        StoreVueController vue = (StoreVueController) super.controller;
+        StoreViewController vue = (StoreViewController) super.controller;
         getStorePaquets();
         vue.rechargerListView();
     }
