@@ -62,7 +62,7 @@ public class MenuPaquetViewController implements Initializable {
                 } else {
                     try {
                         // Charger la vue FXML pour la cellule
-                        FXMLLoader loader = new FXMLLoader(MenuPaquetViewController.class.getResource("paquetDeCarte.fxml"));
+                        FXMLLoader loader = new FXMLLoader(MenuPaquetViewController.class.getResource("paquetOfCard.fxml"));
                         AnchorPane cellLayout = loader.load();
                         // Obtenir le contrôleur pour la vue FXML
                         PaquetOfCardsViewController controller = loader.getController();

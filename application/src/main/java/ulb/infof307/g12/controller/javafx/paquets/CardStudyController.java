@@ -31,7 +31,7 @@ public class CardStudyController extends BaseController implements CardStudyList
      * @throws IOException  exception
      */
     public CardStudyController(Stage stage, Paquet paquet) throws IOException {
-        super(stage, CardStudyViewController.class.getResource("carteEtude.fxml"), "");
+        super(stage, CardStudyViewController.class.getResource("cardStudy.fxml"), "");
         CardStudyViewController controller = (CardStudyViewController) super.controller;
         this.paquet=paquet;
         controller.setListener(this);
