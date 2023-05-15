@@ -46,10 +46,10 @@ public class CardQcm extends Card {
      * verso = bonne réponse
      */
     public void getQCMInfo(){
-        String[] listinfos = this.getRecto().split("§");
-        this.question = listinfos[0];
-        this.propositions = new String[listinfos.length-1];
-        System.arraycopy(listinfos, 1, this.propositions, 0, listinfos.length - 1);
+        String[] listInfos = this.getRecto().split("§");
+        this.question = listInfos[0];
+        this.propositions = new String[listInfos.length-1];
+        System.arraycopy(listInfos, 1, this.propositions, 0, listInfos.length - 1);
         this.answer = this.getVerso();
     }
 

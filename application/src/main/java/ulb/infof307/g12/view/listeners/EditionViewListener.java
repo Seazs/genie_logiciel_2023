@@ -78,13 +78,13 @@ public interface EditionViewListener {
 
     /**
      * Change la question d'une carte dans le paquet
-     * @param newQuestion
+     * @param newQuestion nouvelle question
      */
     void editQuestion(String newQuestion);
 
     /**
-     * Change la reponse d'une carte dans le paquet
-     * @param newReponse
+     * Change la réponse d'une carte dans le paquet
+     * @param newReponse nouvelle réponse
      */
     void editResponse(String newReponse);
 }

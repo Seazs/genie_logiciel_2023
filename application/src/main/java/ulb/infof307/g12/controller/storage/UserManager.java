@@ -21,7 +21,7 @@ public class UserManager {
     /**
      * Constructeur de GestionnaireUtilisateur, en paramètre, c'est le fichier dont on doit charger les utilisateurs
      * @param fichier fichier contenant les utilisateurs
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException si le fichier n'existe pas ou n'est pas trouvé
      */
     public UserManager(File fichier) throws FileNotFoundException {
         userDatabase = fichier;
@@ -46,7 +46,7 @@ public class UserManager {
 
     /**
      * Sauvegarde la liste des utilisateurs dans un fichier .txt
-     * @throws IOException
+     * @throws IOException si il y a une erreur lors de la sauvegarde
      */
     public void save() throws IOException {
         FileWriter writer = new  FileWriter(userDatabase);
@@ -61,7 +61,7 @@ public class UserManager {
 
     /**
      * Charge les utilisateurs à partir d'un fichier
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException si le fichier n'est pas trouvé
      */
     public void load() throws FileNotFoundException {
         LISTE_USER.clear();
@@ -73,9 +73,9 @@ public class UserManager {
             String data = myReader.nextLine();
 
             if (!data.isBlank()) {
-                String[] listdata = data.split("#");
-                if (listdata.length >= 2) {
-                    LISTE_USER.add(new User(listdata[0].strip(),listdata[1].strip()));
+                String[] listData = data.split("#");
+                if (listData.length >= 2) {
+                    LISTE_USER.add(new User(listData[0].strip(),listData[1].strip()));
                 } else {
                     System.out.println("Erreur : la ligne ne contient pas les informations attendues.");
                 }
@@ -96,11 +96,11 @@ public class UserManager {
      * Vérifie si l'utilisateur à déjà un compte et le connecte
      * @param username nom d'utilisateur
      * @param password mot de passe de l'utilisateur
-     * @return
-     * @throws FileNotFoundException
+     * @return true si l'utilisateur est connecté, false sinon
+     * @throws FileNotFoundException si le fichier n'est pas trouvé
      */
     public boolean connect(String username, String password) throws FileNotFoundException {
-        if (!UserIsValid(username, password))
+        if (UserNotValid(username, password))
             return false;
         this.load();
         for (User u : LISTE_USER) {
@@ -122,13 +122,12 @@ public class UserManager {
     }
 
     /**
-     * vérifie que l'utilisateur est déconnecté
+     * Vérifie que l'utilisateur est déconnecté
      */
     public void disconnect(){
         if (userConnected !=null){
             userConnected = null;
         }
-
     }
 
     /**
@@ -143,11 +142,11 @@ public class UserManager {
      * Permet de créer un nouveau compte d'utilisateur
      * @param username pseudo de l'utilisateur
      * @param password mot de passe de l'utilisateur
-     * @return
-     * @throws IOException
+     * @return true si le compte est créé, false sinon
+     * @throws IOException si il y a une erreur lors de la création du compte
      */
     public boolean register(String username, String password) throws IOException {
-        if (!UserIsValid(username, password))
+        if (UserNotValid(username, password))
             return false;
         User new_user = new User(username, password);
         for (User u : LISTE_USER) {
@@ -170,31 +169,30 @@ public class UserManager {
      * Vérifie si le pseudo et le mot de passe sont valides
      * @param pseudo pseudo de l'utilisateur
      * @param mdp mot de passe de l'utilisateur
-     * @return
+     * @return true si non valide, false si oui
      */
-    private boolean UserIsValid(String pseudo, String mdp) {
-
-        if (!isStringValid(pseudo)) {
+    private boolean UserNotValid(String pseudo, String mdp) {
+        if (stringNotValid(pseudo)) {
             status = STATUS.USERNAME_IS_NOT_VALID;
             System.out.println("USERNAME_IS_NOT_VALID");
-            return false;
-        } else if (!isStringValid(mdp)) {
+            return true;
+        } else if (stringNotValid(mdp)) {
             status = STATUS.PASSWORD_IS_NOT_VALID;
             System.out.println("PASSWORD_IS_NOT_VALID");
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
      * Vérifie que le string est valide ou non
      * @param string string à vérifier
-     * @return True si valide
+     * @return True si non valide
      */
-    private boolean isStringValid(String string){
-        return (!string.contains("#") &&
-                !string.equals("") &&
-                !string.contains(" "));
+    private boolean stringNotValid(String string){
+        return (string.contains("#") ||
+                string.equals("") ||
+                string.contains(" "));
     }
 
     /**
@@ -217,27 +215,22 @@ public class UserManager {
      * @param username pseudo de l'utilisateur
      * @param newPassword nouveau mot de passe
      * @param oldPassword ancien mot de passe
-     * @return
-     * @throws IOException
+     * @throws IOException s'il y a une erreur lors de la modification du mot de passe
      */
     public void changePassword(String username, String newPassword, String oldPassword) throws IOException {
-        if(!isStringValid(newPassword)) {
+        if(stringNotValid(newPassword)) {
             status = STATUS.PASSWORD_IS_NOT_VALID;
             return;
         }
-
         User user = findUser(username);
-
         if (user == null) {
             status = STATUS.USERNAME_DOES_NOT_EXIST;
             return;
         }
-
         if (!user.getMdp().equals(oldPassword)) {
             status = STATUS.WRONG_PASSWORD;
             return;
         }
-
         user.setMdp(newPassword);
         save();
         status = STATUS.OK;

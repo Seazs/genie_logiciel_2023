@@ -17,9 +17,8 @@ import java.util.ArrayList;
 
 public class CardStudyController extends BaseController implements CardStudyListener {
 
-    private ArrayList<Card> cardsStudy;
+    private final ArrayList<Card> cardsStudy;
 
-    private final ArrayList<Integer> cardsStudyScore = new ArrayList<>();//liste des scores des cartes
     @Getter
     private final Paquet paquet;
 
@@ -38,6 +37,8 @@ public class CardStudyController extends BaseController implements CardStudyList
         controller.setListener(this);
         cardsStudy = paquet.getCards();
         for(int i = 0; i< cardsStudy.size(); i++){
+            //liste des scores des cartes
+            ArrayList<Integer> cardsStudyScore = new ArrayList<>();
             cardsStudyScore.add(0);
         }
         controller.loadViewStudyCard();
@@ -84,7 +85,6 @@ public class CardStudyController extends BaseController implements CardStudyList
     @Override
     public void veryGood(int index){
         cardsStudy.get(index).setKnowledge(5);
-
     }
 
     /**
@@ -100,9 +100,21 @@ public class CardStudyController extends BaseController implements CardStudyList
         }
     }
 
+    /**
+     * Fonction qui permet de lire un texte avec la synthèse vocale
+     * @param text text
+     */
     @Override
     public void speakText(String text){
         textToSpeechController.vocalSynthesis(text);
+    }
+
+    /**
+     * @param msg message d'erreur à afficher
+     */
+    @Override
+    public void error(String msg) {
+        MenuPrincipal.getINSTANCE().showErrorPopup(msg);
     }
 
 }

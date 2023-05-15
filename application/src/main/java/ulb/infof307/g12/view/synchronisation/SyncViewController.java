@@ -16,6 +16,10 @@ public class SyncViewController {
     public void uploadLocal() {
         listener.uploadLocal();
     }
+
+    /**
+     * Ce qui s'exécute lorsqu'on clique sur le bouton de téléchargement de la base de données distante
+     */
     public void downloadRemote() {
         listener.downloadRemote();
     }

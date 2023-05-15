@@ -22,10 +22,19 @@ public interface StoreViewListener {
      */
     Collection<PaquetDTO> getStorePaquets();
 
+    /**
+     * Filtre les paquets du store selon la recherche
+     * @param recherche recherche
+     * @return liste des paquets du store filtrés
+     */
     Collection<PaquetDTO> filterPaquet(String recherche);
 
     Collection<PaquetDTO> getUserPaquets();
 
+    /**
+     * Supprime un paquet du store
+     * @param paquet paquet à supprimer du store
+     */
     void deletePaquetStore(PaquetDTO paquet);
 
 }

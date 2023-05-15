@@ -24,13 +24,10 @@ public class PaquetOfCardsViewController {
 
         StringBuilder textCategories = new StringBuilder();
         for(int i = 0; i<categories.size(); i++){
-
             textCategories.append(categories.get(i));
-
             if (i != categories.size()-1)
                 textCategories.append(", ");
         }
-
         categorieLabel.setText(textCategories.toString());
     }
 }

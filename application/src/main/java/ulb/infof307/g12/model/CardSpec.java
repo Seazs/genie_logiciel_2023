@@ -29,7 +29,7 @@ public class CardSpec extends Card {
     public CardSpec(int id, String recto, String verso, String lang) {
         super(id, recto, verso);
         if (lang == null) throw new IllegalArgumentException("La langue ne peut pas être nulle");
-        if (!checkLanguage(lang)) throw new IllegalArgumentException("La langue n'est pas valide");
+        if (checkLanguage(lang)) throw new IllegalArgumentException("La langue n'est pas valide");
         if (lang.equals("latex")) {
             try {
                 TeXFormula f2 = new TeXFormula(recto);
@@ -43,11 +43,19 @@ public class CardSpec extends Card {
         this.type="Spec";
     }
 
+    /**
+     * Constructeur pour la deserialisation
+     * @param id   id
+     * @param recto recto
+     * @param verso verso
+     * @param lang lang
+     * @param connaissance connaissance
+     */
     @JsonCreator
     public CardSpec(@JsonProperty("id") int id, @JsonProperty("recto") String recto, @JsonProperty("verso") String verso, @JsonProperty("language") String lang, @JsonProperty("connaissance") int connaissance) {
         super(id, recto, verso);
         if (lang == null) throw new IllegalArgumentException("La langue ne peut pas être nulle");
-        if (!checkLanguage(lang)) throw new IllegalArgumentException("La langue n'est pas valide");
+        if (checkLanguage(lang)) throw new IllegalArgumentException("La langue n'est pas valide");
         this.language = lang;
         this.type="Spec";
         this.connaissance = connaissance;
@@ -56,10 +64,10 @@ public class CardSpec extends Card {
 
     /**
      * @param language le format de la carte (HTML/LATEX)
-     * @return true si le format est valide
+     * @return false si le format est valide
      */
     public boolean checkLanguage(String language){
-         return language.equals("html") || language.equals("latex");
+         return !language.equals("html") && !language.equals("latex");
     }
 
     /**

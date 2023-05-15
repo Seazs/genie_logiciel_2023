@@ -74,14 +74,12 @@ public class EditionViewController {
      * @param value quand on valide le choix de la checkbox
 
      */
-    void switchType(String value) throws IOException {
+    void switchType(String value){
         switch (value) {
             case "QCM" -> showQcm();
             case "Simple" -> showQR();
             case "Texte à trous" -> showTt();
             case "Latex","HTML"-> showSpecial();
-            default -> {
-            }
         }
     }
 
@@ -242,6 +240,7 @@ public class EditionViewController {
         reponseTextField.clear();
         reloadTable();
     }
+
     /**
      * Ajout d'une carte question réponse dans le paquet
      */
@@ -286,11 +285,7 @@ public class EditionViewController {
         typechoix.setValue("Simple");
         typechoix.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             // Appel de la fonction switchtype avec la nouvelle valeur sélectionnée en paramètre
-            try {
-                switchType(newValue);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            switchType(newValue);
         });
 
     }

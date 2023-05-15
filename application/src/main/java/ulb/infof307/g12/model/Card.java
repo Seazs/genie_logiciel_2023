@@ -126,7 +126,7 @@ Card {
 
     /**
      * Fonction qui retourne les infos de la carte
-     * @return les infos de la cartes
+     * @return les infos de la carte
      */
     @JsonIgnore
     public String[] getCardInfo(){

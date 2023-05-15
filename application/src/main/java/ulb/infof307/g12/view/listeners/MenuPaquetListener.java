@@ -14,7 +14,7 @@ public interface MenuPaquetListener {
     PaquetDTO createPaquet() throws IOException;
 
     /**
-     * Editer le paquet
+     * Éditer le paquet
      * @param paquet paquet
      */
     void editPaquet(PaquetDTO paquet) ;
@@ -30,7 +30,11 @@ public interface MenuPaquetListener {
      */
     void deletePaquet(PaquetDTO paquet);
 
-    Collection<PaquetDTO> filterPaquet(String filter);
+    /**
+     * Filtre les paquets selon le filtre
+     * @param filter filtre
+     */
+    void filterPaquet(String filter);
 
     Collection<PaquetDTO> getPaquetDTOList();
 
@@ -49,5 +53,8 @@ public interface MenuPaquetListener {
      */
     void exportPaquet(PaquetDTO paquet, String path);
 
+    /**
+     * Synchroniser les paquets
+     */
     void sync();
 }

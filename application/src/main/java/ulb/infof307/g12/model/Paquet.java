@@ -30,7 +30,7 @@ public class Paquet {
     @Getter
     @Setter //On laisse setter mm si c'est final pour jackson (sauvegarde json)
     @JsonProperty("categories")
-    private final ArrayList<String> categories = new ArrayList<String>();
+    private ArrayList<String> categories = new ArrayList<String>();
 
     @Getter
     @Setter
@@ -56,7 +56,7 @@ public class Paquet {
      * @param nom nom du paquet
      * @param categories catégories du paquet
      * @param cards cartes du paquet
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException si le paquet n'a pas de catérorie ou de nom
      */
     @JsonCreator
     public Paquet(@JsonProperty("id") UUID id, @JsonProperty("nom") String nom, @JsonProperty("categories") List<String> categories, @JsonProperty("cartes") List<Card> cards) throws IllegalArgumentException{
@@ -120,7 +120,7 @@ public class Paquet {
     }
 
     /**
-     * transforme le paquet en DTO
+     * Transforme le paquet en DTO
      * @return une version DTO du paquet
      */
     @JsonIgnore

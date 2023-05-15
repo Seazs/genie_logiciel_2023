@@ -171,11 +171,16 @@ public class EditionController extends BaseController implements EditionViewList
         MenuPrincipal.getINSTANCE().showErrorPopup(message);
     }
 
+
     @Override
     public List<CardDTO> getData() {
        return paquet.getCards().stream().map(Card::getDTO).collect(Collectors.toList());
     }
 
+    /**
+     * Change la question de la carte
+     * @param newQuestion nouvelle question
+     */
     @Override
     public void editQuestion(String newQuestion) {
         try{
@@ -183,12 +188,15 @@ public class EditionController extends BaseController implements EditionViewList
                     .filter(carte -> carte.getRecto().equals(newQuestion))
                     .findFirst()
                     .ifPresent(carte -> carte.editRecto(newQuestion));
-
         }catch (IllegalArgumentException e){
             error(e.getMessage());
         }
     }
 
+    /**
+     * Change la réponse de la carte
+     * @param newReponse nouvelle réponse
+     */
     @Override
     public void editResponse(String newReponse) {
         try {

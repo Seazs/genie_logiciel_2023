@@ -38,7 +38,6 @@ public class ProfileController extends BaseController implements ProfileViewList
 
     /**
      * Changement de mot de passe de l'utilisateur
-     *
      * @param password nouveau mot de passe
      * @return le résultat
      */
@@ -47,11 +46,9 @@ public class ProfileController extends BaseController implements ProfileViewList
         if (!MenuPrincipal.getINSTANCE().isOnline()){
             return STATUS.CANNOT_CHANGE_PASSWORD_OFFLINE.getMsg();
         }
-
         String username = user.getPseudo(),
                 oldPassword = user.getMdp(),
                 result = "";
-
         if (password.isPresent()) {
             String newPassword = password.get();
             UserManager gestionnaire = MenuPrincipal.getINSTANCE().getUserManager();
@@ -67,10 +64,7 @@ public class ProfileController extends BaseController implements ProfileViewList
             } catch (IOException e) {
                 result = "Une erreur s'est produite. Veuillez réessayer.";
             }
-
         }
-
-
         return result;
     }
 

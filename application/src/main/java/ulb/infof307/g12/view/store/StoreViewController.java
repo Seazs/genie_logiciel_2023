@@ -39,9 +39,7 @@ public class StoreViewController implements Initializable{
         // Personnaliser l'affichage des éléments de la liste
         updateVisualListViewPaquet(mesPaquetListView);
         updateVisualListViewPaquet(storePaquetListView);
-
         RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> filterCategory());
-
     }
 
 
@@ -54,7 +52,6 @@ public class StoreViewController implements Initializable{
             @Override
             protected void updateItem(PaquetDTO item, boolean empty) {
                 super.updateItem(item, empty);
-
                 if (empty || item == null) {
                     setText(null);
                     setGraphic(null);
@@ -63,13 +60,10 @@ public class StoreViewController implements Initializable{
                         // Charger la vue FXML pour la cellule
                         FXMLLoader loader = new FXMLLoader(MenuPaquetViewController.class.getResource("paquetDeCarte.fxml"));
                         AnchorPane cellLayout = loader.load();
-
                         // Obtenir le contrôleur pour la vue FXML
                         PaquetOfCardsViewController controller = loader.getController();
-
                         // Définir les valeurs des éléments de la vue FXML à partir de l'objet PaquetDeCartes
                         controller.setPaquetOfCards(item);
-
                         // Définir la vue FXML comme élément de la cellule
                         setGraphic(cellLayout);
                     } catch (IOException e) {

@@ -31,7 +31,7 @@ public class MenuPrincipal extends Application {
     private MenuPaquetController menuPaquetController;
     private ProfileController profilController;
     private EditionController editionController;
-    private CardStudyController carteEtudeController;
+    private CardStudyController cardStudyController;
     private StoreController storeController;
     @Setter
     private User principalUser;
@@ -108,8 +108,8 @@ public class MenuPrincipal extends Application {
         try{
             parent.hide();
             Stage stage = new Stage();
-            carteEtudeController = new CardStudyController(stage,paquet);
-            carteEtudeController.show();
+            cardStudyController = new CardStudyController(stage,paquet);
+            cardStudyController.show();
         }catch (IOException e){
             showErrorPopup("Impossible de lancer une session d'étude !");
         }
@@ -167,7 +167,6 @@ public class MenuPrincipal extends Application {
      * Retour au menu Paquet depuis l'édition de ce dernier
      */
     public void returnFromEditionToMenuPaquet() {
-
         changeView(editionController,menuPaquetController);
         menuPaquetController.updatePaquets();
     }
@@ -176,7 +175,7 @@ public class MenuPrincipal extends Application {
      * Retour à l'étude de cartes depuis le menu du Paquet
      */
     public void returnFromCardStudyToMenuPaquet() {
-        changeView(carteEtudeController,menuPaquetController);
+        changeView(cardStudyController,menuPaquetController);
     }
 
     /**
@@ -201,7 +200,6 @@ public class MenuPrincipal extends Application {
         } catch (IllegalArgumentException e){
             showErrorPopup("Veuillez sélectionner un paquet !");
         }
-
     }
 
     /**
@@ -220,6 +218,9 @@ public class MenuPrincipal extends Application {
         return Collections.unmodifiableList(principalUser.getListPaquet());
     }
 
+    /**
+     * Affichage du menu de synchronisation
+     */
     public void showSyncMenu() {
         if (isOnline) {
             try {
@@ -234,6 +235,10 @@ public class MenuPrincipal extends Application {
     public void setUserPaquets(List<Paquet> paquets) {
         principalUser.setListPaquet(paquets);
     }
+
+    /**
+     * Sauvegarde des paquets
+     */
     public void reloadPaquets() {
         try {
             menuPaquetController.updatePaquets();

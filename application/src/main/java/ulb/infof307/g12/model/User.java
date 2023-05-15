@@ -23,7 +23,6 @@ public class User {
 
     /**
      * Constructeur de la classe utilisateur
-     *
      * @param pseudo pseudo de l'utilisateur
      * @param mdp mot de passe
      */
@@ -36,7 +35,6 @@ public class User {
         else {
             throw new IllegalArgumentException("Le pseudo ou le mot de passe contient des caractères interdits.");
         }
-
     }
 
     /**
@@ -49,7 +47,6 @@ public class User {
             this.mdp = mdp;
         else
             throw new IllegalArgumentException("Le mot de passe contient des caractères interdits.");
-
     }
 
 
@@ -59,12 +56,9 @@ public class User {
      */
     public boolean addPaquet(Paquet paquet) {
         boolean result = listPaquet.stream().anyMatch(paquet1 -> paquet1.getId().equals(paquet.getId()));
-
         if(!result)
             listPaquet.add(paquet);
-
         return result;
-
     }
 
     /**
@@ -92,11 +86,8 @@ public class User {
      * @param paquet paquet
      */
     public void belongToUser(Paquet paquet) {
-        if(listPaquet.stream().anyMatch(paquet1 -> paquet1.getId().equals(paquet.getId()))){
-        }
-        else{
+        if(listPaquet.stream().noneMatch(paquet1 -> paquet1.getId().equals(paquet.getId()))){
             throw new IllegalArgumentException("Le paquet n'appartient pas à l'utilisateur");
         }
     }
-
 }

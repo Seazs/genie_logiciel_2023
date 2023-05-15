@@ -37,5 +37,15 @@ public interface CardStudyListener {
      */
     public void saveCards();
 
+    /**
+     * Fait parler le texte par la synthèse vocale
+     * @param texte texte
+     */
     public void speakText(String texte);
+
+    /**
+     * Affiche une erreur
+     * @param msg message d'erreur
+     */
+    public void error(String msg);
 }

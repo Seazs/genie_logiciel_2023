@@ -21,7 +21,7 @@ import java.util.*;
  */
 public class StoreController extends BaseController implements StoreViewListener {
 
-    private List<Paquet> saveListPaquet = new ArrayList<>();
+    private final List<Paquet> saveListPaquet = new ArrayList<>();
 
     public StoreController(Stage stage) throws IOException {
         super(stage, StoreViewController.class.getResource("menuStore.fxml"), "");
@@ -42,12 +42,10 @@ public class StoreController extends BaseController implements StoreViewListener
         paquetOptional.ifPresent(paquet -> {
             try {
                 boolean result = currentUser.addPaquet(paquet);
-
                 if(result)
                     singleton.showErrorPopup("Vous possédez déjà ce paquet !");
                 else
                     singleton.getPaquetManager().save(currentUser);
-
             } catch (IOException e) {
                 singleton.showErrorPopup("Erreur lors du téléchargement du paquet !");
             }
@@ -61,9 +59,7 @@ public class StoreController extends BaseController implements StoreViewListener
     public Collection<PaquetDTO> getStorePaquets() {
         JSONArray paquetsJson = MenuPrincipal.getINSTANCE().getServer().getPaquets();
         ObjectMapper objectMapper = new ObjectMapper();
-
         saveListPaquet.clear();
-
         for (int i = 0; i < paquetsJson.length(); i++) {
             try {
                 JSONObject paquet = paquetsJson.getJSONObject(i);
@@ -73,8 +69,6 @@ public class StoreController extends BaseController implements StoreViewListener
                 MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors du chargement du paquet");
             }
         }
-
-
         return saveListPaquet.stream()
                 .map(Paquet::getDTO)
                 .toList();
@@ -88,27 +82,19 @@ public class StoreController extends BaseController implements StoreViewListener
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur, veuillez selectionner un paquet à uploader");
             return;
         }
-
-
         Optional<Paquet> paquetOptional = paquet.getPaquet();
-
         if (paquetOptional.isEmpty()) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Erreur, veuillez selectionner un paquet à uploader");
             return;
         }
-
         STATUS status = MenuPrincipal.getINSTANCE().getServer().postPaquet(paquetOptional.get());
-
         System.out.println(status.getMsg());
-
         if (!STATUS.OK.equals(status))
             MenuPrincipal.getINSTANCE().showErrorPopup(status.getMsg());
-
     }
 
     /**
-     * filtre les paquets selon leurs catégories
-     *
+     * Filtre les paquets selon leurs catégories
      * @param recherche filtre à appliquer sur les catégories de chaque paquet
      * @return la liste des paquets filtrés par catégorie
      */

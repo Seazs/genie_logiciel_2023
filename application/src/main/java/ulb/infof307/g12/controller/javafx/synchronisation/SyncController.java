@@ -24,6 +24,9 @@ public class SyncController extends BaseController implements SyncListener {
         controller.setListener(this);
     }
 
+    /**
+     * Upload les paquets locaux lors de la synchronisation
+     */
     @Override
     public void uploadLocal() {
         Server server = MenuPrincipal.getINSTANCE().getServer();
@@ -38,6 +41,9 @@ public class SyncController extends BaseController implements SyncListener {
         this.hide();
     }
 
+    /**
+     * Download les paquets du remote lors de la synchronisation
+     */
     @Override
     public void downloadRemote() {
         Server server = MenuPrincipal.getINSTANCE().getServer();

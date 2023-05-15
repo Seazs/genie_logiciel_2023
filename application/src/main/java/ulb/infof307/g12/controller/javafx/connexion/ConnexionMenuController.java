@@ -44,7 +44,7 @@ public class ConnexionMenuController extends BaseController implements UserCrede
     }
 
     /**
-     * création d'un utilisateur en local
+     * Création d'un utilisateur en local
      * @param username pseudo
      * @param password mot de passe
      * @return le statut
@@ -65,6 +65,12 @@ public class ConnexionMenuController extends BaseController implements UserCrede
         return result;
     }
 
+    /**
+     * Création d'un utilisateur en ligne
+     * @param username username de l'utilisateur
+     * @param password mot de passe de l'utilisateur
+     * @return le statut de la création
+     */
     private String onlineRegister(String username, String password){
         String result = MenuPrincipal.getINSTANCE().getServer().createUser(username,password);
         if (STATUS.valueOf(result).equals(STATUS.SERVER_CREATION_ERROR)){
@@ -78,8 +84,8 @@ public class ConnexionMenuController extends BaseController implements UserCrede
 
     /**
      * Lorsqu'on se connecte
-     * @param username username
-     * @param password mot de passe
+     * @param username username de l'utilisateur
+     * @param password mot de passe de l'utilisateur
      * @param isOnline si la connexion se fait en ligne
      * @return le statut
      */
@@ -91,7 +97,6 @@ public class ConnexionMenuController extends BaseController implements UserCrede
 
     /**
      * Lorsqu'on se connecte de façon hors-ligne
-     * @See onLogin
      * @param username nom d'utilisateur
      * @param password mot de passe
      * @return le statut
@@ -112,13 +117,11 @@ public class ConnexionMenuController extends BaseController implements UserCrede
         } catch (FileNotFoundException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de retrouver les informations de connexion !");
         }
-
         return result;
     }
 
     /**
      * Lorsque l'utilisateur se connecte au serveur
-     * @See onLogin
      * @param username nom d'utilisateur
      * @param password mot de passe
      * @return le statut
@@ -137,8 +140,5 @@ public class ConnexionMenuController extends BaseController implements UserCrede
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de se connecter au serveur !");
             return "Server Not Found";
         }
-
-
     }
-
 }

@@ -49,7 +49,6 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     public PaquetDTO createPaquet() {
         // Créer le paquet et l'ajouter à la liste de paquet de l'utilisateur
         Paquet nouveauPaquet = new Paquet("Nouveau Paquet") ;
-        //editerPaquet(nouveauPaquet.getDTO());
         user.addPaquet(nouveauPaquet);
         return nouveauPaquet.getDTO();
     }
@@ -71,13 +70,13 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     }
 
     /**
-     * filtre les paquets selon leurs catégories
+     * Filtre les paquets selon leurs catégories
+     *
      * @param filter filtre à appliquer sur les catégories de chaque paquet
-     * @return la liste des paquets filtrés par catégorie
      */
     @Override
-    public Collection<PaquetDTO> filterPaquet(String filter) {
-        return saveListPaquet.stream()
+    public void filterPaquet(String filter) {
+        saveListPaquet.stream()
                 .filter(paquet -> paquet.getCategories().stream().anyMatch(category -> category.contains(filter.toLowerCase())))
                 .map(Paquet::getDTO)
                 .toList();
@@ -124,6 +123,9 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         }
     }
 
+    /**
+     * @see MenuPaquetListener#sync()
+     */
     @Override
     public void sync() {MenuPrincipal.getINSTANCE().showSyncMenu();}
 
@@ -153,9 +155,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
             Optional<Paquet> paquet = paquetDTO.getPaquet();
             Paquet paquetInstance = paquet.get();
             if (paquetInstance.cards.size() == 0){
-                //Attention, le showErrorPopup ne fontionne pas, à corriger pour être plus propre.
                 instance.showErrorPopup("Vous devez creer des cartes avant de pouvoir les étudier !");
-
             }else{
                 instance.showCardStudy(this,paquetInstance);
             }
@@ -171,7 +171,9 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         updatePaquets();
     }
 
-
+    /**
+     * Met à jour la liste des paquets de l'utilisateur
+     */
     public void updatePaquets() {
         saveListPaquet = MenuPrincipal.getINSTANCE().getUserPaquets();
         MenuPaquetViewController controller = (MenuPaquetViewController) super.controller;

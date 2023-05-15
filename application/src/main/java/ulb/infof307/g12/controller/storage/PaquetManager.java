@@ -106,8 +106,5 @@ public class PaquetManager {
         } catch (Exception e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de retirer le paquet "+paquet.getNom()+" rattaché à l'utilisateur "+user.getPseudo()+" !");
         }
-
-
     }
-
 }

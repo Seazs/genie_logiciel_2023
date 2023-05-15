@@ -186,11 +186,9 @@ public class CardStudyViewController {
         btnValidAnswer.setVisible(false);
         qrText.setVisible(false);
         htmlView.setVisible(false);
-
         TeXFormula formula = new TeXFormula(content);
         BufferedImage bufferedImage = (BufferedImage) formula.createBufferedImage(TeXFormula.SERIF, 30, java.awt.Color.BLACK, null);
         Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-
         LatexView.setImage(image);
         questionQcmLabel.setVisible(false);
         btnChange.setText("Verso");
@@ -283,20 +281,16 @@ public class CardStudyViewController {
      */
     public void verfyAnswerQcm() throws NullPointerException{
         String[] infos = listener.getCardsStudy().get(indexCarte).getCardInfo();
-        try{
-            if(reponsesList.getSelectionModel().getSelectedItem().equals(infos[4])){
-                answer.setText("T'es un bg en sah");
-                veryGood();
-            }
-            else{
-                answer.setText("Tu pues ta grand mère");
-                veryBad();
-            }
+        if (reponsesList.getSelectionModel().getSelectedItem() == null) {
+            listener.error("Il faut sélectionner une solution !");
         }
-        catch (NullPointerException e){
-            MenuPrincipal.getINSTANCE().showErrorPopup("Il faut sélectionner une solution !");
+        if(reponsesList.getSelectionModel().getSelectedItem().equals(infos[4])){
+            answer.setText("T'es un bg en sah");
+            veryGood();
+        }else{
+            answer.setText("Tu pues ta grand mère");
+            veryBad();
         }
-
     }
 
     /**
@@ -307,8 +301,7 @@ public class CardStudyViewController {
         if(reponseTt.getText().equals(infos[2])){
             answer.setText("T'es un bg en sah");
             listener.veryGood(indexCarte);
-        }
-        else{
+        }else{
             answer.setText("Tu pues ta grand mère !");
             listener.veryBad(indexCarte);
         }
@@ -333,11 +326,10 @@ public class CardStudyViewController {
             showGoodTypeCard(listener.getCardsStudy().get(indexCarte).getType());
             side=0;
         }
-
     }
 
     /**
-     * Fonction qui appelle la fonction terminer de CarteEtudeListener
+     * Fonction qui appelle la fonction saveCards de CarteEtudeListener
      */
     public void endStudy() {
         MenuPrincipal.getINSTANCE().returnFromCardStudyToMenuPaquet();
@@ -415,7 +407,7 @@ public class CardStudyViewController {
      * @param actionEvent  evenement
      */
     public void btnReadText(ActionEvent actionEvent) {
-        String info[]=listener.getCardsStudy().get(indexCarte).getCardInfo();
+        String[] info =listener.getCardsStudy().get(indexCarte).getCardInfo();
         if (side == 0){
             switch (listener.getCardsStudy().get(indexCarte).getType()) {
                 case "Carte" -> listener.speakText(info[1]);

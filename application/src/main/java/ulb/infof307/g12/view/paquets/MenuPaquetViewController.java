@@ -43,11 +43,9 @@ public class MenuPaquetViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Personnaliser l'affichage des éléments de la liste
         updateVisualPaquetList();
-
         RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> {
             filterCategory();
         });
-
     }
 
     /**
@@ -58,7 +56,6 @@ public class MenuPaquetViewController implements Initializable {
             @Override
             protected void updateItem(PaquetDTO item, boolean empty) {
                 super.updateItem(item, empty);
-
                 if (empty || item == null) {
                     setText(null);
                     setGraphic(null);
@@ -67,10 +64,8 @@ public class MenuPaquetViewController implements Initializable {
                         // Charger la vue FXML pour la cellule
                         FXMLLoader loader = new FXMLLoader(MenuPaquetViewController.class.getResource("paquetDeCarte.fxml"));
                         AnchorPane cellLayout = loader.load();
-
                         // Obtenir le contrôleur pour la vue FXML
                         PaquetOfCardsViewController controller = loader.getController();
-
                         // Définir les valeurs des éléments de la vue FXML à partir de l'objet PaquetDeCartes
                         controller.setPaquetOfCards(item);
 
@@ -105,8 +100,6 @@ public class MenuPaquetViewController implements Initializable {
         PaquetDTO nouveauPaquet = listener.createPaquet() ;
         listener.editPaquet(nouveauPaquet);
         reloadListView();
-        // Ajouter le nouveau paquet provenant du listener à la vue
-        //paquetListView.getItems().addAll(nouveauPaquet);
     }
 
     /**

@@ -58,9 +58,9 @@ public class CardTt extends Card {
      * verso = reponse
      */
     private void getTTInfo(){
-        String[] listinfos = this.getRecto().split("§");
-        this.begin = listinfos[0];
-        this.end = listinfos[1];
+        String[] listInfos = this.getRecto().split("§");
+        this.begin = listInfos[0];
+        this.end = listInfos[1];
         this.answer = this.getVerso();
     }
 
