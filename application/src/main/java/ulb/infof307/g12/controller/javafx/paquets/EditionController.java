@@ -43,20 +43,25 @@ public class EditionController extends BaseController implements EditionViewList
      * @param categorie Catégorie à être rajoutée
      */
     @Override
-    public void savePaquet(String nom, String categorie){
+    public void savePaquet(String nom, String categorie) {
         try {
             // Enregistrer le nom et ajouter la nouvelle categorie
             paquet.setNom(nom);
             paquet.addCategory(categorie);
             PaquetManager paquetManager = MenuPrincipal.getINSTANCE().getPaquetManager();
             paquetManager.save(MenuPrincipal.getINSTANCE().getPrincipalUser());
-            MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();// Revenir sur le menu principal
-        }catch (IOException e){
+            MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet(); // Revenir sur le menu principal
+        } catch (IOException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de sauvegarder le paquet !");
-        }catch (IllegalArgumentException e){
-            MenuPrincipal.getINSTANCE().showErrorPopup("La catégorie ne peut pas contenir # !");
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().equals("Le champ catégorie ne peut pas être vide")) {
+                MenuPrincipal.getINSTANCE().showErrorPopup("La catégorie ne peut pas être vide !");
+            } else if (e.getMessage().equals("Le nom de la catégorie ne peut pas contenir le caractère #")) {
+                MenuPrincipal.getINSTANCE().showErrorPopup("La catégorie ne peut pas contenir # !");
+            }
         }
     }
+
 
     /**
      * Renvoyer les cartes du paquet
