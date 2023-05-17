@@ -17,4 +17,14 @@ public interface ProfileViewListener {
     void disconnect();
 
 
+    /**
+     * Retour au menu principal
+     */
+    void returnMenuPaquet();
+
+    /**
+     * Affichage d'un message d'erreur
+     * @param s message d'erreur
+     */
+    void showErrorPopup(String s);
 }

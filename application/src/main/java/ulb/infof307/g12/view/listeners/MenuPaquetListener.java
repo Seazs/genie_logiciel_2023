@@ -57,4 +57,20 @@ public interface MenuPaquetListener {
      * Synchroniser les paquets
      */
     void sync();
+
+    /**
+     * Afficher une popup d'erreur
+     * @param s message d'erreur
+     */
+    void showErrorPopup(String s);
+
+    /**
+     * Ouvre la fenêtre de profil
+     */
+    void openProfile();
+
+    /**
+     * Ouvre la fenêtre de store
+     */
+    void openStore();
 }

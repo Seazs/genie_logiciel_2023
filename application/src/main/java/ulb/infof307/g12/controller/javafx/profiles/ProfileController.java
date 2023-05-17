@@ -77,4 +77,17 @@ public class ProfileController extends BaseController implements ProfileViewList
         instance.getUserManager().disconnect();
         instance.showConnexionMenu(this);
     }
+
+    /**
+     * Retour au menu principal
+     */
+    @Override
+    public void returnMenuPaquet() {MenuPrincipal.getINSTANCE().returnToMenuPaquet();}
+
+    /**
+     * Affichage d'un message d'erreur
+     * @param s message d'erreur
+     */
+    @Override
+    public void showErrorPopup(String s) {MenuPrincipal.getINSTANCE().showErrorPopup(s);}
 }

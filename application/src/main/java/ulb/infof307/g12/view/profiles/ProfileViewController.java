@@ -6,9 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextInputDialog;
 import lombok.Setter;
-import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.view.listeners.ProfileViewListener;
-
 import java.util.Optional;
 
 public class ProfileViewController {
@@ -24,9 +22,7 @@ public class ProfileViewController {
      * Ce qui s'exécute lorsqu'on clique sur le bouton de retour au menu principal
      * @param event l'événement qui a déclenché l'action
      */
-    public void returnMenuPaquet(ActionEvent event){
-        MenuPrincipal.getINSTANCE().returnToMenuPaquet();
-    }
+    public void returnMenuPaquet(ActionEvent event){listener.returnMenuPaquet();}
 
 
     /**
@@ -46,7 +42,7 @@ public class ProfileViewController {
             mdpLabel.setText("Mot de passe: " + newPassword.get());
             messageLabelProfil.setText(result);
         } catch (RuntimeException e) {
-            MenuPrincipal.getINSTANCE().showErrorPopup("veuillez entrer un mot de passe");
+            listener.showErrorPopup("veuillez entrer un mot de passe");
         }
 
 

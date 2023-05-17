@@ -117,6 +117,9 @@ public class CardStudyController extends BaseController implements CardStudyList
         MenuPrincipal.getINSTANCE().showErrorPopup(msg);
     }
 
+    @Override
+    public void returnFromCardStudyToMenuPaquet() {MenuPrincipal.getINSTANCE().returnFromCardStudyToMenuPaquet();}
+
 }
 
 

@@ -213,4 +213,10 @@ public class EditionController extends BaseController implements EditionViewList
             error(e.getMessage());
         }
     }
+
+    /**
+     * Retourne au menu des paquets
+     */
+    @Override
+    public void returnFromEditionToMenuPaquet() {MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();}
 }

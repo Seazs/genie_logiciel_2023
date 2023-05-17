@@ -12,7 +12,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
-import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 import ulb.infof307.g12.view.listeners.MenuPaquetListener;
 import javax.swing.*;
@@ -72,7 +71,7 @@ public class MenuPaquetViewController implements Initializable {
                         // Définir la vue FXML comme élément de la cellule
                         setGraphic(cellLayout);
                     } catch (IOException e) {
-                        MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de charger les textures du paquet de carte");
+                        listener.showErrorPopup("Impossible de charger les textures du paquet de carte");
                     }
                 }
             }
@@ -83,13 +82,9 @@ public class MenuPaquetViewController implements Initializable {
      * Ouvre la view profil
      * @param event event
      */
-    public void openProfile(ActionEvent event) {
-        MenuPrincipal.getINSTANCE().openProfile();
-    }
+    public void openProfile(ActionEvent event) {listener.openProfile();}
 
-    public void openStore(ActionEvent event) {
-        MenuPrincipal.getINSTANCE().openStore();
-    }
+    public void openStore(ActionEvent event) {listener.openStore();}
 
     /**
      * Créer un nouveau paquet vide
@@ -111,7 +106,7 @@ public class MenuPaquetViewController implements Initializable {
             listener.deletePaquet(paquet);
             paquetListView.getItems().remove(paquet);
         }else {
-            MenuPrincipal.getINSTANCE().showErrorPopup("Veuillez sélectionner un paquet"); // TO DO
+            listener.showErrorPopup("Veuillez sélectionner un paquet");
         }
     }
 

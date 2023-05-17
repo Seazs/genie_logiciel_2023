@@ -30,11 +30,19 @@ public interface StoreViewListener {
     Collection<PaquetDTO> filterPaquet(String recherche);
 
     Collection<PaquetDTO> getUserPaquets();
-
     /**
      * Supprime un paquet du store
      * @param paquet paquet à supprimer du store
      */
     void deletePaquetStore(PaquetDTO paquet);
+    /**
+     * Affiche une popup d'erreur
+     * @param s message d'erreur
+     */
+    void showErrorPopup(String s);
 
+    /**
+     * Retourne au menu des paquets
+     */
+    void returnMenuPaquet();
 }

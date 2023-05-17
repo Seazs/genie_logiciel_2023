@@ -130,6 +130,25 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     public void sync() {MenuPrincipal.getINSTANCE().showSyncMenu();}
 
     /**
+     * @see MenuPaquetListener#showErrorPopup(String)
+     * @param s message d'erreur à afficher
+     */
+    @Override
+    public void showErrorPopup(String s) {MenuPrincipal.getINSTANCE().showErrorPopup(s);}
+
+    /**
+     * @see MenuPaquetListener#openProfile()
+     */
+    @Override
+    public void openProfile() {MenuPrincipal.getINSTANCE().openProfile();}
+
+    /**
+     * @see MenuPaquetListener#openStore()
+     */
+    @Override
+    public void openStore() {MenuPrincipal.getINSTANCE().openStore();}
+
+    /**
      * Lancer le menu d'édition avec le paquet choisit par l'utilisateur
      * @param paquetDTO Paquet choisit par l'utilisateur à être modifié
      */

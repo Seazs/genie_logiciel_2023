@@ -10,12 +10,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lombok.Setter;
-import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 import ulb.infof307.g12.view.listeners.StoreViewListener;
 import ulb.infof307.g12.view.paquets.MenuPaquetViewController;
 import ulb.infof307.g12.view.paquets.PaquetOfCardsViewController;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -67,7 +65,7 @@ public class StoreViewController implements Initializable{
                         // Définir la vue FXML comme élément de la cellule
                         setGraphic(cellLayout);
                     } catch (IOException e) {
-                        MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de charger les textures du paquet de carte");
+                        listener.showErrorPopup("Impossible de charger les textures du paquet de carte");
                     }
                 }
             }
@@ -88,9 +86,7 @@ public class StoreViewController implements Initializable{
     /**
      * Retourne au menu précédent
      */
-    public void returnMenuPaquet() {
-        MenuPrincipal.getINSTANCE().returnFromStoreToMenuPaquet();
-    }
+    public void returnMenuPaquet() {listener.returnMenuPaquet();}
 
     /**
      * Envoie à  storeController  le paquet sélectionné pour le telecharger

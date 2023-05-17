@@ -8,7 +8,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebView;
 import lombok.Setter;
-import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.view.listeners.CardStudyListener;
 
 import org.scilab.forge.jlatexmath.TeXFormula;
@@ -332,7 +331,7 @@ public class CardStudyViewController {
      * Fonction qui appelle la fonction saveCards de CarteEtudeListener
      */
     public void endStudy() {
-        MenuPrincipal.getINSTANCE().returnFromCardStudyToMenuPaquet();
+        listener.returnFromCardStudyToMenuPaquet();
         listener.saveCards();
     }
 

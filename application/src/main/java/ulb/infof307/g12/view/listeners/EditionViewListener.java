@@ -87,4 +87,9 @@ public interface EditionViewListener {
      * @param newReponse nouvelle réponse
      */
     void editResponse(String newReponse);
+
+    /**
+     * Retourne au menu des paquets
+     */
+    void returnFromEditionToMenuPaquet();
 }

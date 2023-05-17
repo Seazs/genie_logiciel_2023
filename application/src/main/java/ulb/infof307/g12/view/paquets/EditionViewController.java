@@ -8,11 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import lombok.Setter;
-import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.view.dto.CardDTO;
 import ulb.infof307.g12.view.listeners.EditionViewListener;
-
-import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -154,9 +151,7 @@ public class EditionViewController {
      * Revenir sur le menu précedent sans sauvegarder les modifications
      */
     @FXML
-    void cancelEdition(ActionEvent event) {
-        MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();
-    }
+    void cancelEdition(ActionEvent event) {listener.returnFromEditionToMenuPaquet();}
 
     /**
      * Rajouter une carte au paquet

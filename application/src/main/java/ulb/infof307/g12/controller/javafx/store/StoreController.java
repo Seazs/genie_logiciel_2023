@@ -129,6 +129,19 @@ public class StoreController extends BaseController implements StoreViewListener
         }
     }
 
+    /**
+     * Affiche une popup d'erreur
+     * @param s message d'erreur
+     */
+    @Override
+    public void showErrorPopup(String s) {MenuPrincipal.getINSTANCE().showErrorPopup(s);}
+
+    /**
+     * Retourne au menu des paquets
+     */
+    @Override
+    public void returnMenuPaquet() {MenuPrincipal.getINSTANCE().returnFromStoreToMenuPaquet();}
+
     @Override
     public void show(){
         super.show();

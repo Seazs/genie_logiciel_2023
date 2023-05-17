@@ -48,4 +48,9 @@ public interface CardStudyListener {
      * @param msg message d'erreur
      */
     public void error(String msg);
+
+    /**
+     * Retourne au menu des paquets
+     */
+    void returnFromCardStudyToMenuPaquet();
 }
