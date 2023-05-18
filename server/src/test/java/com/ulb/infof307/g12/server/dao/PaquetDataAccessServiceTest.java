@@ -20,7 +20,7 @@ class PaquetDataAccessServiceTest {
 
     private static Paquet paquet;
     @BeforeAll
-    public static void creeDossierTemporaire() throws IOException {
+    public static void createTemporaryFolder() {
         dossierTemporaire = new File("./stockage");
         dossierTemporaire.mkdirs();
         dossierTemporairePaquet = new File("./stockage/paquet");
@@ -33,12 +33,12 @@ class PaquetDataAccessServiceTest {
         paquet = new Paquet(id, "nomtest", categories, cards);
     }
     @AfterAll
-    public static void supprimeDossierTemporaire(){
+    public static void deleteTemporaryFolder(){
         dossierTemporaire.delete();
         dossierTemporairePaquet.delete();
     }
     @Test
-    void saveLoadTest() throws IOException {
+    void testSaveLoad() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
         paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
@@ -52,7 +52,7 @@ class PaquetDataAccessServiceTest {
     }
 
     @Test
-    void createDuplicatePaquet() throws JsonProcessingException {
+    void testCreateDuplicatePaquet() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
         paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
@@ -60,7 +60,7 @@ class PaquetDataAccessServiceTest {
     }
 
     @Test
-    void getPaquet() throws JsonProcessingException {
+    void testGetPaquet() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
         paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
@@ -68,11 +68,11 @@ class PaquetDataAccessServiceTest {
     }
 
     @Test
-    void deletePaquet() throws JsonProcessingException {
+    void testDeletePaquet() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
         paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
         paquetDataAccessService.deletePaquet(paquet.getId());
-        assertEquals(null,paquetDataAccessService.getPaquet(paquet.getId()));
+        assertNull(paquetDataAccessService.getPaquet(paquet.getId()));
     }
 }

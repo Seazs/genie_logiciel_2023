@@ -31,7 +31,6 @@ class ServerTest {
 
     @Test
     public void testCreateUser() {
-        //ServerApplication.main(new String[]{});
         User user = new User("test","test");
         String reponse = server.createUser(user.getUsername(), user.getPassword());
         assertEquals(STATUS.OK.getMsg(),reponse);
@@ -113,13 +112,5 @@ class ServerTest {
         } catch (IOException e) {
             System.out.println("Erreur lors de la suppression du dossier de stockage");
         }
-
-
-
     }
-
-
-
-
-
 }

@@ -88,7 +88,7 @@ public class Card {
         /**
          * Fonction qui s'assure que le mot est valide
          * @param word mot à valider
-         * @throws IllegalArgumentException
+         * @throws IllegalArgumentException si le mot est vide ou comporte le caractère #
          */
         protected void validate(String word) throws IllegalArgumentException{
                 if(word == null || word.equals("") || word.contains("#"))

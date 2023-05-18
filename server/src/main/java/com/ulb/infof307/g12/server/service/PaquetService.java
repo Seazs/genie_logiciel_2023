@@ -50,13 +50,21 @@ public class PaquetService {
     /**
      * Supprime le paquet correspondant à l'id
      * @param id id du paquet à supprimer
-     * @return
+     * @return STATUS.OK si le paquet a été supprimé, STATUS.NOT_FOUND si le paquet n'existe pas
      */
     public STATUS deletePaquet(UUID id){
         return paquetDao.deletePaquet(id);
     }
 
-    public STATUS syncPaquets(String paquetsEnString) {return paquetDao.syncPaquets(paquetsEnString);}
+    /**
+     * @param paquetString paquets en string
+     * @return le status de la synchronisation
+     */
+    public STATUS syncPaquets(String paquetString) {return paquetDao.syncPaquets(paquetString);}
 
+    /**
+     * @param username pseudo de l'utilisateur
+     * @return les paquets de l'utilisateur
+     */
     public String getUserPaquet(String username) {return paquetDao.getUserPaquet(username);}
 }

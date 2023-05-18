@@ -39,7 +39,17 @@ public interface UserDAO {
 
     List<User> getAllUsers();
 
+    /**
+     * Sauvegarde les utilisateurs dans le fichier
+     * @throws IOException si la sauvegarde échoue
+     *
+     */
     void save() throws IOException;
 
+    /**
+     * Supprime un utilisateur
+     * @param username nom de l'utilisateur
+     * @return le statut de la suppression de l'utilisateur
+     */
     STATUS deleteUser(String username);
 }
