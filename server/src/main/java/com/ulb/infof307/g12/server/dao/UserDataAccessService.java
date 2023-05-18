@@ -70,6 +70,9 @@ public class UserDataAccessService implements UserDAO{
                 .orElse(null);
     }
 
+    /**
+     * @see UserDAO#updateUser(User)
+     */
     @Override
     public STATUS updateUser(User user) {
         // Trouver le bon utilisateur
@@ -155,6 +158,9 @@ public class UserDataAccessService implements UserDAO{
         db_user_file.createNewFile();
     }
 
+    /**
+     * @see UserDAO#deleteUser(String)
+     */
     public STATUS deleteUser(String username){
         try {
             db_user.removeIf(user -> user.getUsername().equals(username));

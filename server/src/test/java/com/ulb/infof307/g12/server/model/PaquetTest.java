@@ -21,24 +21,23 @@ class PaquetTest {
         paquet = new Paquet(id, nom, categories, cards);
     }
     @Test
-    void ajouterCarte() {
+    void testAddCard() {
         Card card = new Card(2, "Recto", "Verso", "QCM");
         paquet.addCarte(card);
         assertTrue(paquet.getCards().contains(card));
     }
     @Test
-    void ajouterDuplicateCarte() {
+    void testAddDuplicateCard() {
         Card card = new Card(2, "Recto", "Verso", "QCM");
         paquet.addCarte(card);
         assertThrows(IllegalArgumentException.class, () -> paquet.addCarte(card));
     }
     @Test
     void testEquals() {
-        assertEquals(paquet, paquet);
-        assertFalse(paquet.equals(null));
+        assertNotEquals(null, paquet);
     }
     @Test
-    void ajouterMauvaisCategorie() {
+    void testAddWrongCategory() {
         assertThrows(IllegalArgumentException.class, () -> {
             Paquet paquet2 = new Paquet(UUID.randomUUID(), "Paquet", null, new ArrayList<>());
         });

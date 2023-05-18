@@ -36,26 +36,22 @@ class CardTest {
     }
 
     @Test
-    public void testEditebien() {
+    public void testEditCorrect() {
         String new_recto = "oloY";
         Card card = new Card(1, "Yolo", "Salut","QCM");
         card.editRecto(new_recto);
         assertEquals(new_recto, card.getRecto());
     }
     @Test
-    public void testEditPasVide() {
+    public void testEditNotEmpty() {
         String verso = "Ça va ?", recto = "Oui bien";
-        String recto_vide = "";
-        String verso_vide= "";
-        String recto_null = null;
-        String verso_null= null;
 
         Card card1 = new Card(1, recto, verso,"QCM");
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            card1.editRecto(recto_vide);
+            card1.editRecto("");
         });
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
-            card1.editRecto(recto_null);
+            card1.editRecto(null);
         });
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             card1.editRecto("#");;

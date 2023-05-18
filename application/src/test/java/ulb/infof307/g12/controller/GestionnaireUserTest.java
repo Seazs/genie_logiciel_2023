@@ -32,7 +32,7 @@ class GestionnaireUserTest {
     }
 
     @Test
-    void loadTest() throws IOException {
+    void testLoad() throws IOException {
         UserManager gest = new UserManager(tmp);
         List<User> list = gest.getListUser();
         assertEquals("alex",list.get(0).getPseudo());
@@ -42,7 +42,7 @@ class GestionnaireUserTest {
     }
 
     @Test
-    void loadTestVide() throws IOException {
+    void testEmptyLoad() throws IOException {
         File tmpVide = File.createTempFile("tmpVide",".txt");
         UserManager gest = new UserManager(tmpVide);
         List<User> list = gest.getListUser();
@@ -50,7 +50,7 @@ class GestionnaireUserTest {
         tmpVide.delete();
     }
 
-    @Test void saveTest() throws IOException {
+    @Test void testSave() throws IOException {
         UserManager gest = new UserManager(tmp);
         List<User> list = gest.getListUser();
         User u1 = list.get(0);
@@ -62,7 +62,7 @@ class GestionnaireUserTest {
     }
 
     @Test
-    void connectUtilisateurPseudoPasValide() throws IOException {
+    void testConnectUtilisateurPseudoPasValide() throws IOException {
         UserManager gestionnaire = new UserManager(tmp);
         assertFalse(gestionnaire.connect("Brenno#", "123"));
         assertEquals(STATUS.USERNAME_IS_NOT_VALID,
@@ -75,7 +75,7 @@ class GestionnaireUserTest {
                 gestionnaire.getStatus());
     }
     @Test
-    void connectUtilisateurMdpPasValide() throws IOException {
+    void testConnectUtilisateurMdpPasValide() throws IOException {
         UserManager gestionnaire = new UserManager(tmp);
         assertFalse(gestionnaire.connect("Brenno", "123#"));
         assertEquals(STATUS.PASSWORD_IS_NOT_VALID,
@@ -88,27 +88,27 @@ class GestionnaireUserTest {
                 gestionnaire.getStatus());
     }
     @Test
-    void connectUtilisateurOK() throws IOException {
+    void testConnectUtilisateurOK() throws IOException {
         UserManager gestionnaire = new UserManager(tmp);
         assertTrue(gestionnaire.connect("alex", "pomme"));
         assertEquals(STATUS.OK,
                 gestionnaire.getStatus());
     }
     @Test
-    void connectUtilisateurMauvaisPseudo() throws FileNotFoundException {
+    void testConnectUtilisateurMauvaisPseudo() throws FileNotFoundException {
         UserManager gestionnaire = new UserManager(tmp);
         assertFalse(gestionnaire.connect("alexxxx", "pomme"));
         assertEquals(STATUS.USERNAME_DOES_NOT_EXIST, gestionnaire.getStatus());
     }
     @Test
-    void connectUtilisateurMauvaisMdp() throws FileNotFoundException {
+    void testConnectUtilisateurMauvaisMdp() throws FileNotFoundException {
         UserManager gestionnaire = new UserManager(tmp);
         assertFalse(gestionnaire.connect("alex", "pommeeeeee"));
         assertEquals(STATUS.WRONG_PASSWORD, gestionnaire.getStatus());
     }
 
     @Test
-    void registerUtilisateurPseudoPasValide() throws IOException {
+    void testRegisterUserPseudoNotValid() throws IOException {
         UserManager gestionnaire = new UserManager(tmp);
         assertFalse(gestionnaire.register("Brenno#", "123"));
         assertEquals(STATUS.USERNAME_IS_NOT_VALID,
@@ -121,7 +121,7 @@ class GestionnaireUserTest {
                 gestionnaire.getStatus());
     }
     @Test
-    void registerUtilisateurMdpPasValide() throws IOException {
+    void testRegisterUserPasswordNotValid() throws IOException {
         UserManager gestionnaire = new UserManager(tmp);
         assertFalse(gestionnaire.register("Brenno", "123#"));
         assertEquals(STATUS.PASSWORD_IS_NOT_VALID,
@@ -135,21 +135,21 @@ class GestionnaireUserTest {
     }
 
     @Test
-    void registerUtilisateurPseudoExistant() throws IOException {
+    void testRegisterUserExistingUsername() throws IOException {
         UserManager gestionnaire = new UserManager(tmp);
         assertFalse(gestionnaire.register("alex", "poire"));
         assertEquals(STATUS.USERNAME_DOES_ALREADY_EXIST, gestionnaire.getStatus());
     }
 
     @Test
-    void registerUtilisateurOK() throws IOException {
+    void testRegisterUserOK() throws IOException {
         UserManager gestionnaire = new UserManager(tmp);
         assertTrue(gestionnaire.register("brenno", "raisin"));
         assertEquals(STATUS.OK, gestionnaire.getStatus());
     }
 
     @Test
-    void registerAndConnect() throws IOException {
+    void testRegisterAndConnect() throws IOException {
         UserManager gestionnaire = new UserManager(tmp);
         assertTrue(gestionnaire.register("ismail", "poire"));
         assertEquals(STATUS.OK, gestionnaire.getStatus());
@@ -158,7 +158,7 @@ class GestionnaireUserTest {
     }
 
     @Test
-    void removeUserTest() throws IOException{
+    void testRemoveUser() throws IOException{
         UserManager gestuser = new UserManager();
         User user1 = new User("felix","meilleuramipourlavie");
         gestuser.register(user1.getPseudo(), user1.getMdp());

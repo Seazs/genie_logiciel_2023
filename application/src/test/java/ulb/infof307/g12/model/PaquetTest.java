@@ -113,7 +113,7 @@ class PaquetTest {
         }
         else {
             paquet.deleteCard(card);
-            Assertions.assertEquals(false,paquet.cards.contains(card));
+            Assertions.assertFalse(paquet.cards.contains(card));
         }
     }
     @Test
@@ -138,6 +138,4 @@ class PaquetTest {
         PaquetDTO paquetDTO = new PaquetDTO(id.toString(),"nom",categories);
         Assertions.assertEquals(paquetDTO,paquet.getDTO());
     }
-
-
 }

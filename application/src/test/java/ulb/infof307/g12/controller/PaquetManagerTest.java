@@ -17,13 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PaquetManagerTest {
 
-    /*
-        - dossier "stockage"
-            -Fichier stockUser
-            - <utilisateur>
-                - fichier <paquet1>
-                - fichier <paquet2>
-         */
     private static File dossierTemporaire;
     private static File fichierUtilisateur;
 
@@ -58,7 +51,7 @@ class PaquetManagerTest {
         }
 
     @Test
-    public void testSauvegardePaquet() throws IOException{
+    public void testSavePaquet() throws IOException{
         User user1 = new User("testUtilisateur","test");
         Paquet paquet1 = new Paquet("Maths","BA1");
         Card card1 = new Card(1, "divergence = rotationnel ?", "Non");
@@ -88,7 +81,7 @@ class PaquetManagerTest {
     }
 
     @Test
-    public void testremove() throws IOException{
+    public void testRemove() throws IOException{
         User user1 = new User("alex","pomme");
         Paquet paquet1 = new Paquet("Maths","BA1");
         Card card1 = new Card(1, "divergence = rotationnel ?", "Non");
@@ -138,6 +131,5 @@ class PaquetManagerTest {
         assertEquals(user1.getListPaquet().get(1).getCategories(), user2.getListPaquet().get(1).getCategories());
 
     }
-
 
 }
