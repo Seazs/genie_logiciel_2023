@@ -15,7 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import java.awt.image.BufferedImage;
 import javafx.embed.swing.SwingFXUtils;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class CardStudyViewController {
     @Setter
@@ -40,7 +39,7 @@ public class CardStudyViewController {
      * Chargement de la vue des cartes d'études
      */
     public void loadViewStudyCard() {
-        indexCarte=indexRandom();
+        listener.sortCardStudyList();
         String type = listener.getCardsStudy().get(indexCarte).getType();
         showGoodTypeCard(type);
     }
@@ -310,8 +309,10 @@ public class CardStudyViewController {
      * Passe à la carte suivante
      */
     public void nextCard(){
-        indexCarte++;
-        indexCarte = indexRandom();
+        indexCarte=++indexCarte%listener.getCardsStudy().size();
+        if(indexCarte==0){
+            listener.sortCardStudyList();
+        }
         showGoodTypeCard(listener.getCardsStudy().get(indexCarte).getType());
         side=0;
     }
@@ -320,8 +321,8 @@ public class CardStudyViewController {
      * Retourne à la carte précédente
      */
     public void previousCard(){
-        if (indexCarte >= 0){
-            indexCarte=indexRandom();
+        if (indexCarte > 0){
+            indexCarte=--indexCarte%listener.getCardsStudy().size();
             showGoodTypeCard(listener.getCardsStudy().get(indexCarte).getType());
             side=0;
         }
@@ -367,39 +368,6 @@ public class CardStudyViewController {
      */
     public void veryGood() {
         listener.veryGood(indexCarte);
-    }
-
-    /**
-     * Vérifie si toutes les cartes ont été vues au moins une fois. Si c’est le cas:
-     * On tire une carte du paquet au hasard. On tire un nombre "apparition" au hasard entre 0 et scoreConnaissance*10 + 1.
-     * tant que le nombre "apparition" est plus grand que 20, on continue à tirer une carte au hasard et une "apparition".
-     * Cela signifie que les cartes avec un score de connaissance élevé sont tirées moins souvent car leur "apparition" à plus de chance d’être supérieur à 20.
-     */
-    public int indexRandom(){
-        if(cardsReaded()){
-            indexCarte = ThreadLocalRandom.current().nextInt(0, listener.getCardsStudy().size());
-            int apparition = ThreadLocalRandom.current().nextInt(0,(listener.getCardsStudy().get(indexCarte).getConnaissance()*10)+1);
-            while(apparition>20){
-                indexCarte = ThreadLocalRandom.current().nextInt(0, listener.getCardsStudy().size());
-                apparition = ThreadLocalRandom.current().nextInt(0,(listener.getCardsStudy().get(indexCarte).getConnaissance()*10)+1);
-            }
-        }
-        return indexCarte;
-    }
-
-    /**
-     * Fonction qui vérifie si toutes les cartes ont été lues
-     * @return true si toutes les cartes ont été lues
-     */
-    public boolean cardsReaded() {
-        indexCarte=0;
-        while (indexCarte < listener.getCardsStudy().size()-1) {
-            indexCarte++;
-            if (listener.getCardsStudy().get(indexCarte).getConnaissance() == 0) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**

@@ -53,4 +53,9 @@ public interface CardStudyListener {
      * Retourne au menu des paquets
      */
     void returnFromCardStudyToMenuPaquet();
+
+    /**
+     * Range la liste des cartes dans un ordre croissant par rapport à leur niveau de connaissance
+     */
+    void sortCardStudyList();
 }

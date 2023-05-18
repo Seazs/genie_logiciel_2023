@@ -14,6 +14,7 @@ import ulb.infof307.g12.view.paquets.CardStudyViewController;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class CardStudyController extends BaseController implements CardStudyListener {
 
@@ -36,11 +37,6 @@ public class CardStudyController extends BaseController implements CardStudyList
         this.paquet=paquet;
         controller.setListener(this);
         cardsStudy = paquet.getCards();
-        for(int i = 0; i< cardsStudy.size(); i++){
-            //liste des scores des cartes
-            ArrayList<Integer> cardsStudyScore = new ArrayList<>();
-            cardsStudyScore.add(0);
-        }
         controller.loadViewStudyCard();
     }
 
@@ -119,6 +115,9 @@ public class CardStudyController extends BaseController implements CardStudyList
 
     @Override
     public void returnFromCardStudyToMenuPaquet() {MenuPrincipal.getINSTANCE().returnFromCardStudyToMenuPaquet();}
+
+    @Override
+    public void sortCardStudyList(){cardsStudy.sort(Comparator.comparingInt(Card::getConnaissance));}
 
 }
 
