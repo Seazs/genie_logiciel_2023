@@ -2,17 +2,18 @@
     -fx-background-color: #ffffe6;
 }
 
-@font-face{
-    font-family: 'Legrand' ;
-    src: url('./../../fonts/Legrand.ttf') ;
-}
-
-
 #titre{
-    -fx-font-family: 'Legrand' ;
     -fx-font-size: 45px;
 }
 
 .button{
     -fx-background-color: #f3f3db ;
+}
+
+.button:pressed {
+    -fx-background-color: #FFDAB9;
+}
+
+.button:hover {
+    -fx-background-color: #efefd8;
 }

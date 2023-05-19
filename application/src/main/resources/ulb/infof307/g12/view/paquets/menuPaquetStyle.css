@@ -2,13 +2,7 @@
     -fx-background-color: #ffffe6;
 }
 
-@font-face{
-    font-family: 'Legrand' ;
-    src: url('src/main/resources/ulb/infof307/g12/view/Legrand.ttf')
-}
-
 #titre{
-    -fx-font-family: "Legrand" ;
     -fx-font-size: 45px;
 }
 
@@ -23,6 +17,30 @@
 }
 
 #boutonJouer{
-    -fx-font-family: "Legrand" ;
-    -fx-font-size: 20px
+    -fx-font-size: 17px
+}
+
+.button:pressed {
+    -fx-background-color: #FFDAB9;
+}
+
+.button:hover {
+    -fx-background-color: #efefd8;
+}
+
+#boutonJouer:hover {
+    -fx-background-color: #FFDAB9;
+    -fx-font-size: 21px;
+    -fx-pref-height: 52px;
+    -fx-pref-width: 85px;
+}
+
+.boutonConnaissance:hover {
+    -fx-pref-height: 27px;
+    -fx-pref-width: 120px;
+    -fx-background-color: #d7d7bc;
+}
+
+.boutonConnaissance:pressed {
+    -fx-background-color: #FFDAB9;
 }
