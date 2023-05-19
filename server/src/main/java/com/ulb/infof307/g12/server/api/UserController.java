@@ -79,7 +79,6 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable String username){
         STATUS result = userService.deleteUser(username);
         return ResponseEntity.ok(result.getMsg());
-
     }
 
 }

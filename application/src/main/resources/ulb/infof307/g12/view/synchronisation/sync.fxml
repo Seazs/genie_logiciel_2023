@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane minHeight="200.0" minWidth="400.0" prefHeight="150.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.synchronisation.SyncVueController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.synchronisation.SyncViewController">
    <Button fx:id="uploadButton" layoutX="62.0" layoutY="87.0" mnemonicParsing="false" onAction="#uploadLocal"
            text="Synchroniser Local"/>
    <Button fx:id="downloadButton" layoutX="216.0" layoutY="87.0" mnemonicParsing="false" onAction="#downloadRemote"

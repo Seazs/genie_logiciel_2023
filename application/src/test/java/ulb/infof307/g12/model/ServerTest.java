@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.http.HttpEntity;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,7 +31,6 @@ class ServerTest {
 
     @Test
     public void testCreateUser() {
-        //ServerApplication.main(new String[]{});
         User user = new User("test","test");
         String reponse = server.createUser(user.getUsername(), user.getPassword());
         assertEquals(STATUS.OK.getMsg(),reponse);
@@ -65,8 +63,8 @@ class ServerTest {
     @Test
     public void testPostPaquet() {
         Paquet paquet = new Paquet("test","test");
-        paquet.addCard(new Carte(1,"test", "test"));
-        paquet.addCard(new CarteQcm(2,"test", "test"));
+        paquet.addCard(new Card(1,"test", "test"));
+        paquet.addCard(new CardQcm(2,"test", "test"));
         try {
             STATUS reponse = server.postPaquet(paquet);
             assertEquals(STATUS.OK,reponse);
@@ -82,12 +80,12 @@ class ServerTest {
     public void testGetPaquet() {
         ObjectMapper objectMapper = new ObjectMapper();
         Paquet paquet = new Paquet("test","test");
-        paquet.addCard(new Carte(1,"test", "test"));
-        paquet.addCard(new CarteQcm(2,"test", "test"));
+        paquet.addCard(new Card(1,"test", "test"));
+        paquet.addCard(new CardQcm(2,"test", "test"));
 
         Paquet paquet2 = new Paquet("test2","test2");
-        paquet2.addCard(new Carte(1,"test2", "test2"));
-        paquet2.addCard(new CarteQcm(2,"test2", "test2"));
+        paquet2.addCard(new Card(1,"test2", "test2"));
+        paquet2.addCard(new CardQcm(2,"test2", "test2"));
         ArrayList<Paquet> sentPaquets = new ArrayList<>();
         ArrayList<Paquet> receivedPaquets = new ArrayList<>();
         try {
@@ -114,13 +112,5 @@ class ServerTest {
         } catch (IOException e) {
             System.out.println("Erreur lors de la suppression du dossier de stockage");
         }
-
-
-
     }
-
-
-
-
-
 }

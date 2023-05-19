@@ -55,6 +55,11 @@ public class UserService {
         return userDAO.getAllUsers();
     }
 
+    /**
+     * Supprime un utilisateur du serveur
+     * @param username pseudo de l'utilisateur à supprimer
+     * @return le status de la suppression
+     */
     public STATUS deleteUser(String username) {
         return userDAO.deleteUser(username);
     }

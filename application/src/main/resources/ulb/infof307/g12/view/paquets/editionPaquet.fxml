@@ -10,13 +10,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="444.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.EditionVueController">
+<AnchorPane prefHeight="444.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.EditionViewController">
    <children>
       <Label layoutX="155.0" layoutY="39.0" prefHeight="18.0" prefWidth="93.0" text="Nom du Paquet:" />
       <Label layoutX="155.0" layoutY="73.0" prefHeight="18.0" prefWidth="117.0" text="Catégorie du Paquet:" />
       <TextField fx:id="nomPaquetTextField" layoutX="294.0" layoutY="35.0" />
       <TextField fx:id="categoriePaquetTextField" layoutX="294.0" layoutY="69.0" />
-      <Button fx:id="enregistrerBouton" layoutX="481.0" layoutY="33.0" mnemonicParsing="false" onAction="#enregistrerPaquet" prefHeight="63.0" prefWidth="80.0" text="Enregistrer" />
+      <Button fx:id="enregistrerBouton" layoutX="481.0" layoutY="33.0" mnemonicParsing="false" onAction="#savePaquet" prefHeight="63.0" prefWidth="80.0" text="Enregistrer" />
       <TableView fx:id="tableQR" editable="true" layoutX="50.0" layoutY="137.0" prefHeight="163.0" prefWidth="511.0">
         <columns>
           <TableColumn fx:id="questionCol" editable="true" prefWidth="75.0" text="Question" />
@@ -26,7 +26,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="retourBouton" layoutX="50.0" layoutY="33.0" mnemonicParsing="false" onAction="#annulerEdition" prefHeight="63.0" prefWidth="80.0" text="Retour" />
+      <Button fx:id="retourBouton" layoutX="50.0" layoutY="33.0" mnemonicParsing="false" onAction="#cancelEdition" prefHeight="63.0" prefWidth="80.0" text="Retour" />
        <Button fx:id="ajouterCarte" layoutX="478.0" layoutY="306.0" mnemonicParsing="false" onAction="#addCard" text="Ajouter Carte" />
       <ChoiceBox fx:id="typechoix" layoutX="55.0" layoutY="306.0" prefWidth="150.0" />
        <TextField fx:id="questionTextField" layoutX="50.0" layoutY="339.0" minHeight="25.0" minWidth="226.0" prefHeight="25.0" prefWidth="226.0" promptText="Question" />

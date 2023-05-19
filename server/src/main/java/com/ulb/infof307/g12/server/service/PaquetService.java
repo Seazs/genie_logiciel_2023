@@ -1,14 +1,12 @@
 package com.ulb.infof307.g12.server.service;
 
 import com.ulb.infof307.g12.server.dao.PaquetDao;
-import com.ulb.infof307.g12.server.model.Carte;
 import com.ulb.infof307.g12.server.model.Paquet;
 import com.ulb.infof307.g12.server.model.STATUS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,10 +14,11 @@ import java.util.UUID;
 public class PaquetService {
     private final PaquetDao paquetDao;
 
-    /**Auto Wired crée une instance de PaquetDao (comme ça on ne doit pas s'occuper de le créer nous même)
+    /**
      * @param paquetDao Dao permettant de gérer les paquets (généré automatiquement par Spring)
      */
     @Autowired
+    // Auto Wired crée une instance de PaquetDao (comme ça on ne doit pas s'occuper de le créer nous même)
     public PaquetService(@Qualifier("database") PaquetDao paquetDao) {
         this.paquetDao = paquetDao;
     }
@@ -42,7 +41,6 @@ public class PaquetService {
     }
 
     /**
-     * Renvoie tous les paquets d'un utilisateur
      * @return la liste de tous les paquets
      */
     public List<Paquet> getAllPaquets() {
@@ -52,13 +50,21 @@ public class PaquetService {
     /**
      * Supprime le paquet correspondant à l'id
      * @param id id du paquet à supprimer
-     * @return le status ok si tout c'est bien déroulé
+     * @return STATUS.OK si le paquet a été supprimé, STATUS.NOT_FOUND si le paquet n'existe pas
      */
     public STATUS deletePaquet(UUID id){
         return paquetDao.deletePaquet(id);
     }
 
-    public STATUS syncPaquets(String paquetsEnString) {return paquetDao.syncPaquets(paquetsEnString);}
+    /**
+     * @param paquetString paquets en string
+     * @return le status de la synchronisation
+     */
+    public STATUS syncPaquets(String paquetString) {return paquetDao.syncPaquets(paquetString);}
 
+    /**
+     * @param username pseudo de l'utilisateur
+     * @return les paquets de l'utilisateur
+     */
     public String getUserPaquet(String username) {return paquetDao.getUserPaquet(username);}
 }

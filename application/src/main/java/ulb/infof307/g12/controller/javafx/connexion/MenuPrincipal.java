@@ -5,15 +5,15 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import ulb.infof307.g12.controller.javafx.BaseController;
+import ulb.infof307.g12.controller.javafx.paquets.CardStudyController;
+import ulb.infof307.g12.controller.javafx.profiles.ProfileController;
 import ulb.infof307.g12.controller.javafx.synchronisation.SyncController;
 import ulb.infof307.g12.controller.javafx.exception.ExceptionPopupController;
-import ulb.infof307.g12.controller.javafx.paquets.CarteEtudeController;
 import ulb.infof307.g12.controller.javafx.paquets.EditionController;
 import ulb.infof307.g12.controller.javafx.paquets.MenuPaquetController;
-import ulb.infof307.g12.controller.javafx.profiles.ProfilController;
 import ulb.infof307.g12.controller.javafx.store.StoreController;
-import ulb.infof307.g12.controller.storage.GestionnairePaquet;
-import ulb.infof307.g12.controller.storage.GestionnaireUtilisateur;
+import ulb.infof307.g12.controller.storage.PaquetManager;
+import ulb.infof307.g12.controller.storage.UserManager;
 import ulb.infof307.g12.model.*;
 
 import java.io.File;
@@ -25,16 +25,16 @@ import java.util.List;
 public class MenuPrincipal extends Application {
     @Getter(lazy = true)
     private static final MenuPrincipal INSTANCE = new MenuPrincipal();
-    private final GestionnaireUtilisateur gestionnaireUtilisateur = new GestionnaireUtilisateur();
-    private final GestionnairePaquet gestionnairePaquet = new GestionnairePaquet();
+    private final UserManager userManager = new UserManager();
+    private final PaquetManager paquetManager = new PaquetManager();
     private ConnexionMenuController connexionController;
     private MenuPaquetController menuPaquetController;
-    private ProfilController profilController;
+    private ProfileController profilController;
     private EditionController editionController;
-    private CarteEtudeController carteEtudeController;
+    private CardStudyController cardStudyController;
     private StoreController storeController;
     @Setter
-    private Utilisateur principalUser;
+    private User principalUser;
     private ExceptionPopupController exceptionPopupController;
 
     private SyncController syncController;
@@ -51,7 +51,7 @@ public class MenuPrincipal extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        this.connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
+        this.connexionController = new ConnexionMenuController(stage, userManager);
         exceptionPopupController = new ExceptionPopupController(new Stage());
         connexionController.show();
     }
@@ -72,7 +72,7 @@ public class MenuPrincipal extends Application {
      * @param user utilisateur
      * @param parent parent
      */
-    public void showMenuPaquet(Utilisateur user, ConnexionMenuController parent) {
+    public void showMenuPaquet(User user, ConnexionMenuController parent) {
         try {
             this.principalUser = user;
             menuPaquetController = new MenuPaquetController(user,new Stage());
@@ -87,11 +87,11 @@ public class MenuPrincipal extends Application {
      * Affichage du menu de connexion
      * @param parent parent
      */
-    public void showConnexionMenu(ProfilController parent){
+    public void showConnexionMenu(ProfileController parent){
         try {
             parent.hide();
             Stage stage = new Stage();
-            connexionController = new ConnexionMenuController(stage, gestionnaireUtilisateur);
+            connexionController = new ConnexionMenuController(stage, userManager);
             connexionController.show();
         } catch (IOException e) {
             showErrorPopup("Un problème est survenu lors du chargement du menu de connexion.");
@@ -104,12 +104,12 @@ public class MenuPrincipal extends Application {
      * @param parent parent
      * @param paquet paquet
      */
-    public void showCarteEtude(MenuPaquetController parent,Paquet paquet){
+    public void showCardStudy(MenuPaquetController parent, Paquet paquet){
         try{
             parent.hide();
             Stage stage = new Stage();
-            carteEtudeController = new CarteEtudeController(stage,paquet);
-            carteEtudeController.show();
+            cardStudyController = new CardStudyController(stage,paquet);
+            cardStudyController.show();
         }catch (IOException e){
             showErrorPopup("Impossible de lancer une session d'étude !");
         }
@@ -121,7 +121,7 @@ public class MenuPrincipal extends Application {
     public void openProfile(){
         profilController = null;
         try {
-            profilController = new ProfilController(new Stage(), principalUser);
+            profilController = new ProfileController(new Stage(), principalUser);
             menuPaquetController.hide();
             profilController.show();
         } catch (IOException e) {
@@ -167,7 +167,6 @@ public class MenuPrincipal extends Application {
      * Retour au menu Paquet depuis l'édition de ce dernier
      */
     public void returnFromEditionToMenuPaquet() {
-
         changeView(editionController,menuPaquetController);
         menuPaquetController.updatePaquets();
     }
@@ -175,8 +174,8 @@ public class MenuPrincipal extends Application {
     /**
      * Retour à l'étude de cartes depuis le menu du Paquet
      */
-    public void returnFromCarteEtudeToMenuPaquet() {
-        changeView(carteEtudeController,menuPaquetController);
+    public void returnFromCardStudyToMenuPaquet() {
+        changeView(cardStudyController,menuPaquetController);
     }
 
     /**
@@ -201,7 +200,6 @@ public class MenuPrincipal extends Application {
         } catch (IllegalArgumentException e){
             showErrorPopup("Veuillez sélectionner un paquet !");
         }
-
     }
 
     /**
@@ -212,7 +210,7 @@ public class MenuPrincipal extends Application {
         try {
             exceptionPopupController = new ExceptionPopupController(new Stage());
             exceptionPopupController.createError(error);
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 
@@ -220,6 +218,9 @@ public class MenuPrincipal extends Application {
         return Collections.unmodifiableList(principalUser.getListPaquet());
     }
 
+    /**
+     * Affichage du menu de synchronisation
+     */
     public void showSyncMenu() {
         if (isOnline) {
             try {
@@ -234,10 +235,14 @@ public class MenuPrincipal extends Application {
     public void setUserPaquets(List<Paquet> paquets) {
         principalUser.setListPaquet(paquets);
     }
-    public void rechargerPaquets() {
+
+    /**
+     * Sauvegarde des paquets
+     */
+    public void reloadPaquets() {
         try {
             menuPaquetController.updatePaquets();
-            gestionnairePaquet.save(principalUser);
+            paquetManager.save(principalUser);
         } catch (IOException e) {
             showErrorPopup("Impossible de sauvegarder les paquets !");
         }

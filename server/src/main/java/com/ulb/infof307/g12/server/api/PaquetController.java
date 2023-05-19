@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import java.util.UUID;
+
 /**
  * Class permettant de gérer les requêtes HTTP pour les paquets
  */
@@ -38,7 +39,6 @@ public class PaquetController {
     }
 
     /**
-     * Revoie une liste de paquets
      * @return la liste de tous les paquets
      */
     @GetMapping

@@ -4,37 +4,37 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
+import ulb.infof307.g12.controller.storage.PaquetManager;
 import ulb.infof307.g12.model.*;
 import ulb.infof307.g12.view.dto.CardDTO;
-import ulb.infof307.g12.view.listeners.EditionVueListener;
-import ulb.infof307.g12.controller.storage.GestionnairePaquet;
-import ulb.infof307.g12.view.paquets.EditionVueController;
+import ulb.infof307.g12.view.listeners.EditionViewListener;
+import ulb.infof307.g12.view.paquets.EditionViewController;
 
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class EditionController extends BaseController implements EditionVueListener {
+public class EditionController extends BaseController implements EditionViewListener {
 
     @Getter
     private final Paquet paquet;
 
 
-    /**y
+    /**
      * Controller de l'édition
      * @param stage stage
      * @param paquet paquet
      * @throws IOException exception
      */
     public EditionController(Stage stage, Paquet paquet) throws IOException, IllegalArgumentException {
-        super(stage, EditionVueController.class.getResource("editionPaquet.fxml"), "");
+        super(stage, EditionViewController.class.getResource("editionPaquet.fxml"), "");
         if (paquet == null) {
             throw new IllegalArgumentException("Le paquet ne peut pas être null");
         }
         this.paquet = paquet;
-        EditionVueController controller = (EditionVueController) super.controller;
+        EditionViewController controller = (EditionViewController) super.controller;
         controller.setListener(this);
-        controller.chargerEditionVue(paquet.getNom());
+        controller.loadEditionView(paquet.getNom());
     }
 
     /**
@@ -43,27 +43,32 @@ public class EditionController extends BaseController implements EditionVueListe
      * @param categorie Catégorie à être rajoutée
      */
     @Override
-    public void savePaquet(String nom, String categorie){
+    public void savePaquet(String nom, String categorie) {
         try {
             // Enregistrer le nom et ajouter la nouvelle categorie
             paquet.setNom(nom);
             paquet.addCategory(categorie);
-            GestionnairePaquet gestionnairePaquet = MenuPrincipal.getINSTANCE().getGestionnairePaquet();
-            gestionnairePaquet.save(MenuPrincipal.getINSTANCE().getPrincipalUser());
-            MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();// Revenir sur le menu principal
-        }catch (IOException e){
+            PaquetManager paquetManager = MenuPrincipal.getINSTANCE().getPaquetManager();
+            paquetManager.save(MenuPrincipal.getINSTANCE().getPrincipalUser());
+            MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet(); // Revenir sur le menu principal
+        } catch (IOException e) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Impossible de sauvegarder le paquet !");
-        }catch (IllegalArgumentException e){
-            MenuPrincipal.getINSTANCE().showErrorPopup("La catégorie ne peut pas contenir # !");
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().equals("Le champ catégorie ne peut pas être vide")) {
+                MenuPrincipal.getINSTANCE().showErrorPopup("La catégorie ne peut pas être vide !");
+            } else if (e.getMessage().equals("Le nom de la catégorie ne peut pas contenir le caractère #")) {
+                MenuPrincipal.getINSTANCE().showErrorPopup("La catégorie ne peut pas contenir # !");
+            }
         }
     }
+
 
     /**
      * Renvoyer les cartes du paquet
      * @return ArrayList<Carte>
      */
-    public ArrayList<Carte> loadCartes() {
-        return paquet.getCartes();
+    public ArrayList<Card> loadCards() {
+        return paquet.getCards();
     }
 
     /**
@@ -71,10 +76,10 @@ public class EditionController extends BaseController implements EditionVueListe
      */
     @Override
     public void addCard(String recto, String verso) {
-        int id = paquet.getCartes().size() + 1 ;
+        int id = paquet.getCards().size() + 1 ;
         try {
-            Carte carte = new Carte(id, recto, verso) ;
-            paquet.addCard(carte);
+            Card card = new Card(id, recto, verso) ;
+            paquet.addCard(card);
         }catch (IllegalArgumentException e){
             MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posséder un recto et un verso!");
         }
@@ -86,9 +91,9 @@ public class EditionController extends BaseController implements EditionVueListe
      * @param verso verso
      */
     public void addCardQCM(String recto, String verso) {
-        int id = paquet.getCartes().size() + 1 ;
+        int id = paquet.getCards().size() + 1 ;
         try {
-            CarteQcm carte = new CarteQcm(id, recto, verso) ;
+            CardQcm carte = new CardQcm(id, recto, verso) ;
             paquet.addCard(carte);
         }catch (IllegalArgumentException e){
             MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posséder un recto et un verso !");
@@ -101,9 +106,9 @@ public class EditionController extends BaseController implements EditionVueListe
      * @param verso verso
      */
     public void addCardTT(String recto, String verso) {
-        int id = paquet.getCartes().size() + 1 ;
+        int id = paquet.getCards().size() + 1 ;
         try {
-            CarteTt carte = new CarteTt(id, recto, verso) ;
+            CardTt carte = new CardTt(id, recto, verso) ;
             paquet.addCard(carte);
         }catch (IllegalArgumentException e){
             MenuPrincipal.getINSTANCE().showErrorPopup("La carte doit posséder un recto et un verso !");
@@ -116,9 +121,9 @@ public class EditionController extends BaseController implements EditionVueListe
      * @param lang langue de la carte
      */
     public void addCardSpecial(String recto, String verso,String lang) {
-        int id = paquet.getCartes().size() + 1 ;
+        int id = paquet.getCards().size() + 1 ;
         try {
-            CarteSpec carte = new CarteSpec(id, recto, verso,lang) ;
+            CardSpec carte = new CardSpec(id, recto, verso,lang) ;
             paquet.addCard(carte);
         }catch (IllegalArgumentException e){
             MenuPrincipal.getINSTANCE().showErrorPopup(e.getMessage());
@@ -171,28 +176,36 @@ public class EditionController extends BaseController implements EditionVueListe
         MenuPrincipal.getINSTANCE().showErrorPopup(message);
     }
 
+
     @Override
     public List<CardDTO> getData() {
-       return paquet.getCartes().stream().map(Carte::getDTO).collect(Collectors.toList());
+       return paquet.getCards().stream().map(Card::getDTO).collect(Collectors.toList());
     }
 
+    /**
+     * Change la question de la carte
+     * @param newQuestion nouvelle question
+     */
     @Override
     public void editQuestion(String newQuestion) {
         try{
-            paquet.getCartes().stream()
+            paquet.getCards().stream()
                     .filter(carte -> carte.getRecto().equals(newQuestion))
                     .findFirst()
                     .ifPresent(carte -> carte.editRecto(newQuestion));
-
         }catch (IllegalArgumentException e){
             error(e.getMessage());
         }
     }
 
+    /**
+     * Change la réponse de la carte
+     * @param newReponse nouvelle réponse
+     */
     @Override
-    public void editReponse(String newReponse) {
+    public void editResponse(String newReponse) {
         try {
-            paquet.getCartes().stream()
+            paquet.getCards().stream()
                     .filter(carte -> carte.getVerso().equals(newReponse))
                     .findFirst()
                     .ifPresent(carte -> carte.editVerso(newReponse));
@@ -200,4 +213,10 @@ public class EditionController extends BaseController implements EditionVueListe
             error(e.getMessage());
         }
     }
+
+    /**
+     * Retourne au menu des paquets
+     */
+    @Override
+    public void returnFromEditionToMenuPaquet() {MenuPrincipal.getINSTANCE().returnFromEditionToMenuPaquet();}
 }
