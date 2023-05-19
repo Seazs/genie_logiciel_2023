@@ -31,7 +31,8 @@ class ServerTest {
 
     @Test
     public void testCreateUser() {
-        User user = new User("test","test");
+        server.deleteUser("champimignon");
+        User user = new User("champimignon","oui");
         String reponse = server.createUser(user.getUsername(), user.getPassword());
         assertEquals(STATUS.OK.getMsg(),reponse);
 

@@ -24,13 +24,6 @@ public class PaquetManager {
     }
 
     /**
-     * Destiné aux tests
-     * @param folderPath chemin du dossier de stockage
-     */
-    public PaquetManager(String folderPath) {
-        folderStockagePath = folderPath+"/";
-    }
-    /**
      * Sauvegarde un paquet de cartes sous forme de fichier Json dans le dossier de l'utilisateur.
      * @param user utilisateur
      * @throws IOException exception

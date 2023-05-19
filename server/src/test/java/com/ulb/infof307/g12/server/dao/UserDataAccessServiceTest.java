@@ -2,6 +2,7 @@ package com.ulb.infof307.g12.server.dao;
 
 import com.ulb.infof307.g12.server.model.STATUS;
 import com.ulb.infof307.g12.server.model.User;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,10 +14,10 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserDataAccessServiceTest {
-    private File tmp;
+    private static File tmp;
     @BeforeEach
     void createTmpFile() throws IOException {
-        tmp = new File("server/src/main/resources/stockage","stockUser.txt");
+        tmp = new File("null/src/main/resources/stockage","stockUser.txt");
         tmp.getParentFile().mkdirs();
         tmp.createNewFile();
         FileWriter writer = new FileWriter(tmp);
@@ -45,8 +46,9 @@ class UserDataAccessServiceTest {
     }
     @Test
     void testCreateUser() {
-        User user = new User("test","test");
         UserDataAccessService userDataAccessService = new UserDataAccessService();
+        userDataAccessService.deleteUser("test");
+        User user = new User("test","test");
         assertEquals(STATUS.OK,userDataAccessService.createUser(user));
         assertEquals("test",userDataAccessService.getPassword("test"));
     }
@@ -72,7 +74,7 @@ class UserDataAccessServiceTest {
 
     @Test
     void testUpdateNotExistingUser(){
-        User user = new User("123","123");
+        User user = new User("champignon","123");
         UserDataAccessService userDataAccessService = new UserDataAccessService();
         assertEquals(STATUS.USERNAME_DOES_NOT_EXIST,userDataAccessService.updateUser(user));
     }
@@ -80,12 +82,10 @@ class UserDataAccessServiceTest {
 
     @Test
     void testLoadFichierErronee() throws IOException {
-        File tmp = new File("server/src/main/resources/stockage","stockUser.txt");
         FileWriter myWriter = new FileWriter(tmp);
         myWriter.write("test");
         myWriter.close();
         UserDataAccessService userDataAccessService = new UserDataAccessService();
         assertEquals(STATUS.DB_COULD_NOT_BE_LOADED,userDataAccessService.status);
-        tmp.delete();
     }
 }

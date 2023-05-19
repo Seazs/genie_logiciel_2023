@@ -131,7 +131,7 @@ public class Server {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
         HttpEntity<String> entity = new HttpEntity<>(username, headers);
-        restTemplate.delete(url+"user/"+username);
+        restTemplate.delete(url+"user/delete/"+username);
         return entity.getBody();
     }
     /**

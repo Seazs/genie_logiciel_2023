@@ -27,6 +27,7 @@ class PaquetManagerTest {
         fichierUtilisateur = new File(dossierTemporaire, "stockUser.txt");
         fichierUtilisateur.createNewFile();
     }
+
     @AfterAll
     public static void supprimeDossierTemporaire(){
         deleteFolder(dossierTemporaire);
@@ -70,10 +71,11 @@ class PaquetManagerTest {
         UserManager gestuser = new UserManager(fichierUtilisateur);
         gestuser.register(user1.getPseudo(), user1.getMdp());
         PaquetManager gestPaquet = new PaquetManager();
-        gestPaquet.save(user1);
-        //Test d'assertion
-        File f = new File(Main.getStorageFolderPath() +"testUtilisateur/"+paquet1.getId()+".json");
-        File f2 = new File(Main.getStorageFolderPath() +"testUtilisateur/"+paquet2.getId()+".json");
+        gestPaquet.savePaquet(user1,paquet1);
+        gestPaquet.savePaquet(user1,paquet2);
+        File f = new File("null/src/main/resources/stockage/"+ user1.getPseudo()+ "/"+ paquet1.getId()+".json");
+        File f2 = new File("null/src/main/resources/stockage/"+ user1.getPseudo()+ "/"+ paquet2.getId()+".json");
+
         assertTrue(f.exists());
         assertTrue(f2.exists());
         f.delete();

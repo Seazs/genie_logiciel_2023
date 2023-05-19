@@ -43,7 +43,7 @@ class PaquetDataAccessServiceTest {
         PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
         paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
         paquetDataAccessService.save();
-        File f = new File("server/src/main/resources/stockage/paquet/" + paquet.getId().toString() + ".json");
+        File f = new File("null/src/main/resources/stockage/store/" + paquet.getId().toString() + ".json");
         assertTrue(f.exists());
         PaquetDataAccessService paquetDataAccessService2 = new PaquetDataAccessService();
         List<Paquet> paquets = paquetDataAccessService2.getAllPaquets();
