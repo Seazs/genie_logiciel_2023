@@ -222,95 +222,113 @@ Tâche 2 : Implémentation de la lecture audio (Back end) - 3 points
 
 ## Histoire 26 (Refactoring) - 8 points 
 
-Tâche 1 : Changer le format stockage de notre structure locale vers JSON
+Tâche 1 : Changer le format stockage de notre structure locale vers JSON - 2 points
 
-- Brenno (Alex A.)
+- Alex A. (Brenno)
 - Description : Modifier les fonctions de sauvegarde et chargement des paquets en JSON en local. 
 
-Tâche 2 : Changer le format stockage de notre structure server vers JSON
+Tâche 2 : Changer le format stockage de notre structure server vers JSON - 3 points
 
 - Romain (Brenno)
 - Description : Modifier les fonctions du server pour gérer des JSON.
 
-Tâche 3 : Correction MVC
+Tâche 3 : Correction MVC - 3 points
 
 - Nico (Alex A.)
 - Description : S'assurer que l'architecture soit bien respectée. Enlever les modèles de la view.
 
-Tâche 4 : Gestion des erreurs/exceptions
-
-- Alex B. (Ismail)
-- Description : S'assurer que toutes les exceptions sont traitées.
-
-Tâches 5 : Tests unitaires 
-
-- Wassim (Nico)
-- Description : Créer des tests pour les modèles (attention au dossier application/application)
 
 
 ## Histoire 25 (Fin serveur/store) - 6 points
 
-Tâche 1 : Finaliser l'implémentation Upload et Download
+Tâche 1 : Finaliser l'implémentation Upload et Download - 2 points
 
 - Nico (Brenno)
 - Description : S'assurer qu'on peut upload et download de paquet, faire attention aux doublons. Ajouter UUID au paquet ? Changer le modèle du coup.
 
 
-Tâche 2 : Finaliser l'affichage store
+Tâche 2 : Finaliser l'affichage store - 1 points
 
 - Romain (Nico)
 - Description : S'assurer que la liste des paquets se mette à jour automatiquement (Refresh auto)
 
 
-Tâche 3 : Finaliser gestion d'erreur du serveur
+Tâche 3 : Finaliser gestion d'erreur du serveur - 1 points
 
 - Ismail (Romain)
-- Description : S'assurer que toutes les exceptions sont traitées
+- Description : S'assurer que toutes les exceptions sont traitées 
 
 
-Tâche 4 : Vérification de la bonne communication du serveur et client
+Tâche 4 : Vérification de la bonne communication du serveur et client - 1 points
 
 - Brenno (Alex B.)
 - Description : Vérifier le bon deroulement de chaque requête -> chercher des bugs à ce niveau.
 
 
-Tâche 5 : Synchronisation de la database locale avec celle du serveur
+Tâche 5 : Synchronisation de la database locale avec celle du serveur - 1 points
 
 - Wassim (Brenno)
 - Description : Faire en sorte d'avoir les mêmes données en local et sur le serveur. (ajout uuid dans modèle local et dto)
-
-Tâche 6 : Supprimer un de ses paquets du store
-
-- Alex A. (Lina) 
-- Description : L'utilisateur doit pouvoir supprimer ses paquets du store. Vérifier qu'un paquet appartient bien à l'utilisateur avant de le supprimer.
  
 
 ## Histoire 17 (HTML Latex) - 8 points
 
-Tâche 1 : Implémenter l'interprétation de HTML dans une carte
+Tâche 1 : Implémenter l'interprétation de HTML dans une carte - 2,5 points
 
 - Raph (Philippe)
 - Description : L'utilisateur doit pouvoir écrire du HTML sur carte et au moment de l'étude, le contenu HTML doit être rendu correctment.
 
-Tâche 2 : Implémenter l'interprétation de Latex dans une carte
+Tâche 2 : Implémenter l'interprétation de Latex dans une carte - 2,5 points
 
 - Philippe (Raph)
 - Description : L'utilisateur doit pouvoir écrire du Latex sur carte et au moment de l'étude, le contenu Latex doit être rendu correctment.
 
-Tâche 3 : Adapter le menu d'édition pour tenir compter la visualisation de HTML et Latex.
+Tâche 3 : Adapter le menu d'édition pour tenir compter la visualisation de HTML et Latex. - 3 points
 
-- Lina (Ismail)
+- Ismail (Lina)
 - Description : Rendre possible la création des cartes contenant du HTML et du Latex. Ajout d'un bouton qui ouvre un popup ou remplir les text input en bas par exemple
 
 
 ## Histoire 15 (Import/Export) - 6 points
 
-Tâche 1 : Importation de paquet de cartes
+Tâche 1 : Importation de paquet de cartes - 3 points
 
 - Philippe (Raph)
 - Description : Implémenter un bouton import qui prend un fichier .json dans le bon format.
 
-Tâche 2 : Exportation de paquet de cartes
+Tâche 2 : Exportation de paquet de cartes - 3 points
 
-- Philippe (Raph)
+- Raph (Philippe)
 - Description : Implémenter un bouton export qui copie un fichier .json existante dans le dossier choisi par l'utilisateur.
+
+
+## Histoire 27 Debug, Optimisation et Réalisation de la vidéo de présentation - 14 points
+Tâche 1 : Gestion des erreurs/exceptions - 2,5 points
+
+- Alex B. (Ismail)
+- Description : S'assurer que toutes les exceptions sont traitées correctement.
+
+Tâches 2 : Tests unitaires - 3 points
+
+- Wassim (Nico)
+- Description : Créer des tests pour les modèles (attention au dossier application/application)
+
+Tâches 3 : Clean du code et Javadoc - 1 point
+
+- Raphaël (Nico)
+- Description : Vérifier tout le code et s'assurer qu'il n'y ait pas de code mort, de fonction doubles ou de commentaires manquants, obsolètes.
+
+Tâche 4 : Supprimer un de ses paquets du store - 1 point
+
+- Alex A. (Lina) 
+- Description : L'utilisateur doit pouvoir supprimer ses paquets du store. Vérifier qu'un paquet appartient bien à l'utilisateur avant de le supprimer.
+
+Tâche 5 : Faire la vidéo de présentation - 1 point
+
+- Romain (Philippe) 
+- Description : Faire la vidéo de présentation de l'application.
+
+Tâche 6 : Optimisation de la généricité du code - 1 point
+
+- Nico. (Raphael) 
+- Description : Éviter et enlever les fonctions étant similaires pour les simplifier en une fonction plus générique.

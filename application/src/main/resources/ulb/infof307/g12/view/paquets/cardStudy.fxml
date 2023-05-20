@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ulb.infof307.g12.view.paquets.CardStudyViewController">
+   <children>
+      <Button fx:id="boutonEcouter" layoutX="394.0" layoutY="26.0" mnemonicParsing="false" onAction="#btnReadText" prefHeight="26.0" prefWidth="76.0" text="Écouter">
+         <font>
+            <Font name="Times New Roman" size="13.0" />
+         </font></Button>
+      <Button fx:id="boutonPrecedent" layoutX="60.0" layoutY="440.0" mnemonicParsing="false" onAction="#previousCard" text="Précédente">
+         <font>
+            <Font name="Times New Roman" size="13.0" />
+         </font></Button>
+      <Button fx:id="boutonSuivant" layoutX="413.0" layoutY="440.0" mnemonicParsing="false" onAction="#nextCard" prefHeight="25.0" prefWidth="76.0" text="Suivante">
+         <font>
+            <Font name="Times New Roman" size="13.0" />
+         </font></Button>
+      <Button fx:id="btnChange" layoutX="202.0" layoutY="336.0" mnemonicParsing="false" onAction="#changeSide" prefHeight="27.0" prefWidth="100.0" text="Verso" />
+      <Label layoutX="188.0" layoutY="400.0" text="Niveau de connaissance">
+         <font>
+            <Font name="Times New Roman" size="13.0" />
+         </font></Label>
+      <VBox alignment="CENTER" layoutX="181.0" layoutY="423.0" prefHeight="163.0" prefWidth="138.0" spacing="5">
+         <children>
+            <Button fx:id="boutonTB" mnemonicParsing="false" onAction="#veryGood" prefHeight="25.0" prefWidth="100.0" styleClass="boutonConnaissance" text="Très Bonne" textFill="#4a9e00">
+               <font>
+                  <Font name="Times New Roman" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="boutonB" mnemonicParsing="false" onAction="#good" prefHeight="25.0" prefWidth="100.0" styleClass="boutonConnaissance" text="Bonne" textAlignment="CENTER" textFill="#afc62a">
+               <font>
+                  <Font name="Times New Roman" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="boutonM" mnemonicParsing="false" onAction="#middle" prefHeight="25.0" prefWidth="100.0" styleClass="boutonConnaissance" text="Moyenne" textFill="#ffa500">
+               <font>
+                  <Font name="Times New Roman" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="boutonBad" mnemonicParsing="false" onAction="#bad" prefHeight="25.0" prefWidth="100.0" styleClass="boutonConnaissance" text="Mauvaise" textFill="#ff6233">
+               <font>
+                  <Font name="Times New Roman" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="boutonVeryBad" mnemonicParsing="false" onAction="#veryBad" prefHeight="25.0" prefWidth="100.0" styleClass="boutonConnaissance" text="Très mauvaise" textFill="RED">
+               <font>
+                  <Font name="Times New Roman" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Button fx:id="btnValidAnswer" layoutX="221.0" layoutY="300.0" mnemonicParsing="false" onAction="#choiceSelected" prefHeight="26.0" prefWidth="59.0" text="Valider" />
+      <Button fx:id="boutonTerminer" layoutX="43.0" layoutY="26.0" mnemonicParsing="false" onAction="#endStudy" prefHeight="25.0" prefWidth="76.0" text="Terminer">
+         <font>
+            <Font name="Times New Roman" size="13.0" />
+         </font></Button>
+      <ListView fx:id="reponsesList" layoutX="101.0" layoutY="165.0" prefHeight="100.0" prefWidth="300.0" />
+      <Label fx:id="qrText" alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="84.0" prefHeight="200.0" prefWidth="406.0" text="Coucou c'est moi l'élan derriere toi" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label fx:id="questionQcmLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="49.0" layoutY="89.0" prefHeight="50.0" prefWidth="406.0" text="Question QCM" textAlignment="CENTER" />
+      <Label fx:id="answer" alignment="CENTER" layoutX="84.0" layoutY="375.0" prefHeight="25.0" prefWidth="333.0" />
+      <TextField fx:id="reponseTt" layoutX="171.0" layoutY="229.0" promptText="Compléter" visible="false" />
+      <WebView fx:id="htmlView" layoutX="34.0" layoutY="71.0" prefHeight="255.0" prefWidth="436.0" visible="false" />
+      <ImageView fx:id="LatexView" fitHeight="182.0" fitWidth="394.0" layoutX="53.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+   <stylesheets>
+      <URL value="@menuPaquetStyle.css" />
+   </stylesheets>
+</AnchorPane>

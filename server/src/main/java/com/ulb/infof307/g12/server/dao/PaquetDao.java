@@ -33,9 +33,14 @@ public interface PaquetDao {
     /**
      * Renvoie les paquets de l'utilisateur sous forme de string
      * @param username nom de l'utilisateur
-     * @return
+     * @return les paquets de l'utilisateur sous forme de string
      */
     String getUserPaquet(String username);
 
+    /**
+     * Supprime le paquet correspondant à l'id
+     * @param id id du paquet
+     * @return le statut de la suppression du paquet
+     */
     STATUS deletePaquet(UUID id);
 }

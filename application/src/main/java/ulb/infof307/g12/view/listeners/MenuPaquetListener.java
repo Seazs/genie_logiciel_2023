@@ -11,26 +11,30 @@ public interface MenuPaquetListener {
      * @return Paquet
      * @throws IOException exception
      */
-    PaquetDTO creerPaquet() throws IOException;
+    PaquetDTO createPaquet() throws IOException;
 
     /**
-     * Editer le paquet
+     * Éditer le paquet
      * @param paquet paquet
      */
-    void editerPaquet(PaquetDTO paquet) ;
+    void editPaquet(PaquetDTO paquet) ;
 
     /**
      * Etude des cartes
      * @param paquet paquet
      */
-    void carteEtude(PaquetDTO paquet);
+    void cardStudy(PaquetDTO paquet);
 
     /**
      * @param paquet Paquet à supprimer
      */
-    void supprimerPaquet(PaquetDTO paquet);
+    void deletePaquet(PaquetDTO paquet);
 
-    Collection<PaquetDTO> filterPaquet(String filter);
+    /**
+     * Filtre les paquets selon le filtre
+     * @param filter filtre
+     */
+    void filterPaquet(String filter);
 
     Collection<PaquetDTO> getPaquetDTOList();
 
@@ -49,5 +53,24 @@ public interface MenuPaquetListener {
      */
     void exportPaquet(PaquetDTO paquet, String path);
 
+    /**
+     * Synchroniser les paquets
+     */
     void sync();
+
+    /**
+     * Afficher une popup d'erreur
+     * @param s message d'erreur
+     */
+    void showErrorPopup(String s);
+
+    /**
+     * Ouvre la fenêtre de profil
+     */
+    void openProfile();
+
+    /**
+     * Ouvre la fenêtre de store
+     */
+    void openStore();
 }

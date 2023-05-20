@@ -12,7 +12,7 @@ public class textToSpeechController {
      * @param text : texte à dire
      * permet de dire le texte vocalement
      */
-    public void synthese_vocal(String text){
+    public void vocalSynthesis(String text){
         try {
             //setting properties as Kevin Dictionary
             System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us" + ".cmu_us_kal.KevinVoiceDirectory");

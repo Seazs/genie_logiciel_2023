@@ -31,6 +31,12 @@ public class User {
         this.username = args[0];
         this.password = args[1];
     }
+
+    /**Constructeur
+     * @param username username
+     * @param password password
+     * @throws IllegalArgumentException Si les arguments ne sont pas conformes
+     */
     public User(String username, String password) throws IllegalArgumentException{
         this.username = username;
         this.password = password;

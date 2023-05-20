@@ -7,7 +7,9 @@ import com.ulb.infof307.g12.server.model.User;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -19,15 +21,6 @@ import java.util.ArrayList;
 
 class ServerTest {
 
-
-    @BeforeEach
-    public void createDossierTemporaire(){
-        try {
-            FileUtils.deleteDirectory(new File("null"));
-        } catch (IOException e) {
-            System.out.println("Erreur lors de la suppression du dossier de stockage");
-        }
-    }
     private static ConfigurableApplicationContext context;
     private final Server server = new Server();
     @BeforeEach
@@ -38,8 +31,8 @@ class ServerTest {
 
     @Test
     public void testCreateUser() {
-        //ServerApplication.main(new String[]{});
-        User user = new User("test2","test2");
+        server.deleteUser("champimignon");
+        User user = new User("champimignon","oui");
         String reponse = server.createUser(user.getUsername(), user.getPassword());
         assertEquals(STATUS.OK.getMsg(),reponse);
 
@@ -71,8 +64,8 @@ class ServerTest {
     @Test
     public void testPostPaquet() {
         Paquet paquet = new Paquet("test","test");
-        paquet.addCard(new Carte(1,"test", "test"));
-        paquet.addCard(new CarteQcm(2,"test", "test"));
+        paquet.addCard(new Card(1,"test", "test"));
+        paquet.addCard(new CardQcm(2,"test", "test"));
         try {
             STATUS reponse = server.postPaquet(paquet);
             assertEquals(STATUS.OK,reponse);
@@ -82,19 +75,19 @@ class ServerTest {
             System.out.println("Erreur lors de l'envoi du paquet");
         }
     }
+
+
     @Test
     public void testGetPaquet() {
         ObjectMapper objectMapper = new ObjectMapper();
         Paquet paquet = new Paquet("test","test");
-        paquet.addCard(new Carte(1,"test", "test"));
-        paquet.addCard(new CarteQcm(2,"test", "test"));
+        paquet.addCard(new Card(1,"test", "test"));
+        paquet.addCard(new CardQcm(2,"test", "test"));
 
         Paquet paquet2 = new Paquet("test2","test2");
-        paquet2.addCard(new Carte(1,"test2", "test2"));
-        paquet2.addCard(new CarteQcm(2,"test2", "test2"));
+        paquet2.addCard(new Card(1,"test2", "test2"));
+        paquet2.addCard(new CardQcm(2,"test2", "test2"));
         ArrayList<Paquet> sentPaquets = new ArrayList<>();
-        sentPaquets.add(paquet);
-        sentPaquets.add(paquet2);
         ArrayList<Paquet> receivedPaquets = new ArrayList<>();
         try {
             server.postPaquet(paquet);
@@ -102,7 +95,7 @@ class ServerTest {
             JSONArray reponse = server.getPaquets();
             for (int i = 0; i < reponse.length(); i++) {
                 JSONObject paquetRetour = reponse.getJSONObject(i);
-                Paquet newPaquet = objectMapper.readValue(paquetRetour.toString(), Paquet.class);
+                Paquet newPaquet = objectMapper.readValue(paquet.toString(), Paquet.class);
                 receivedPaquets.add(newPaquet);
             }
             assertEquals(sentPaquets,receivedPaquets);

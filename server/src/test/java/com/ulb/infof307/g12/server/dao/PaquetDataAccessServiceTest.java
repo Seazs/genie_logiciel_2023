@@ -2,14 +2,12 @@ package com.ulb.infof307.g12.server.dao;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ulb.infof307.g12.server.model.Carte;
+import com.ulb.infof307.g12.server.model.Card;
 import com.ulb.infof307.g12.server.model.Paquet;
 import com.ulb.infof307.g12.server.model.STATUS;
 import org.junit.jupiter.api.*;
-import org.junit.runners.Suite;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,7 @@ class PaquetDataAccessServiceTest {
 
     private static Paquet paquet;
     @BeforeAll
-    public static void creeDossierTemporaire() throws IOException {
+    public static void createTemporaryFolder() {
         dossierTemporaire = new File("./stockage");
         dossierTemporaire.mkdirs();
         dossierTemporairePaquet = new File("./stockage/paquet");
@@ -30,22 +28,22 @@ class PaquetDataAccessServiceTest {
         UUID id = UUID.randomUUID();
         ArrayList<String> categories = new ArrayList<>();
         categories.add("test");
-        ArrayList<Carte> cartes = new ArrayList<>();
-        cartes.add(new Carte(1, "test", "test", "QCM"));
-        paquet = new Paquet(id, "nomtest", categories, cartes);
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(1, "test", "test", "QCM"));
+        paquet = new Paquet(id, "nomtest", categories, cards);
     }
     @AfterAll
-    public static void supprimeDossierTemporaire(){
+    public static void deleteTemporaryFolder(){
         dossierTemporaire.delete();
         dossierTemporairePaquet.delete();
     }
     @Test
-    void saveLoadTest() throws IOException {
+    void testSaveLoad() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
         paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
         paquetDataAccessService.save();
-        File f = new File("server/src/main/resources/stockage/paquet/" + paquet.getId().toString() + ".json");
+        File f = new File("null/src/main/resources/stockage/store/" + paquet.getId().toString() + ".json");
         assertTrue(f.exists());
         PaquetDataAccessService paquetDataAccessService2 = new PaquetDataAccessService();
         List<Paquet> paquets = paquetDataAccessService2.getAllPaquets();
@@ -54,7 +52,7 @@ class PaquetDataAccessServiceTest {
     }
 
     @Test
-    void createDuplicatePaquet() throws JsonProcessingException {
+    void testCreateDuplicatePaquet() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
         paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
@@ -62,7 +60,7 @@ class PaquetDataAccessServiceTest {
     }
 
     @Test
-    void getPaquet() throws JsonProcessingException {
+    void testGetPaquet() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
         paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
@@ -70,11 +68,11 @@ class PaquetDataAccessServiceTest {
     }
 
     @Test
-    void deletePaquet() throws JsonProcessingException {
+    void testDeletePaquet() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         PaquetDataAccessService paquetDataAccessService = new PaquetDataAccessService();
         paquetDataAccessService.createPaquet(objectMapper.writeValueAsString(paquet));
         paquetDataAccessService.deletePaquet(paquet.getId());
-        assertEquals(null,paquetDataAccessService.getPaquet(paquet.getId()));
+        assertNull(paquetDataAccessService.getPaquet(paquet.getId()));
     }
 }
