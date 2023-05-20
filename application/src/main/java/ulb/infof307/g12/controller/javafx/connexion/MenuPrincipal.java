@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import ulb.infof307.g12.Main;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.paquets.CardStudyController;
 import ulb.infof307.g12.controller.javafx.profiles.ProfileController;
@@ -26,7 +27,7 @@ public class MenuPrincipal extends Application {
     @Getter(lazy = true)
     private static final MenuPrincipal INSTANCE = new MenuPrincipal();
     private final UserManager userManager = new UserManager();
-    private final PaquetManager paquetManager = new PaquetManager();
+    private final PaquetManager paquetManager = new PaquetManager(Main.getStockageFolderPath());
     private ConnexionMenuController connexionController;
     private MenuPaquetController menuPaquetController;
     private ProfileController profilController;

@@ -16,13 +16,12 @@ public class PaquetManager {
     @Getter
     private final String folderStockagePath;
 
-    /**
-     * Constructeur du gestionnaire de paquet
-     */
-    public PaquetManager() {
-        folderStockagePath = Main.getStockageFolderPath();
-    }
 
+
+    /**
+     * Sauvegarde un paquet de cartes sous forme de fichier Json dans le dossier de l'utilisateur.
+     * @param folderStockagePath chemin du dossier de stockage
+     */
     public PaquetManager(String folderStockagePath) {
         this.folderStockagePath = folderStockagePath;
     }
