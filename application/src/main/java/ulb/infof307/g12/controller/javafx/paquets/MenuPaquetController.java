@@ -1,17 +1,17 @@
 package ulb.infof307.g12.controller.javafx.paquets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lombok.Getter;
 import ulb.infof307.g12.controller.javafx.BaseController;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.controller.storage.PaquetManager;
+import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.model.User;
 import ulb.infof307.g12.view.dto.PaquetDTO;
 import ulb.infof307.g12.view.listeners.MenuPaquetListener;
-import ulb.infof307.g12.model.Paquet;
 import ulb.infof307.g12.view.paquets.MenuPaquetViewController;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +23,10 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
 
     @Getter
     private final User user;
+
+    private final FileChooser fileChooser = new FileChooser();
+
+    private final MenuPrincipal instance = MenuPrincipal.getINSTANCE();
 
     private List<Paquet> saveListPaquet;
 
@@ -39,6 +43,8 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
         controller.setListener(this);
         saveListPaquet = MenuPrincipal.getINSTANCE().getUserPaquets();
         controller.reloadListView();
+        //support uniquement du format .JSON lors de l'import/export des paquets
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JSON", "*.json"));
     }
 
     /**
@@ -60,7 +66,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     @Override
     public void deletePaquet(PaquetDTO paquetDTO) {
         Optional<Paquet> paquet = paquetDTO.getPaquet();
-        PaquetManager paquetManager = MenuPrincipal.getINSTANCE().getPaquetManager();
+        PaquetManager paquetManager = instance.getPaquetManager();
         if(paquet.isEmpty()) {
             MenuPrincipal.getINSTANCE().showErrorPopup("Veuillez sélectionner un paquet à supprimer");
             return;
@@ -94,32 +100,56 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
     }
 
     /**
-     * @see MenuPaquetListener#importPaquet(File)
+     * @see MenuPaquetListener#importPaquet()
      */
     @Override
-    public void importPaquet(File file) {
+    public void importPaquet() {
+
+        fileChooser.setTitle("Select a file to import");
+
+        File file = fileChooser.showOpenDialog(this.stage);
+        if (file == null) {
+            showErrorPopup("Aucun fichier n'a été sélectionné !");
+            return;
+        }
+
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             Paquet newPaquet = objectMapper.readValue(file, Paquet.class);
-            MenuPrincipal.getINSTANCE().getPrincipalUser().addPaquet(newPaquet);
-            MenuPrincipal.getINSTANCE().getPaquetManager().save(MenuPrincipal.getINSTANCE().getPrincipalUser());
+            instance.getPrincipalUser().addPaquet(newPaquet);
+            instance.getPaquetManager().save(MenuPrincipal.getINSTANCE().getPrincipalUser());
+            updatePaquets();
             System.out.println("Importation du paquet " + file.getName() + " réussie !");
         } catch (IOException e) {
-            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de l'importation du paquet");
+            showErrorPopup("Erreur lors de l'importation du paquet");
         }
     }
 
     /**
-     * @see MenuPaquetListener#exportPaquet(PaquetDTO, String)
+     * @see MenuPaquetListener#exportPaquet(PaquetDTO)
      */
     @Override
-    public void exportPaquet(PaquetDTO paquet, String path) {
+    public void exportPaquet(PaquetDTO paquet) {
+
+        if(paquet.getPaquet().isEmpty()) {
+            showErrorPopup("Erreur lors de la récupération du paquet");
+            return;
+        }
+
+        fileChooser.setTitle("Select a file to export");
+        File selectedFile = fileChooser.showSaveDialog(this.stage);
+
+        //Cas où l'utilisateur annule l'export
+        if(selectedFile == null)
+            return;
+
         ObjectMapper objectMapper = new ObjectMapper();
+
         try {
-            objectMapper.writeValue(new File(path+ ".json"), paquet.getPaquet().get());
+            objectMapper.writeValue(selectedFile, paquet.getPaquet().get());
             System.out.println("Exportation du paquet " + paquet.nom() + " réussie !");
         } catch (IOException e) {
-            MenuPrincipal.getINSTANCE().showErrorPopup("Erreur lors de l'exportation du paquet");
+            showErrorPopup("Erreur lors de l'exportation du paquet");
         }
     }
 
@@ -127,26 +157,34 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      * @see MenuPaquetListener#sync()
      */
     @Override
-    public void sync() {MenuPrincipal.getINSTANCE().showSyncMenu();}
+    public void sync() {
+        instance.showSyncMenu();
+    }
 
     /**
      * @see MenuPaquetListener#showErrorPopup(String)
      * @param s message d'erreur à afficher
      */
     @Override
-    public void showErrorPopup(String s) {MenuPrincipal.getINSTANCE().showErrorPopup(s);}
+    public void showErrorPopup(String s) {
+        instance.showErrorPopup(s);
+    }
 
     /**
      * @see MenuPaquetListener#openProfile()
      */
     @Override
-    public void openProfile() {MenuPrincipal.getINSTANCE().openProfile();}
+    public void openProfile() {
+        instance.openProfile();
+    }
 
     /**
      * @see MenuPaquetListener#openStore()
      */
     @Override
-    public void openStore() {MenuPrincipal.getINSTANCE().openStore();}
+    public void openStore() {
+        instance.openStore();
+    }
 
     /**
      * Lancer le menu d'édition avec le paquet choisit par l'utilisateur
@@ -154,12 +192,8 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      */
     @Override
     public void editPaquet(PaquetDTO paquetDTO) {
-        try {
-            Optional<Paquet> paquet = paquetDTO.getPaquet();
-            MenuPrincipal.getINSTANCE().showMenuEdition(paquet.get());
-        }catch (NullPointerException e){
-            MenuPrincipal.getINSTANCE().showErrorPopup("Vous devez sélectionner un paquet à éditer !");
-        }
+        Optional<Paquet> paquet = paquetDTO.getPaquet();
+        paquet.ifPresent(instance::showMenuEdition);
     }
 
     /**
@@ -168,22 +202,27 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      */
     @Override
     public void cardStudy(PaquetDTO paquetDTO) {
-        MenuPrincipal instance = MenuPrincipal.getINSTANCE();
+        Optional<Paquet> paquet = paquetDTO.getPaquet();
 
-        try {
-            Optional<Paquet> paquet = paquetDTO.getPaquet();
-            Paquet paquetInstance = paquet.get();
-            if (paquetInstance.cards.size() == 0){
-                instance.showErrorPopup("Vous devez creer des cartes avant de pouvoir les étudier !");
-            }else{
-                instance.showCardStudy(this,paquetInstance);
-            }
-        }catch (NullPointerException e){
+        if(paquet.isEmpty()){
             instance.showErrorPopup("Vous devez sélectionner un paquet à étudier !");
+            return;
         }
 
+        Paquet paquetInstance = paquet.get();
+
+        if (paquetInstance.cards.size() == 0){
+            instance.showErrorPopup("Vous devez creer des cartes avant de pouvoir les étudier !");
+            return;
+        }
+
+        instance.showCardStudy(this,paquetInstance);
     }
 
+    /**
+     * Affiche la scène et met à jour la liste des paquets affichés
+     * @see BaseController#show()
+     */
     @Override
     public void show(){
         super.show();
@@ -194,7 +233,7 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
      * Met à jour la liste des paquets de l'utilisateur
      */
     public void updatePaquets() {
-        saveListPaquet = MenuPrincipal.getINSTANCE().getUserPaquets();
+        saveListPaquet = instance.getUserPaquets();
         MenuPaquetViewController controller = (MenuPaquetViewController) super.controller;
         controller.reloadListView();
     }
