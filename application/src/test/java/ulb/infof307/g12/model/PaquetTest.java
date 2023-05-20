@@ -91,7 +91,7 @@ class PaquetTest {
             paquet.addCard(card);
         });
     }
-    public static List<Arguments> creatPaquet(){
+    public static List<Arguments> createPaquet(){
         Paquet paquet = new Paquet("Maths","BA-1");
         Card card = new Card(1, "r1", "v1");
         Card card1 = new Card(4, "r2", "v2");
@@ -104,7 +104,7 @@ class PaquetTest {
         return arguments;
     }
     @ParameterizedTest
-    @MethodSource("creatPaquet")
+    @MethodSource("createPaquet")
     public void testSupprimeCarte(Paquet paquet, Card card){
         if (!paquet.cards.contains(card)){
             Assertions.assertThrows(IllegalArgumentException.class,()  -> {

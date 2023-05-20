@@ -44,7 +44,7 @@ class UserTest {
     }
 
     @Test
-    void validitePseudoTest() {
+    void validityPseudoTest() {
         assertThrows(IllegalArgumentException.class,
                 () -> {
                     User pers1 = new User("Brenno#", "123");
@@ -59,7 +59,7 @@ class UserTest {
                 });
     }
     @Test
-    void validiteMdpTest() {
+    void validityMdpTest() {
         assertThrows(IllegalArgumentException.class,
                 () -> {
                     User pers1 = new User("Brenno", "123#");
