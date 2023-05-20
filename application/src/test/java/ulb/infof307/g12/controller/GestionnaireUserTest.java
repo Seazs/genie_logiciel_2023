@@ -159,7 +159,7 @@ class GestionnaireUserTest {
 
     @Test
     void testRemoveUser() throws IOException{
-        UserManager gestuser = new UserManager();
+        UserManager gestuser = new UserManager(tmp);
         User user1 = new User("felix","meilleuramipourlavie");
         gestuser.register(user1.getPseudo(), user1.getMdp());
         gestuser.removeUser(user1);
