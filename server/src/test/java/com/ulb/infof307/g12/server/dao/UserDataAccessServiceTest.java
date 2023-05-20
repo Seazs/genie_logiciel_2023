@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserDataAccessServiceTest {
@@ -81,11 +82,13 @@ class UserDataAccessServiceTest {
 
 
     @Test
-    void testLoadFichierErronee() throws IOException {
-        FileWriter myWriter = new FileWriter(tmp);
-        myWriter.write("test");
-        myWriter.close();
-        UserDataAccessService userDataAccessService = new UserDataAccessService();
-        assertEquals(STATUS.DB_COULD_NOT_BE_LOADED,userDataAccessService.status);
+    void testLoadCompromisedFile(){
+        assertDoesNotThrow(() -> {
+            FileWriter myWriter = new FileWriter(tmp);
+            myWriter.write("test");
+            myWriter.close();
+            UserDataAccessService userDataAccessService = new UserDataAccessService();
+            assertEquals(STATUS.DB_COULD_NOT_BE_LOADED,userDataAccessService.status);
+        });
     }
 }
