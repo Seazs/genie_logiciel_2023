@@ -23,6 +23,10 @@ public class PaquetManager {
         folderStockagePath = Main.getStockageFolderPath();
     }
 
+    public PaquetManager(String folderStockagePath) {
+        this.folderStockagePath = folderStockagePath;
+    }
+
     /**
      * Sauvegarde un paquet de cartes sous forme de fichier Json dans le dossier de l'utilisateur.
      * @param user utilisateur

@@ -68,13 +68,13 @@ class PaquetManagerTest {
         paquet2.addCard(card5);
         user1.addPaquet(paquet1);
         user1.addPaquet(paquet2);
-        UserManager gestuser = new UserManager(fichierUtilisateur);
+        UserManager gestuser = new UserManager(fichierUtilisateur, dossierTemporaire.getPath()+ "/");
         gestuser.register(user1.getPseudo(), user1.getMdp());
-        PaquetManager gestPaquet = new PaquetManager();
+        PaquetManager gestPaquet = new PaquetManager(dossierTemporaire.getPath()+ "/");
         gestPaquet.savePaquet(user1,paquet1);
         gestPaquet.savePaquet(user1,paquet2);
-        File f = new File("null/src/main/resources/stockage/"+ user1.getPseudo()+ "/"+ paquet1.getId()+".json");
-        File f2 = new File("null/src/main/resources/stockage/"+ user1.getPseudo()+ "/"+ paquet2.getId()+".json");
+        File f = new File(dossierTemporaire + "/" + user1.getPseudo()+ "/"+ paquet1.getId()+".json");
+        File f2 = new File(dossierTemporaire + "/" + user1.getPseudo()+ "/"+ paquet2.getId()+".json");
 
         assertTrue(f.exists());
         assertTrue(f2.exists());
@@ -97,13 +97,13 @@ class PaquetManagerTest {
         paquet2.addCard(card4);
         user1.addPaquet(paquet1);
         user1.addPaquet(paquet2);
-        UserManager gestuser = new UserManager();
+        UserManager gestuser = new UserManager(fichierUtilisateur, dossierTemporaire.getPath()+ "/");
         gestuser.register(user1.getPseudo(), user1.getMdp());
-        PaquetManager gestPaquet = new PaquetManager();
+        PaquetManager gestPaquet = new PaquetManager(dossierTemporaire.getPath() + "/");
         gestPaquet.save(user1);
         //Test de suppression
         gestPaquet.remove(user1,paquet1);
-        File f = new File("src/main/resources/stockage/"+ user1.getPseudo()+"/"+paquet1.getNom());
+        File f = new File(dossierTemporaire + "/" + user1.getPseudo()+"/"+paquet1.getNom());
         assertFalse(f.exists());
     }
 
@@ -122,8 +122,8 @@ class PaquetManagerTest {
         paquet2.addCard(card4);
         user1.addPaquet(paquet1);
         user1.addPaquet(paquet2);
-        PaquetManager gestPaquet = new PaquetManager();
-        UserManager gestuser = new UserManager();
+        PaquetManager gestPaquet = new PaquetManager(dossierTemporaire.getPath()+ "/");
+        UserManager gestuser = new UserManager(fichierUtilisateur, dossierTemporaire.getPath()+ "/");
         gestuser.register(user1.getPseudo(), user1.getMdp());
         gestPaquet.save(user1);
         //Création de l'utilisateur 2 qui va charger l'utilisateur 1

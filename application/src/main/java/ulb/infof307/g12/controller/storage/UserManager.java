@@ -1,5 +1,6 @@
 package ulb.infof307.g12.controller.storage;
 
+import lombok.Setter;
 import ulb.infof307.g12.Main;
 import ulb.infof307.g12.controller.javafx.connexion.MenuPrincipal;
 import ulb.infof307.g12.model.STATUS;
@@ -16,6 +17,7 @@ public class UserManager {
     private final File userDatabase;
     public STATUS status;
     public static User userConnected;
+
     private String stock_folder = Main.getStockageFolderPath();
 
     /**
@@ -29,6 +31,13 @@ public class UserManager {
         status = STATUS.OK;
     }
 
+
+    public UserManager(File fichier, String stock_folder) throws FileNotFoundException {
+        userDatabase = fichier;
+        this.stock_folder = stock_folder;
+        load();
+        status = STATUS.OK;
+    }
     /**
      * Autre constructeur du gestionnaire utilisateur
      */
