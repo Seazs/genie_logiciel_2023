@@ -269,7 +269,7 @@ public class CardStudyViewController {
     void choiceSelected() {
         String type = listener.getCardsStudy().get(indexCarte).getType();
         switch (type) {
-            case "QCM" -> verfyAnswerQcm();
+            case "QCM" -> verifyAnswerQcm();
             case "TT" -> verifyAnswerTt();
         }
     }
@@ -277,17 +277,17 @@ public class CardStudyViewController {
     /**
      * Fonction qui verifie si la réponse est bonne pour les cartes Qcm
      */
-    public void verfyAnswerQcm(){
+    public void verifyAnswerQcm(){
         String[] infos = listener.getCardsStudy().get(indexCarte).getCardInfo();
         if (reponsesList.getSelectionModel().getSelectedItem() == null) {
             listener.error("Il faut sélectionner une solution !");
             return;
         }
         if(reponsesList.getSelectionModel().getSelectedItem().equals(infos[4])){
-            answer.setText("T'es un bg en sah");
+            answer.setText("Bien joué !");
             veryGood();
         }else{
-            answer.setText("Tu pues ta grand mère");
+            answer.setText("Dommage, réessaie !");
             veryBad();
         }
     }
