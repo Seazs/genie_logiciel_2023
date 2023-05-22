@@ -298,10 +298,10 @@ public class CardStudyViewController {
     public void verifyAnswerTt(){
         String[] infos = listener.getCardsStudy().get(indexCarte).getCardInfo();
         if(reponseTt.getText().equals(infos[2])){
-            answer.setText("T'es un bg en sah");
+            answer.setText("Bien joué !");
             listener.veryGood(indexCarte);
         }else{
-            answer.setText("Tu pues ta grand mère !");
+            answer.setText("Dommage, réessaie !");
             listener.veryBad(indexCarte);
         }
     }
