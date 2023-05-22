@@ -57,10 +57,11 @@ public class UserController {
         try {
             User user = new User(userString);
             result = userService.createUser(user).getMsg();
+            return ResponseEntity.ok(result);
         }catch (IllegalArgumentException e){
             result = e.getMessage();
         }
-        return ResponseEntity.ok(result);
+        return ResponseEntity.badRequest().body(result);
     }
 
     /**
