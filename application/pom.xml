@@ -7,7 +7,7 @@
     <parent>
         <groupId>ulb.infof307.g12</groupId>
         <artifactId>Projet_gestion_projet</artifactId>
-        <version>3.0-RELEASE</version>
+        <version>4.0-RELEASE</version>
     </parent>
 
     <artifactId>application</artifactId>
@@ -90,7 +90,7 @@
         <dependency>
             <groupId>ulb.infof307.g12</groupId>
             <artifactId>server</artifactId>
-            <version>3.0-RELEASE</version>
+            <version>4.0-RELEASE</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
