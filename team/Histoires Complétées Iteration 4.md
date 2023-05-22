@@ -39,3 +39,12 @@ Refactoring
 * Points : 8
 * Risque : 2
 * Priorité : 1
+
+
+# Histoire 27 :
+
+Debug et optimisation du code, de la documentation et des tests.
+
+* Points : 14
+* Risque : 3
+* Priorité : 1
