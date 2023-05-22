@@ -30,7 +30,7 @@ public class Paquet {
     @Getter
     @Setter //On laisse setter mm si c'est final pour jackson (sauvegarde json)
     @JsonProperty("categories")
-    private ArrayList<String> categories = new ArrayList<String>();
+    private List<String> categories = new ArrayList<String>();
 
     @Getter
     @Setter
@@ -108,7 +108,7 @@ public class Paquet {
 
     /**
      * Ajoute une catégorie au paquet
-     * @param categorie catégorie
+     * @param categorie catégories enchaînées avec des ,
      */
     public void addCategory(String categorie) {
         if (categorie == null || categorie.isEmpty()) {
@@ -118,7 +118,8 @@ public class Paquet {
             throw new IllegalArgumentException("Le nom de la catégorie ne peut pas contenir le caractère #");
         }
         if (!this.categories.contains(categorie)) {
-            this.categories.add(categorie);
+
+            this.categories = Arrays.stream(categorie.split(",")).toList();
         }
     }
 
@@ -131,4 +132,17 @@ public class Paquet {
         return new PaquetDTO(this.id.toString(),this.nom, this.categories);
     }
 
+    /**
+     * Transforme les catégories enchaînées avec des , en liste de catégories
+     * @return les catégories enchaînées avec des ,
+     */
+    public String categoriesToString() {
+        StringBuilder categories = new StringBuilder();
+        if (this.categories.isEmpty()) return "";
+        categories.append(this.categories.get(0));
+        for (int i=1; i < this.categories.size(); i++) {
+            categories.append(", ").append(this.categories.get(i));
+        }
+        return categories.toString();
+    }
 }

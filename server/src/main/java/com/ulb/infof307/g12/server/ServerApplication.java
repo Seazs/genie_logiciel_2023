@@ -9,7 +9,7 @@ import java.io.File;
 @SpringBootApplication
 public class ServerApplication {
 	@Getter
-	private static String storageFolderPath = "/server/src/main/resources/stockage/";
+	private static String storageFolderPath = "/src/main/resources/stockage/";
 	@Getter
 	private static String rootPath;
 	public static void main(String[] args) {

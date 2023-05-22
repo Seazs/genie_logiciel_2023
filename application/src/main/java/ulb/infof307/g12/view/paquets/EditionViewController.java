@@ -38,10 +38,12 @@ public class EditionViewController {
      * Charge la vue du menu d'édition avec les informations existantes du paquet
      *
      * @param name nom du paquet modifié
+     * @param categories catégories du paquet modifié
      */
-    public void loadEditionView(String name) {
+    public void loadEditionView(String name, String categories) {
 
-        categoriePaquetTextField.setPromptText("Catégorie");
+        if (Objects.equals(categories, "")) categoriePaquetTextField.setPromptText("Catégorie");
+        else categoriePaquetTextField.setText(categories);
         nomPaquetTextField.setText(name);
 
         questionCol.setCellValueFactory(data->new SimpleStringProperty(data.getValue().question()));

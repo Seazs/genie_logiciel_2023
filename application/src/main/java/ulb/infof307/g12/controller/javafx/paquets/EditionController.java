@@ -34,7 +34,7 @@ public class EditionController extends BaseController implements EditionViewList
         this.paquet = paquet;
         EditionViewController controller = (EditionViewController) super.controller;
         controller.setListener(this);
-        controller.loadEditionView(paquet.getNom());
+        controller.loadEditionView(paquet.getNom(), paquet.categoriesToString());
     }
 
     /**

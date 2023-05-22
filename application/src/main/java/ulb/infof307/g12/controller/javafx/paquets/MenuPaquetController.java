@@ -77,14 +77,12 @@ public class MenuPaquetController extends BaseController implements MenuPaquetLi
 
     /**
      * Filtre les paquets selon leurs catégories
-     *
      * @param filter filtre à appliquer sur les catégories de chaque paquet
      */
     @Override
     public void filterPaquet(String filter) {
-        saveListPaquet.stream()
-                .filter(paquet -> paquet.getCategories().stream().anyMatch(category -> category.contains(filter.toLowerCase())))
-                .map(Paquet::getDTO)
+        saveListPaquet =  getUser().getListPaquet().stream()
+                .filter(paquet -> paquet.getCategories().stream().anyMatch(category -> category.toLowerCase().contains(filter.toLowerCase())))
                 .toList();
     }
 

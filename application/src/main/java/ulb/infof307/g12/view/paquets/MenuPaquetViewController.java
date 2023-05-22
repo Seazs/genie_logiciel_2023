@@ -113,8 +113,9 @@ public class MenuPaquetViewController implements Initializable {
      * Ouvrir le menu d'édition de paquet
      */
     public void openEdition(ActionEvent event) {
-        // Obtenir le paquet selectionné pour modifier et Envoyer demande de modification au listener
-        listener.editPaquet(paquetListView.getSelectionModel().getSelectedItem());
+        PaquetDTO paquet = paquetListView.getSelectionModel().getSelectedItem(); // Obtenir le paquet selectionné pour modifier et Envoyer demande de modification au listener
+        if (paquet != null) listener.editPaquet(paquet);
+        else listener.showErrorPopup("Veuillez sélectionner un paquet");
         // Après la modification, recharger la vue pour tenir compte des modifications
         reloadListView();
     }
@@ -138,6 +139,7 @@ public class MenuPaquetViewController implements Initializable {
         String search = searchLabel.getText().toLowerCase();
         paquetListView.getItems().clear();
         listener.filterPaquet(search);
+        reloadListView();
     }
 
     /**

@@ -8,7 +8,7 @@ import java.io.File;
 public class Main {
 
     @Getter
-    private static String storageFolderPath = "/application/src/main/resources/stockage/";
+    private static String storageFolderPath = "/src/main/resources/stockage/";
     @Getter
     private static String rootPath;
     public static void main(String[] args) {

@@ -138,4 +138,14 @@ class PaquetTest {
         PaquetDTO paquetDTO = new PaquetDTO(id.toString(),"nom",categories);
         Assertions.assertEquals(paquetDTO,paquet.getDTO());
     }
+
+
+    @Test
+    public void testToString(){
+        Paquet paquet = new Paquet("Maths","BA-1", "BA-2");
+        String result = "BA-1, BA-2";
+        Assertions.assertEquals(result,paquet.categoriesToString());
+        Paquet paquet2 = new Paquet("Maths");
+        Assertions.assertEquals("",paquet2.categoriesToString());
+    }
 }
