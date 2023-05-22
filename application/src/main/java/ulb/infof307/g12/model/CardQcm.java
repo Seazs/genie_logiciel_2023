@@ -29,6 +29,14 @@ public class CardQcm extends Card {
         this.verso = verso;
         getQCMInfo();
     }
+
+    /**
+     * Constructeur pour la deserialisation
+     * @param id id
+     * @param recto recto
+     * @param verso verso
+     * @param propositions propositions
+     */
     @JsonCreator
     public CardQcm(@JsonProperty("id") int id, @JsonProperty("recto") String recto, @JsonProperty("verso") String verso, @JsonProperty("propositions") String[] propositions) {
         super(id, recto, verso);

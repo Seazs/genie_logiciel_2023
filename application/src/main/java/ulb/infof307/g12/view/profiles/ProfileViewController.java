@@ -58,9 +58,18 @@ public class ProfileViewController {
         }
     }
 
+    /**
+     * Change le nom d'utilisateur affiché
+     * @param pseudo le pseudo de l'utilisateur
+     */
     public void setPseudoLabel(String pseudo){
         this.pseudoLabel.setText("Pseudo: " + pseudo);
     }
+
+    /**
+     * Change le mot de passe affiché
+     * @param mdp le mot de passe de l'utilisateur
+     */
     public void setMdpLabel(String mdp){
         this.mdpLabel.setText("Mot de passe: " + mdp);
     }

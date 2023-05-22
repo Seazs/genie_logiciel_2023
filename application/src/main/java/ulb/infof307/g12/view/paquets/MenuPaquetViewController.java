@@ -82,6 +82,10 @@ public class MenuPaquetViewController implements Initializable {
         listener.openProfile();
     }
 
+    /**
+     * Ouvre la view store
+     * @param event event
+     */
     public void openStore(ActionEvent event) {
         listener.openStore();
     }

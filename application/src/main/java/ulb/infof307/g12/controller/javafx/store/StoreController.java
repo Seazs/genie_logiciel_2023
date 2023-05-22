@@ -106,6 +106,9 @@ public class StoreController extends BaseController implements StoreViewListener
                 .toList();
     }
 
+    /**
+     * @return la liste des paquets de l'utilisateur
+     */
     @Override
     public Collection<PaquetDTO> getUserPaquets() {
         return MenuPrincipal.getINSTANCE().getUserPaquets().stream()
@@ -142,6 +145,9 @@ public class StoreController extends BaseController implements StoreViewListener
     @Override
     public void returnMenuPaquet() {MenuPrincipal.getINSTANCE().returnFromStoreToMenuPaquet();}
 
+    /**
+     * Affiche la vue
+     */
     @Override
     public void show(){
         super.show();

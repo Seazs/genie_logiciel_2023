@@ -14,8 +14,8 @@ public class UserDataAccessService implements UserDAO{
     public STATUS status;
     private List<User> db_user;
 
-    /**Constructeur
-     *
+    /**
+     * Constructeur
      */
     public UserDataAccessService() {
         db_user_file = new File(ServerApplication.getStockageFolderPath(),"stockUser.txt");
@@ -72,9 +72,6 @@ public class UserDataAccessService implements UserDAO{
                 .map(User::getPassword)
                 .orElse(null);
     }
-    /**
-     * @see UserDAO#updateUser(User)
-     */
 
     /**
      * @see UserDAO#updateUser(User)

@@ -13,6 +13,9 @@ public class SyncViewController {
     @Setter
     SyncListener listener;
 
+    /**
+     * Permet d'uploader la base de données locale
+     */
     public void uploadLocal() {
         listener.uploadLocal();
     }

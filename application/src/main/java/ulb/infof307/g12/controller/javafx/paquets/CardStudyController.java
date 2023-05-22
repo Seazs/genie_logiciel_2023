@@ -113,9 +113,15 @@ public class CardStudyController extends BaseController implements CardStudyList
         MenuPrincipal.getINSTANCE().showErrorPopup(msg);
     }
 
+    /**
+     * Retour au menu principal depuis l'étude de carte
+     */
     @Override
     public void returnFromCardStudyToMenuPaquet() {MenuPrincipal.getINSTANCE().returnFromCardStudyToMenuPaquet();}
 
+    /**
+     * Trie les cartes par connaissance
+     */
     @Override
     public void sortCardStudyList(){cardsStudy.sort(Comparator.comparingInt(Card::getConnaissance));}
 

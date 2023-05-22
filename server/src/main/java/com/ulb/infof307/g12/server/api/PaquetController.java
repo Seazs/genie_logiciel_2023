@@ -55,6 +55,12 @@ public class PaquetController {
         STATUS result = paquetService.createPaquet(paquetEnString);
         return result.toString();
     }
+
+    /**
+     * Synchronise le paquet avec la base de données
+     * @param infoString paquet en string
+     * @return resultat de la synchronisation
+     */
     @PostMapping("/sync")
     public String syncPaquet(@RequestBody String infoString) {
         STATUS result = paquetService.syncPaquets(infoString);
@@ -72,6 +78,11 @@ public class PaquetController {
         return result.toString();
     }
 
+    /**
+     * Renvoie les paquets de l'utilisateur
+     * @param username nom d'utilisateur
+     * @return les paquets de l'utilisateur
+     */
     @GetMapping("/sync/{username}")
     public String giveUserPaquets(@PathVariable String username) {
         return paquetService.getUserPaquet(username);

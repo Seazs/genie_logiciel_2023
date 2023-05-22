@@ -166,6 +166,11 @@ public class PaquetDataAccessService implements PaquetDao {
         return STATUS.OK;
     }
 
+    /**
+     * Syncroniser les paquets de l'utilisateur avec la base de données
+     * @param infoString String json contenant les paquets de l'utilisateur
+     * @return STATUS
+     */
     @Override
     public STATUS syncPaquets(String infoString) {
         try {
