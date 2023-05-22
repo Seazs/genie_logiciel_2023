@@ -9,7 +9,7 @@ public interface ProfileViewListener {
      * @param password nouveau mot de passe
      * @return le statut
      */
-    String changePassword(Optional<String> password);
+    String changePassword ( String password);
 
     /**
      * Deconnexion de l'utilisateur

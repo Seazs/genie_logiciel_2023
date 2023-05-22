@@ -56,7 +56,7 @@ public class UserController {
         String result;
         try {
             User user = new User(userString);
-            result = userService.createUser(user).getMsg();
+            result = userService.createUser(user).toString();
             return ResponseEntity.ok(result);
         }catch (IllegalArgumentException e){
             result = e.getMessage();
@@ -73,6 +73,8 @@ public class UserController {
     @PostMapping("changepassword/{username}")
     public ResponseEntity<String> updateUser(@RequestBody String password, @PathVariable String username){
         User user = new User(username, password);
+        System.out.println(user);
+        System.out.println(password);
         STATUS result = userService.updateUser(user);
         return ResponseEntity.ok(result.getMsg());
     }

@@ -99,7 +99,7 @@ public class Server {
         HttpEntity<String> entity = new HttpEntity<>(username+"#"+password, headers);
         try {
             ResponseEntity<String> response = restTemplate.postForEntity(url+"user/register", entity, String.class);
-            if (response.getStatusCode()== HttpStatusCode.valueOf(200)){
+            if (response.getStatusCode() == HttpStatusCode.valueOf(200)){
                 return response.getBody();
             }
             else{
@@ -126,6 +126,11 @@ public class Server {
         return response.getBody();
     }
 
+    /**
+     * Envoie une requète DELETE au serveur pour supprimer un utilisateur.
+     * @param username le pseudo de l'utilisateur
+     * @return le statut de la requète
+     */
     public String deleteUser(String username) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();

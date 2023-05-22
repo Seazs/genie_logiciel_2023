@@ -42,24 +42,23 @@ public class ProfileController extends BaseController implements ProfileViewList
      * @return le résultat
      */
     @Override
-    public String changePassword(Optional<String> password) {
+    public String changePassword (String password) {
         if (!MenuPrincipal.getINSTANCE().isOnline()){
             return STATUS.CANNOT_CHANGE_PASSWORD_OFFLINE.getMsg();
         }
         String username = user.getPseudo(),
                 oldPassword = user.getMdp(),
                 result = "";
-        if (password.isPresent()) {
-            String newPassword = password.get();
+        if (password != null && !password.isEmpty()) {
             UserManager gestionnaire = MenuPrincipal.getINSTANCE().getUserManager();
             Server server = MenuPrincipal.getINSTANCE().getServer();
             try {
-                String response = server.changeUserPassword(username, newPassword);
+                String response = server.changeUserPassword(username, password);
                 if (!STATUS.valueOf(response).equals(STATUS.OK)){
                     return STATUS.SERVER_CANNOT_CHANGE_PASSWORD.getMsg();
                 }
-                gestionnaire.changePassword(username, newPassword, oldPassword);
-                MenuPrincipal.getINSTANCE().getPrincipalUser().setMdp(newPassword);
+                gestionnaire.changePassword(username, password, oldPassword);
+                MenuPrincipal.getINSTANCE().getPrincipalUser().setMdp(password);
                 result = gestionnaire.getStatusMsg();
             } catch (IOException e) {
                 result = "Une erreur s'est produite. Veuillez réessayer.";

@@ -17,6 +17,8 @@ public class ProfileViewController {
     @Setter
     private ProfileViewListener listener;
 
+    private final TextInputDialog dialog = new TextInputDialog("T");
+
 
     /**
      * Ce qui s'exécute lorsqu'on clique sur le bouton de retour au menu principal
@@ -30,19 +32,19 @@ public class ProfileViewController {
      */
     @FXML
     protected void onChangePasswordButtonClick() {
-
-        TextInputDialog dialog = new TextInputDialog("");
+        //TextInputDialog dialog = new TextInputDialog("");
         dialog.setTitle("Change password");
         dialog.setHeaderText("Enter your new password:");
         PasswordField pwdField = new PasswordField();
         dialog.getDialogPane().setContent(pwdField);
-        Optional<String> newPassword = dialog.showAndWait();
+        dialog.showAndWait();
+        String newPassword = pwdField.getText();
         try {
             String result = listener.changePassword(newPassword);
-            mdpLabel.setText("Mot de passe: " + newPassword.get());
+            mdpLabel.setText("Mot de passe: " + newPassword);
             messageLabelProfil.setText(result);
         } catch (RuntimeException e) {
-            listener.showErrorPopup("veuillez entrer un mot de passe");
+            listener.showErrorPopup("Veuillez entrer un mot de passe");
         }
 
 
