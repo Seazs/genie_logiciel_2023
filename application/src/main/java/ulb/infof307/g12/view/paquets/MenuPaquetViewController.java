@@ -25,7 +25,7 @@ public class MenuPaquetViewController implements Initializable {
 
 
     @FXML
-    private TextField RechercheLabel;
+    private TextField searchLabel;
 
     @Setter
     private MenuPaquetListener listener;
@@ -39,7 +39,7 @@ public class MenuPaquetViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Personnaliser l'affichage des éléments de la liste
         updateVisualPaquetList();
-        RechercheLabel.textProperty().addListener((observable, oldValue, newValue) -> filterCategory());
+        searchLabel.textProperty().addListener((observable, oldValue, newValue) -> filterCategory());
     }
 
     /**
@@ -135,9 +135,9 @@ public class MenuPaquetViewController implements Initializable {
      * Met à jour la liste visuel des paquets en fonction du filtre entré
      */
     public void filterCategory() {
-        String recherche = RechercheLabel.getText().toLowerCase();
+        String search = searchLabel.getText().toLowerCase();
         paquetListView.getItems().clear();
-        listener.filterPaquet(recherche);
+        listener.filterPaquet(search);
     }
 
     /**

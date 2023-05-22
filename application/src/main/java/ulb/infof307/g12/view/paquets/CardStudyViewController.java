@@ -277,10 +277,11 @@ public class CardStudyViewController {
     /**
      * Fonction qui verifie si la réponse est bonne pour les cartes Qcm
      */
-    public void verfyAnswerQcm() throws NullPointerException{
+    public void verfyAnswerQcm(){
         String[] infos = listener.getCardsStudy().get(indexCarte).getCardInfo();
         if (reponsesList.getSelectionModel().getSelectedItem() == null) {
             listener.error("Il faut sélectionner une solution !");
+            return;
         }
         if(reponsesList.getSelectionModel().getSelectedItem().equals(infos[4])){
             answer.setText("T'es un bg en sah");
