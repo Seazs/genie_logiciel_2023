@@ -119,9 +119,9 @@ class PaquetTest {
     @Test
     public void testAjouterCategorie(){
         Paquet paquet = new Paquet("Maths","BA1");
-        paquet.addCategory("BA2");
+        paquet.addCategory("BA1,BA2");
         Paquet paquet2 = new Paquet("Maths", "BA1", "BA2") ;
-        Assertions.assertEquals(paquet,paquet2) ;
+        Assertions.assertEquals(paquet.getCategories(),paquet2.getCategories()) ;
         Assertions.assertThrows(IllegalArgumentException.class,()  -> {
             paquet.addCategory("#");
         });

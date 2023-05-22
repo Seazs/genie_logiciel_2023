@@ -46,10 +46,7 @@ public class ProfileViewController {
         } catch (RuntimeException e) {
             listener.showErrorPopup("Veuillez entrer un mot de passe");
         }
-
-
     }
-
     /**
      * Ce qui s'exécute lorsqu'on clique sur le bouton de déconnexion
      * @param e l'événement qui a déclenché l'action

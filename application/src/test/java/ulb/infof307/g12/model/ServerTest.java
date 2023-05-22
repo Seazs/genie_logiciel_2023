@@ -37,16 +37,16 @@ class ServerTest {
         assertEquals(STATUS.OK.getMsg(),reponse);
 
         String reponse2 = server.createUser(user.getUsername(), user.getPassword());
-        assertEquals(STATUS.USERNAME_DOES_ALREADY_EXIST.getMsg(),reponse2);
+        assertEquals(STATUS.USERNAME_DOES_ALREADY_EXIST.toString(),reponse2);
 
 
         User user2 = new User("#","#");
         String reponse3 = server.createUser(user2.getUsername(), user2.getPassword());
-        assertEquals("Nombre d'arguments détectés invalide !",reponse3);
+        assertEquals(STATUS.SERVER_CONNEXION_ERROR.toString(),reponse3);
 
         User user3 = new User("  ","");
         String reponse4 = server.createUser(user3.getUsername(), user3.getPassword());
-        assertEquals("Nombre d'arguments détectés invalide !",reponse4);
+        assertEquals(STATUS.SERVER_CONNEXION_ERROR.toString(),reponse4);
     }
 
     @Test

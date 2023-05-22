@@ -195,4 +195,41 @@ class UserManagerTest {
             assertFalse(userManager.getListUser().contains(user1));
         });
     }
+    @Test
+    void testDisconnect(){
+        assertDoesNotThrow(() -> {
+            UserManager userManager = new UserManager(tmp);
+            userManager.connect("alex", "pomme");
+            assertEquals("alex",UserManager.userConnected.getPseudo());
+            userManager.disconnect();
+            assertNull(UserManager.userConnected);
+        });
+    }
+    @Test
+    void testFindUser(){
+        assertDoesNotThrow(() -> {
+            UserManager userManager = new UserManager(tmp);
+            User user1 = new User("felix","meilleuramipourlavie");
+            userManager.register(user1.getPseudo(), user1.getMdp());
+            assertEquals(user1.getPseudo(),userManager.findUser(user1.getPseudo()).getPseudo());
+            assertEquals(user1.getMdp(),userManager.findUser(user1.getPseudo()).getMdp());
+            assertNull(userManager.findUser("1"));
+        });
+    }
+    @Test
+    void testchangePassword(){
+        assertDoesNotThrow(() -> {
+            UserManager userManager = new UserManager(tmp);
+            User user1 = new User("felix","meilleuramipourlavie");
+            userManager.register(user1.getPseudo(), user1.getMdp());
+            userManager.changePassword(user1.getPseudo(),"nouveau","meilleuramipourlavie");
+            assertEquals("nouveau",userManager.findUser(user1.getPseudo()).getMdp());
+            userManager.changePassword("1","nouveau","meilleuramipourlavie");
+            assertEquals(STATUS.USERNAME_DOES_NOT_EXIST,userManager.getStatus());
+            userManager.changePassword(user1.getPseudo(),"#","meilleuramipourlavie");
+            assertEquals(STATUS.PASSWORD_IS_NOT_VALID,userManager.getStatus());
+            userManager.changePassword(user1.getPseudo(),"nouveau","123");
+            assertEquals(STATUS.WRONG_PASSWORD,userManager.getStatus());
+        });
+    }
 }
