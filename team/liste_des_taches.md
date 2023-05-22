@@ -313,22 +313,38 @@ Tâches 2 : Tests unitaires - 3 points
 - Wassim (Nico)
 - Description : Créer des tests pour les modèles (attention au dossier application/application)
 
-Tâches 3 : Clean du code et Javadoc - 1 point
+Tâches 3 : Clean du code et Javadoc - 1,5 point
 
-- Raphaël (Nico)
+- Raphaël (Wassim)
 - Description : Vérifier tout le code et s'assurer qu'il n'y ait pas de code mort, de fonction doubles ou de commentaires manquants, obsolètes.
 
-Tâche 4 : Supprimer un de ses paquets du store - 1 point
+Tâche 4 : Supprimer paquets du store - 1 point
 
 - Alex A. (Lina) 
 - Description : L'utilisateur doit pouvoir supprimer ses paquets du store. Vérifier qu'un paquet appartient bien à l'utilisateur avant de le supprimer.
 
-Tâche 5 : Faire la vidéo de présentation - 1 point
+Tâche 5 : Bouton hover on click - 0.5 point
 
-- Romain (Philippe) 
-- Description : Faire la vidéo de présentation de l'application.
+- Philippe (Romain)) 
+- Description : Visuel, que les boutons soient modifiés quand on passe la souris dessus et qu'on clique.
 
 Tâche 6 : Optimisation de la généricité du code - 1 point
 
 - Nico. (Raphael) 
 - Description : Éviter et enlever les fonctions étant similaires pour les simplifier en une fonction plus générique.
+
+Tâche 7 : Uniformité des langues utilisées - 2 point
+
+- Alex A. (Raphael) 
+- Description : Mettre toutes les fonctions et noms de variables en anglais.
+
+
+Tâche 8: Réaction des boutons précédents et suivants - 1 point
+
+- Ismail (Lina) 
+- Description : Éviter et enlever les fonctions étant similaires pour les simplifier en une fonction plus générique.
+
+Tâche 9: Correction des tests - 1,5 point
+
+- Romain (Philippe) 
+- Description : Corriger les tests qui ne marchaient plus dû à des modifications dans le code.
