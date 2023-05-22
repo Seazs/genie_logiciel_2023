@@ -26,7 +26,7 @@ public class Paquet {
      * @param id id du paquet
      * @param nom nom de paquet
      * @param categories catégorie(s) du paquet
-     * @param cartes liste des cartes du paquet
+     * @param cards liste des cartes du paquet
      * @throws IllegalArgumentException exception si le paquet de carte ne possède pas de catégorie
      */
     @JsonCreator
